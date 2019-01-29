@@ -1,0 +1,17 @@
+version: "2.1"
+
+networks:
+  webnetwork:
+
+services:
+  media-server:
+    networks:
+      - webnetwork
+    image: tunguyenuni/web-diff:v1
+    volumes: 
+      - ./server:/go/src/github.com/tunguyennnnn/vserver/media-processor
+    ports:
+      - "4000:4000"
+    environment:
+      GO_WORK_DIR: "/go/src/github.com/tunguyennnnn/vserver/media-processor/app"
+    restart: on-failure

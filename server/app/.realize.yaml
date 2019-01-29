@@ -1,0 +1,21 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+server:
+  status: false
+  open: false
+  port: 6000
+  host: localhost
+schema:
+- name: server
+  path: .
+  commands:
+    run:
+      status: true
+  watcher:
+    paths:
+    - /
+    extensions:
+    - go
+    - yaml
