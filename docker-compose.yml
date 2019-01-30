@@ -4,6 +4,15 @@ networks:
   webnetwork:
 
 services:
+  mongo:
+    image: mongo:3.2.20
+    networks:
+      - webnetwork
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo_data_db:/data/db
   media-server:
     networks:
       - webnetwork
@@ -12,6 +21,8 @@ services:
       - ./server:/go/src/github.com/tunguyennnnn/vserver/media-processor
     ports:
       - "4000:4000"
+    depends_on:
+      - mongo
     environment:
       GO_WORK_DIR: "/go/src/github.com/tunguyennnnn/vserver/media-processor/app"
     restart: on-failure

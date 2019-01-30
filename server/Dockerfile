@@ -20,6 +20,7 @@ RUN go get github.com/satori/go.uuid
 RUN go get github.com/h2non/filetype
 RUN go get -u github.com/gin-gonic/gin
 RUN go get -u github.com/gin-gonic/contrib/static
+RUN go get github.com/mongodb/mongo-go-driver/mongo
 
 WORKDIR $GOPATH
 
