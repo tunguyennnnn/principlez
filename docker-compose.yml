@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3"
 
 networks:
   webnetwork:
@@ -18,11 +18,12 @@ services:
       - webnetwork
     image: tunguyenuni/web-diff:v1
     volumes: 
-      - ./server:/go/src/github.com/tunguyennnnn/vserver/media-processor
+      - ./server:/go/src/github.com/tunguyennnnn/web-diff/server
     ports:
       - "4000:4000"
     depends_on:
       - mongo
     environment:
-      GO_WORK_DIR: "/go/src/github.com/tunguyennnnn/vserver/media-processor/app"
+      GO_WORK_DIR: "/go/src/github.com/tunguyennnnn/web-diff/server/app"
+      MONGO_URL: "mongodb://mongo:27017/app_development"
     restart: on-failure
