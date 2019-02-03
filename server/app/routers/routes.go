@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tunguyennnnn/web-diff/server/app/controllers"
 )
 
 func NewRouter() *gin.Engine {
@@ -16,6 +17,16 @@ func NewRouter() *gin.Engine {
 				"message": "ok",
 			})
 		})
+	}
+
+	v1 := api.Group("/v1")
+	{
+		collectionGroup := v1.Group("/collection")
+		{
+			collection := new(controllers.CollectionController)
+			collectionGroup.POST("/", collection.Request)
+			collectionGroup.GET("/", collection.Index)
+		}
 	}
 	return router
 }
