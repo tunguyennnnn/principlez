@@ -8,7 +8,7 @@ server:
   port: 6000
   host: localhost
 schema:
-- name: server
+- name: main
   path: .
   commands:
     run:
