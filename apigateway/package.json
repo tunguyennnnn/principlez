@@ -9,7 +9,9 @@
     "prod": "tsc && node ./build/index.js"
   },
   "dependencies": {
+    "@types/cors": "^2.8.4",
     "@types/express": "^4.16.1",
+    "@types/graphql": "^14.0.5",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
