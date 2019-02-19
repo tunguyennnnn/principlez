@@ -13,18 +13,29 @@ services:
       - 27017:27017
     volumes:
       - ./mongo_data_db:/data/db
+  postgres:
+    image: postgres:10.0
+    networks:
+      - webnetwork
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: principles_dev_database
+    restart: always
   apigateway:
     networks:
       - webnetwork
     image: tunguyenuni/api-gateway:v1
-    volumes: 
+    volumes:
       - ./apigateway:/usr/src/app
     restart: on-failure
   media-server:
     networks:
       - webnetwork
     image: tunguyenuni/web-diff:v1
-    volumes: 
+    volumes:
       - ./server:/go/src/github.com/tunguyennnnn/web-diff/server
     ports:
       - "4000:4000"
