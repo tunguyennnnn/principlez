@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         notNull: true,
       },
+      locationId: {
+        type: DataTypes.INTEGER,
+      },
       yearOfBirth: {
         type: DataTypes.STRING,
         is: ['^[1-9]{4}$', 'i'],

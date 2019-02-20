@@ -3,7 +3,7 @@ import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-import models from './models';
+import models from '../models';
 import schema from './graphql';
 
 const app = express();
