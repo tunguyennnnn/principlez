@@ -17,6 +17,7 @@
     "graphql-server-express": "^1.4.0",
     "graphql-tools": "^4.0.4",
     "merge-graphql-schemas": "^1.5.8",
+    "pg": "^7.8.0",
     "sequelize": "^4.42.0"
   },
   "devDependencies": {

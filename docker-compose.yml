@@ -4,21 +4,14 @@ networks:
   webnetwork:
 
 services:
-  mongo:
-    image: mongo:3.2.20
-    networks:
-      - webnetwork
-    restart: always
-    ports:
-      - 27017:27017
-    volumes:
-      - ./mongo_data_db:/data/db
   postgres:
     image: postgres:10.0
     networks:
       - webnetwork
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
@@ -30,18 +23,9 @@ services:
     image: tunguyenuni/api-gateway:v1
     volumes:
       - ./apigateway:/usr/src/app
-    restart: on-failure
-  media-server:
-    networks:
-      - webnetwork
-    image: tunguyenuni/web-diff:v1
-    volumes:
-      - ./server:/go/src/github.com/tunguyennnnn/web-diff/server
     ports:
       - "4000:4000"
-    depends_on:
-      - mongo
     environment:
-      GO_WORK_DIR: "/go/src/github.com/tunguyennnnn/web-diff/server/app"
-      MONGO_URL: "mongodb://mongo:27017/app_development"
+      DB_HOST: postgres
+    command: npm run dev
     restart: on-failure

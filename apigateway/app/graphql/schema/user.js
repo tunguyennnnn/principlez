@@ -1,8 +1,8 @@
 export default `
     type User {
-        email: string!
-        fullname: string!
-        location: string!
-        yearOfBirth: string!
+        email: String!
+        fullname: String!
+        location: String!
+        yearOfBirth: String!
     }
 `;
