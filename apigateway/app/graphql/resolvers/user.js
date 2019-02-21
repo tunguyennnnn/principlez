@@ -1,7 +1,16 @@
 import generateToken from '../../services/generateToken';
-import encrypt from '../../services/encrypt';
+import { encrypt, compare } from '../../services/bcrypt';
 
 export default {
+  User: {
+    authToken: user => {
+      const { id, email, createdAt } = user;
+      return generateToken({ id, email, createdAt });
+    },
+    location: async (user, args, { models }) => {
+      return await user.getLocation();
+    },
+  },
   Mutation: {
     signup: async (
       root,
@@ -21,17 +30,19 @@ export default {
           locationId: userLocation.id,
         });
 
-        const { token, expiresIn } = generateToken({
-          id: user.id,
-          email,
-          createdAt: user.createdAt,
-        });
-        const { id } = user;
-        return { id, email, fullname, yearOfBirth, location: userLocation };
+        return user;
       } catch (e) {
-        console.log(e);
         throw e;
       }
+    },
+    login: async (root, { email, password }, { models }) => {
+      try {
+        const user = await models.User.findOne({ where: { email } });
+        if (!user || !(await compare(password, user.password))) {
+          throw new Error(`Incorrect email or password`);
+        }
+        return user;
+      } catch (e) {}
     },
   },
 };

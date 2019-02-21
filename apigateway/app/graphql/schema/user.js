@@ -34,5 +34,6 @@ export default `
 
     type Mutation {
         signup(email: String!, password: String!, fullname: String!, yearOfBirth: String!, location: LocationInput!): User!
+        login(emial: String!, password: String!): User!
     }
 `;
