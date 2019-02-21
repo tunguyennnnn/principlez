@@ -1,4 +1,4 @@
-import generateToken from '../../services/generateToken';
+import { generateToken } from '../../services/auth';
 import { encrypt, compare } from '../../services/bcrypt';
 
 export default {
@@ -9,6 +9,12 @@ export default {
     },
     location: async (user, args, { models }) => {
       return await user.getLocation();
+    },
+  },
+  Query: {
+    me: async (root, args, { models, user }) => {
+      if (!user) throw new Error('Not authenticated');
+      return user;
     },
   },
   Mutation: {

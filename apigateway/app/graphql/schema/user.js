@@ -32,6 +32,10 @@ export default `
         city: String!
     }
 
+    type Query {
+        me: User!
+    }
+
     type Mutation {
         signup(email: String!, password: String!, fullname: String!, yearOfBirth: String!, location: LocationInput!): User!
         login(emial: String!, password: String!): User!
