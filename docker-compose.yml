@@ -5,7 +5,7 @@ networks:
 
 services:
   postgres:
-    image: postgres:10.0
+    image: postgres:9.6
     networks:
       - webnetwork
     volumes:

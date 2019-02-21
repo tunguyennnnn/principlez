@@ -30,6 +30,6 @@ app.use(
   bodyParser.json(),
   graphqlExpress(req => ({
     schema,
-    context: {},
+    context: { models },
   })),
 );

@@ -33,6 +33,16 @@ module.exports = (sequelize, DataTypes) => {
       ],
     },
   );
-  User.associate = models => {};
+
+  User.associate = models => {
+    User.belongsTo(models.Location, {
+      foreignKey: 'locationId',
+      as: 'location',
+    });
+    User.hasOne(models.ProfileImage, {
+      foreignKey: 'userId',
+      as: 'profileImage',
+    });
+  };
   return User;
 };
