@@ -1,15 +1,17 @@
+import './styles/common.scss';
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from './containers/Home';
-import BlogWrite from './containers/BlogWrite';
+import StoryWrite from './containers/StoryWrite';
 
 export default class App extends Component {
   render() {
     return (
       <div id="app">
         <Switch>
-          <Route exact path="/blogs/:id" component={BlogWrite} />
+          <Route exact path="/blogs/:id" component={StoryWrite} />
           <Route exact path="/" component={Home} />
         </Switch>
       </div>

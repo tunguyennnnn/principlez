@@ -2,3 +2,4 @@ mongo_data_db
 build
 node_modules
 nvm
+.DS_Store
