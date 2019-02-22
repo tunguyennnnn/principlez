@@ -17,19 +17,19 @@ export default class BlogWrite extends Component {
         <ChapterList
           title={'My life'}
           chapters={[
-            { id: 1, title: 'Moving to Montreal from Vietnam' },
-            { id: 2, title: 'Learning English' },
-            { id: 3, title: 'My University' },
+            { id: 1, title: 'Chapter 1' },
+            { id: 2, title: 'Chapter 2' },
+            { id: 3, title: 'Chapter 3' },
           ]}
         />
       </React.Fragment>
     );
     return (
       <div class="story-page">
-        <MediaQuery query="(min-width: 600px)">
+        <MediaQuery query="(min-width: 850px)">
           <div class="chapter-list-container">{ChapterListComponents}</div>
         </MediaQuery>
-        <MediaQuery query="(max-width: 600px">
+        <MediaQuery query="(max-width: 850px">
           <div class="chapter-list-container">
             <SideMenu>{ChapterListComponents}</SideMenu>
           </div>

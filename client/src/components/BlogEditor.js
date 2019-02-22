@@ -27,7 +27,7 @@ export default class BlogEditor extends React.Component {
 
   render() {
     return (
-      <div className="blog-editor-container">
+      <div class="blog-editor-container">
         <Editor
           value={this.state.value}
           renderEditor={this.renderEditor}
