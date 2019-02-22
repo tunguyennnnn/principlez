@@ -7,7 +7,7 @@ export default class ChapterList extends Component {
   onDragEnd = event => {};
 
   render() {
-    const { title, chapters } = this.props;
+    const { title, chapters, basePath } = this.props;
     return (
       <div class="chapter-list">
         <div class="chapter-title">{title}</div>
@@ -24,7 +24,11 @@ export default class ChapterList extends Component {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <Chapter>{title}</Chapter>
+                        <Chapter
+                          link={!id ? basePath : `${basePath}/chapters/${id}`}
+                        >
+                          {title}
+                        </Chapter>
                       </div>
                     )}
                   </Draggable>

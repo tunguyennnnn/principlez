@@ -11,8 +11,8 @@ export default class App extends Component {
     return (
       <div id="app">
         <Switch>
-          <Route exact path="/blogs/:id" component={StoryWrite} />
           <Route exact path="/" component={Home} />
+          <Route path="/stories/:id" component={StoryWrite} />
         </Switch>
       </div>
     );
