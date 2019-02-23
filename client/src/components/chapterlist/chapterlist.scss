@@ -1,0 +1,38 @@
+.chapter-list {
+  background-color: white;
+  padding: 5px;
+  border: 1px solid grey;
+  margin: 5px;
+
+  .chapter-title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  margin-top: 5px;
+
+  .chapter {
+    font-family: 'proxima-nova-soft', sans-serif;
+    position: relative;
+    margin: 2vh 1vh 2vh 1vh;
+
+    .chapter-content {
+      background-color: #fff;
+      box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3);
+      padding: 1em;
+      box-sizing: border-box;
+
+      .title {
+        vertical-align: baseline;
+        margin: 0 5px 0 5px 0 !important;
+        font-size: 20px;
+        font-weight: 700;
+
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+      }
+    }
+  }
+}

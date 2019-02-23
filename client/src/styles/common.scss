@@ -1,0 +1,11 @@
+@font-face {
+  font-family: proxima-nova-soft;
+  src: url(./fonts/Proxima.ttf);
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  font-family: 'proxima-nova-soft', sans-serif;
+}
