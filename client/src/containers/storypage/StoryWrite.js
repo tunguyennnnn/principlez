@@ -1,16 +1,62 @@
+import { compose, graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import React from 'react';
+
 import BlogEditor from '../../components/BlogEditor';
+import StoryWriteContext from '../../contexts/StoryWriteContext';
 
-export default class StoryPage extends React.Component {
+const PlaceHolder = {
+  ABOUT_ME: 'Tell us about you...',
+  CHAPTER: 'Tell us your story...',
+  LESSON: 'What you want us to learn...',
+};
+
+class StoryPage extends React.Component {
+  placeHolder(type) {
+    const placeHolder = PlaceHolder[type];
+    return placeHolder || PlaceHolder.CHAPTER;
+  }
+
   render() {
-    console.log(this.props);
-    const { id: storyId, chapterId } = this.props.match.params;
+    const { data } = this.props;
 
-    console.log(storyId, chapterId);
+    if (data.loading) return <div>...loading</div>;
+
+    const { title, body, type } = data.chapter;
+
     return (
-      <div>
-        <BlogEditor />
-      </div>
+      <StoryWriteContext.Provider
+        value={{
+          placeholderText: this.placeHolder(type),
+        }}
+      >
+        <div>
+          <BlogEditor body={body} />
+        </div>
+      </StoryWriteContext.Provider>
     );
   }
 }
+
+const queryChapter = gql`
+  query chapter($storyId: ID!, $chapterId: ID) {
+    chapter(storyId: $storyId, chapterId: $chapterId) {
+      type
+      title
+      body
+    }
+  }
+`;
+
+export default compose(
+  graphql(queryChapter, {
+    options: props => {
+      return {
+        variables: {
+          storyId: props.match.params.id,
+          chapterId: props.match.params.chapterId,
+        },
+      };
+    },
+  }),
+)(StoryPage);
