@@ -1,13 +1,13 @@
-import './storypage.scss';
+import './storypage/storypage.scss';
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import { Switch, Route } from 'react-router-dom';
 
-import BlogEditor from '../components/BlogEditor';
+import StoryWrite from './storypage/StoryWrite';
 import ChapterList from '../components/ChapterList';
 import SideMenu from '../components/SideMenu';
 
-export default class BlogWrite extends Component {
+export default class StoryPage extends Component {
   get basePath() {
     const {
       match: { url },
@@ -48,11 +48,11 @@ export default class BlogWrite extends Component {
           <Route
             exact
             path="/stories/:id/"
-            component={() => <BlogEditor title="My Story" />}
+            component={props => <StoryWrite {...props} title="My Story" />}
           />
           <Route
             path="/stories/:id/chapters/:chapterId"
-            component={() => <BlogEditor title="Chapter..." />}
+            component={props => <StoryWrite {...props} title="Chapter..." />}
           />
         </div>
       </div>

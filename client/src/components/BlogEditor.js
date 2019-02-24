@@ -30,8 +30,11 @@ export default class BlogEditor extends React.Component {
       <div class="blog-editor-container">
         {this.props.title}
         <Editor
+          placeholder="Your story..."
           value={this.state.value}
           renderEditor={this.renderEditor}
+          autoFocus
+          spellCheck
           schema={schema}
           renderNode={this.renderNode}
           onChange={this.onChange}
