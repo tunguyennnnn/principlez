@@ -14,6 +14,7 @@
   }
   .blog-editor-container {
     flex: auto;
+    padding: 1.5vw;
   }
 }
 
@@ -21,4 +22,26 @@
   .chapter-list-container {
     width: 100px;
   }
+}
+
+.move-enter {
+  opacity: 0.01;
+  transform: translate(-40px, 0);
+}
+
+.move-enter-active {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: all 800ms ease-in;
+}
+
+.move-exit {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.move-exit-active {
+  opacity: 0.01;
+  transform: translate(40px, 0);
+  transition: all 400ms ease-in;
 }

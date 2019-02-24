@@ -18,7 +18,7 @@ class StoryPage extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, location } = this.props;
 
     if (data.loading) return <div>...loading</div>;
 
