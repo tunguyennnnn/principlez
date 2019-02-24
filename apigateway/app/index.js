@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import models from '../models';
 import schema from './graphql';
+import { authCheck } from './services/auth';
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.listen(4000, function() {
 
 app.all('*', cors());
 
+app.use(authCheck);
+
 app.use(
   '/graphiql',
   graphiqlExpress({
@@ -30,6 +33,6 @@ app.use(
   bodyParser.json(),
   graphqlExpress(req => ({
     schema,
-    context: { models },
+    context: { models, user: req.user },
   })),
 );
