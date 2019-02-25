@@ -2,6 +2,7 @@ import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import React from 'react';
 
+import ImageUpload from '../../components/ImageUpload';
 import BlogEditor from '../../components/BlogEditor';
 import StoryWriteContext from '../../contexts/StoryWriteContext';
 
@@ -31,6 +32,7 @@ class StoryPage extends React.Component {
         }}
       >
         <div>
+          <ImageUpload />
           <BlogEditor body={body} />
         </div>
       </StoryWriteContext.Provider>

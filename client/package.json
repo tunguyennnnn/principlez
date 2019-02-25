@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.config.js",
+    "dev": "npm rebuild node-sass && NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config=./webpack.config.js"
   },
   "dependencies": {
@@ -15,10 +15,12 @@
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "immutable": "^4.0.0-rc.12",
+    "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-apollo": "^2.4.1",
     "react-beautiful-dnd": "^10.0.4",
     "react-dom": "^16.8.1",
+    "react-dropzone": "^9.0.0",
     "react-responsive": "^6.1.1",
     "react-router-dom": "^4.3.1",
     "react-transition-group": "^2.5.3",

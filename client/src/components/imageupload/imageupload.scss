@@ -1,0 +1,21 @@
+.image-upload-container {
+  position: relative;
+  margin: 10px auto;
+  border: 6px solid #f8f8f8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+  cursor: pointer;
+
+  p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+}
+
+.image-upload-container:hover {
+  opacity: 1;
+}

@@ -9,3 +9,7 @@ body,
   height: 100%;
   font-family: 'proxima-nova-soft', sans-serif;
 }
+
+*:focus {
+  outline: none;
+}
