@@ -4,12 +4,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import models from '../models';
-import { typeDefs, resolvers, middlewares } from './graphql';
+import { schemaWithMiddleware } from './graphql';
 import { authCheck } from './services/auth';
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema: schemaWithMiddleware,
   context: async ({ req }) => {
     return { models, user: req.user };
   },
