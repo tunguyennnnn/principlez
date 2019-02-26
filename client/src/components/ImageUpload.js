@@ -25,6 +25,7 @@ export default class ImageUpload extends React.Component {
   state = {
     modalIsOpen: false,
     blobUrl: '',
+    previewImageUrl: '',
   };
 
   onDrop = ([file]) => {
@@ -33,7 +34,7 @@ export default class ImageUpload extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modalIsOpen: false });
+    this.setState({ modalIsOpen: false, blobUrl: '' });
   };
 
   getStyle() {
@@ -47,11 +48,18 @@ export default class ImageUpload extends React.Component {
     return style;
   }
 
+  submitImage = blob => {
+    this.setState({ previewImageUrl: URL.createObjectURL(blob) });
+    this.closeModal();
+  };
+
   render() {
     const { round } = this.props;
-    const { modalIsOpen, blobUrl } = this.state;
+    const { modalIsOpen, blobUrl, previewImageUrl } = this.state;
+    console.log(previewImageUrl);
     return (
       <div>
+        {previewImageUrl && <img src={previewImageUrl} />}
         <Dropzone
           accept="image/*"
           multiple={false}
@@ -76,9 +84,10 @@ export default class ImageUpload extends React.Component {
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
         >
-          {blobUrl && modalIsOpen && <ImageEdit url={blobUrl} />}
+          {blobUrl && modalIsOpen && (
+            <ImageEdit url={blobUrl} submitImage={this.submitImage} />
+          )}
         </Modal>
       </div>
     );

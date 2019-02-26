@@ -1,7 +1,8 @@
 import 'react-image-crop/dist/ReactCrop.css';
 import ReactCrop from 'react-image-crop';
 import React from 'react';
-import { resolve } from 'q';
+
+import Button from '../commons/Button';
 
 export default class ImageEdit extends React.Component {
   state = {
@@ -30,10 +31,13 @@ export default class ImageEdit extends React.Component {
       pixelCrop.width,
       pixelCrop.height,
     );
-    return new Promise((resolve, reject) => {
-      canvas.toBlob(blob => {
-        console.log(blob);
-      });
+
+    canvas.toBlob(blob => {
+      if (!blob) {
+        return;
+      }
+      blob.name = 'newFile.jpeg';
+      this.props.submitImage(blob);
     });
   };
 
@@ -54,17 +58,19 @@ export default class ImageEdit extends React.Component {
   render() {
     const { url } = this.props;
     return (
-      <div>
-        <div>Edit image</div>
-        <ReactCrop
-          src={url}
-          crop={this.state.crop}
-          onChange={this.onChange}
-          onImageLoaded={this.onImageLoaded}
-          onComplete={this.onCropComplete}
-        />
-        <div>
-          <button onClick={this.submitImage}>save</button>
+      <div class="image-edit-container">
+        <div class="title">Edit image</div>
+        <div class="image-editor">
+          <ReactCrop
+            src={url}
+            crop={this.state.crop}
+            onChange={this.onChange}
+            onImageLoaded={this.onImageLoaded}
+            onComplete={this.onCropComplete}
+          />
+        </div>
+        <div class="submit">
+          <Button onClick={this.submitImage}>save</Button>
         </div>
       </div>
     );

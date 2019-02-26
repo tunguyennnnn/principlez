@@ -19,3 +19,27 @@
 .image-upload-container:hover {
   opacity: 1;
 }
+
+.image-edit-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  .title {
+    height: 50px;
+    text-align: center;
+    padding: 1vw;
+  }
+
+  .image-editor {
+    flex: 1;
+    padding: 2vw;
+    text-align: center;
+  }
+
+  .submit {
+    height: 8%;
+    text-align: right;
+  }
+}
