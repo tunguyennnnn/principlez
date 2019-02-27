@@ -23,7 +23,7 @@ class StoryPage extends React.Component {
 
     if (data.loading) return <div>...loading</div>;
 
-    const { title, body, type } = data.chapter;
+    const { title, body, type, imageTheme } = data.chapter;
 
     return (
       <StoryWriteContext.Provider
@@ -32,7 +32,7 @@ class StoryPage extends React.Component {
         }}
       >
         <div>
-          <ImageUpload />
+          <ImageUpload imageUrl={imageTheme && imageTheme.large} />
           <BlogEditor body={body} />
         </div>
       </StoryWriteContext.Provider>
@@ -43,6 +43,10 @@ class StoryPage extends React.Component {
 const queryChapter = gql`
   query chapter($storyId: ID!, $chapterId: ID) {
     chapter(storyId: $storyId, chapterId: $chapterId) {
+      imageTheme {
+        medium
+        large
+      }
       type
       title
       body

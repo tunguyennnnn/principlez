@@ -16,6 +16,20 @@ const customStyles = {
   },
 };
 
+function ImageViewMode({ imageUrl, open, getInputProps }) {
+  return (
+    <React.Fragment>
+      <input {...getInputProps()} />
+      <img src={imageUrl} />
+      <label class="edit-button" type="button" onClick={() => open()} />
+    </React.Fragment>
+  );
+}
+
+function ImageEditMode({ getInputProps }) {
+  return <input {...getInputProps()} />;
+}
+
 export default class ImageUpload extends React.Component {
   static propTypes = {
     round: PropTypes.bool,
@@ -53,28 +67,50 @@ export default class ImageUpload extends React.Component {
     this.closeModal();
   };
 
+  renderDescription() {
+    const { round, imageUrl } = this.props;
+    if (round || imageUrl) return null;
+    return <p>Click or Drag to Add Image</p>;
+  }
+
+  renderDropZoneBody({ getInputProps, open }) {
+    const { imageUrl } = this.props;
+    if (!imageUrl) {
+      return <ImageEditMode getInputProps={getInputProps} />;
+    }
+
+    return (
+      <ImageViewMode
+        imageUrl={imageUrl}
+        open={open}
+        getInputProps={getInputProps}
+      />
+    );
+  }
+
   render() {
-    const { round } = this.props;
-    const { modalIsOpen, blobUrl, previewImageUrl } = this.state;
-    console.log(previewImageUrl);
+    const { round, imageUrl } = this.props;
+    const { modalIsOpen, blobUrl } = this.state;
+
+    const hasImage = !!imageUrl;
     return (
       <div>
-        {previewImageUrl && <img src={previewImageUrl} />}
         <Dropzone
           accept="image/*"
           multiple={false}
           onDrop={this.onDrop}
           maxSize={1048576 * 3}
         >
-          {({ getRootProps, getInputProps, isDragActive }) => {
+          {({ getRootProps, getInputProps, open }) => {
+            window.openFile = open;
             return (
               <div
-                {...getRootProps()}
-                class="image-upload-container"
+                {...getRootProps({ onClick: evt => evt.preventDefault() })}
+                class={`image-upload-container ${hasImage && 'with--image'}`}
                 style={this.getStyle()}
               >
-                <input {...getInputProps()} />
-                {!round && <p>Click or Drag to Add Image</p>}
+                {this.renderDropZoneBody({ getInputProps, open })}
+                {this.renderDescription()}
               </div>
             );
           }}
