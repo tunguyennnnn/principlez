@@ -10,7 +10,19 @@ const MockChapter = {
   body: {},
 };
 
+const MockImage = {
+  thumb:
+    'https://cdn.pixabay.com/photo/2018/01/12/10/19/fantasy-3077928_1280.jpg',
+  medium:
+    'https://cdn.pixabay.com/photo/2018/01/12/10/19/fantasy-3077928_1280.jpg',
+  large:
+    'https://cdn.pixabay.com/photo/2018/01/12/10/19/fantasy-3077928_1280.jpg',
+};
+
 export default {
+  Chapter: {
+    imageTheme: (chapter, args, { models }) => MockImage,
+  },
   Query: {
     chapter: async (root, { storyId, chapterId }, { models, user }) => {
       try {
