@@ -15,4 +15,8 @@ export default `
   type Query {
     chapter (storyId: ID!, chapterId: ID): Chapter!
   }
+
+  type Mutation {
+    uploadImageTheme(storyId: ID!, chapterId: ID, file: Upload!): ImageTheme!
+  }
 `;

@@ -18,8 +18,25 @@ class StoryPage extends React.Component {
     return placeHolder || PlaceHolder.CHAPTER;
   }
 
+  uploadImage = async file => {
+    const { id: storyId, chapterId } = this.props.match.params;
+    console.log(storyId, chapterId);
+    console.log(file);
+    try {
+      await this.props.uploadImageTheme({
+        variables: {
+          storyId,
+          chapterId,
+          file,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   render() {
-    const { data, location } = this.props;
+    const { data, location, uploadImageTheme } = this.props;
 
     if (data.loading) return <div>...loading</div>;
 
@@ -32,13 +49,25 @@ class StoryPage extends React.Component {
         }}
       >
         <div>
-          <ImageUpload imageUrl={imageTheme && imageTheme.large} />
+          <ImageUpload
+            imageUrl={imageTheme && imageTheme.large}
+            uploadImage={this.uploadImage}
+          />
           <BlogEditor body={body} />
         </div>
       </StoryWriteContext.Provider>
     );
   }
 }
+
+const uploadImageTheme = gql`
+  mutation uploadImageTheme($storyId: ID!, $chapterId: ID, $file: Upload!) {
+    uploadImageTheme(storyId: $storyId, chapterId: $chapterId, file: $file) {
+      medium
+      large
+    }
+  }
+`;
 
 const queryChapter = gql`
   query chapter($storyId: ID!, $chapterId: ID) {
@@ -65,4 +94,5 @@ export default compose(
       };
     },
   }),
+  graphql(uploadImageTheme, { name: 'uploadImageTheme' }),
 )(StoryPage);

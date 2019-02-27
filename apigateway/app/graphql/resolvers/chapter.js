@@ -32,4 +32,18 @@ export default {
       }
     },
   },
+  Mutation: {
+    uploadImageTheme: async (
+      root,
+      { storyId, chapterId, file },
+      { models, user },
+    ) => {
+      try {
+        const { stream, filename, mimetype, encoding } = await file;
+        return MockImage;
+      } catch (e) {
+        return MockImage;
+      }
+    },
+  },
 };

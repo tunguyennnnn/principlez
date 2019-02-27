@@ -34,17 +34,19 @@ export default class ImageUpload extends React.Component {
   static propTypes = {
     round: PropTypes.bool,
     width: PropTypes.number,
+    imageUrl: PropTypes.string,
+    uploadImage: PropTypes.func,
   };
 
   state = {
     modalIsOpen: false,
     blobUrl: '',
-    previewImageUrl: '',
   };
 
   onDrop = ([file]) => {
-    const blobUrl = URL.createObjectURL(file);
-    this.setState({ modalIsOpen: true, blobUrl });
+    this.props.uploadImage(file);
+    // const blobUrl = URL.createObjectURL(file);
+    // this.setState({ modalIsOpen: true, blobUrl });
   };
 
   closeModal = () => {
@@ -63,7 +65,7 @@ export default class ImageUpload extends React.Component {
   }
 
   submitImage = blob => {
-    this.setState({ previewImageUrl: URL.createObjectURL(blob) });
+    this.props.uploadImage(blob);
     this.closeModal();
   };
 

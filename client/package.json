@@ -12,6 +12,7 @@
     "apollo-client": "^2.4.13",
     "apollo-link-context": "^1.0.14",
     "apollo-link-http": "^1.5.11",
+    "apollo-upload-client": "^10.0.0",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "immutable": "^4.0.0-rc.12",

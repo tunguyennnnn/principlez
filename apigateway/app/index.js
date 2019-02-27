@@ -4,11 +4,15 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import models from '../models';
-import { schemaWithMiddleware } from './graphql';
+import { schemaWithMiddleware, typeDefs, resolvers } from './graphql';
 import { authCheck } from './services/auth';
 
 const server = new ApolloServer({
   schema: schemaWithMiddleware,
+  uploads: {
+    maxFileSize: 10000000, // 10 MB
+    maxFiles: 20,
+  },
   context: async ({ req }) => {
     return { models, user: req.user };
   },
