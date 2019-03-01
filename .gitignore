@@ -3,3 +3,4 @@ build
 node_modules
 nvm
 .DS_Store
+postgres_data

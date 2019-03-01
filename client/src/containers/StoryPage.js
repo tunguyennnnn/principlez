@@ -2,6 +2,7 @@ import './storypage/storypage.scss';
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import { Switch, Route } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import StoryWrite from './storypage/StoryWrite';
 import ChapterList from '../components/ChapterList';
@@ -44,17 +45,29 @@ export default class StoryPage extends Component {
             <SideMenu>{ChapterListComponents}</SideMenu>
           </div>
         </MediaQuery>
-        <div class="blog-editor-container">
-          <Route
-            exact
-            path="/stories/:id/"
-            component={props => <StoryWrite {...props} title="My Story" />}
-          />
-          <Route
-            path="/stories/:id/chapters/:chapterId"
-            component={props => <StoryWrite {...props} title="Chapter..." />}
-          />
-        </div>
+        <TransitionGroup className="blog-editor-container">
+          <CSSTransition
+            key={this.props.location.key}
+            classNames="move"
+            timeout={1000}
+            appear
+          >
+            <Switch>
+              <Route
+                exact
+                path="/stories/:id/"
+                component={props => <StoryWrite {...props} title="My Story" />}
+              />
+              <Route
+                exact
+                path="/stories/:id/chapters/:chapterId"
+                component={props => (
+                  <StoryWrite {...props} title="Chapter..." />
+                )}
+              />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
       </div>
     );
   }

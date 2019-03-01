@@ -1,12 +1,22 @@
 import express from 'express';
-import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import models from '../models';
-import schema from './graphql';
+import { schemaWithMiddleware, typeDefs, resolvers } from './graphql';
 import { authCheck } from './services/auth';
 
+const server = new ApolloServer({
+  schema: schemaWithMiddleware,
+  uploads: {
+    maxFileSize: 10000000, // 10 MB
+    maxFiles: 20,
+  },
+  context: async ({ req }) => {
+    return { models, user: req.user };
+  },
+});
 const app = express();
 
 app.get('/', function(req, res) {
@@ -21,18 +31,4 @@ app.all('*', cors());
 
 app.use(authCheck);
 
-app.use(
-  '/graphiql',
-  graphiqlExpress({
-    endpointURL: '/graphql',
-  }),
-);
-
-app.use(
-  '/graphql',
-  bodyParser.json(),
-  graphqlExpress(req => ({
-    schema,
-    context: { models, user: req.user },
-  })),
-);
+server.applyMiddleware({ app, path: '/graphql' });

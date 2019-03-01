@@ -23,6 +23,7 @@ services:
     image: tunguyenuni/api-gateway:v1
     volumes:
       - ./apigateway:/usr/src/app
+      - ./upload:/user/src/upload
     ports:
       - "4000:4000"
     environment:
