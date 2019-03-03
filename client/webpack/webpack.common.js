@@ -1,8 +1,8 @@
-const webpack = require('webpack')
-const commonPaths = require('./config.path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack');
+const commonPaths = require('./config.path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const isDev = process.env.NODE_ENV !== 'production'
+const isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: commonPaths.entryPath,
@@ -10,28 +10,23 @@ module.exports = {
     rules: [
       {
         test: /\.html$/,
-        loader: 'html-loader'
+        loader: 'html-loader',
       },
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        exclude: /(node_modules)/
+        exclude: /(node_modules)/,
       },
       {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto",
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|mp3)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              outputPath: commonPaths.imagesFolder
-            }
-          }
-        ]
+              outputPath: commonPaths.imagesFolder,
+            },
+          },
+        ],
       },
       {
         test: /\.(woff2|ttf|woff|eot|otf)$/,
@@ -39,22 +34,20 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: commonPaths.fontsFolder
-            }
-          }
-        ]
-      }
-    ]
+              outputPath: commonPaths.fontsFolder,
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.mjs', '.json']
+    extensions: ['*', '.js', '.jsx'],
   },
   plugins: [
     new webpack.ProgressPlugin(),
-    new webpack.DefinePlugin({
-    }),
     new HtmlWebpackPlugin({
-      template: commonPaths.templatePath
-    })
-  ]
-}
+      template: commonPaths.templatePath,
+    }),
+  ],
+};

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config=./webpack.config.js"
+    "build": "npm rebuild node-sass && cross-env NODE_ENV=production webpack --config=./webpack.config.js"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.4.3",

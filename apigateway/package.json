@@ -5,15 +5,18 @@
   "license": "MIT",
   "scripts": {
     "tsc": "tsc",
-    "dev": "nodemon app/index.js --exec babel-node",
-    "build": "babel app -d build",
-    "prod": "node ./build/index.js"
+    "dev": "cross-env NODE_ENV=development && nodemon app/index.js --exec babel-node",
+    "build": "rimraf ./build && babel . --ignore node_modules,test --out-dir build",
+    "prod:local": "cross-env NODE_ENV=production && node ./build/app/index.js",
+    "prod": "cross-env NODE_ENV=production && node ./app/index.js"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "apollo-server-express": "^2.4.6",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "graphql": "^14.1.1",
@@ -33,6 +36,7 @@
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "nodemon": "^1.18.10",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "rimraf": "^2.6.3"
   }
 }
