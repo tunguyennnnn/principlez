@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
   const ProfileImage = sequelize.define(
     'ProfileImage',
     {
-      userId: DataTypes.INTEGER,
       thumb: {
         type: DataTypes.STRING,
         isUrl: true,

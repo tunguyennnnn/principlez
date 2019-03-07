@@ -23,6 +23,9 @@ module.exports = {
       yearOfBirth: {
         type: Sequelize.STRING,
       },
+      imageId: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.literal('NOW()'),

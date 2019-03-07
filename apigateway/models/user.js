@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         len: [4],
       },
+      imageId: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       indexes: [
@@ -39,8 +42,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'locationId',
       as: 'location',
     });
-    User.hasOne(models.ProfileImage, {
-      foreignKey: 'userId',
+
+    User.belongsTo(models.ProfileImage, {
+      foreignKey: 'imageId',
       as: 'profileImage',
     });
   };

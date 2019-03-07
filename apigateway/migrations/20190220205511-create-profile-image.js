@@ -6,31 +6,33 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       thumb: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       medium: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       large: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       source: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.literal('NOW()'),
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        defaultValue: Sequelize.literal('NOW()'),
+        type: Sequelize.DATE,
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('ProfileImages');
-  }
+  },
 };
