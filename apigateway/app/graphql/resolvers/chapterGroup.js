@@ -18,4 +18,26 @@ export default {
       }
     },
   },
+  Mutation: {
+    createChapter: async (root, { type }, { models, user }) => {
+      try {
+        if (!user) {
+          throw new Error('Anauthenticated');
+        }
+
+        const chapterGroup = await models.ChapterGroup.findOne({
+          where: { userId: user.id, type },
+        });
+        if (!chapterGroup) {
+          throw new Error('Not found type');
+        }
+        const { group, chapter } = await models.ChapterGroup.createNewChapter(
+          chapterGroup,
+        );
+        return { chapterGroup: group, chapter };
+      } catch (e) {
+        throw e;
+      }
+    },
+  },
 };

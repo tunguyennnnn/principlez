@@ -19,8 +19,5 @@ export default `
 
   type Mutation {
     uploadImageTheme(storyId: ID!, chapterId: ID, file: Upload!): ImageTheme!
-    createChapter (type: String!, orderNumber: Int = 0): Chapter!
-    removeChapter (type: String!, id: ID!): ID!
-    reorderChapter (chapterGroupId: ID!, newOrder: [Int!]!): [Int!]!
   }
 `;

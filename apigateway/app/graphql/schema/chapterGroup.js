@@ -12,9 +12,17 @@ export default `
     chapters: [ChapterView!]!
   }
 
+  type createdChapterResult {
+    chapterGroup: ChapterGroup!
+    chapter: Chapter!
+  }
+
   type Query {
     chapterGroups (userId: ID!): [ChapterGroup!]
-    createChapter (type: String!, orderNumber: Int = 0): Chapter!
+  }
+
+  type Mutation {
+    createChapter (type: String!): createdChapterResult!
     removeChapter (type: String!, id: ID!): ID!
     reorderChapter (chapterGroupId: ID!, newOrder: [Int!]!): [Int!]!
   }

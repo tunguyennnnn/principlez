@@ -55,5 +55,17 @@ module.exports = (sequelize, DataTypes) => {
       await group.update({ chapterListOrder: [chapter.id] });
     }
   };
+
+  ChapterGroup.createNewChapter = async chapterGroup => {
+    const { id: chapterGroupId, userId, chapterListOrder } = chapterGroup;
+    const chapter = await sequelize.models.Chapter.create({
+      chapterGroupId,
+      userId,
+    });
+    const updatedGroup = await chapterGroup.update({
+      chapterListOrder: [...chapterListOrder, chapter.id],
+    });
+    return { group: updatedGroup, chapter };
+  };
   return ChapterGroup;
 };
