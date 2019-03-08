@@ -35,7 +35,7 @@ export default {
           yearOfBirth,
           locationId: userLocation.id,
         });
-
+        await models.ChapterGroup.createDefaultGroups(user.id);
         return user;
       } catch (e) {
         throw e;

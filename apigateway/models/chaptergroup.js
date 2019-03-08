@@ -1,4 +1,7 @@
 'use strict';
+
+const GroupTypes = ['STORY', 'ABOUT_ME', 'LESSON'];
+
 module.exports = (sequelize, DataTypes) => {
   const ChapterGroup = sequelize.define(
     'ChapterGroup',
@@ -6,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       type: {
         type: DataTypes.STRING,
         defaultValue: 'STORY',
-        isIn: [['STORY', 'ABOUT_ME', 'LESSON']],
+        isIn: [GroupTypes],
       },
       userId: {
         type: DataTypes.INTEGER,
@@ -17,7 +20,13 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: [],
       },
     },
-    {},
+    {
+      indexes: [
+        {
+          fields: ['userId', 'type'],
+        },
+      ],
+    },
   );
   ChapterGroup.associate = function(models) {
     ChapterGroup.belongsTo(models.User, {
@@ -29,6 +38,22 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'chapterGroupId',
       as: 'chapters',
     });
+  };
+
+  ChapterGroup.createDefaultGroups = async userId => {
+    const groups = await ChapterGroup.bulkCreate(
+      GroupTypes.map(type => ({ type, userId })),
+      { returning: true },
+    );
+
+    for (const group of groups) {
+      const { id: chapterGroupId } = group;
+      const chapter = await sequelize.models.Chapter.create({
+        chapterGroupId,
+        userId,
+      });
+      await group.update({ chapterListOrder: [chapter.id] });
+    }
   };
   return ChapterGroup;
 };
