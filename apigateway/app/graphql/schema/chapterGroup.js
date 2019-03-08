@@ -23,7 +23,7 @@ export default `
 
   type Mutation {
     createChapter (type: String!): createdChapterResult!
-    removeChapter (type: String!, id: ID!): ID!
+    deleteChapter (type: String!, id: ID!): ChapterGroup!
     reorderChapter (chapterGroupId: ID!, newOrder: [Int!]!): [Int!]!
   }
 `;

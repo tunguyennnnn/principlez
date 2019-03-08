@@ -1,4 +1,4 @@
-'use strict';
+import _ from 'lodash';
 
 const GroupTypes = ['STORY', 'ABOUT_ME', 'LESSON'];
 
@@ -66,6 +66,16 @@ module.exports = (sequelize, DataTypes) => {
       chapterListOrder: [...chapterListOrder, chapter.id],
     });
     return { group: updatedGroup, chapter };
+  };
+
+  ChapterGroup.deleteChapter = async (chapterGroup, chapter) => {
+    await sequelize.models.Chapter.destroy({ where: { id: chapter.id } });
+
+    return chapterGroup.update({
+      chapterListOrder: chapterGroup.chapterListOrder.filter(
+        id => id !== chapter.id,
+      ),
+    });
   };
   return ChapterGroup;
 };
