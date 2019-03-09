@@ -18,10 +18,23 @@ class StoryPage extends React.Component {
     return placeHolder || PlaceHolder.CHAPTER;
   }
 
+  updateChapterContent = async (title, body) => {
+    const { chapterId: id } = this.props.match.params;
+    try {
+      const { updateChapterContent } = this.props;
+      await updateChapterContent({
+        variables: { id, title, body },
+        update: (proxy, { data: { chapter } }) => {
+          console.log(chapter);
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   uploadImage = async file => {
     const { id: storyId, chapterId } = this.props.match.params;
-    console.log(storyId, chapterId);
-    console.log(file);
     try {
       await this.props.uploadImageTheme({
         variables: {
@@ -36,12 +49,11 @@ class StoryPage extends React.Component {
   };
 
   render() {
-    const { data, location, uploadImageTheme } = this.props;
-
+    const { data } = this.props;
     if (data.loading) return <div>...loading</div>;
 
-    const { title, body, type, imageTheme } = data.chapter;
-
+    const { id, title, body, type, imageTheme } = data.chapter;
+    console.log(title, body);
     return (
       <StoryWriteContext.Provider
         value={{
@@ -53,7 +65,11 @@ class StoryPage extends React.Component {
             imageUrl={imageTheme && imageTheme.large}
             uploadImage={this.uploadImage}
           />
-          <BlogEditor body={body} />
+          <BlogEditor
+            title={title}
+            body={body}
+            update={this.updateChapterContent}
+          />
         </div>
       </StoryWriteContext.Provider>
     );
@@ -69,14 +85,23 @@ const uploadImageTheme = gql`
   }
 `;
 
+const updateChapterContentMutation = gql`
+  mutation updateChapterContent($id: ID!, $title: String, $body: JSON) {
+    chapter: updateChapterContent(id: $id, title: $title, body: $body) {
+      id
+      title
+      body
+    }
+  }
+`;
+
 const queryChapter = gql`
-  query chapter($storyId: ID!, $chapterId: ID) {
-    chapter(storyId: $storyId, chapterId: $chapterId) {
+  query chapter($chapterId: ID!) {
+    chapter: chapter(chapterId: $chapterId) {
       imageTheme {
         medium
         large
       }
-      type
       title
       body
     }
@@ -95,4 +120,5 @@ export default compose(
     },
   }),
   graphql(uploadImageTheme, { name: 'uploadImageTheme' }),
+  graphql(updateChapterContentMutation, { name: 'updateChapterContent' }),
 )(StoryPage);

@@ -1,16 +1,51 @@
 import React, { Component } from 'react';
-
+import { Subject, timer } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { Editor } from 'slate-react';
+import { Value } from 'slate';
 import Plain from 'slate-plain-serializer';
 import Blocks from './editors/Blocks';
 import schema from './editors/schema';
+import { TITLE } from './editors/types';
 
 export default class BlogEditor extends React.Component {
-  state = {
-    value: Plain.deserialize(''),
+  constructor(props) {
+    super(props);
+    const { title, body } = props;
+    this.state = {
+      value: this.initializeValue(title, body),
+    };
+    this.observable = new Subject().pipe(debounceTime(1000));
+    this.observable.subscribe(this.update);
+  }
+
+  initializeValue = (title, body) => {
+    return Value.fromJSON({
+      document: {
+        nodes: [
+          {
+            object: 'block',
+            type: TITLE,
+            nodes: [
+              { object: 'text', leaves: [{ object: 'leaf', text: title }] },
+            ],
+          },
+        ],
+      },
+    });
+  };
+
+  update = () => {
+    const { nodes } = this.state.value.document;
+    const title = nodes.first().text;
+    const body = nodes.slice(1).toJS();
+    this.props.update(title, body);
   };
 
   onChange = ({ value }) => {
+    if (value.document !== this.state.value.document) {
+      this.observable.next();
+    }
     this.setState({ value });
   };
 
@@ -28,7 +63,6 @@ export default class BlogEditor extends React.Component {
   render() {
     return (
       <div class="blog-editor-container">
-        {this.props.title}
         <Editor
           placeholder="Your story..."
           value={this.state.value}

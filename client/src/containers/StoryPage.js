@@ -3,12 +3,23 @@ import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import { Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { compose, graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import _ from 'lodash';
 
 import StoryWrite from './storypage/StoryWrite';
 import ChapterList from '../components/ChapterList';
 import SideMenu from '../components/SideMenu';
 
-export default class StoryPage extends Component {
+const TypeToTitle = {
+  ABOUT_ME: 'About Me',
+  STORY: 'My Stories',
+  LESSON: 'Principles',
+};
+
+const OrderedGroup = ['ABOUT_ME', 'STORY', 'LESSON'];
+
+class StoryPage extends Component {
   get basePath() {
     const {
       match: { url },
@@ -17,22 +28,32 @@ export default class StoryPage extends Component {
   }
 
   render() {
+    const { data } = this.props;
+    if (data.loading) {
+      return <div>...loading</div>;
+    }
+
+    if (data.error) {
+      return <div>something is wrong</div>;
+    }
+
+    const { myChapterGroups } = data;
+
     const ChapterListComponents = (
       <React.Fragment>
-        <ChapterList
-          basePath={this.basePath}
-          title={'About me'}
-          chapters={[{ id: null, title: 'My background' }]}
-        />
-        <ChapterList
-          basePath={this.basePath}
-          title={'My life'}
-          chapters={[
-            { id: 1, title: 'Chapter 1' },
-            { id: 2, title: 'Chapter 2' },
-            { id: 3, title: 'Chapter 3' },
-          ]}
-        />
+        {_.sortBy(myChapterGroups, group =>
+          OrderedGroup.indexOf(group.type),
+        ).map(group => {
+          const { type, id, chapters } = group;
+          return (
+            <ChapterList
+              key={`group-${type}-${id}`}
+              basePath={this.basePath}
+              title={TypeToTitle[type]}
+              chapters={chapters}
+            />
+          );
+        })}
       </React.Fragment>
     );
     return (
@@ -72,3 +93,18 @@ export default class StoryPage extends Component {
     );
   }
 }
+
+const chapterGroupsQuery = gql`
+  query myChapterGroups {
+    myChapterGroups {
+      id
+      type
+      chapterListOrder
+      chapters {
+        id
+        title
+      }
+    }
+  }
+`;
+export default compose(graphql(chapterGroupsQuery))(StoryPage);
