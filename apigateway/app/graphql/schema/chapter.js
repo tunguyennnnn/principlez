@@ -14,10 +14,11 @@ export default `
   }
 
   type Query {
-    chapter (storyId: ID!, chapterId: ID): Chapter!
+    chapter (chapterId: ID!): Chapter!
   }
 
   type Mutation {
     uploadImageTheme(storyId: ID!, chapterId: ID, file: Upload!): ImageTheme!
+    updateChapterContent(id: ID!, title: String, body: JSON): Chapter!
   }
 `;

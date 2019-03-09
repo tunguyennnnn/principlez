@@ -18,7 +18,8 @@ export default `
   }
 
   type Query {
-    chapterGroups (userId: ID!): [ChapterGroup!]
+    chapterGroups (userId: ID!): [ChapterGroup!]!
+    myChapterGroups: [ChapterGroup!]!
   }
 
   type Mutation {

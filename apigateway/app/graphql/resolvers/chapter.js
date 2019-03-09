@@ -1,15 +1,3 @@
-const MockAboutMeChapter = {
-  type: 'ABOUT_ME',
-  title: 'About Me',
-  body: {},
-};
-
-const MockChapter = {
-  type: 'CHAPTER',
-  title: 'Chapter',
-  body: {},
-};
-
 const MockImage = {
   thumb:
     'https://cdn.pixabay.com/photo/2018/01/12/10/19/fantasy-3077928_1280.jpg',
@@ -24,15 +12,35 @@ export default {
     imageTheme: (chapter, args, { models }) => MockImage,
   },
   Query: {
-    chapter: async (root, { storyId, chapterId }, { models, user }) => {
+    chapter: async (root, { chapterId }, { models, user }) => {
       try {
-        return chapterId ? MockChapter : MockAboutMeChapter;
+        return models.Chapter.findOne({ where: { id: chapterId } });
       } catch (e) {
         throw e;
       }
     },
   },
   Mutation: {
+    updateChapterContent: async (
+      root,
+      { id, title, body },
+      { models, user },
+    ) => {
+      if (!user) {
+        throw new Error('Anauthenticated');
+      }
+      const chapter = await models.Chapter.findOne({
+        where: { id, userId: user.id },
+      });
+      if (!chapter) {
+        throw new Error('Chatper not found');
+      }
+
+      return chapter.update({
+        title: title || chapter.title,
+        body: body || chapter.body,
+      });
+    },
     uploadImageTheme: async (
       root,
       { storyId, chapterId, file },
