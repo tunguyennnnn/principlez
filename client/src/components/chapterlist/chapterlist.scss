@@ -1,8 +1,16 @@
 .chapter-list {
   background-color: white;
   padding: 5px;
+  position: relative;
   border: 1px solid grey;
   margin: 5px;
+
+  .chapter-list-add-icon {
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+    cursor: pointer;
+  }
 
   .chapter-title {
     font-size: 20px;
@@ -26,6 +34,13 @@
         text-decoration: none;
         color: inherit;
       }
+    }
+
+    .chapter-delete-icon {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
     }
   }
 }

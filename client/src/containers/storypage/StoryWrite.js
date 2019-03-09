@@ -24,10 +24,8 @@ class StoryPage extends React.Component {
       const { updateChapterContent } = this.props;
       await updateChapterContent({
         variables: { id, title, body },
-        update: (proxy, { data: { chapter } }) => {
-          console.log(chapter);
-        },
       });
+      this.props.updateChapterTitle(id, title);
     } catch (e) {
       console.log(e);
     }
