@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import * as utils from '../utils';
 
 const GroupTypes = ['STORY', 'ABOUT_ME', 'LESSON'];
 
@@ -76,6 +77,17 @@ module.exports = (sequelize, DataTypes) => {
         id => id !== chapter.id,
       ),
     });
+  };
+
+  ChapterGroup.reorderChapters = async (chapterGroup, newOrder) => {
+    const { chapterListOrder } = chapterGroup;
+    newOrder = newOrder.map(i => Number(i));
+
+    if (!utils.hasSameElements(chapterListOrder, newOrder)) {
+      return chapterGroup;
+    }
+
+    return chapterGroup.update({ chapterListOrder: newOrder });
   };
   return ChapterGroup;
 };

@@ -25,6 +25,6 @@ export default `
   type Mutation {
     createChapter (type: String!): createdChapterResult!
     deleteChapter (type: String!, id: ID!): ChapterGroup!
-    reorderChapter (chapterGroupId: ID!, newOrder: [Int!]!): [Int!]!
+    reorderChapters (chapterGroupId: ID!, newOrder: [ID!]!): ChapterGroup!
   }
 `;

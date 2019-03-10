@@ -1,10 +1,15 @@
+import _ from 'lodash';
+
 export default {
   ChapterGroup: {
     chapters: async (chapterGroup, args, { models }) => {
       const { chapterListOrder } = chapterGroup;
-      return models.Chapter.findAll({
+      const chapters = await models.Chapter.findAll({
         where: { id: chapterListOrder },
         attributes: ['id', 'title'],
+      });
+      return _.sortBy(chapters, chapter => {
+        return chapterListOrder.indexOf(chapter.id);
       });
     },
   },
@@ -72,6 +77,25 @@ export default {
         console.log(e);
         throw e;
       }
+    },
+    reorderChapters: async (
+      root,
+      { chapterGroupId, newOrder },
+      { models, user },
+    ) => {
+      if (!user) {
+        throw new Error('Not found chapter');
+      }
+
+      const chapterGroup = await models.ChapterGroup.findOne({
+        where: { userId: user.id, id: chapterGroupId },
+      });
+
+      if (!chapterGroup) {
+        throw new Error('Not found type');
+      }
+
+      return models.ChapterGroup.reorderChapters(chapterGroup, newOrder);
     },
   },
 };
