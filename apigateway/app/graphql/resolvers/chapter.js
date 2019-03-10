@@ -10,6 +10,10 @@ const MockImage = {
 export default {
   Chapter: {
     imageTheme: (chapter, args, { models }) => MockImage,
+    type: async (chapter, args, { models }) => {
+      const chapterGroup = await chapter.getChapterGroup();
+      return chapterGroup.type;
+    },
   },
   Query: {
     chapter: async (root, { chapterId }, { models, user }) => {

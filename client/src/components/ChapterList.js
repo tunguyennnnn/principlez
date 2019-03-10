@@ -49,7 +49,7 @@ export default class ChapterList extends Component {
 
   render() {
     const { title, chapters, type, createChapter } = this.props;
-    console.log(chapters.map(c => c.id));
+
     return (
       <div class="chapter-list">
         <div class="chapter-list-add-icon">

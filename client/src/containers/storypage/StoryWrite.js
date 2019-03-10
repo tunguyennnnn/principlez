@@ -19,13 +19,15 @@ class StoryPage extends React.Component {
   }
 
   updateChapterContent = async (title, body) => {
+    const { type } = this.props.data.chapter;
     const { chapterId: id } = this.props.match.params;
+
     try {
       const { updateChapterContent } = this.props;
       await updateChapterContent({
         variables: { id, title, body },
       });
-      this.props.updateChapterTitle(id, title);
+      this.props.updateChapterTitle(id, title, type);
     } catch (e) {
       console.log(e);
     }
@@ -50,7 +52,8 @@ class StoryPage extends React.Component {
     const { data } = this.props;
     if (data.loading) return <div>...loading</div>;
 
-    const { id, title, body, type, imageTheme } = data.chapter;
+    const { title, body, type, imageTheme } = data.chapter;
+
     return (
       <StoryWriteContext.Provider
         value={{
@@ -95,6 +98,7 @@ const updateChapterContentMutation = gql`
 const queryChapter = gql`
   query chapter($chapterId: ID!) {
     chapter: chapter(chapterId: $chapterId) {
+      type
       imageTheme {
         medium
         large

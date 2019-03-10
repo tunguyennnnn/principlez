@@ -14,6 +14,19 @@ const TypeToTitle = {
 const OrderedGroup = ['ABOUT_ME', 'STORY', 'LESSON'];
 
 class ChapterGroup extends React.Component {
+  updateTitle = (chapterId, title, type) => {
+    this.props.data.updateQuery((prev, options) => {
+      const chapterGroup = _.find(prev.myChapterGroups, { type });
+      const chapter = _.find(chapterGroup.chapters, { id: chapterId });
+      chapter.title = title;
+      return prev;
+    });
+  };
+
+  componentDidMount() {
+    this.props.updateTitleRef(this.updateTitle);
+  }
+
   reorderChapters = async (chapterGroupId, sourceIndex, destinationIndex) => {
     try {
       const chapterGroup = _.find(this.props.data.myChapterGroups, {
@@ -55,6 +68,7 @@ class ChapterGroup extends React.Component {
 
   render() {
     const { data, basePath } = this.props;
+
     if (data.loading) {
       return <div>...loading</div>;
     }

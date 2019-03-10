@@ -10,7 +10,11 @@ import StoryWrite from './storypage/StoryWrite';
 import SideMenu from '../components/SideMenu';
 
 export default class StoryPage extends Component {
-  updateChapterTitle = (id, title, type) => {};
+  updateChapterTitle = (id, title, type) => {
+    if (this.updateTitle) {
+      this.updateTitle(id, title, type);
+    }
+  };
 
   get basePath() {
     const {
@@ -24,13 +28,19 @@ export default class StoryPage extends Component {
       <div class="story-page">
         <MediaQuery query="(min-width: 850px)">
           <div class="chapter-list-container">
-            <ChapterGroup basePath={this.basePath} />
+            <ChapterGroup
+              basePath={this.basePath}
+              updateTitleRef={fn => (this.updateTitle = fn)}
+            />
           </div>
         </MediaQuery>
         <MediaQuery query="(max-width: 850px">
           <div class="chapter-list-container">
             <SideMenu>
-              <ChapterGroup basePath={this.basePath} />
+              <ChapterGroup
+                basePath={this.basePath}
+                updateTitleRef={fn => (this.updateTitle = fn)}
+              />
             </SideMenu>
           </div>
         </MediaQuery>

@@ -47,10 +47,15 @@
       }
     }
 
+    .header {
+      font-weight: 700;
+      font-size: 1.3em;
+    }
+
     .chapter-delete-icon {
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 0px;
+      right: 0px;
       cursor: pointer;
     }
 
