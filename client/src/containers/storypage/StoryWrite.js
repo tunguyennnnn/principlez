@@ -51,7 +51,6 @@ class StoryPage extends React.Component {
     if (data.loading) return <div>...loading</div>;
 
     const { id, title, body, type, imageTheme } = data.chapter;
-    console.log(title, body);
     return (
       <StoryWriteContext.Provider
         value={{

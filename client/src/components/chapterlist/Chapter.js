@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Card, Icon, Image } from 'semantic-ui-react';
 
 export default function Chapter({ children, link, deleteChapter }) {
@@ -8,14 +8,14 @@ export default function Chapter({ children, link, deleteChapter }) {
       <div class="chapter-delete-icon">
         <Icon name="delete" circular onClick={deleteChapter} />
       </div>
-      <Link to={link}>
+      <NavLink to={link} activeClassName="active-chapter-content">
         <Card.Content>
           <Card.Header>{children}</Card.Header>
           <Card.Meta>
             <span className="date">Written in 2019</span>
           </Card.Meta>
         </Card.Content>
-      </Link>
+      </NavLink>
       <Card.Content>
         <a>
           <Icon name="user" />
