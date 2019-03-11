@@ -20,6 +20,11 @@ export default class BlogEditor extends React.Component {
   }
 
   initializeValue = (title, body) => {
+    window.test = {
+      Value,
+      title,
+      body,
+    };
     return Value.fromJSON({
       document: {
         nodes: [
@@ -30,6 +35,7 @@ export default class BlogEditor extends React.Component {
               { object: 'text', leaves: [{ object: 'leaf', text: title }] },
             ],
           },
+          ...body,
         ],
       },
     });
@@ -38,7 +44,7 @@ export default class BlogEditor extends React.Component {
   update = () => {
     const { nodes } = this.state.value.document;
     const title = nodes.first().text;
-    const body = nodes.slice(1).toJS();
+    const body = _.slice(this.state.value.document.toJSON().nodes, 1);
     this.props.update(title, body);
   };
 
