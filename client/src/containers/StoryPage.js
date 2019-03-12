@@ -16,31 +16,18 @@ export default class StoryPage extends Component {
     }
   };
 
-  get basePath() {
-    const {
-      match: { url },
-    } = this.props;
-    return url;
-  }
-
   render() {
     return (
       <div class="story-page">
         <MediaQuery query="(min-width: 850px)">
           <div class="chapter-list-container">
-            <ChapterGroup
-              basePath={this.basePath}
-              updateTitleRef={fn => (this.updateTitle = fn)}
-            />
+            <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} />
           </div>
         </MediaQuery>
         <MediaQuery query="(max-width: 850px">
           <div class="chapter-list-container">
             <SideMenu>
-              <ChapterGroup
-                basePath={this.basePath}
-                updateTitleRef={fn => (this.updateTitle = fn)}
-              />
+              <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} />
             </SideMenu>
           </div>
         </MediaQuery>
@@ -51,19 +38,11 @@ export default class StoryPage extends Component {
             timeout={1000}
             appear
           >
-            <Switch>
-              <Route
-                exact
-                path="/stories/:id/chapters/:chapterId"
-                component={props => (
-                  <StoryWrite
-                    {...props}
-                    title="Chapter..."
-                    updateChapterTitle={this.updateChapterTitle}
-                  />
-                )}
-              />
-            </Switch>
+            <StoryWrite
+              match={this.props.match}
+              title="Chapter..."
+              updateChapterTitle={this.updateChapterTitle}
+            />
           </CSSTransition>
         </TransitionGroup>
       </div>

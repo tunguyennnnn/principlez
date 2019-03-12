@@ -11,7 +11,12 @@ export default class App extends Component {
       <div id="app">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/stories/:id" component={StoryPage} />
+          <Route
+            exact
+            path="/of/:name"
+            component={() => <div>Personal page</div>}
+          />
+          <Route path="/of/:name/stories/:chapterId" component={StoryPage} />
         </Switch>
       </div>
     );

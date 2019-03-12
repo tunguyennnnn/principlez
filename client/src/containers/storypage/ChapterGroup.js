@@ -67,7 +67,7 @@ class ChapterGroup extends React.Component {
   };
 
   render() {
-    const { data, basePath } = this.props;
+    const { data } = this.props;
 
     if (data.loading) {
       return <div>...loading</div>;
@@ -93,7 +93,6 @@ class ChapterGroup extends React.Component {
               type={type}
               chapterGroupId={id}
               key={`group-${type}-${id}`}
-              basePath={basePath}
               title={TypeToTitle[type]}
               chapters={chapters}
             />

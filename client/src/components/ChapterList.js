@@ -21,7 +21,7 @@ export default class ChapterList extends Component {
   };
 
   renderChapters(chapters) {
-    const { basePath, deleteChapter, type } = this.props;
+    const { deleteChapter, type } = this.props;
     return (
       <React.Fragment>
         {chapters.map(({ id, title }, index) => (
@@ -34,7 +34,7 @@ export default class ChapterList extends Component {
                 {...provided.dragHandleProps}
               >
                 <Chapter
-                  link={`${basePath}/chapters/${id}`}
+                  link={`${id}`}
                   deleteChapter={deleteChapter.bind(null, type, id)}
                 >
                   {title}
