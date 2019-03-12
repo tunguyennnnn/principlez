@@ -67,7 +67,7 @@ class ChapterGroup extends React.Component {
   };
 
   render() {
-    const { data } = this.props;
+    const { data, readOnly } = this.props;
 
     if (data.loading) {
       return <div>...loading</div>;
@@ -87,6 +87,7 @@ class ChapterGroup extends React.Component {
           const { type, id, chapters } = group;
           return (
             <ChapterList
+              readOnly={readOnly}
               reorderChapters={this.reorderChapters}
               deleteChapter={this.deleteChapter}
               createChapter={this.createChapter}

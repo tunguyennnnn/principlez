@@ -1,12 +1,12 @@
 import './storypage/storypage.scss';
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
-import { Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import _ from 'lodash';
 
 import ChapterGroup from './storypage/ChapterGroup';
 import StoryWrite from './storypage/StoryWrite';
+import StoryView from './storypage/StoryView';
 import SideMenu from '../components/SideMenu';
 
 export default class StoryPage extends Component {
@@ -17,17 +17,25 @@ export default class StoryPage extends Component {
   };
 
   render() {
+    const { readOnly } = this.props;
+    const StoryComponent = readOnly ? StoryView : StoryWrite;
     return (
       <div class="story-page">
         <MediaQuery query="(min-width: 850px)">
           <div class="chapter-list-container">
-            <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} />
+            <ChapterGroup
+              readOnly={readOnly}
+              updateTitleRef={fn => (this.updateTitle = fn)}
+            />
           </div>
         </MediaQuery>
         <MediaQuery query="(max-width: 850px">
           <div class="chapter-list-container">
             <SideMenu>
-              <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} />
+              <ChapterGroup
+                readOnly={readOnly}
+                updateTitleRef={fn => (this.updateTitle = fn)}
+              />
             </SideMenu>
           </div>
         </MediaQuery>
@@ -38,7 +46,7 @@ export default class StoryPage extends Component {
             timeout={1000}
             appear
           >
-            <StoryWrite
+            <StoryComponent
               match={this.props.match}
               title="Chapter..."
               updateChapterTitle={this.updateChapterTitle}

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Subject, timer } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
-import Plain from 'slate-plain-serializer';
 import Blocks from './editors/Blocks';
 import schema from './editors/schema';
 import { TITLE } from './editors/types';
@@ -20,11 +19,6 @@ export default class BlogEditor extends React.Component {
   }
 
   initializeValue = (title, body) => {
-    window.test = {
-      Value,
-      title,
-      body,
-    };
     return Value.fromJSON({
       document: {
         nodes: [
@@ -49,7 +43,8 @@ export default class BlogEditor extends React.Component {
   };
 
   onChange = ({ value }) => {
-    if (value.document !== this.state.value.document) {
+    const { readOnly } = this.props;
+    if (value.document !== this.state.value.document && !readOnly) {
       this.observable.next();
     }
     this.setState({ value });
@@ -67,6 +62,7 @@ export default class BlogEditor extends React.Component {
   };
 
   render() {
+    const { readOnly } = this.props;
     return (
       <div class="blog-editor-container">
         <Editor
@@ -74,6 +70,7 @@ export default class BlogEditor extends React.Component {
           value={this.state.value}
           renderEditor={this.renderEditor}
           autoFocus
+          readOnly={readOnly}
           spellCheck
           schema={schema}
           renderNode={this.renderNode}

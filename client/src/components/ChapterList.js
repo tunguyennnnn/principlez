@@ -1,5 +1,6 @@
 import './chapterlist/chapterlist.scss';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { Icon } from 'semantic-ui-react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import _ from 'lodash';
@@ -13,6 +14,7 @@ const EmptyChapterMapper = {
   LESSON: 'The lessons',
 };
 
+@withRouter
 export default class ChapterList extends Component {
   onDragEnd = ({ source, destination }) => {
     const swapIndexes = [source.index, destination.index];
@@ -21,7 +23,7 @@ export default class ChapterList extends Component {
   };
 
   renderChapters(chapters) {
-    const { deleteChapter, type } = this.props;
+    const { deleteChapter, type, readOnly } = this.props;
     return (
       <React.Fragment>
         {chapters.map(({ id, title }, index) => (
@@ -47,14 +49,37 @@ export default class ChapterList extends Component {
     );
   }
 
+  renderReadOnly() {
+    const { title, chapters } = this.props;
+    const { url } = this.props.match;
+    return (
+      <div class="chapter-list">
+        <div class="chapter-title">{title}</div>
+        {chapters.map(({ id, title }) => (
+          <div class="chapter box" key={`chapter-${id}`}>
+            <Chapter readOnly link={url.replace(/\d+\/view/, `${id}/view`)}>
+              {title}
+            </Chapter>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   render() {
-    const { title, chapters, type, createChapter } = this.props;
+    const { title, chapters, type, createChapter, readOnly } = this.props;
+
+    if (readOnly) {
+      return this.renderReadOnly();
+    }
 
     return (
       <div class="chapter-list">
-        <div class="chapter-list-add-icon">
-          <Icon name="plus" onClick={() => createChapter(type)} />
-        </div>
+        {!readOnly && (
+          <div class="chapter-list-add-icon">
+            <Icon name="plus" onClick={() => createChapter(type)} />
+          </div>
+        )}
         <div class="chapter-title">{title}</div>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">

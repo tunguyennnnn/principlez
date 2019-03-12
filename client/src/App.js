@@ -20,7 +20,16 @@ export default class App extends Component {
             path="/of/:name"
             component={() => <div>Personal page</div>}
           />
-          <Route path="/of/:name/stories/:chapterId" component={StoryPage} />
+          <Route
+            exact
+            path="/of/:name/stories/:chapterId"
+            component={StoryPage}
+          />
+          <Route
+            exact
+            path="/of/:name/stories/:chapterId/view"
+            component={props => <StoryPage {...props} readOnly />}
+          />
         </Switch>
       </div>
     );
