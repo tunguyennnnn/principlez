@@ -36,8 +36,13 @@ export default `
         me: User!
     }
 
+    type UserPayload {
+        error: String
+        user: User
+    }
+
     type Mutation {
-        signup(email: String!, password: String!, fullname: String!, yearOfBirth: String!, location: LocationInput!): User!
-        login(email: String!, password: String!): User!
+        signup(email: String!, password: String!, fullname: String!, yearOfBirth: String!, location: LocationInput!): UserPayload!
+        login(email: String!, password: String!): UserPayload!
     }
 `;

@@ -6,7 +6,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import models from '../models';
-import { schemaWithMiddleware, typeDefs, resolvers } from './graphql';
+import { schemaWithMiddleware } from './graphql';
+import middlewares from './graphql/middlewares';
 import { authCheck } from './services/auth';
 import { build } from 'protobufjs';
 
@@ -16,6 +17,7 @@ const server = new ApolloServer({
     maxFileSize: 10000000, // 10 MB
     maxFiles: 20,
   },
+  middlewares,
   context: async ({ req }) => {
     return { models, user: req.user };
   },

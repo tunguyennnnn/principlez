@@ -36,9 +36,9 @@ export default {
           locationId: userLocation.id,
         });
         await models.ChapterGroup.createDefaultGroups(user.id);
-        return user;
+        return { user };
       } catch (e) {
-        throw e;
+        return { error: e.toString() };
       }
     },
     login: async (root, { email, password }, { models }) => {
@@ -47,8 +47,10 @@ export default {
         if (!user || !(await compare(password, user.password))) {
           throw new Error(`Incorrect email or password`);
         }
-        return user;
-      } catch (e) {}
+        return { user };
+      } catch (e) {
+        return { error: e.toString() };
+      }
     },
   },
 };

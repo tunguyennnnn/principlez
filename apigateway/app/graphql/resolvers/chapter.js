@@ -25,37 +25,33 @@ export default {
     },
   },
   Mutation: {
-    updateChapterContent: async (
-      root,
-      { id, title, body },
-      { models, user },
-    ) => {
-      if (!user) {
-        throw new Error('Anauthenticated');
-      }
-      const chapter = await models.Chapter.findOne({
-        where: { id, userId: user.id },
-      });
-      if (!chapter) {
-        throw new Error('Chatper not found');
-      }
+    updateChapterContent: {
+      resolve: async (root, { id, title, body }, { models, user }) => {
+        if (!user) {
+          throw new Error('Anauthenticated');
+        }
+        const chapter = await models.Chapter.findOne({
+          where: { id, userId: user.id },
+        });
+        if (!chapter) {
+          throw new Error('Chatper not found');
+        }
 
-      return chapter.update({
-        title: title || chapter.title,
-        body: body || chapter.body,
-      });
+        return chapter.update({
+          title: title || chapter.title,
+          body: body || chapter.body,
+        });
+      },
     },
-    uploadImageTheme: async (
-      root,
-      { storyId, chapterId, file },
-      { models, user },
-    ) => {
-      try {
-        const { stream, filename, mimetype, encoding } = await file;
-        return MockImage;
-      } catch (e) {
-        return MockImage;
-      }
+    uploadImageTheme: {
+      resolve: async (root, { storyId, chapterId, file }, { models, user }) => {
+        try {
+          const { stream, filename, mimetype, encoding } = await file;
+          return MockImage;
+        } catch (e) {
+          return MockImage;
+        }
+      },
     },
   },
 };

@@ -29,7 +29,8 @@
     "merge-graphql-schemas": "^1.5.8",
     "pg": "^7.8.0",
     "sequelize": "^4.42.0",
-    "shortid": "^2.2.14"
+    "shortid": "^2.2.14",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
