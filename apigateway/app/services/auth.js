@@ -12,27 +12,22 @@ export function generateToken(user) {
   };
 }
 
-export const authCheck = async (req, res, next) => {
-  try {
-    const { headers } = req;
-    if (
-      headers.authorization &&
-      headers.authorization.split(' ')[0] === 'Bearer'
-    ) {
-      const decoded = jwt.verify(
-        headers.authorization.split(' ')[1],
-        superSecret,
-      );
+export const authCheck = async req => {
+  const { headers } = req;
+  if (
+    headers.authorization &&
+    headers.authorization.split(' ')[0] === 'Bearer'
+  ) {
+    const decoded = jwt.verify(
+      headers.authorization.split(' ')[1],
+      superSecret,
+    );
 
-      const user = await models.User.findOne({
-        where: { id: decoded.id },
-      });
+    const user = await models.User.findOne({
+      where: { id: decoded.id },
+    });
 
-      req.user = user;
-    }
-  } catch (e) {
-    console.log(e);
-  } finally {
-    next();
+    return user;
   }
+  return null;
 };

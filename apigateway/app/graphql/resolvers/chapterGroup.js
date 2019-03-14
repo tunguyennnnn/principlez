@@ -31,12 +31,9 @@ export default {
   },
   Mutation: {
     createChapter: {
+      authentication: true,
       resolve: async (root, { type }, { models, user }) => {
         try {
-          if (!user) {
-            throw new Error('Anauthenticated');
-          }
-
           const chapterGroup = await models.ChapterGroup.findOne({
             where: { userId: user.id, type },
           });
@@ -53,12 +50,9 @@ export default {
       },
     },
     deleteChapter: {
+      authentication: true,
       resolve: async (root, { type, id }, { models, user }) => {
         try {
-          if (!user) {
-            throw new Error('Anauthenticated');
-          }
-
           const chapterGroup = await models.ChapterGroup.findOne({
             where: { userId: user.id, type },
           });
@@ -83,11 +77,8 @@ export default {
       },
     },
     reorderChapters: {
+      authentication: true,
       resolve: async (root, { chapterGroupId, newOrder }, { models, user }) => {
-        if (!user) {
-          throw new Error('Not found chapter');
-        }
-
         const chapterGroup = await models.ChapterGroup.findOne({
           where: { userId: user.id, id: chapterGroupId },
         });

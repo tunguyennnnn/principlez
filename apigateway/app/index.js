@@ -8,8 +8,6 @@ import cors from 'cors';
 import models from '../models';
 import { schemaWithMiddleware } from './graphql';
 import middlewares from './graphql/middlewares';
-import { authCheck } from './services/auth';
-import { build } from 'protobufjs';
 
 const server = new ApolloServer({
   schema: schemaWithMiddleware,
@@ -19,7 +17,7 @@ const server = new ApolloServer({
   },
   middlewares,
   context: async ({ req }) => {
-    return { models, user: req.user };
+    return { models, req };
   },
 });
 
@@ -31,8 +29,6 @@ app.listen(4000, function() {
 
 app.use(bodyParser.json());
 app.all('*', cors());
-
-app.use(authCheck);
 
 server.applyMiddleware({ app, path: '/graphql' });
 
