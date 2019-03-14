@@ -1,6 +1,6 @@
 export default `
 
-  type ChapterView {
+  type ChapterFace {
     id: ID!
     title: String!
   }
@@ -9,7 +9,7 @@ export default `
     id: ID!
     type: String!
     chapterListOrder: [ID!]!
-    chapters: [ChapterView!]!
+    chapters: [ChapterFace!]!
   }
 
   type createdChapterResult {
