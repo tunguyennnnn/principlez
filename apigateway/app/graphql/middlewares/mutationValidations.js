@@ -22,7 +22,13 @@ export default {
         const values = await validator.validate(args);
         return resolve(root, values, context, info);
       } catch (error) {
-        return { error: error.toString() };
+        if (error instanceof yup.ValidationError) {
+          return {
+            error: error.message,
+          };
+        } else {
+          throw error;
+        }
       }
     }
     return resolve(root, args, context, info);

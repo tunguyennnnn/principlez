@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   ChapterView.addViewer = async (chapterId, userId) => {
-    return sequelize.models.ChapterView.findOrCreate({
+    return ChapterView.findOrCreate({
       where: { chapterId, userId },
     });
   };
