@@ -8,6 +8,27 @@ const MockImage = {
 };
 
 export default {
+  ChapterFace: {
+    view: async (chapter, args, { models }) => {
+      const anonymousView = await models.AnonymousView.findOne({
+        where: { chapterId: chapter.id },
+      });
+
+      return {
+        anonymousCount: anonymousView ? anonymousView.count : 0,
+        count: await models.ChapterView.count({
+          where: { chapterId: chapter.id },
+        }),
+      };
+    },
+    like: async (chapter, args, { models }) => {
+      return {
+        count: await models.ChapterLike.count({
+          where: { chapterId: chapter.id },
+        }),
+      };
+    },
+  },
   Chapter: {
     imageTheme: (chapter, args, { models }) => MockImage,
     type: async (chapter, args, { models }) => {

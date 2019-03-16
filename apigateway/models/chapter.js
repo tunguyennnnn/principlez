@@ -47,6 +47,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'imageId',
       as: 'profileImage',
     });
+
+    Chapter.hasMany(models.ChapterLike, {
+      foreignKey: 'chapterId',
+      as: 'likes',
+    });
   };
   return Chapter;
 };

@@ -3,6 +3,8 @@ export default `
   type ChapterFace {
     id: ID!
     title: String!
+    view: ChapterView!
+    like: ChapterLike!
   }
 
   type ChapterGroup {

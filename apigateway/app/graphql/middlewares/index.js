@@ -1,3 +1,3 @@
 import mutationValidations from './mutationValidations';
-
-export default [mutationValidations];
+import queryValidations from './queryValidations';
+export default [mutationValidations, queryValidations];

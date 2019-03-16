@@ -2,7 +2,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Card, Icon, Image } from 'semantic-ui-react';
 
-export default function Chapter({ children, link, deleteChapter, readOnly }) {
+export default function Chapter({
+  children,
+  link,
+  deleteChapter,
+  readOnly,
+  view,
+  like,
+}) {
   return (
     <Card className="chapter-content">
       {!readOnly && (
@@ -19,10 +26,18 @@ export default function Chapter({ children, link, deleteChapter, readOnly }) {
         </Card.Content>
       </NavLink>
       <Card.Content>
-        <a>
-          <Icon name="user" />
-          150 views
-        </a>
+        {view.count ? (
+          <a>
+            <Icon name="user" />
+            {view.count} Views
+          </a>
+        ) : null}
+        {like.count ? (
+          <a>
+            <Icon name="thumbs up" />
+            {like.count} Likes
+          </a>
+        ) : null}
       </Card.Content>
     </Card>
   );

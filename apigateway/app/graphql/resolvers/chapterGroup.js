@@ -14,11 +14,11 @@ export default {
     },
   },
   Query: {
-    myChapterGroups: async (root, args, { models, user }) => {
-      if (!user) {
-        throw new Error(`Anauthenticated`);
-      }
-      return models.ChapterGroup.findAll({ where: { userId: user.id } });
+    myChapterGroups: {
+      authentication: true,
+      resolve: async (root, args, { models, user }) => {
+        return models.ChapterGroup.findAll({ where: { userId: user.id } });
+      },
     },
     chapterGroups: async (root, { userId }, { models, user }) => {
       try {

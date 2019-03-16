@@ -78,7 +78,6 @@ class ChapterGroup extends React.Component {
     }
 
     const { myChapterGroups } = data;
-
     return (
       <React.Fragment>
         {_.sortBy(myChapterGroups, group =>
@@ -112,6 +111,13 @@ const chapterGroupFields = gql`
     chapters {
       id
       title
+      like {
+        count
+      }
+      view {
+        count
+        anonymousCount
+      }
     }
   }
 `;

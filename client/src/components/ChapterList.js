@@ -26,7 +26,7 @@ export default class ChapterList extends Component {
     const { deleteChapter, type, readOnly } = this.props;
     return (
       <React.Fragment>
-        {chapters.map(({ id, title }, index) => (
+        {chapters.map(({ id, title, view, like }, index) => (
           <Draggable key={`${id}`} draggableId={`${id}`} index={index}>
             {(provided, snapshot) => (
               <div
@@ -37,6 +37,8 @@ export default class ChapterList extends Component {
               >
                 <Chapter
                   link={`${id}`}
+                  view={view}
+                  like={like}
                   deleteChapter={deleteChapter.bind(null, type, id)}
                 >
                   {title}
@@ -55,9 +57,14 @@ export default class ChapterList extends Component {
     return (
       <div class="chapter-list">
         <div class="chapter-title">{title}</div>
-        {chapters.map(({ id, title }) => (
+        {chapters.map(({ id, title, view, like }) => (
           <div class="chapter box" key={`chapter-${id}`}>
-            <Chapter readOnly link={url.replace(/\d+\/view/, `${id}/view`)}>
+            <Chapter
+              readOnly
+              link={url.replace(/\d+\/view/, `${id}/view`)}
+              view={view}
+              like={like}
+            >
               {title}
             </Chapter>
           </div>
