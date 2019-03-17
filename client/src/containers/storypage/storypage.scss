@@ -6,6 +6,15 @@
   .chapter-list-container {
     position: relative;
   }
+
+  .button-action-container {
+    border: 1px solid #2ecc40;
+    border-radius: 4px;
+    padding: 4px;
+  }
+
+  .bottom-action-container {
+  }
 }
 
 @media only screen and (min-width: 850px) {

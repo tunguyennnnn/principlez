@@ -7,6 +7,7 @@ import _ from 'lodash';
 import ChapterGroup from './storypage/ChapterGroup';
 import StoryWrite from './storypage/StoryWrite';
 import StoryView from './storypage/StoryView';
+import Action from './storypage/Action';
 import SideMenu from '../components/SideMenu';
 
 export default class StoryPage extends Component {
@@ -54,6 +55,7 @@ export default class StoryPage extends Component {
             />
           </CSSTransition>
         </TransitionGroup>
+        <Action />
       </div>
     );
   }

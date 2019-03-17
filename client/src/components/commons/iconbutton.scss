@@ -1,0 +1,13 @@
+.icon-button {
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 4px;
+
+  i {
+    transition: all 0.2s ease-in-out;
+  }
+
+  i:hover {
+    transform: scale(1.3);
+  }
+}
