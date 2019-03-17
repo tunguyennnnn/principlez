@@ -6,12 +6,13 @@ export default {
       info.fieldName
     ];
 
+    const user = await authCheck(context.req);
+    context.user = user;
+
     if (mutationField.authentication) {
-      const user = await authCheck(context.req);
       if (!user) {
         throw new Error('Anauthenticated');
       }
-      context.user = user;
     }
 
     return resolve(root, args, context, info);

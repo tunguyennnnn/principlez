@@ -35,6 +35,12 @@ export default {
       const chapterGroup = await chapter.getChapterGroup();
       return chapterGroup.type;
     },
+    isAuthor: async (chapter, args, { models, user }) => {
+      if (!user || chapter.userId !== user.id) {
+        return false;
+      }
+      return true;
+    },
   },
   Query: {
     chapter: async (root, { chapterId }, { models, user }) => {
@@ -47,6 +53,7 @@ export default {
   },
   Mutation: {
     updateChapterContent: {
+      authentication: true,
       resolve: async (root, { id, title, body }, { models, user }) => {
         if (!user) {
           throw new Error('Anauthenticated');
@@ -65,6 +72,7 @@ export default {
       },
     },
     uploadImageTheme: {
+      authentication: true,
       resolve: async (root, { storyId, chapterId, file }, { models, user }) => {
         try {
           const { stream, filename, mimetype, encoding } = await file;

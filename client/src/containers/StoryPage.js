@@ -47,6 +47,7 @@ export default class StoryPage extends Component {
             appear
           >
             <StoryComponent
+              location={this.props.location}
               match={this.props.match}
               title="Chapter..."
               updateChapterTitle={this.updateChapterTitle}

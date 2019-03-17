@@ -1,6 +1,7 @@
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import ImageUpload from '../../components/ImageUpload';
 import BlogEditor from '../../components/BlogEditor';
@@ -49,10 +50,20 @@ class StoryPage extends React.Component {
   };
 
   render() {
-    const { data } = this.props;
+    const { data, location } = this.props;
     if (data.loading) return <div>...loading</div>;
 
-    const { title, body, type, imageTheme } = data.chapter;
+    const { title, body, type, imageTheme, isAuthor } = data.chapter;
+    if (!isAuthor) {
+      return (
+        <Redirect
+          to={{
+            pathname: `${location.pathname}/view`,
+            state: { from: this.props.location },
+          }}
+        />
+      );
+    }
 
     return (
       <StoryWriteContext.Provider
@@ -105,6 +116,7 @@ const queryChapter = gql`
       }
       title
       body
+      isAuthor
     }
   }
 `;

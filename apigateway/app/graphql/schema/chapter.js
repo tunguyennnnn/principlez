@@ -11,6 +11,7 @@ export default `
     type: String!
     title: String!
     body: JSON!
+    isAuthor: Boolean!
   }
 
   type Query {
