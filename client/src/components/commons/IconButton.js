@@ -1,13 +1,25 @@
 import './iconbutton.scss';
-import React, { useState } from 'react';
-import { Icon, Popup } from 'semantic-ui-react';
+import React from 'react';
+import { Icon, Popup, Button } from 'semantic-ui-react';
 
-export default function IconButton({ iconName, text, action }) {
-  const iconComp = <Icon name={iconName} />;
-  const children = text ? (
-    <Popup trigger={iconComp} content={text} position="left center" />
-  ) : (
-    iconComp
+export default function IconButton({ iconName, text, action, horizontal }) {
+  const iconComp = <Icon name={iconName} size="large" />;
+
+  if (!horizontal) {
+    const children = text ? (
+      <Popup trigger={iconComp} content={text} position="left center" />
+    ) : (
+      iconComp
+    );
+    return <div class="icon-button">{children}</div>;
+  }
+
+  const children = (
+    <React.Fragment>
+      {iconComp}
+      {text}
+    </React.Fragment>
   );
+
   return <div class="icon-button">{children}</div>;
 }
