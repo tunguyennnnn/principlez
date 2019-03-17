@@ -55,7 +55,7 @@ export default class StoryPage extends Component {
             />
           </CSSTransition>
         </TransitionGroup>
-        <Action />
+        <Action readOnly={readOnly} match={this.props.match} />
       </div>
     );
   }

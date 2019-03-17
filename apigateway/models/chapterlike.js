@@ -18,10 +18,17 @@ module.exports = (sequelize, DataTypes) => {
   );
   ChapterLike.associate = models => {};
 
-  ChapterLike.addLike = async (chapter, userId) => {
+  ChapterLike.addLike = async (chapterId, userId) => {
     return ChapterLike.findOrCreate({
       where: { chapterId, userId },
     });
   };
+
+  ChapterLike.removeLike = async (chapterId, userId) => {
+    return ChapterLike.destroy({
+      where: { chapterId, userId },
+    });
+  };
+
   return ChapterLike;
 };

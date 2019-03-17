@@ -11,7 +11,11 @@ export default function IconButton({ iconName, text, action, horizontal }) {
     ) : (
       iconComp
     );
-    return <div class="icon-button">{children}</div>;
+    return (
+      <div class="icon-button" onClick={action}>
+        {children}
+      </div>
+    );
   }
 
   const children = (
@@ -21,5 +25,9 @@ export default function IconButton({ iconName, text, action, horizontal }) {
     </React.Fragment>
   );
 
-  return <div class="icon-button">{children}</div>;
+  return (
+    <div class="icon-button" onClick={action}>
+      {children}
+    </div>
+  );
 }

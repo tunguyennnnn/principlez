@@ -14,8 +14,13 @@ export default `
     isAuthor: Boolean!
   }
 
+  type ChapterViewerInfo {
+    liked: Boolean!
+  }
+
   type Query {
     chapter (chapterId: ID!): Chapter!
+    chapterViewerInfo (chapterId: ID): ChapterViewerInfo! 
   }
 
   type Mutation {

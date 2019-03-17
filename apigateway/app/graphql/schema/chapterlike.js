@@ -17,5 +17,6 @@ export default `
 
   type Mutation {
     likeChapter (chapterId: ID!): Boolean!
+    unlikeChapter (chapterId: ID!): Boolean!
   }
 `;

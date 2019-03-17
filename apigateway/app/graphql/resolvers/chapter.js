@@ -50,6 +50,15 @@ export default {
         throw e;
       }
     },
+    chapterViewerInfo: async (root, { chapterId }, { models, user }) => {
+      if (!user) {
+        return { liked: false };
+      }
+      const liked = !!(await models.ChapterLike.findOne({
+        where: { chapterId, userId: user.id },
+      }));
+      return { liked };
+    },
   },
   Mutation: {
     updateChapterContent: {
