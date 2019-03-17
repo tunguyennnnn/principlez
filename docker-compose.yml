@@ -5,7 +5,7 @@ networks:
 
 services:
   postgres:
-    image: postgres:9.6
+    image: postgres:10
     networks:
       - webnetwork
     volumes:
@@ -26,6 +26,8 @@ services:
       - ./upload:/user/src/upload
     ports:
       - "4000:4000"
+    depends_on:
+      - postgres
     environment:
       DB_HOST: postgres
     command: npm run dev

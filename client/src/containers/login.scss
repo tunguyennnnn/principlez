@@ -1,0 +1,28 @@
+.login-page-container {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-sub-header {
+  width: 60%;
+}
+
+.login-content {
+  width: 60%;
+}
+
+.login-button {
+  width: 60%;
+  background-color: #777b7e !important;
+  color: white !important;
+  margin-top: 5% !important;
+  border-radius: 12px !important;
+  margin-left: 20% !important;
+}
+
+.login-centered-header {
+  text-align: center;
+}
