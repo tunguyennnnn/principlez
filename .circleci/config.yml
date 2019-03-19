@@ -25,6 +25,31 @@ jobs:
           root: ~/principlez/apigateway
           paths:
             - build
+  build_client:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/principlez/client
+    steps:
+      - checkout:
+          path: ~/principlez
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Run build client
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/principlez/apigateway
+          paths:
+            - build
   deploy_to_prod:
     docker:
       - image: google/cloud-sdk
@@ -66,9 +91,10 @@ workflows:
   build_test_deploy:
     jobs:
       - build_server
+      - build_client
       - deploy_to_prod:
           requires:
-            - build_server
+            - build_client
           filters:
             branches:
               only: master
