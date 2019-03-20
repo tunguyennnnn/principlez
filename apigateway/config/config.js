@@ -16,7 +16,7 @@ module.exports = {
   production: {
     username: 'postgres',
     password: 'postgres',
-    database: 'principles_prod_database',
+    database: 'principlez-prod',
     host: process.env.DB_HOST || '127.0.0.1',
     dialect: 'postgres',
   },

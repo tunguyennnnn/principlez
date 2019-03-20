@@ -56,8 +56,8 @@ jobs:
     environment:
       - PROJECT_NAME: "principlez"
       - GOOGLE_PROJECT_ID: "principlez-233105"
-      - GOOGLE_COMPUTE_ZONE: "us-west1-a"
-      - GOOGLE_CLUSTER_NAME: "prod-cluster"
+      - GOOGLE_COMPUTE_ZONE: "us-east1-d"
+      - GOOGLE_CLUSTER_NAME: "principlez-servers"
     steps:
       - checkout
       - run:
