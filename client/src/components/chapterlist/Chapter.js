@@ -10,6 +10,8 @@ export default function Chapter({
   view,
   like,
 }) {
+  const viewCount = view.count + view.anonymousCount;
+
   return (
     <Card className="chapter-content">
       {!readOnly && (
@@ -26,12 +28,13 @@ export default function Chapter({
         </Card.Content>
       </NavLink>
       <Card.Content>
-        {view.count ? (
+        {viewCount ? (
           <a>
             <Icon name="user" />
-            {view.count} Views
+            {viewCount} Views
           </a>
         ) : null}
+        <br />
         {like.count ? (
           <a>
             <Icon name="thumbs up" />

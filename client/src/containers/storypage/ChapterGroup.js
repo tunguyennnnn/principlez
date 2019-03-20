@@ -78,6 +78,7 @@ class ChapterGroup extends React.Component {
     }
 
     const { myChapterGroups } = data;
+
     return (
       <React.Fragment>
         {_.sortBy(myChapterGroups, group =>

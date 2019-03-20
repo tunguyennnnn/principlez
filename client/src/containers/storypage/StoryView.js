@@ -5,6 +5,19 @@ import React from 'react';
 import BlogEditor from '../../components/BlogEditor';
 
 class StoryView extends React.Component {
+  viewChapter = async () => {
+    try {
+      const { chapterId } = this.props.match.params;
+      await this.props.viewChapter({ variables: { chapterId } });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  componentDidMount() {
+    this.viewChapter();
+  }
+
   render() {
     const { data } = this.props;
     if (data.loading) return <div>...loading</div>;
@@ -18,6 +31,12 @@ class StoryView extends React.Component {
     );
   }
 }
+
+const viewChapter = gql`
+  mutation viewChapter($chapterId: ID!) {
+    viewChapter(chapterId: $chapterId)
+  }
+`;
 
 const queryChapter = gql`
   query chapter($chapterId: ID!) {
@@ -44,4 +63,5 @@ export default compose(
       };
     },
   }),
+  graphql(viewChapter, { name: 'viewChapter' }),
 )(StoryView);
