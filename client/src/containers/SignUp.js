@@ -11,6 +11,7 @@ import { Link, Redirect } from 'react-router-dom';
 import SideImage from './images/img1.png';
 import { ipLookUp } from '../utils/userLocation';
 import { auth } from '../services';
+import MessageDisplayer from '../components/commons/MessageDisplayer';
 
 const listOfYears = () => {
   const now = moment().year();
@@ -29,7 +30,8 @@ class SignUp extends React.Component {
       country: '',
       city: '',
     },
-    signupSuccess: false,
+    signupSuccess: null,
+    message: '',
   };
 
   componentDidMount() {
@@ -80,19 +82,33 @@ class SignUp extends React.Component {
       const {
         data: { signup },
       } = response;
-      const { token, expiresIn } = signup.authToken;
 
+      const { error, user } = signup;
+
+      if (error) {
+        this.setState({ signupSuccess: false, message: error });
+        return;
+      }
+
+      const { token, expiresIn } = user.authToken;
       auth.saveToken(token, expiresIn);
-
-      this.setState({ ...this.state, signupSuccess: true });
+      this.setState({ signupSuccess: true });
     } catch (error) {
       console.log(error);
+      this.setState({ signupSuccess: false, message: 'Something is wrong' });
     }
   };
 
   render() {
-    const { country, city } = this.state.inputs;
-    if (this.state.signupSuccess) return <Redirect to="/" />;
+    const { signupSuccess, message, inputs } = this.state;
+    if (signupSuccess) return <Redirect to="/" />;
+
+    const messageComponent =
+      signupSuccess === false ? (
+        <MessageDisplayer type="error" header="Sign Up" message={message} />
+      ) : null;
+
+    const { country, city } = inputs;
     return (
       <Grid className="signup-grid">
         <Grid.Row className="signup-row">
@@ -100,73 +116,76 @@ class SignUp extends React.Component {
             <Image className="signup-image" src={SideImage} />
           </Grid.Column>
           <Grid.Column
-            className="signup-column-right"
+            className="signup-column-right-container"
             largeScreen={10}
             verticalAlign="middle"
             mobile={16}
           >
-            <h3 className="signup-header-main">CREATE ACCOUNT</h3>
-            <Form className="signup-form" width={8} onSubmit={this.onSubmit}>
-              <Form.Input
-                placeholder="Full Name"
-                name="fullname"
-                icon="user"
-                iconPosition="left"
-                onChange={event =>
-                  this.onInputChange(event.target.name, event.target.value)
-                }
-              />
-              <Form.Input
-                placeholder="Email"
-                name="email"
-                icon="mail"
-                iconPosition="left"
-                onChange={event =>
-                  this.onInputChange(event.target.name, event.target.value)
-                }
-              />
-              <Form.Dropdown
-                placeholder="Year of Birth"
-                name="yearOfBirth"
-                options={listOfYears()}
-                selection
-                onChange={(event, data) =>
-                  this.onInputChange('yearOfBirth', data.value)
-                }
-              />
-              <Form.Input
-                placeholder="Country"
-                value={country}
-                name="country"
-              />
-              <Form.Input placeholder="City" value={city} name="city" />
-              <Form.Input
-                type="password"
-                placeholder="Password"
-                name="password"
-                icon="lock open"
-                iconPosition="left"
-                onChange={event =>
-                  this.onInputChange(event.target.name, event.target.value)
-                }
-              />
-              <Form.Input
-                type="password"
-                placeholder="Password Confirmation"
-                name="confirmPassword"
-                icon="lock open"
-                iconPosition="left"
-                onChange={event =>
-                  this.onInputChange(event.target.name, event.target.value)
-                }
-              />
-              <Button className="signup-button" size="large">
-                SIGN UP
-              </Button>
-            </Form>
-            <Header className="signup-header" as="h4">
-              Already have an account? <Link to="/login">Sign In</Link>
-            </Header>
+            <div className="signup-column-right">
+              {messageComponent}
+              <h3 className="signup-header-main">CREATE ACCOUNT</h3>
+              <Form className="signup-form" width={8} onSubmit={this.onSubmit}>
+                <Form.Input
+                  placeholder="Full Name"
+                  name="fullname"
+                  icon="user"
+                  iconPosition="left"
+                  onChange={event =>
+                    this.onInputChange(event.target.name, event.target.value)
+                  }
+                />
+                <Form.Input
+                  placeholder="Email"
+                  name="email"
+                  icon="mail"
+                  iconPosition="left"
+                  onChange={event =>
+                    this.onInputChange(event.target.name, event.target.value)
+                  }
+                />
+                <Form.Dropdown
+                  placeholder="Year of Birth"
+                  name="yearOfBirth"
+                  options={listOfYears()}
+                  selection
+                  onChange={(event, data) =>
+                    this.onInputChange('yearOfBirth', data.value)
+                  }
+                />
+                <Form.Input
+                  placeholder="Country"
+                  value={country}
+                  name="country"
+                />
+                <Form.Input placeholder="City" value={city} name="city" />
+                <Form.Input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  icon="lock open"
+                  iconPosition="left"
+                  onChange={event =>
+                    this.onInputChange(event.target.name, event.target.value)
+                  }
+                />
+                <Form.Input
+                  type="password"
+                  placeholder="Password Confirmation"
+                  name="confirmPassword"
+                  icon="lock open"
+                  iconPosition="left"
+                  onChange={event =>
+                    this.onInputChange(event.target.name, event.target.value)
+                  }
+                />
+                <Button className="signup-button" size="large">
+                  SIGN UP
+                </Button>
+              </Form>
+              <Header className="signup-header" as="h4">
+                Already have an account? <Link to="/login">Sign In</Link>
+              </Header>
+            </div>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -190,11 +209,14 @@ const mutationSignUp = gql`
       password: $password
       location: { country: $country, city: $city }
     ) {
-      fullname
-      email
-      authToken {
-        token
-        expiresIn
+      error
+      user {
+        fullname
+        email
+        authToken {
+          token
+          expiresIn
+        }
       }
     }
   }

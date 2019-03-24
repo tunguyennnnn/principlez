@@ -1,12 +1,13 @@
 import './login.scss';
 
 import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Grid, Form, Button } from 'semantic-ui-react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, Redirect } from 'react-router-dom';
 
 import { auth } from '../services';
+import MessageDisplayer from '../components/commons/MessageDisplayer';
 
 class Login extends React.Component {
   state = {
@@ -14,7 +15,8 @@ class Login extends React.Component {
       email: '',
       password: '',
     },
-    signinSuccess: false,
+    signinSuccess: null,
+    message: '',
   };
 
   onChange = event => {
@@ -34,26 +36,41 @@ class Login extends React.Component {
         },
       });
 
-      const { fullname, authToken } = response.data.login;
+      const { error, user } = response.data.login;
+
+      if (error) {
+        this.setState({ signinSuccess: false, message: error });
+        return;
+      }
+
+      const { fullname, authToken } = user;
       const { token, expiresIn } = authToken;
       auth.login({ fullname, email, token, expiresIn });
-      this.setState({ ...this.state, signinSuccess: true });
+
+      this.setState({ signinSuccess: true });
     } catch (error) {
+      this.setState({ signinSuccess: false, message: 'Something is wrong' });
       console.log(error);
     }
   };
 
   render() {
-    const { signinSuccess } = this.state;
+    const { signinSuccess, message } = this.state;
     if (signinSuccess) return <Redirect to="/" />;
     return (
-      <div>
-        <div className="login-page-container">
-          <h2>Principlez</h2>
-          <h4 className="login-sub-header">
-            Don't have an account? <Link to="/signup">Sign up</Link>
-          </h4>
-          <div className="login-content">
+      <Grid className="login-grid">
+        <Grid.Row className="login-row">
+          <Grid.Column className="login-column">
+            {message ? (
+              <MessageDisplayer
+                type="error"
+                message={message}
+                header="Log In"
+              />
+            ) : null}
+            <h4>
+              Don't have an account? <Link to="/signup">Sign up</Link>
+            </h4>
             <Form onSubmit={this.onSubmit}>
               <Form.Input
                 placeholder="Email"
@@ -72,10 +89,10 @@ class Login extends React.Component {
               />
               <Button className="login-button">LOGIN</Button>
             </Form>
-            <h4 className="login-centered-header">Forgot password?</h4>
-          </div>
-        </div>
-      </div>
+            <h4 className="login-centered-text">Forgot password?</h4>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
@@ -83,11 +100,14 @@ class Login extends React.Component {
 const mutationLogin = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      fullname
-      email
-      authToken {
-        token
-        expiresIn
+      error
+      user {
+        fullname
+        email
+        authToken {
+          token
+          expiresIn
+        }
       }
     }
   }

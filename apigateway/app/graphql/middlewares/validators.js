@@ -13,7 +13,11 @@ export const signup = yup.object().shape({
   yearOfBirth: yup
     .string()
     .trim()
-    .length(4, 'Example 1975'),
+    .length(4, 'Year of birth example: 1975'),
+  password: yup
+    .string()
+    .trim()
+    .min(8, 'Invalid password'),
 });
 
 export const login = yup.object().shape({
@@ -21,8 +25,4 @@ export const login = yup.object().shape({
     .string()
     .trim()
     .email(),
-  password: yup
-    .string()
-    .trim()
-    .min(8, 'Invalid password'),
 });

@@ -14,11 +14,16 @@
   padding-right: 0px !important;
 }
 
-.signup-column-right {
+.signup-column-right-container {
   display: flex !important;
   justify-content: center !important;
   height: 100%;
   padding-left: 0px !important;
+}
+
+.signup-column-right {
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .signup-image {
@@ -27,17 +32,9 @@
 }
 
 .signup-form {
-  margin-left: 20%;
-  margin-right: 20%;
-}
-
-.ui.pointing.label {
-  margin-top: 0px;
-  margin-bottom: 1em;
 }
 
 .signup-header-main {
-  margin-left: 20%;
 }
 
 .signup-button {
@@ -50,7 +47,5 @@
 }
 
 .signup-header {
-  margin-left: 20%;
-  margin-right: 20%;
   text-align: center;
 }

@@ -1,17 +1,19 @@
-.login-page-container {
-  height: 50vh;
+.login-grid {
+  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
-.login-sub-header {
-  width: 60%;
+.login-row {
+  padding-bottom: 0px !important;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 10%;
 }
 
-.login-content {
-  width: 60%;
+.login-column {
+  display: flex;
+  justify-content: center;
 }
 
 .login-button {
@@ -23,6 +25,6 @@
   margin-left: 20% !important;
 }
 
-.login-centered-header {
+.login-centered-text {
   text-align: center;
 }
