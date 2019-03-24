@@ -43,9 +43,9 @@ class Login extends React.Component {
         return;
       }
 
-      const { fullname, authToken } = user;
+      const { id, fullname, authToken } = user;
       const { token, expiresIn } = authToken;
-      auth.login({ fullname, email, token, expiresIn });
+      auth.login({ id, fullname, email, token, expiresIn });
 
       this.setState({ signinSuccess: true });
     } catch (error) {
@@ -102,6 +102,7 @@ const mutationLogin = gql`
     login(email: $email, password: $password) {
       error
       user {
+        id
         fullname
         email
         authToken {

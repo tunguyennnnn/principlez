@@ -2,6 +2,7 @@ import './styles/common.scss';
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import Header from './containers/Header';
 import Home from './containers/Home';
 import SignUp from './containers/SignUp';
 import StoryPage from './containers/StoryPage';
@@ -11,10 +12,11 @@ export default class App extends Component {
   render() {
     return (
       <div id="app">
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/login" component={Login} />
           <Route
             exact
             path="/of/:name"

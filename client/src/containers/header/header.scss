@@ -1,0 +1,28 @@
+.app-header {
+  padding: 5px;
+
+  .header-container {
+    position: relative;
+
+    .header-logo {
+      max-width: 50px;
+    }
+  }
+
+  .header-bottom {
+    border-bottom: 3px solid #a0a0a0;
+    margin-left: 2vw;
+    margin-right: 2vw;
+  }
+}
+
+.header-userprofile-container {
+  position: relative;
+
+  .profile-container {
+    position: relative;
+    .card-container {
+      position: absolute;
+    }
+  }
+}

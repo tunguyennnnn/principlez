@@ -11,11 +11,17 @@ export default class Auth {
     return token && expiresIn && Number(expiresIn) > Date.now();
   }
 
-  login = ({ token, expiresIn, email, fullname }) => {
+  login = ({ token, expiresIn, id, email, fullname }) => {
+    window.localStorage.setItem('userId', id);
     window.localStorage.setItem('email', email);
     window.localStorage.setItem('fullname', fullname);
     this.expiresIn = Date.now() + expiresIn * 1000;
     window.localStorage.setItem('token', token);
     window.localStorage.setItem('expiresIn', this.expiresIn);
   };
+
+  get userProfile() {
+    const { userId, fullname, email } = window.localStorage;
+    return { userId, fullname, email };
+  }
 }
