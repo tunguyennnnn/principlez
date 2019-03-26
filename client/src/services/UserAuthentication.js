@@ -1,3 +1,5 @@
+import { generateId } from '../utils/userId';
+
 export default class Auth {
   saveToken(token, expiresIn) {
     this.expiresIn = Date.now() + expiresIn * 1000;
@@ -23,5 +25,22 @@ export default class Auth {
   get userProfile() {
     const { userId, fullname, email } = window.localStorage;
     return { userId, fullname, email };
+  }
+
+  get userProfileLink() {
+    if (this.isUserLoginned()) {
+      const { userId, fullname } = this.userProfile;
+      return '/of/' + generateId(userId, fullname);
+    }
+
+    return '/login';
+  }
+
+  get userStoriesLink() {
+    if (this.isUserLoginned()) {
+      const { userId, fullname } = this.userProfile;
+      return '/of/' + generateId(userId, fullname) + '/stories';
+    }
+    return '/login';
   }
 }

@@ -1,0 +1,49 @@
+.card-container {
+  font-family: 'PT Sans';
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: white;
+  max-width: 300px;
+
+  border-radius: 8px 0 8px 0;
+
+  margin: 20px;
+
+  .card-author {
+    padding: 5px;
+  }
+
+  .card-content-container {
+    padding: 5px;
+    .title {
+      color: #f64c3f;
+    }
+  }
+
+  .card-actions {
+    background-color: #383838;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+
+    border-radius: 0px 0 8px 0;
+
+    .action {
+      width: 33%;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 5px;
+      margin-right: 0.5%;
+      display: inline-block;
+      height: 48px;
+      padding: 0 20px;
+      line-height: 48px;
+    }
+
+    .action:last-child {
+      border-radius: 0px 0 8px 0;
+      margin-right: 0%;
+    }
+  }
+}

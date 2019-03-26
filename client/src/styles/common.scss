@@ -5,9 +5,14 @@
 
 html,
 body,
+#root,
 #app {
   height: 100%;
   font-family: 'proxima-nova-soft', sans-serif;
+}
+
+#root {
+  background: #f8f8f8;
 }
 
 *:focus {

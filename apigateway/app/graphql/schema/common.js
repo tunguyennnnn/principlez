@@ -9,4 +9,9 @@ export default `
     encoding: String!
   }
 
+  type PageInfo {
+    hasNextPage: Boolean
+    hasPreviousPage: Boolean
+  }
+
 `;

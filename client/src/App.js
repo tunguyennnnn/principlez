@@ -12,7 +12,6 @@ export default class App extends Component {
   render() {
     return (
       <div id="app">
-        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={SignUp} />

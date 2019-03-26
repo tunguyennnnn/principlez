@@ -30,6 +30,25 @@ export default {
     },
   },
   Chapter: {
+    view: async (chapter, args, { models }) => {
+      const anonymousView = await models.AnonymousView.findOne({
+        where: { chapterId: chapter.id },
+      });
+
+      return {
+        anonymousCount: anonymousView ? anonymousView.count : 0,
+        count: await models.ChapterView.count({
+          where: { chapterId: chapter.id },
+        }),
+      };
+    },
+    like: async (chapter, args, { models }) => {
+      return {
+        count: await models.ChapterLike.count({
+          where: { chapterId: chapter.id },
+        }),
+      };
+    },
     imageTheme: (chapter, args, { models }) => MockImage,
     type: async (chapter, args, { models }) => {
       const chapterGroup = await chapter.getChapterGroup();
@@ -40,6 +59,9 @@ export default {
         return false;
       }
       return true;
+    },
+    author: async (chapter, args, { models }) => {
+      return models.User.findOne({ where: { id: chapter.userId } });
     },
   },
   Query: {
@@ -58,6 +80,22 @@ export default {
         where: { chapterId, userId: user.id },
       }));
       return { liked };
+    },
+    allChapters: async (root, { limit, cursor }, { models }) => {
+      try {
+        const chapterList = await models.Chapter.get({ limit, cursor });
+        return {
+          edges: chapterList.map(chapter => {
+            return {
+              cursor: chapter.updatedAt,
+              node: chapter,
+            };
+          }),
+        };
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
     },
   },
   Mutation: {

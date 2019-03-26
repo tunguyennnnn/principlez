@@ -53,5 +53,13 @@ module.exports = (sequelize, DataTypes) => {
       as: 'likes',
     });
   };
+
+  Chapter.get = async ({ type = 'STORIES', limit = 20, cursor }) => {
+    const options = { where: {}, order: [['updatedAt', 'DESC']], limit };
+    if (cursor) {
+      options.where.updatedAt = { $lt: cursor };
+    }
+    return Chapter.findAll(options);
+  };
   return Chapter;
 };
