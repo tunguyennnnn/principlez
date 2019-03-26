@@ -5,6 +5,7 @@ import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import Blocks from './editors/Blocks';
 import schema from './editors/schema';
+import previewBodySchema from './editors/previewBodySchema';
 import { TITLE } from './editors/types';
 
 export default class BlogEditor extends React.Component {
@@ -19,6 +20,14 @@ export default class BlogEditor extends React.Component {
   }
 
   initializeValue = (title, body) => {
+    const { previewOnly } = this.props;
+    if (previewOnly) {
+      return Value.fromJSON({
+        document: {
+          nodes: body[0] ? [body[0]] : [],
+        },
+      });
+    }
     return Value.fromJSON({
       document: {
         nodes: [
@@ -62,17 +71,16 @@ export default class BlogEditor extends React.Component {
   };
 
   render() {
-    const { readOnly } = this.props;
+    const { readOnly, previewOnly } = this.props;
     return (
       <div class="blog-editor-container">
         <Editor
-          placeholder="Your story..."
           value={this.state.value}
           renderEditor={this.renderEditor}
           autoFocus
           readOnly={readOnly}
           spellCheck
-          schema={schema}
+          schema={previewOnly ? previewBodySchema : schema}
           renderNode={this.renderNode}
           onChange={this.onChange}
         />

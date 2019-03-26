@@ -11,12 +11,13 @@
 
   .card-author {
     padding: 5px;
+    color: #f64c3f;
   }
 
   .card-content-container {
     padding: 5px;
     .title {
-      color: #f64c3f;
+      color: #505050;
     }
   }
 
@@ -26,11 +27,11 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: white;
 
     border-radius: 0px 0 8px 0;
 
-    .action {
+    .card-action {
+      cursor: pointer;
       width: 33%;
       background-color: rgba(0, 0, 0, 0.8);
       padding: 5px;
@@ -39,9 +40,15 @@
       height: 48px;
       padding: 0 20px;
       line-height: 48px;
+      color: #91949d;
     }
 
-    .action:last-child {
+    .card-action:hover {
+      background-color: #db4439;
+      color: white;
+    }
+
+    .card-action:last-child {
       border-radius: 0px 0 8px 0;
       margin-right: 0%;
     }
