@@ -10,8 +10,14 @@
   margin: 20px;
 
   .card-author {
-    padding: 5px;
+    padding: 10px 10px 10px 20px;
     color: #f64c3f;
+    cursor: pointer;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   .card-content-container {

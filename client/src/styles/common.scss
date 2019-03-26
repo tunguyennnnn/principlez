@@ -18,3 +18,11 @@ body,
 *:focus {
   outline: none;
 }
+
+.scaler-hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.scaler-hover:hover {
+  transform: scale(1.3);
+}

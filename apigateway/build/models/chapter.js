@@ -1,5 +1,9 @@
 'use strict';
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 module.exports = function (sequelize, DataTypes) {
   var Chapter = sequelize.define('Chapter', {
     userId: {
@@ -45,6 +49,46 @@ module.exports = function (sequelize, DataTypes) {
       as: 'likes'
     });
   };
+
+  Chapter.get =
+  /*#__PURE__*/
+  function () {
+    var _ref2 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee(_ref) {
+      var _ref$type, type, _ref$limit, limit, cursor, options;
+
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _ref$type = _ref.type, type = _ref$type === void 0 ? 'STORIES' : _ref$type, _ref$limit = _ref.limit, limit = _ref$limit === void 0 ? 20 : _ref$limit, cursor = _ref.cursor;
+              options = {
+                where: {},
+                order: [['updatedAt', 'DESC']],
+                limit: limit
+              };
+
+              if (cursor) {
+                options.where.updatedAt = {
+                  $lt: cursor
+                };
+              }
+
+              return _context.abrupt("return", Chapter.findAll(options));
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    return function (_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
 
   return Chapter;
 };
