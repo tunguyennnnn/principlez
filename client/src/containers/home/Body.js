@@ -1,6 +1,7 @@
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Grid } from 'semantic-ui-react';
 
 import Card from '../../components/commons/Card';
 
@@ -12,12 +13,16 @@ class Body extends React.Component {
       return <div>loading...</div>;
     }
     return (
-      <div>
+      <Grid stackable columns={2}>
         {data.allChapters.edges.map(({ cursor, node }) => {
           const { id } = node;
-          return <Card key={`chapter-list-${id}`} {...node} />;
+          return (
+            <Grid.Column>
+              <Card key={`chapter-list-${id}`} {...node} />
+            </Grid.Column>
+          );
         })}
-      </div>
+      </Grid>
     );
   }
 }
@@ -32,6 +37,7 @@ const allChaptersQuery = gql`
           title
           type
           body
+          updatedAt
           author {
             id
             fullname
