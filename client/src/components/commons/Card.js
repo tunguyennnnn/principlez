@@ -13,8 +13,8 @@ const formatDateTime = updatedAt => {
 };
 
 export default function Card(props) {
-  const { title, body, updatedAt, type, author, view, like } = props;
-
+  const { id, title, body, updatedAt, type, author, view, like } = props;
+  const viewCount = view.count + view.anonymousCount;
   const link = '/of/' + UserId.generateId(author.id, author.fullname);
   return (
     <div class="card-container">
@@ -37,15 +37,17 @@ export default function Card(props) {
       <div class="card-actions">
         <div class="card-action">
           <Icon name="user" />
-          {' View'}
+          {` ${viewCount} Views`}
         </div>
         <div class="card-action">
           <Icon name="thumbs up" />
-          {' Like'}
+          {` ${like.count} Like`}
         </div>
         <div class="card-action">
-          {'Read '}
-          <Icon name="chevron right" />
+          <Link to={link + `/stories/${id}/view`}>
+            {'Read '}
+            <Icon name="chevron right" />
+          </Link>
         </div>
       </div>
     </div>

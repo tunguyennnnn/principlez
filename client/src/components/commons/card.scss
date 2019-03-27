@@ -63,6 +63,12 @@
     .card-action:last-child {
       border-radius: 0px 0 8px 0;
       margin-right: 0%;
+      text-align: right;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
     }
   }
 }
