@@ -2,11 +2,19 @@ import './card.scss';
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+
 import * as UserId from '../../utils/userId';
 import BlogEditor from '../BlogEditor';
 
+const formatDateTime = updatedAt => {
+  const time = moment(Number(updatedAt));
+  return time.format('YYYY-MM-DD');
+};
+
 export default function Card(props) {
-  const { title, body, type, author, view, like } = props;
+  const { id, title, body, updatedAt, type, author, view, like } = props;
+  const viewCount = view.count + view.anonymousCount;
   const link = '/of/' + UserId.generateId(author.id, author.fullname);
   return (
     <div class="card-container">
@@ -22,10 +30,25 @@ export default function Card(props) {
         </div>
         <BlogEditor title={title} body={body} readOnly previewOnly />
       </div>
+      <div class="card-time-container">
+        <Icon name="pencil alternate" />
+        {formatDateTime(updatedAt)}
+      </div>
       <div class="card-actions">
-        <div class="card-action">View</div>
-        <div class="card-action">Like</div>
-        <div class="card-action">Info</div>
+        <div class="card-action">
+          <Icon name="user" />
+          {` ${viewCount} Views`}
+        </div>
+        <div class="card-action">
+          <Icon name="thumbs up" />
+          {` ${like.count} Like`}
+        </div>
+        <div class="card-action">
+          <Link to={link + `/stories/${id}/view`}>
+            {'Read '}
+            <Icon name="chevron right" />
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ export default `
     imageTheme: ImageTheme
     type: String!
     title: String!
+    updatedAt: String!
     body: JSON!
     isAuthor: Boolean!
     author: User!

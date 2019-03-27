@@ -672,6 +672,13 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
+"@babel/runtime@>=7.0.0-beta.56":
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.2.tgz#f5ab6897320f16decd855eed70b705908a313fe8"
+  integrity sha512-7Bl2rALb7HpvXFL7TETNzKSAeBVCPHELzc0C//9FCxN8nsiueWSJBqaF+2oIJScyILStASR/Cx5WMkXGYTiJFA==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/runtime@^7.1.2":
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
@@ -4042,6 +4049,7 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
 moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -5233,6 +5241,14 @@ react-router@^4.3.1:
     prop-types "^15.6.1"
     warning "^4.0.1"
 
+react-sidebar@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-sidebar/-/react-sidebar-3.0.2.tgz#cf695b5a78098e70460c847fb0c6c81cfd896c37"
+  integrity sha512-LG/JO1cJvdRqSmUT+DOhJrml/b45/UqM9nm8emcgbJb5EKNegKCObZcrRqyzVix42VfFf0odytviAAFEYYTu1Q==
+  dependencies:
+    "@babel/runtime" ">=7.0.0-beta.56"
+    prop-types "^15.6.2"
+
 react-transition-group@^2.5.3:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.6.1.tgz#abf4a95e2f13fb9ba83a970a896fedbc5c4856a2"
@@ -5338,6 +5354,11 @@ regenerate@^1.2.1, regenerate@^1.4.0:
 regenerator-runtime@^0.12.0:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
+
+regenerator-runtime@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.2.tgz#32e59c9a6fb9b1a4aff09b4930ca2d4477343447"
+  integrity sha512-S/TQAZJO+D3m9xeN1WTI8dLKBBiRgXBlTJvbWjCThHWZj9EvHK70Ff50/tYj2J/fvBY6JtFVwRuazHN2E7M9BA==
 
 regenerator-transform@^0.13.3:
   version "0.13.4"
