@@ -60,96 +60,39 @@ module.exports = function (sequelize, DataTypes) {
     var _ref = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee(userId) {
-      var groups, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, group, chapterGroupId, chapter;
-
+      var storyGroup, storyChapter;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return ChapterGroup.bulkCreate(GroupTypes.map(function (type) {
-                return {
-                  type: type,
-                  userId: userId
-                };
-              }), {
-                returning: true
-              });
-
-            case 2:
-              groups = _context.sent;
-              _iteratorNormalCompletion = true;
-              _didIteratorError = false;
-              _iteratorError = undefined;
-              _context.prev = 6;
-              _iterator = groups[Symbol.iterator]();
-
-            case 8:
-              if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                _context.next = 19;
-                break;
-              }
-
-              group = _step.value;
-              chapterGroupId = group.id;
-              _context.next = 13;
-              return sequelize.models.Chapter.create({
-                chapterGroupId: chapterGroupId,
+              return ChapterGroup.create({
+                type: 'STORY',
                 userId: userId
               });
 
-            case 13:
-              chapter = _context.sent;
-              _context.next = 16;
-              return group.update({
-                chapterListOrder: [chapter.id]
+            case 2:
+              storyGroup = _context.sent;
+              _context.next = 5;
+              return sequelize.models.Chapter.create({
+                chapterGroupId: storyGroup.id,
+                userId: userId,
+                type: 'STORY'
               });
 
-            case 16:
-              _iteratorNormalCompletion = true;
+            case 5:
+              storyChapter = _context.sent;
               _context.next = 8;
-              break;
+              return storyGroup.update({
+                chapterListOrder: [storyChapter.id]
+              });
 
-            case 19:
-              _context.next = 25;
-              break;
-
-            case 21:
-              _context.prev = 21;
-              _context.t0 = _context["catch"](6);
-              _didIteratorError = true;
-              _iteratorError = _context.t0;
-
-            case 25:
-              _context.prev = 25;
-              _context.prev = 26;
-
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-
-            case 28:
-              _context.prev = 28;
-
-              if (!_didIteratorError) {
-                _context.next = 31;
-                break;
-              }
-
-              throw _iteratorError;
-
-            case 31:
-              return _context.finish(28);
-
-            case 32:
-              return _context.finish(25);
-
-            case 33:
+            case 8:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, this, [[6, 21, 25, 33], [26,, 28, 32]]);
+      }, _callee, this);
     }));
 
     return function (_x) {
