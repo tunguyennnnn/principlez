@@ -8,25 +8,25 @@ import { Icon, Image } from 'semantic-ui-react';
 function Actions() {
   return (
     <ul class="action-list">
-      <li>
+      <li class="common-button">
         <Link to={auth.userProfileLink}>
           <Icon name="home" />
           {' My Profile'}
         </Link>
       </li>
-      <li>
+      <li class="common-button">
         <Link to={auth.userStoriesLink}>
           <Icon name="pencil alternate" />
           {' Write my stories'}
         </Link>
       </li>
-      <li>
+      <li class="common-button">
         <a>
           <Icon name="sticky note outline" />
           {' New Stories'}
         </a>
       </li>
-      <li>
+      <li class="common-button">
         <a>
           <Icon name="street view" />
           {' Writers Around Me'}
@@ -38,7 +38,7 @@ function Actions() {
 
 function Channels() {
   return (
-    <div class="channel-container">
+    <div class="channel-container common-button">
       <div class="channels">
         <Icon name="youtube" className="channel" />
         <Icon name="facebook" className="channel" />
@@ -50,7 +50,7 @@ function Channels() {
 
 function PrinciplezIntro() {
   return (
-    <div class="introduction">
+    <div class="introduction common-button">
       <Image src={LogoImage} />
       <p class="head">Principlez of successful people</p>
       <p class="body">
@@ -63,7 +63,7 @@ function PrinciplezIntro() {
 
 export default function HomeMenu() {
   return (
-    <div class="home-menu-container">
+    <div class="home-menu-container dark-background">
       <PrinciplezIntro />
       <Actions />
       <Channels />

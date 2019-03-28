@@ -34,16 +34,16 @@ export default function Card(props) {
         <Icon name="pencil alternate" />
         {formatDateTime(updatedAt)}
       </div>
-      <div class="card-actions">
-        <div class="card-action">
+      <div class="card-actions dark-background">
+        <div class="card-action common-button">
           <Icon name="user" />
           {` ${viewCount} Views`}
         </div>
-        <div class="card-action">
+        <div class="card-action common-button">
           <Icon name="thumbs up" />
           {` ${like.count} Like`}
         </div>
-        <div class="card-action">
+        <div class="card-action common-button">
           <Link to={link + `/stories/${id}/view`}>
             {'Read '}
             <Icon name="chevron right" />

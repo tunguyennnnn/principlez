@@ -42,19 +42,17 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   ChapterGroup.createDefaultGroups = async userId => {
-    const groups = await ChapterGroup.bulkCreate(
-      GroupTypes.map(type => ({ type, userId })),
-      { returning: true },
-    );
+    const storyGroup = await ChapterGroup.create({
+      type: 'STORY',
+      userId,
+    });
 
-    for (const group of groups) {
-      const { id: chapterGroupId } = group;
-      const chapter = await sequelize.models.Chapter.create({
-        chapterGroupId,
-        userId,
-      });
-      await group.update({ chapterListOrder: [chapter.id] });
-    }
+    const storyChapter = await sequelize.models.Chapter.create({
+      chapterGroupId: storyGroup.id,
+      userId,
+      type: 'STORY',
+    });
+    await storyGroup.update({ chapterListOrder: [storyChapter.id] });
   };
 
   ChapterGroup.createNewChapter = async chapterGroup => {

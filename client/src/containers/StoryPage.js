@@ -23,7 +23,7 @@ export default class StoryPage extends Component {
     return (
       <div class="story-page">
         <MediaQuery query="(min-width: 850px)">
-          <div class="chapter-list-container">
+          <div class="chapter-list-container dark-background">
             <ChapterGroup
               readOnly={readOnly}
               updateTitleRef={fn => (this.updateTitle = fn)}
@@ -31,7 +31,7 @@ export default class StoryPage extends Component {
           </div>
         </MediaQuery>
         <MediaQuery query="(max-width: 850px">
-          <div class="chapter-list-container">
+          <div class="chapter-list-container dark-background">
             <SideMenu>
               <ChapterGroup
                 readOnly={readOnly}

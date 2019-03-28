@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.JSONB,
         defaultValue: [],
       },
+      type: {
+        type: DataTypes.STRING,
+        defaultValue: 'STORY',
+      },
       chapterGroupId: {
         type: DataTypes.INTEGER,
         allowNul: false,
