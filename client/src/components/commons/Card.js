@@ -28,7 +28,9 @@ export default function Card(props) {
         <div class="title">
           <strong>{title}</strong>
         </div>
-        <BlogEditor title={title} body={body} readOnly previewOnly />
+        <div class="content">
+          <BlogEditor title={title} body={body} readOnly previewOnly />
+        </div>
       </div>
       <div class="card-time-container">
         <Icon name="pencil alternate" />

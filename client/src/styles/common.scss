@@ -27,7 +27,6 @@ body,
 .dark-background-container {
   background-color: #383838;
   opacity: 0.8;
-  position: fixed;
 }
 
 .common-button {
@@ -37,7 +36,7 @@ body,
 .side-menu-grid {
   margin: 1vh;
   width: 300px;
-  height: 500px;
+  height: 100%;
   border: 0px solid;
 
   padding: 5px;

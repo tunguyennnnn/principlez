@@ -20,11 +20,15 @@
   }
 
   .card-content-container {
-    padding: 5px;
+    padding: 10px;
     .title {
       font-size: 18px;
       color: #505050;
-      text-align: right;
+    }
+
+    .content {
+      border-left: 1px solid #505050;
+      border-bottom: 1px solid #505050;
     }
   }
 

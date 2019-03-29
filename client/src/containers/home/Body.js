@@ -17,7 +17,7 @@ class Body extends React.Component {
         {data.allChapters.edges.map(({ cursor, node }) => {
           const { id } = node;
           return (
-            <Grid.Column>
+            <Grid.Column largeScreen={8} mobile={15}>
               <Card key={`chapter-list-${id}`} {...node} />
             </Grid.Column>
           );
