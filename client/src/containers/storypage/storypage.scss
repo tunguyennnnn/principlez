@@ -1,10 +1,14 @@
 .story-page {
+  height: 100%;
+  overflow-y: scroll;
   display: flex;
   flex-direction: row;
   position: relative;
 
   .chapter-list-container {
     position: relative;
+    height: 100%;
+    box-sizing: border-box;
   }
 
   .button-action-container {

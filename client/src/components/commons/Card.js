@@ -34,7 +34,7 @@ export default function Card(props) {
         <Icon name="pencil alternate" />
         {formatDateTime(updatedAt)}
       </div>
-      <div class="card-actions dark-background">
+      <div class="card-actions dark-background-container background-opacity">
         <div class="card-action common-button">
           <Icon name="user" />
           {` ${viewCount} Views`}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 
 export default function Chapter({
   children,
@@ -13,21 +13,24 @@ export default function Chapter({
   const viewCount = view.count + view.anonymousCount;
 
   return (
-    <Card className="chapter-content">
-      {!readOnly && (
-        <div class="chapter-delete-icon">
-          <Icon name="delete" circular onClick={deleteChapter} />
-        </div>
-      )}
-      <NavLink to={link} activeClassName="active-chapter-content">
-        <Card.Content>
-          <Card.Header>{children}</Card.Header>
-          <Card.Meta>
+    <div className="chapter-content">
+      <div class="chapter-delete-icon">
+        <Icon
+          name="delete"
+          circular
+          onClick={deleteChapter}
+          className="reverse-color"
+        />
+      </div>
+      <div class="top">
+        <NavLink to={link} activeClassName="active-chapter-content">
+          <div class="title">{children}</div>
+          <div class="time">
             <span className="date">Written in 2019</span>
-          </Card.Meta>
-        </Card.Content>
-      </NavLink>
-      <Card.Content>
+          </div>
+        </NavLink>
+      </div>
+      <div>
         {viewCount ? (
           <a>
             <Icon name="user" />
@@ -41,7 +44,7 @@ export default function Chapter({
             {like.count} Likes
           </a>
         ) : null}
-      </Card.Content>
-    </Card>
+      </div>
+    </div>
   );
 }

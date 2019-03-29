@@ -19,13 +19,13 @@ export default class App extends Component {
           <Route exact path="/login" component={Login} />
           <Route
             exact
-            path="/of/:name"
-            component={() => <div>Personal page</div>}
+            path="/of/:name/stories/:chapterId"
+            component={StoryPage}
           />
           <Route
             exact
-            path="/of/:name/stories/:chapterId"
-            component={StoryPage}
+            path="/of/:name"
+            component={() => <div>Personal page</div>}
           />
           <Route
             exact

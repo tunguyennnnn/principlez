@@ -52,7 +52,6 @@ class StoryPage extends React.Component {
   render() {
     const { data, location } = this.props;
     if (data.loading) return <div>...loading</div>;
-
     const { title, body, type, imageTheme, isAuthor } = data.chapter;
     if (!isAuthor) {
       return (

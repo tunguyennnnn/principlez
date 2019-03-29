@@ -1,10 +1,11 @@
 import './chapterlist/chapterlist.scss';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Image } from 'semantic-ui-react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import _ from 'lodash';
 
+import LogoImage from '../assets/image-medium.png';
 import Chapter from './chapterlist/Chapter';
 import EmptyChapterList from './chapterlist/EmptyChapterList';
 
@@ -30,7 +31,7 @@ export default class ChapterList extends Component {
           <Draggable key={`${id}`} draggableId={`${id}`} index={index}>
             {(provided, snapshot) => (
               <div
-                class="chapter box"
+                class="chapter box common-button"
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
@@ -56,7 +57,6 @@ export default class ChapterList extends Component {
     const { url } = this.props.match;
     return (
       <div class="chapter-list">
-        <div class="chapter-title">{title}</div>
         {chapters.map(({ id, title, view, like }) => (
           <div class="chapter box" key={`chapter-${id}`}>
             <Chapter
@@ -81,26 +81,35 @@ export default class ChapterList extends Component {
     }
 
     return (
-      <div class="chapter-list">
-        {!readOnly && (
-          <div class="chapter-list-add-icon">
-            <Icon name="plus" onClick={() => createChapter(type)} />
-          </div>
-        )}
-        <div class="chapter-title">{title}</div>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable droppableId="droppable">
-            {(provided, snapshot) => (
-              <div ref={provided.innerRef}>
-                {_.isEmpty(chapters) ? (
-                  <EmptyChapterList text={EmptyChapterMapper[type]} />
-                ) : (
-                  this.renderChapters(chapters)
-                )}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+      <div class="chapter-list dark-background-container">
+        <div class="logo-container common-button">
+          <Image src={LogoImage} />
+        </div>
+        <div class="chapters-container">
+          {!readOnly && (
+            <div class="chapter-list-add-icon">
+              <Icon
+                name="plus"
+                circular
+                className="reverse-color"
+                onClick={() => createChapter(type)}
+              />
+            </div>
+          )}
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <Droppable droppableId="droppable">
+              {(provided, snapshot) => (
+                <div ref={provided.innerRef}>
+                  {_.isEmpty(chapters) ? (
+                    <EmptyChapterList text={EmptyChapterMapper[type]} />
+                  ) : (
+                    this.renderChapters(chapters)
+                  )}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
       </div>
     );
   }

@@ -63,7 +63,7 @@ function PrinciplezIntro() {
 
 export default function HomeMenu() {
   return (
-    <div class="home-menu-container dark-background">
+    <div class="home-menu-container dark-background-container">
       <PrinciplezIntro />
       <Actions />
       <Channels />
