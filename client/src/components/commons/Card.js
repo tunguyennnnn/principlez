@@ -28,13 +28,15 @@ export default function Card(props) {
         <div class="title">
           <strong>{title}</strong>
         </div>
-        <BlogEditor title={title} body={body} readOnly previewOnly />
+        <div class="content">
+          <BlogEditor title={title} body={body} readOnly previewOnly />
+        </div>
       </div>
       <div class="card-time-container">
         <Icon name="pencil alternate" />
         {formatDateTime(updatedAt)}
       </div>
-      <div class="card-actions dark-background">
+      <div class="card-actions dark-background-container background-opacity">
         <div class="card-action common-button">
           <Icon name="user" />
           {` ${viewCount} Views`}

@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div class="home-page-container">
       <MediaQuery query="(min-width: 750px)">
-        <div class="home-menu-grid">
+        <div class="side-menu-grid">
           <HomeMenu />
         </div>
       </MediaQuery>
