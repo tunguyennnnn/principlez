@@ -36,7 +36,7 @@ export default `
   type Query {
     chapter (chapterId: ID!): Chapter!
     chapterViewerInfo (chapterId: ID): ChapterViewerInfo! 
-    allChapters (limit: Int = 20, cursor: String): ChapterList!
+    allChapters (limit: Int = 20, cursor: String, userId: ID): ChapterList!
   }
 
   type Mutation {

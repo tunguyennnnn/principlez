@@ -65,5 +65,9 @@ module.exports = (sequelize, DataTypes) => {
     }
     return Chapter.findAll(options);
   };
+
+  Chapter.getByUserId = async userId => {
+    return Chapter.findAll({ where: { userId } });
+  };
   return Chapter;
 };
