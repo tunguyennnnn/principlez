@@ -1,3 +1,4 @@
+import './editors/blogeditor.scss';
 import React from 'react';
 import { Subject, timer } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -20,7 +21,7 @@ export default class BlogEditor extends React.Component {
   }
 
   initializeValue = (title, body) => {
-    const { previewOnly } = this.props;
+    const { previewOnly, noTitle } = this.props;
     if (previewOnly) {
       return Value.fromJSON({
         document: {
@@ -28,6 +29,15 @@ export default class BlogEditor extends React.Component {
         },
       });
     }
+
+    if (noTitle) {
+      return Value.fromJSON({
+        document: {
+          nodes: [...body],
+        },
+      });
+    }
+
     return Value.fromJSON({
       document: {
         nodes: [
@@ -71,7 +81,7 @@ export default class BlogEditor extends React.Component {
   };
 
   render() {
-    const { readOnly, previewOnly } = this.props;
+    const { readOnly, previewOnly, noTitle } = this.props;
     return (
       <div class="blog-editor-container">
         <Editor
@@ -80,7 +90,7 @@ export default class BlogEditor extends React.Component {
           autoFocus
           readOnly={readOnly}
           spellCheck
-          schema={previewOnly ? previewBodySchema : schema}
+          schema={previewOnly || noTitle ? previewBodySchema : schema}
           renderNode={this.renderNode}
           onChange={this.onChange}
         />

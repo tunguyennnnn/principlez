@@ -7,19 +7,20 @@ import { branch, renderComponent } from 'recompose';
 import { extractUserId } from '../utils/userId';
 import Story from './readpage/Story';
 
-function ReadPage({ data }) {
-  const { stories } = data.allChapters;
-  console.log(data);
-  console.log(stories);
-  return (
-    <div class="read-page">
-      <div class="stories-container">
-        {stories.map(({ story }) => (
-          <Story {...story} />
-        ))}
+class ReadPage extends React.Component {
+  render() {
+    const { data } = this.props;
+    const { stories } = data.allChapters;
+    return (
+      <div class="read-page">
+        <div class="stories-container">
+          {stories.map(({ story }) => (
+            <Story {...story} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 function renderWhileLoading(component) {
@@ -37,6 +38,7 @@ const storiesQuery = gql`
           id
           title
           body
+          updatedAt
           view {
             count
             anonymousCount
@@ -44,9 +46,32 @@ const storiesQuery = gql`
           like {
             count
           }
+          author {
+            id
+            fullname
+            email
+          }
         }
       }
     }
+  }
+`;
+
+const likeChapter = gql`
+  mutation likeChapter($chapterId: ID!) {
+    likeResult: likeChapter(chapterId: $chapterId)
+  }
+`;
+
+const unlikeChapter = gql`
+  mutation unlikeChapter($chapterId: ID!) {
+    likeResult: unlikeChapter(chapterId: $chapterId)
+  }
+`;
+
+const viewChapter = gql`
+  mutation viewChapter($chapterId: ID!) {
+    viewChapter(chapterId: $chapterId)
   }
 `;
 
@@ -59,4 +84,7 @@ export default compose(
     }),
   }),
   renderWhileLoading(() => <div>Loading...</div>),
+  graphql(likeChapter, { name: 'likeChapter' }),
+  graphql(unlikeChapter, { name: 'unlikeChapter' }),
+  graphql(viewChapter, { name: 'viewChapter' }),
 )(ReadPage);
