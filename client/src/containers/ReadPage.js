@@ -6,17 +6,37 @@ import { branch, renderComponent } from 'recompose';
 
 import { extractUserId } from '../utils/userId';
 import Story from './readpage/Story';
+import AuthorInfo from './readpage/AuthorInfo';
 
 class ReadPage extends React.Component {
+  updateStore(proxy, { chapter }) {}
+
   render() {
-    const { data } = this.props;
-    const { stories } = data.allChapters;
+    const { authorQuery, storiesQuery } = this.props;
+
+    if (authorQuery.loading || storiesQuery.loading) {
+      return <div>loading...</div>;
+    }
+
+    const { author } = authorQuery;
+    const { stories } = storiesQuery.allChapters;
     return (
       <div class="read-page">
+        <div class="author-info-container">
+          <div class="author-info">
+            <AuthorInfo {...author} />
+          </div>
+        </div>
         <div class="stories-container">
-          {stories.map(({ story }) => (
-            <Story {...story} />
-          ))}
+          <div class="stories">
+            {stories.map(({ story }) => (
+              <Story
+                key={`author-${author.id}-stories-${story.id}`}
+                {...story}
+                author={author}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -46,12 +66,22 @@ const storiesQuery = gql`
           like {
             count
           }
-          author {
-            id
-            fullname
-            email
-          }
         }
+      }
+    }
+  }
+`;
+
+const userQuery = gql`
+  query user($userId: ID!) {
+    author: user(id: $userId) {
+      id
+      fullname
+      email
+      yearOfBirth
+      profileImage {
+        thumb
+        medium
       }
     }
   }
@@ -77,13 +107,22 @@ const viewChapter = gql`
 
 export default compose(
   graphql(storiesQuery, {
+    name: 'storiesQuery',
     options: props => ({
       variables: {
         userId: extractUserId(props.match.params.name),
       },
     }),
   }),
-  renderWhileLoading(() => <div>Loading...</div>),
+  graphql(userQuery, {
+    name: 'authorQuery',
+    options: props => ({
+      variables: {
+        userId: extractUserId(props.match.params.name),
+      },
+    }),
+  }),
+  // renderWhileLoading(() => <div>Loading...</div>),
   graphql(likeChapter, { name: 'likeChapter' }),
   graphql(unlikeChapter, { name: 'unlikeChapter' }),
   graphql(viewChapter, { name: 'viewChapter' }),
