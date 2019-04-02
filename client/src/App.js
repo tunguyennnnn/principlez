@@ -7,6 +7,7 @@ import Home from './containers/Home';
 import SignUp from './containers/SignUp';
 import StoryPage from './containers/StoryPage';
 import Login from './containers/Login';
+import ReadPage from './containers/ReadPage';
 
 export default class App extends Component {
   render() {
@@ -27,11 +28,7 @@ export default class App extends Component {
             path="/of/:name"
             component={() => <div>Personal page</div>}
           />
-          <Route
-            exact
-            path="/of/:name/stories/:chapterId/view"
-            component={props => <StoryPage {...props} readOnly />}
-          />
+          <Route exact path="/of/:name/stories" component={ReadPage} />
         </Switch>
       </div>
     );

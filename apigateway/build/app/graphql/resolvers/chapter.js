@@ -381,22 +381,39 @@ var _default = {
       var _allChapters = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee10(root, _ref13, _ref14) {
-        var limit, cursor, models, chapterList;
+        var limit, cursor, userId, models, chapterList;
         return regeneratorRuntime.wrap(function _callee10$(_context10) {
           while (1) {
             switch (_context10.prev = _context10.next) {
               case 0:
-                limit = _ref13.limit, cursor = _ref13.cursor;
+                limit = _ref13.limit, cursor = _ref13.cursor, userId = _ref13.userId;
                 models = _ref14.models;
                 _context10.prev = 2;
-                _context10.next = 5;
+
+                if (!userId) {
+                  _context10.next = 9;
+                  break;
+                }
+
+                _context10.next = 6;
+                return models.Chapter.getByUserId(userId);
+
+              case 6:
+                chapterList = _context10.sent;
+                _context10.next = 12;
+                break;
+
+              case 9:
+                _context10.next = 11;
                 return models.Chapter.get({
                   limit: limit,
                   cursor: cursor
                 });
 
-              case 5:
+              case 11:
                 chapterList = _context10.sent;
+
+              case 12:
                 return _context10.abrupt("return", {
                   edges: chapterList.map(function (chapter) {
                     return {
@@ -406,18 +423,18 @@ var _default = {
                   })
                 });
 
-              case 9:
-                _context10.prev = 9;
+              case 15:
+                _context10.prev = 15;
                 _context10.t0 = _context10["catch"](2);
                 console.log(_context10.t0);
                 throw _context10.t0;
 
-              case 13:
+              case 19:
               case "end":
                 return _context10.stop();
             }
           }
-        }, _callee10, this, [[2, 9]]);
+        }, _callee10, this, [[2, 15]]);
       }));
 
       function allChapters(_x28, _x29, _x30) {

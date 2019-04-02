@@ -2,15 +2,10 @@ import './card.scss';
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 
 import * as UserId from '../../utils/userId';
 import BlogEditor from '../BlogEditor';
-
-const formatDateTime = updatedAt => {
-  const time = moment(Number(updatedAt));
-  return time.format('YYYY-MM-DD');
-};
+import { formatDateTime } from '../../utils/datetime';
 
 export default function Card(props) {
   const { id, title, body, updatedAt, type, author, view, like } = props;

@@ -81,9 +81,14 @@ export default {
       }));
       return { liked };
     },
-    allChapters: async (root, { limit, cursor }, { models }) => {
+    allChapters: async (root, { limit, cursor, userId }, { models }) => {
       try {
-        const chapterList = await models.Chapter.get({ limit, cursor });
+        let chapterList;
+        if (userId) {
+          chapterList = await models.Chapter.getByUserId(userId);
+        } else {
+          chapterList = await models.Chapter.get({ limit, cursor });
+        }
         return {
           edges: chapterList.map(chapter => {
             return {
