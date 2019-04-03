@@ -60,13 +60,19 @@ const chapterViewerInfo = gql`
 
 const likeChapter = gql`
   mutation likeChapter($chapterId: ID!) {
-    likeResult: likeChapter(chapterId: $chapterId)
+    likeResult: likeChapter(chapterId: $chapterId) {
+      count
+      liked
+    }
   }
 `;
 
 const unlikeChapter = gql`
   mutation unlikeChapter($chapterId: ID!) {
-    likeResult: unlikeChapter(chapterId: $chapterId)
+    likeResult: unlikeChapter(chapterId: $chapterId) {
+      count
+      liked
+    }
   }
 `;
 

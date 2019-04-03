@@ -42,8 +42,15 @@ export default {
         }),
       };
     },
-    like: async (chapter, args, { models }) => {
+    like: async (chapter, args, { models, user }) => {
+      const liked =
+        user &&
+        !!(await models.ChapterLike.findOne({
+          userId: user.id,
+          chapterId: chapter.id,
+        }));
       return {
+        liked,
         count: await models.ChapterLike.count({
           where: { chapterId: chapter.id },
         }),

@@ -1,22 +1,19 @@
+@media only screen and (min-width: 850px) {
+  .read-page {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .read-page {
+    display: block;
+  }
+}
+
 .read-page {
   position: relative;
   padding: 20px 0 20px 0;
-  display: flex;
-  flex-direction: row;
-
-  .author-info-container {
-    width: 250px;
-    height: 100%;
-
-    .author-info {
-      width: 250px;
-      padding: 15px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-    }
-  }
 
   .stories-container {
     flex: auto 1;
@@ -33,7 +30,7 @@
     }
   }
 
-  @media only screen and (min-width: 750px) and (max-width: 1000px) {
+  @media only screen and (min-width: 850px) and (max-width: 1000px) {
     .stories {
       position: absolute;
       top: 50%;
@@ -43,7 +40,11 @@
     }
   }
 
-  @media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 850px) {
+    .stories-container {
+      flex: none;
+    }
+
     .stories {
       padding: 30px;
     }
@@ -67,9 +68,17 @@
       font-size: 15px;
 
       .meta-items {
-        width: 70%;
+        width: 50%;
 
         .item {
+          i {
+            cursor: pointer;
+          }
+
+          i.set {
+            color: green;
+          }
+
           margin-left: 10px;
           display: inline;
         }
@@ -98,5 +107,39 @@
 
   .story-container:last-child {
     border-bottom: 0;
+  }
+}
+
+.author-info-container {
+  width: 250px;
+  height: 100%;
+
+  .author-info {
+    width: 250px;
+    padding: 40px 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+}
+
+.author-info-container-mobile {
+  padding-top: 30px;
+
+  .author-info {
+    padding: 15px;
+    .author {
+      display: flex;
+      flex-grow: column;
+    }
+
+    .profile-image {
+      width: 30%;
+    }
+
+    .profile {
+      flex: 1 auto;
+    }
   }
 }

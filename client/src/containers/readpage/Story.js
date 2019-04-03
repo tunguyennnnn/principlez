@@ -6,8 +6,20 @@ import { formatDateTime } from '../../utils/datetime';
 import { generateId } from '../../utils/userId';
 import BlogEditor from '../../components/BlogEditor';
 
-export default function Story({ title, body, updatedAt, like, view, author }) {
+export default function Story({
+  id,
+  title,
+  body,
+  updatedAt,
+  like,
+  view,
+  author,
+  likeChapter,
+  unlikeChapter,
+}) {
   const viewCount = view.count + view.anonymousCount;
+  const { liked, count: likeCount } = like;
+  const likeAction = liked ? unlikeChapter : likeChapter;
   return (
     <div class="story-container">
       <div class="title">{title}</div>
@@ -20,12 +32,12 @@ export default function Story({ title, body, updatedAt, like, view, author }) {
       <div class="meta-data">
         <div class="meta-items">
           <div class="item">
-            <Icon name="user" />
+            <Icon name="eye" />
             {viewCount}
           </div>
           <div class="item">
-            <Icon name="thumbs up" />
-            {like.count}
+            <Icon name="star" onClick={() => likeAction(id)} />
+            {likeCount}
           </div>
         </div>
         <div class="time-container">

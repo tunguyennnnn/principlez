@@ -12,11 +12,12 @@ export default `
 
   type ChapterLike {
     count: Int!
+    liked: Boolean
     edges: [ChapterLikerEdge!]!
   }
 
   type Mutation {
-    likeChapter (chapterId: ID!): Boolean!
-    unlikeChapter (chapterId: ID!): Boolean!
+    likeChapter (chapterId: ID!): ChapterLike!
+    unlikeChapter (chapterId: ID!): ChapterLike!
   }
 `;

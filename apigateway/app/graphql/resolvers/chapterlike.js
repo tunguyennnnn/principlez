@@ -9,8 +9,14 @@ export default {
         if (!chapter) {
           throw new Error('Resource not found');
         }
-        await models.ChapterLike.addLike(chapterId, user.id);
-        return true;
+        const liked = !!(await models.ChapterLike.addLike(chapterId, user.id));
+
+        return {
+          liked,
+          count: await models.ChapterLike.count({
+            where: { chapterId },
+          }),
+        };
       },
     },
     unlikeChapter: {
@@ -23,7 +29,12 @@ export default {
           throw new Error('Resource not found');
         }
         await models.ChapterLike.removeLike(chapterId, user.id);
-        return true;
+        return {
+          liked: false,
+          count: await models.ChapterLike.count({
+            where: { chapterId },
+          }),
+        };
       },
     },
   },

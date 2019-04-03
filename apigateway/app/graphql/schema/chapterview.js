@@ -14,6 +14,7 @@ export default `
   type ChapterView {
     count: Int!
     anonymousCount: Int!
+    viewed: Boolean
     edges: [ChapterViewerEdge!]!
   }
 
