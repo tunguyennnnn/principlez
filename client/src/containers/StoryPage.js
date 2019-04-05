@@ -21,9 +21,9 @@ export default class StoryPage extends Component {
     const { readOnly } = this.props;
     const StoryComponent = readOnly ? StoryView : StoryWrite;
     return (
-      <div class="story-page">
+      <div className="story-page">
         <MediaQuery query="(min-width: 850px)">
-          <div class="chapter-list-container side-menu-grid">
+          <div className="chapter-list-container side-menu-grid">
             <ChapterGroup
               readOnly={readOnly}
               updateTitleRef={fn => (this.updateTitle = fn)}
@@ -31,7 +31,7 @@ export default class StoryPage extends Component {
           </div>
         </MediaQuery>
         <MediaQuery query="(max-width: 850px">
-          <div class="chapter-list-container">
+          <div className="chapter-list-container">
             <SideMenu>
               <ChapterGroup
                 readOnly={readOnly}

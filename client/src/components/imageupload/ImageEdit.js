@@ -58,9 +58,9 @@ export default class ImageEdit extends React.Component {
   render() {
     const { url } = this.props;
     return (
-      <div class="image-edit-container">
-        <div class="title">Edit image</div>
-        <div class="image-editor">
+      <div className="image-edit-container">
+        <div className="title">Edit image</div>
+        <div className="image-editor">
           <ReactCrop
             src={url}
             crop={this.state.crop}
@@ -69,7 +69,7 @@ export default class ImageEdit extends React.Component {
             onComplete={this.onCropComplete}
           />
         </div>
-        <div class="submit">
+        <div className="submit">
           <Button onClick={this.submitImage}>save</Button>
         </div>
       </div>

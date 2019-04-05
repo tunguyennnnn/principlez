@@ -14,7 +14,7 @@ export default function Chapter({
 
   return (
     <div className="chapter-content">
-      <div class="chapter-delete-icon">
+      <div className="chapter-delete-icon">
         <Icon
           name="delete"
           circular
@@ -22,10 +22,10 @@ export default function Chapter({
           className="reverse-color"
         />
       </div>
-      <div class="top">
+      <div className="top">
         <NavLink to={link} activeClassName="active-chapter-content">
-          <div class="title">{children}</div>
-          <div class="time">
+          <div className="title">{children}</div>
+          <div className="time">
             <span className="date">Written in 2019</span>
           </div>
         </NavLink>

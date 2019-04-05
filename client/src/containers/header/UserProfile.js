@@ -17,8 +17,8 @@ function Trigger({ src }) {
 
 function Profile({ fullname, email, userId }) {
   return (
-    <div class="profile-container">
-      <div class="card-container">
+    <div className="profile-container">
+      <div className="card-container">
         <Card>
           <Card.Content>
             <Card.Header>{fullname}</Card.Header>
@@ -55,12 +55,14 @@ export default function UserProfile() {
   const { showProfile, shouldNavigate } = profileState;
   const { userId, fullname, email } = auth.userProfile;
   if (shouldNavigate) {
-    return <Redirect to={`/of/${UserId.generateId(userId, fullname)}`} />;
+    return (
+      <Redirect to={`/of/${UserId.generateId(userId, fullname)}/stories`} />
+    );
   }
 
   return (
     <div
-      class="header-userprofile-container"
+      className="header-userprofile-container"
       onMouseEnter={() =>
         isBrowser &&
         updateProfileState({

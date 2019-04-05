@@ -31,7 +31,7 @@ export default class ChapterList extends Component {
           <Draggable key={`${id}`} draggableId={`${id}`} index={index}>
             {(provided, snapshot) => (
               <div
-                class="chapter box common-button"
+                className="chapter box common-button"
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
@@ -56,9 +56,9 @@ export default class ChapterList extends Component {
     const { title, chapters } = this.props;
     const { url } = this.props.match;
     return (
-      <div class="chapter-list">
+      <div className="chapter-list">
         {chapters.map(({ id, title, view, like }) => (
-          <div class="chapter box" key={`chapter-${id}`}>
+          <div className="chapter box" key={`chapter-${id}`}>
             <Chapter
               readOnly
               link={url.replace(/\d+\/view/, `${id}/view`)}
@@ -81,13 +81,13 @@ export default class ChapterList extends Component {
     }
 
     return (
-      <div class="chapter-list dark-background-container">
-        <div class="logo-container common-button">
+      <div className="chapter-list dark-background-container">
+        <div className="logo-container common-button">
           <Image src={LogoImage} />
         </div>
-        <div class="chapters-container">
+        <div className="chapters-container">
           {!readOnly && (
-            <div class="chapter-list-add-icon">
+            <div className="chapter-list-add-icon">
               <Icon
                 name="plus"
                 circular

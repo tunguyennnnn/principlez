@@ -15,7 +15,7 @@ export default function ViewerButtonAction({ liked, likeAction }) {
   const likeText = liked ? Match.like.yesText : Match.like.noText;
 
   return (
-    <div class="button-action-container">
+    <div className="button-action-container">
       <IconButton iconName={likeIcon} text={likeText} action={likeAction} />
       <IconButton iconName="newspaper outline" text="Give your thought" />
       <IconButton iconName="plus square" text="Save the story" />

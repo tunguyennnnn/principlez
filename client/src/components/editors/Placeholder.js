@@ -5,7 +5,7 @@ export default function({ node, placeholderText = '...' }) {
   if (_.trim(node.text)) return null;
   return (
     <span
-      class="editor-placeholder-text"
+      className="editor-placeholder-text"
       contentEditable={false}
       style={{
         display: 'inline-block',

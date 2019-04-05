@@ -21,7 +21,7 @@ function ImageViewMode({ imageUrl, open, getInputProps }) {
     <React.Fragment>
       <input {...getInputProps()} />
       <img src={imageUrl} />
-      <label class="edit-button" type="button" onClick={() => open()} />
+      <label className="edit-button" type="button" onClick={() => open()} />
     </React.Fragment>
   );
 }
@@ -108,7 +108,7 @@ export default class ImageUpload extends React.Component {
             return (
               <div
                 {...getRootProps({ onClick: evt => evt.preventDefault() })}
-                class={`image-upload-container ${hasImage && 'with--image'}`}
+                className={`image-upload-container ${hasImage && 'with--image'}`}
                 style={this.getStyle()}
               >
                 {this.renderDropZoneBody({ getInputProps, open })}

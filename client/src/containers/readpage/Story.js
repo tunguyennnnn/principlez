@@ -21,26 +21,26 @@ export default function Story({
   const { liked, count: likeCount } = like;
   const likeAction = liked ? unlikeChapter : likeChapter;
   return (
-    <div class="story-container">
-      <div class="title">{title}</div>
-      <div class="author">
+    <div className="story-container">
+      <div className="title">{title}</div>
+      <div className="author">
         <Link to={`/of/${generateId(author.id, author.fullname)}`}>
           <Icon name="id badge outline" />
           {author.fullname}
         </Link>
       </div>
-      <div class="meta-data">
-        <div class="meta-items">
-          <div class="item">
+      <div className="meta-data">
+        <div className="meta-items">
+          <div className="item">
             <Icon name="eye" />
             {viewCount}
           </div>
-          <div class="item">
+          <div className="item">
             <Icon name="star" onClick={() => likeAction(id)} />
             {likeCount}
           </div>
         </div>
-        <div class="time-container">
+        <div className="time-container">
           <Icon name="pencil alternate" />
           {formatDateTime(updatedAt)}
         </div>

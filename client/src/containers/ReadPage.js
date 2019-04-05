@@ -76,23 +76,23 @@ class ReadPage extends React.Component {
     const { author } = authorQuery;
     const { stories } = storiesQuery.allChapters;
     return (
-      <div class="read-page" ref={el => (this.containerEl = el)}>
+      <div className="read-page" ref={el => (this.containerEl = el)}>
         <MediaQuery query="(min-width: 850px)">
-          <div class="author-info-container">
-            <div class="author-info">
+          <div className="author-info-container">
+            <div className="author-info">
               <AuthorInfo {...author} />
             </div>
           </div>
         </MediaQuery>
         <MediaQuery query="(max-width: 850px)">
-          <div class="author-info-container-mobile">
-            <div class="author-info">
+          <div className="author-info-container-mobile">
+            <div className="author-info">
               <AuthorInfo {...author} />
             </div>
           </div>
         </MediaQuery>
-        <div class="stories-container">
-          <div class="stories">
+        <div className="stories-container">
+          <div className="stories">
             {stories.map(({ story }) => (
               <div
                 key={`author-${author.id}-stories-${story.id}-container`}

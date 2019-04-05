@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function EmptyChapterList({ text }) {
-  return <div class="empty-chapter-list-container">{text}</div>;
+  return <div className="empty-chapter-list-container">{text}</div>;
 }
