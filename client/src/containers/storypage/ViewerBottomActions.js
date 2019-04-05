@@ -17,7 +17,7 @@ export default function ViewerBottomActions({ liked, likeAction }) {
   const likeText = liked ? Match.like.yesText : Match.like.noText;
 
   return (
-    <div class="bottom-action-container">
+    <div className="bottom-action-container">
       <Grid columns="equal">
         <Grid.Row>
           <Grid.Column className="viewer-bottom-action">

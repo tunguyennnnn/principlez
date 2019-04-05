@@ -7,26 +7,26 @@ import { Icon, Image } from 'semantic-ui-react';
 
 function Actions() {
   return (
-    <ul class="action-list">
-      <li class="common-button">
+    <ul className="action-list">
+      <li className="common-button">
         <Link to={auth.userProfileLink}>
           <Icon name="home" />
           {' My Profile'}
         </Link>
       </li>
-      <li class="common-button">
+      <li className="common-button">
         <Link to={auth.userStoriesLink}>
           <Icon name="pencil alternate" />
           {' Write my stories'}
         </Link>
       </li>
-      <li class="common-button">
+      <li className="common-button">
         <a>
           <Icon name="sticky note outline" />
           {' New Stories'}
         </a>
       </li>
-      <li class="common-button">
+      <li className="common-button">
         <a>
           <Icon name="street view" />
           {' Writers Around Me'}
@@ -38,8 +38,8 @@ function Actions() {
 
 function Channels() {
   return (
-    <div class="channel-container common-button">
-      <div class="channels">
+    <div className="channel-container common-button">
+      <div className="channels">
         <Icon name="youtube" className="channel" />
         <Icon name="facebook" className="channel" />
         <Icon name="meetup" className="channel" />
@@ -50,10 +50,10 @@ function Channels() {
 
 function PrinciplezIntro() {
   return (
-    <div class="introduction common-button">
+    <div className="introduction common-button">
       <Image src={LogoImage} />
-      <p class="head">Principlez of successful people</p>
-      <p class="body">
+      <p className="head">Principlez of successful people</p>
+      <p className="body">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
         eirmod tempor invidunt ut
       </p>
@@ -63,7 +63,7 @@ function PrinciplezIntro() {
 
 export default function HomeMenu() {
   return (
-    <div class="home-menu-container dark-background-container">
+    <div className="home-menu-container dark-background-container">
       <PrinciplezIntro />
       <Actions />
       <Channels />

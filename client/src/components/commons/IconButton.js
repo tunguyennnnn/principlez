@@ -12,7 +12,7 @@ export default function IconButton({ iconName, text, action, horizontal }) {
       iconComp
     );
     return (
-      <div class="icon-button" onClick={action}>
+      <div className="icon-button" onClick={action}>
         {children}
       </div>
     );
@@ -26,7 +26,7 @@ export default function IconButton({ iconName, text, action, horizontal }) {
   );
 
   return (
-    <div class="icon-button" onClick={action}>
+    <div className="icon-button" onClick={action}>
       {children}
     </div>
   );

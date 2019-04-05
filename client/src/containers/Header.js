@@ -8,10 +8,12 @@ import User from './header/User';
 export default function Header() {
   return (
     <MediaQuery query="(max-width: 750px)">
-      <div class="app-header">
-        <div class="header-container">
+      <div className="app-header">
+        <div className="header-container">
           <Menu>
-            <Menu.Item name="home" />
+            <Menu.Item>
+              <a href="/">Home</a>
+            </Menu.Item>
             <User />
           </Menu>
         </div>

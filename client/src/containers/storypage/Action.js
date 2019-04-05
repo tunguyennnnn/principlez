@@ -34,7 +34,7 @@ class Action extends React.Component {
     const { liked } = data.chapterViewerInfo;
 
     return (
-      <div class="story-page-action-container">
+      <div className="story-page-action-container">
         <MediaQuery query="(max-width: 850px">
           <BottomMenu>
             <ViewerBottomActions liked={liked} likeAction={this.likeAction} />

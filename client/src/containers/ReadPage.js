@@ -5,12 +5,15 @@ import gql from 'graphql-tag';
 import { branch, renderComponent } from 'recompose';
 import MediaQuery from 'react-responsive';
 import _ from 'lodash';
+import queryString from 'query-string';
 
 import { extractUserId } from '../utils/userId';
 import Story from './readpage/Story';
 import AuthorInfo from './readpage/AuthorInfo';
 
 class ReadPage extends React.Component {
+  storiesRef = {};
+
   updateStore = (chapterId, proxy, { data: { likeResult } }) => {
     const userId = extractUserId(this.props.match.params.name);
     const data = proxy.readQuery({
@@ -46,6 +49,23 @@ class ReadPage extends React.Component {
     }
   };
 
+  scrollToStory = () => {
+    const { location, data } = this.props;
+    const { search } = location;
+    if (search && !storiesQuery.loading) {
+      const { id } = queryString.parse(search);
+      if (id && this.storiesRef[id]) {
+        const ref = this.storiesRef[id];
+        const top = ref.offsetTop - this.containerEl.offsetTop;
+        setTimeout(() => window.scroll({ top }), 0);
+      }
+    }
+  };
+
+  componentDidUpdate() {
+    this.scrollToStory();
+  }
+
   render() {
     const { authorQuery, storiesQuery } = this.props;
 
@@ -56,31 +76,36 @@ class ReadPage extends React.Component {
     const { author } = authorQuery;
     const { stories } = storiesQuery.allChapters;
     return (
-      <div class="read-page">
+      <div className="read-page" ref={el => (this.containerEl = el)}>
         <MediaQuery query="(min-width: 850px)">
-          <div class="author-info-container">
-            <div class="author-info">
+          <div className="author-info-container">
+            <div className="author-info">
               <AuthorInfo {...author} />
             </div>
           </div>
         </MediaQuery>
         <MediaQuery query="(max-width: 850px)">
-          <div class="author-info-container-mobile">
-            <div class="author-info">
+          <div className="author-info-container-mobile">
+            <div className="author-info">
               <AuthorInfo {...author} />
             </div>
           </div>
         </MediaQuery>
-        <div class="stories-container">
-          <div class="stories">
+        <div className="stories-container">
+          <div className="stories">
             {stories.map(({ story }) => (
-              <Story
-                key={`author-${author.id}-stories-${story.id}`}
-                likeChapter={this.likeChapter}
-                unlikeChapter={this.unlikeChapter}
-                {...story}
-                author={author}
-              />
+              <div
+                key={`author-${author.id}-stories-${story.id}-container`}
+                ref={el => (this.storiesRef[story.id] = el)}
+              >
+                <Story
+                  key={`author-${author.id}-stories-${story.id}`}
+                  likeChapter={this.likeChapter}
+                  unlikeChapter={this.unlikeChapter}
+                  {...story}
+                  author={author}
+                />
+              </div>
             ))}
           </div>
         </div>

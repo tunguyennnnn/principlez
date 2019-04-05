@@ -12,36 +12,36 @@ export default function Card(props) {
   const viewCount = view.count + view.anonymousCount;
   const link = '/of/' + UserId.generateId(author.id, author.fullname);
   return (
-    <div class="card-container">
-      <div class="card-author">
+    <div className="card-container">
+      <div className="card-author">
         <Link to={link} className="scaler-hover">
           <Icon name="id badge outline" />
           {author.fullname}
         </Link>
       </div>
-      <div class="card-content-container">
-        <div class="title">
+      <div className="card-content-container">
+        <div className="title">
           <strong>{title}</strong>
         </div>
-        <div class="content">
+        <div className="content">
           <BlogEditor title={title} body={body} readOnly previewOnly />
         </div>
       </div>
-      <div class="card-time-container">
+      <div className="card-time-container">
         <Icon name="pencil alternate" />
         {formatDateTime(updatedAt)}
       </div>
-      <div class="card-actions dark-background-container background-opacity">
-        <div class="card-action common-button">
+      <div className="card-actions dark-background-container background-opacity">
+        <div className="card-action common-button">
           <Icon name="user" />
           {` ${viewCount} Views`}
         </div>
-        <div class="card-action common-button">
+        <div className="card-action common-button">
           <Icon name="thumbs up" />
           {` ${like.count} Like`}
         </div>
-        <div class="card-action common-button">
-          <Link to={link + `/stories/${id}/view`}>
+        <div className="card-action common-button">
+          <Link to={link + `/stories?id=${id}`}>
             {'Read '}
             <Icon name="chevron right" />
           </Link>

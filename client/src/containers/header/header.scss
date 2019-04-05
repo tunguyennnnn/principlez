@@ -21,6 +21,9 @@
   position: relative;
 
   .profile-container {
+    z-index: 10000;
+    cursor: pointer;
+
     position: relative;
     .card-container {
       position: absolute;
