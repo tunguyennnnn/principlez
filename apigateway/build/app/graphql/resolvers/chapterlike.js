@@ -17,7 +17,7 @@ var _default = {
         var _resolve = _asyncToGenerator(
         /*#__PURE__*/
         regeneratorRuntime.mark(function _callee(root, _ref, _ref2) {
-          var chapterId, models, user, chapter;
+          var chapterId, models, user, chapter, liked;
           return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
@@ -46,9 +46,23 @@ var _default = {
                   return models.ChapterLike.addLike(chapterId, user.id);
 
                 case 9:
-                  return _context.abrupt("return", true);
+                  liked = !!_context.sent;
+                  _context.t0 = liked;
+                  _context.next = 13;
+                  return models.ChapterLike.count({
+                    where: {
+                      chapterId: chapterId
+                    }
+                  });
 
-                case 10:
+                case 13:
+                  _context.t1 = _context.sent;
+                  return _context.abrupt("return", {
+                    liked: _context.t0,
+                    count: _context.t1
+                  });
+
+                case 15:
                 case "end":
                   return _context.stop();
               }
@@ -98,9 +112,21 @@ var _default = {
                   return models.ChapterLike.removeLike(chapterId, user.id);
 
                 case 9:
-                  return _context2.abrupt("return", true);
+                  _context2.next = 11;
+                  return models.ChapterLike.count({
+                    where: {
+                      chapterId: chapterId
+                    }
+                  });
 
-                case 10:
+                case 11:
+                  _context2.t0 = _context2.sent;
+                  return _context2.abrupt("return", {
+                    liked: false,
+                    count: _context2.t0
+                  });
+
+                case 13:
                 case "end":
                   return _context2.stop();
               }

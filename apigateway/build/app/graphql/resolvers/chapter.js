@@ -155,26 +155,46 @@ var _default = {
       var _like2 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee4(chapter, args, _ref4) {
-        var models;
+        var models, user, liked;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                models = _ref4.models;
-                _context4.next = 3;
+                models = _ref4.models, user = _ref4.user;
+                _context4.t0 = user;
+
+                if (!_context4.t0) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                _context4.next = 5;
+                return models.ChapterLike.findOne({
+                  userId: user.id,
+                  chapterId: chapter.id
+                });
+
+              case 5:
+                _context4.t0 = !!_context4.sent;
+
+              case 6:
+                liked = _context4.t0;
+                _context4.t1 = liked;
+                _context4.next = 10;
                 return models.ChapterLike.count({
                   where: {
                     chapterId: chapter.id
                   }
                 });
 
-              case 3:
-                _context4.t0 = _context4.sent;
+              case 10:
+                _context4.t2 = _context4.sent;
                 return _context4.abrupt("return", {
-                  count: _context4.t0
+                  liked: _context4.t1,
+                  count: _context4.t2
                 });
 
-              case 5:
+              case 12:
               case "end":
                 return _context4.stop();
             }
