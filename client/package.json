@@ -19,6 +19,7 @@
     "immutable": "^4.0.0-rc.12",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
+    "query-string": "^6.4.2",
     "react": "^16.8.1",
     "react-apollo": "^2.4.1",
     "react-beautiful-dnd": "^10.0.4",

@@ -41,7 +41,7 @@ export default function Card(props) {
           {` ${like.count} Like`}
         </div>
         <div class="card-action common-button">
-          <Link to={link + `/stories/${id}/view`}>
+          <Link to={link + `/stories?id=${id}`}>
             {'Read '}
             <Icon name="chevron right" />
           </Link>
