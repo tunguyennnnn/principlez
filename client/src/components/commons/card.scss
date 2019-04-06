@@ -2,9 +2,7 @@
   font-family: 'PT Sans';
   font-size: 14px;
   line-height: 1.5;
-  background-color: white;
-  border: 1px solid #383838;
-  box-shadow: 3px 3px#808080;
+  background-color: #f8f8f8;
 
   border-radius: 8px 0 0 0;
 
@@ -40,24 +38,27 @@
     letter-spacing: 1px;
 
     .card-action {
+      text-align: center;
       cursor: pointer;
       width: 33%;
-      margin-right: 0.5%;
       display: inline-block;
-      padding: 0 10px;
       line-height: 48px;
+      background: #f8f8f8;
       color: #91949d;
+      border-right: 0.5px solid #91949d;
       border-radius: 0;
     }
 
     .card-action:hover {
-      background-color: #db4439;
-      color: white;
+      background-color: white;
+      // color: white;
     }
 
     .card-action:last-child {
-      margin-right: 0%;
+      width: 34%;
       text-align: right;
+      padding: 0 10px;
+      border-right: 0px;
 
       a {
         color: inherit;

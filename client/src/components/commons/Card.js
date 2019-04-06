@@ -12,7 +12,7 @@ export default function Card(props) {
   const viewCount = view.count + view.anonymousCount;
   const link = '/of/' + UserId.generateId(author.id, author.fullname);
   return (
-    <div className="card-container">
+    <div className="card-container box-shadow">
       <div className="card-author">
         <Link to={link} className="scaler-hover">
           <Icon name="id badge outline" />
@@ -31,16 +31,16 @@ export default function Card(props) {
         <Icon name="pencil alternate" />
         {formatDateTime(updatedAt)}
       </div>
-      <div className="card-actions dark-background-container background-opacity">
-        <div className="card-action common-button">
+      <div className="card-actions">
+        <div className="card-action">
           <Icon name="user" />
           {` ${viewCount} Views`}
         </div>
-        <div className="card-action common-button">
+        <div className="card-action">
           <Icon name="thumbs up" />
           {` ${like.count} Like`}
         </div>
-        <div className="card-action common-button">
+        <div className="card-action">
           <Link to={link + `/stories?id=${id}`}>
             {'Read '}
             <Icon name="chevron right" />
