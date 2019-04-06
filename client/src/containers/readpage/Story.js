@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { formatDateTime } from '../../utils/datetime';
 import { generateId } from '../../utils/userId';
 import BlogEditor from '../../components/BlogEditor';
+import StoryMetaData from '../../components/commons/StoryMetaData';
 
 export default function Story({
   id,
@@ -29,22 +30,12 @@ export default function Story({
           {author.fullname}
         </Link>
       </div>
-      <div className="meta-data">
-        <div className="meta-items">
-          <div className="item">
-            <Icon name="eye" />
-            {viewCount}
-          </div>
-          <div className="item">
-            <Icon name="star" onClick={() => likeAction(id)} />
-            {likeCount}
-          </div>
-        </div>
-        <div className="time-container">
-          <Icon name="pencil alternate" />
-          {formatDateTime(updatedAt)}
-        </div>
-      </div>
+      <StoryMetaData
+        likeCount={like.count}
+        viewCount={viewCount}
+        likeAction={() => likeAction(id)}
+        updatedAt={updatedAt}
+      />
       <BlogEditor title={title} body={body} readOnly noTitle />
     </div>
   );

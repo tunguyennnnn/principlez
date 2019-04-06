@@ -3,9 +3,9 @@ import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+import StoryMetaData from './StoryMetaData';
 import * as UserId from '../../utils/userId';
 import BlogEditor from '../BlogEditor';
-import { formatDateTime } from '../../utils/datetime';
 
 export default function Card(props) {
   const { id, title, body, updatedAt, type, author, view, like } = props;
@@ -26,26 +26,16 @@ export default function Card(props) {
         <div className="content">
           <BlogEditor title={title} body={body} readOnly previewOnly />
         </div>
-      </div>
-      <div className="card-time-container">
-        <Icon name="pencil alternate" />
-        {formatDateTime(updatedAt)}
+        <div className="read">
+          <Link to={link + `/stories?id=${id}`}>Read...</Link>
+        </div>
       </div>
       <div className="card-actions">
-        <div className="card-action">
-          <Icon name="user" />
-          {` ${viewCount} Views`}
-        </div>
-        <div className="card-action">
-          <Icon name="thumbs up" />
-          {` ${like.count} Like`}
-        </div>
-        <div className="card-action">
-          <Link to={link + `/stories?id=${id}`}>
-            {'Read '}
-            <Icon name="chevron right" />
-          </Link>
-        </div>
+        <StoryMetaData
+          viewCount={viewCount}
+          likeCount={like.count}
+          updatedAt={updatedAt}
+        />
       </div>
     </div>
   );

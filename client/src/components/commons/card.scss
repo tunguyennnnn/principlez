@@ -2,7 +2,6 @@
   font-family: 'PT Sans';
   font-size: 14px;
   line-height: 1.5;
-  background-color: #f8f8f8;
 
   border-radius: 8px 0 0 0;
 
@@ -22,6 +21,20 @@
     .title {
       font-size: 18px;
       color: #505050;
+    }
+
+    .content {
+      max-height: 250px;
+      overflow: hidden;
+    }
+
+    .read {
+      padding-right: 10px;
+      text-align: right;
+
+      a {
+        cursor: pointer;
+      }
     }
   }
 

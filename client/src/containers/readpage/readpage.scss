@@ -61,36 +61,6 @@
       padding-left: 10px;
     }
 
-    .meta-data {
-      display: flex;
-      padding: 10px 20px 10px 20px;
-      flex-direction: row;
-      font-size: 15px;
-
-      .meta-items {
-        width: 50%;
-
-        .item {
-          i {
-            cursor: pointer;
-          }
-
-          i.set {
-            color: green;
-          }
-
-          margin-left: 10px;
-          display: inline;
-        }
-      }
-
-      .time-container {
-        flex: 1 auto;
-        text-align: right;
-        font-weight: 900;
-      }
-    }
-
     .author {
       padding: 20px;
       color: #f64c3f;
