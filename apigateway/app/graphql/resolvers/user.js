@@ -62,5 +62,25 @@ export default {
         return { error: e.toString() };
       }
     },
+    updateUserInfo: {
+      authentication: true,
+      resolve: async (
+        root,
+        { fullname, yearOfBirth, blurb, occupation },
+        { models, user },
+      ) => {
+        try {
+          const newUser = await user.update({
+            fullname: fullname || user.fullname,
+            yearOfBirth: yearOfBirth || user.yearOfBirth,
+            blurb: blurb || user.blurb,
+            occupation: occupation || user.occupation,
+          });
+          return { user: newUser };
+        } catch (e) {
+          return { error: e.toString() };
+        }
+      },
+    },
   },
 };

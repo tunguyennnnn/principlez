@@ -1,7 +1,6 @@
 import './signup/signup.scss';
 
 import * as _ from 'lodash';
-import moment from 'moment';
 import React from 'react';
 import { Form, Grid, Header, Image, Button } from 'semantic-ui-react';
 import { compose, graphql } from 'react-apollo';
@@ -12,12 +11,7 @@ import SideImage from './images/img1.png';
 import { ipLookUp } from '../utils/userLocation';
 import { auth } from '../services';
 import MessageDisplayer from '../components/commons/MessageDisplayer';
-
-const listOfYears = () => {
-  const now = moment().year();
-  const years = _.range(now, now - 100, -1);
-  return _.map(years, year => ({ value: String(year), text: String(year) }));
-};
+import { yearsDropdown } from '../utils/yearsDropdown';
 
 class SignUp extends React.Component {
   state = {
@@ -146,7 +140,7 @@ class SignUp extends React.Component {
                 <Form.Dropdown
                   placeholder="Year of Birth"
                   name="yearOfBirth"
-                  options={listOfYears()}
+                  options={yearsDropdown()}
                   selection
                   onChange={(event, data) =>
                     this.onInputChange('yearOfBirth', data.value)

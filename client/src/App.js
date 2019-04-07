@@ -8,6 +8,7 @@ import SignUp from './containers/SignUp';
 import StoryPage from './containers/StoryPage';
 import Login from './containers/Login';
 import ReadPage from './containers/ReadPage';
+import ProfilePage from './containers/ProfilePage';
 
 export default class App extends Component {
   render() {
@@ -18,15 +19,11 @@ export default class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/of/:name" component={ProfilePage} />
           <Route
             exact
             path="/of/:name/stories/:chapterId"
             component={StoryPage}
-          />
-          <Route
-            exact
-            path="/of/:name"
-            component={() => <div>Personal page</div>}
           />
           <Route exact path="/of/:name/stories" component={ReadPage} />
         </Switch>

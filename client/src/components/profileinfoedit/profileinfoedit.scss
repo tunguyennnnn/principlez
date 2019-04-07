@@ -1,0 +1,23 @@
+.profile-info-edit-header-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.profile-info-edit-button {
+  background-color: #383838 !important;
+  color: white !important;
+  opacity: 0.8;
+}
+
+.push-button-to-right {
+  margin-left: auto !important;
+}
+
+.profile-info-edit-blurb {
+  margin-bottom: 10%;
+}
+
+hr {
+  height: 2px;
+  border-top: 1px solid black;
+}

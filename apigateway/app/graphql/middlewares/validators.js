@@ -26,3 +26,15 @@ export const login = yup.object().shape({
     .trim()
     .email(),
 });
+
+export const updateUserInfo = yup.object().shape({
+  fullname: yup
+    .string()
+    .trim()
+    .min(3, 'Fullname must be at least 3 characters long')
+    .matches(/^[a-zA-Z-_0-9 \.]+$/, 'Invalid name'),
+  yearOfBirth: yup
+    .string()
+    .trim()
+    .length(4, 'Year of birth example: 1975'),
+});

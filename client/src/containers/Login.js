@@ -1,4 +1,4 @@
-import './login.scss';
+import './login/login.scss';
 
 import React from 'react';
 import { Grid, Form, Button } from 'semantic-ui-react';

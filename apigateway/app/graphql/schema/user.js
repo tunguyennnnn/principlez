@@ -25,6 +25,8 @@ export default `
         yearOfBirth: String!
         profileImage: ProfileImage!
         authToken: AuthenticationToken!
+        blurb: JSON!
+        occupation: String!
     }
 
     input LocationInput {
@@ -45,5 +47,6 @@ export default `
     type Mutation {
         signup(email: String!, password: String!, fullname: String!, yearOfBirth: String!, location: LocationInput!): UserPayload!
         login(email: String!, password: String!): UserPayload!
+        updateUserInfo(fullname: String, yearOfBirth: String, blurb: JSON, occupation: String): UserPayload!
     }
 `;
