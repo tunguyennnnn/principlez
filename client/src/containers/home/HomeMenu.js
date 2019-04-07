@@ -1,40 +1,8 @@
 import './home-menu.scss';
 import LogoImage from '../../assets/image-medium.png';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { auth } from '../../services';
 import { Icon, Image } from 'semantic-ui-react';
-
-function Actions() {
-  return (
-    <ul className="action-list">
-      <li className="home-intruction-layout">
-        <Link to={auth.userProfileLink}>
-          <Icon name="home" />
-          {' My Profile'}
-        </Link>
-      </li>
-      <li className="home-intruction-layout">
-        <Link to={auth.userStoriesLink}>
-          <Icon name="pencil alternate" />
-          {' Write my stories'}
-        </Link>
-      </li>
-      <li className="home-intruction-layout">
-        <a>
-          <Icon name="sticky note outline" />
-          {' New Stories'}
-        </a>
-      </li>
-      <li className="home-intruction-layout">
-        <a>
-          <Icon name="street view" />
-          {' Writers Around Me'}
-        </a>
-      </li>
-    </ul>
-  );
-}
+import Actions from './Actions';
 
 function Channels() {
   return (

@@ -26,7 +26,7 @@ class Body extends React.Component {
             return (
               <div
                 key={`chapter-list-${id}`}
-                style={{ width: '45%', margin: '2%', minWidth: 350 }}
+                style={{ width: '45%', margin: '2%', minWidth: 300 }}
               >
                 <Card {...node} />
               </div>
