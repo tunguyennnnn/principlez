@@ -1,6 +1,6 @@
 import './editors/blogeditor.scss';
 import React from 'react';
-import { Subject, timer } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';

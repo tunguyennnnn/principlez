@@ -2,7 +2,6 @@ import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-import { formatDateTime } from '../../utils/datetime';
 import { generateId } from '../../utils/userId';
 import BlogEditor from '../../components/BlogEditor';
 import StoryMetaData from '../../components/commons/StoryMetaData';
