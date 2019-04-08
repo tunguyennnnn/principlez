@@ -1,9 +1,14 @@
+import './body.scss';
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Grid } from 'semantic-ui-react';
+import Masonry from 'react-masonry-component';
 
 import Card from '../../components/commons/Card';
+
+const masonryOptions = {
+  transitionDuration: 300,
+};
 
 class Body extends React.Component {
   render() {
@@ -13,16 +18,20 @@ class Body extends React.Component {
       return <div>loading...</div>;
     }
     return (
-      <Grid stackable columns={2}>
-        {data.allChapters.edges.map(({ cursor, node }) => {
-          const { id } = node;
-          return (
-            <Grid.Column largeScreen={8} mobile={15}>
-              <Card key={`chapter-list-${id}`} {...node} />
-            </Grid.Column>
-          );
-        })}
-      </Grid>
+      <div className="home-body-container">
+        <Masonry
+          options={masonryOptions} // default {}
+        >
+          {data.allChapters.edges.map(({ cursor, node }, index) => {
+            const { id } = node;
+            return (
+              <div key={`chapter-list-${id}`} className="body-story-container">
+                <Card {...node} />
+              </div>
+            );
+          })}
+        </Masonry>
+      </div>
     );
   }
 }

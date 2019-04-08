@@ -1,44 +1,12 @@
 import './home-menu.scss';
 import LogoImage from '../../assets/image-medium.png';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { auth } from '../../services';
 import { Icon, Image } from 'semantic-ui-react';
-
-function Actions() {
-  return (
-    <ul className="action-list">
-      <li className="common-button">
-        <Link to={auth.userProfileLink}>
-          <Icon name="home" />
-          {' My Profile'}
-        </Link>
-      </li>
-      <li className="common-button">
-        <Link to={auth.userStoriesLink}>
-          <Icon name="pencil alternate" />
-          {' Write my stories'}
-        </Link>
-      </li>
-      <li className="common-button">
-        <a>
-          <Icon name="sticky note outline" />
-          {' New Stories'}
-        </a>
-      </li>
-      <li className="common-button">
-        <a>
-          <Icon name="street view" />
-          {' Writers Around Me'}
-        </a>
-      </li>
-    </ul>
-  );
-}
+import Actions from './Actions';
 
 function Channels() {
   return (
-    <div className="channel-container common-button">
+    <div className="channel-container home-intruction-layout">
       <div className="channels">
         <Icon name="youtube" className="channel" />
         <Icon name="facebook" className="channel" />
@@ -50,8 +18,7 @@ function Channels() {
 
 function PrinciplezIntro() {
   return (
-    <div className="introduction common-button">
-      <Image src={LogoImage} />
+    <div className="introduction home-intruction-layout">
       <p className="head">Principlez of successful people</p>
       <p className="body">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
@@ -63,7 +30,7 @@ function PrinciplezIntro() {
 
 export default function HomeMenu() {
   return (
-    <div className="home-menu-container dark-background-container">
+    <div className="home-menu-container">
       <PrinciplezIntro />
       <Actions />
       <Channels />

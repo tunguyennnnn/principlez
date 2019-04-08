@@ -6,7 +6,6 @@
 
   .introduction {
     border-radius: 8px 8px 0 0;
-    color: white;
 
     .head {
       font-weight: 700;
@@ -23,58 +22,14 @@
     }
   }
 
-  .action-list {
-    margin: 0;
-    padding: 0;
-
-    li {
-      position: relative;
-      margin-top: 2px;
-      display: list-item;
-      list-style-type: none;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: white;
-
-      a {
-        height: 48px;
-        padding: 0 20px;
-        line-height: 48px;
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        font-weight: inherit;
-      }
-
-      p {
-        text-align: center;
-        line-height: 30px;
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        font-weight: inherit;
-      }
-    }
-
-    li:hover {
-      background-color: #db4439;
-    }
-
-    li:last-child {
-      margin-bottom: 2px;
-    }
-  }
-
   .channel-container {
     border-radius: 0 0 8px 8px;
+
     .channels {
       padding: 15px;
       border-radius: 0 0 8px 8px;
 
       .channel {
-        color: white;
         cursor: pointer;
         font-size: 25px;
         transition: all 0.2s ease-in-out;
@@ -85,4 +40,10 @@
       }
     }
   }
+}
+
+.home-intruction-layout {
+  background-color: #f8f8f8;
+  box-shadow: 3px 3px 6px -6px black;
+  color: #505050;
 }
