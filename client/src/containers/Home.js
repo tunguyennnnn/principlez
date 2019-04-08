@@ -14,7 +14,7 @@ export default function Home() {
           <HomeMenu />
         </div>
       </MediaQuery>
-      <MediaQuery query="(max-width: 1000px)">
+      <MediaQuery query="(max-width: 999px)">
         <TopHomeMenu />
       </MediaQuery>
       <div className="home-page-body">

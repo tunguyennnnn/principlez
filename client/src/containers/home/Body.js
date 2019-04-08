@@ -1,3 +1,4 @@
+import './body.scss';
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -17,17 +18,14 @@ class Body extends React.Component {
       return <div>loading...</div>;
     }
     return (
-      <div>
+      <div className="home-body-container">
         <Masonry
           options={masonryOptions} // default {}
         >
           {data.allChapters.edges.map(({ cursor, node }, index) => {
             const { id } = node;
             return (
-              <div
-                key={`chapter-list-${id}`}
-                style={{ width: '45%', margin: '2%', minWidth: 300 }}
-              >
+              <div key={`chapter-list-${id}`} className="body-story-container">
                 <Card {...node} />
               </div>
             );
