@@ -1,35 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 
-export default function Chapter({
-  children,
-  link,
-  deleteChapter,
-  readOnly,
-  view,
-  like,
-}) {
+function ChapterMenu(props) {
+  return (
+    <div class="chapter-action-menu">
+      <Icon name="trash" />
+    </div>
+  );
+}
+
+export default function Chapter({ children, link, deleteChapter, view, like }) {
+  const [hovered, updateHoverState] = useState(false);
   const viewCount = view.count + view.anonymousCount;
 
   return (
-    <div className="chapter-content">
-      <div className="chapter-delete-icon">
-        <Icon
-          name="delete"
-          circular
-          onClick={deleteChapter}
-          className="reverse-color"
-        />
-      </div>
+    <div
+      className="chapter-content common-layout"
+      onMouseEnter={() => updateHoverState(true)}
+      onMouseLeave={() => updateHoverState(false)}
+    >
       <div className="top">
         <NavLink to={link} activeClassName="active-chapter-content">
           <div className="title">{children}</div>
-          <div className="time">
-            <span className="date">Written in 2019</span>
-          </div>
         </NavLink>
       </div>
+      {hovered && <ChapterMenu />}
       <div>
         {viewCount ? (
           <a>
@@ -37,7 +33,6 @@ export default function Chapter({
             {viewCount} Views
           </a>
         ) : null}
-        <br />
         {like.count ? (
           <a>
             <Icon name="thumbs up" />

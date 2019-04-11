@@ -22,7 +22,6 @@ class StoryPage extends React.Component {
   updateChapterContent = async (title, body) => {
     const { type } = this.props.data.chapter;
     const { chapterId: id } = this.props.match.params;
-
     try {
       const { updateChapterContent } = this.props;
       await updateChapterContent({
@@ -71,10 +70,6 @@ class StoryPage extends React.Component {
         }}
       >
         <div>
-          <ImageUpload
-            imageUrl={imageTheme && imageTheme.large}
-            uploadImage={this.uploadImage}
-          />
           <BlogEditor
             title={title}
             body={body}
@@ -128,6 +123,7 @@ export default compose(
           storyId: props.match.params.id,
           chapterId: props.match.params.chapterId,
         },
+        fetchPolicy: 'network-only',
       };
     },
   }),

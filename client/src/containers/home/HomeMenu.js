@@ -6,7 +6,7 @@ import Actions from './Actions';
 
 function Channels() {
   return (
-    <div className="channel-container home-intruction-layout">
+    <div className="channel-container common-layout">
       <div className="channels">
         <Icon name="youtube" className="channel" />
         <Icon name="facebook" className="channel" />
@@ -18,7 +18,7 @@ function Channels() {
 
 function PrinciplezIntro() {
   return (
-    <div className="introduction home-intruction-layout">
+    <div className="introduction common-layout">
       <p className="head">Principlez of successful people</p>
       <p className="body">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy

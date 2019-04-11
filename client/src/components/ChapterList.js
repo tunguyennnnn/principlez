@@ -31,7 +31,7 @@ export default class ChapterList extends Component {
           <Draggable key={`${id}`} draggableId={`${id}`} index={index}>
             {(provided, snapshot) => (
               <div
-                className="chapter box common-button"
+                className="chapter box"
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
@@ -52,64 +52,31 @@ export default class ChapterList extends Component {
     );
   }
 
-  renderReadOnly() {
-    const { title, chapters } = this.props;
-    const { url } = this.props.match;
-    return (
-      <div className="chapter-list">
-        {chapters.map(({ id, title, view, like }) => (
-          <div className="chapter box" key={`chapter-${id}`}>
-            <Chapter
-              readOnly
-              link={url.replace(/\d+\/view/, `${id}/view`)}
-              view={view}
-              like={like}
-            >
-              {title}
-            </Chapter>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
   render() {
     const { title, chapters, type, createChapter, readOnly } = this.props;
-
-    if (readOnly) {
-      return this.renderReadOnly();
-    }
-
     return (
-      <div className="chapter-list dark-background-container">
-        <div className="logo-container common-button">
-          <Image src={LogoImage} />
+      <div className="chapter-list">
+        <div className="chapter-list-add-icon">
+          <Icon
+            name="plus"
+            circular
+            className="reverse-color"
+            onClick={() => createChapter(type)}
+          />
         </div>
-        <div className="chapters-container">
-          {!readOnly && (
-            <div className="chapter-list-add-icon">
-              <Icon
-                name="plus"
-                circular
-                className="reverse-color"
-                onClick={() => createChapter(type)}
-              />
-            </div>
-          )}
-          <DragDropContext onDragEnd={this.onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div ref={provided.innerRef}>
-                  {_.isEmpty(chapters) ? (
-                    <EmptyChapterList text={EmptyChapterMapper[type]} />
-                  ) : (
-                    this.renderChapters(chapters)
-                  )}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </div>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div ref={provided.innerRef}>
+                {_.isEmpty(chapters) ? (
+                  <EmptyChapterList text={EmptyChapterMapper[type]} />
+                ) : (
+                  this.renderChapters(chapters)
+                )}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     );
   }

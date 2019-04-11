@@ -13,7 +13,6 @@ const masonryOptions = {
 class Body extends React.Component {
   render() {
     const { data } = this.props;
-
     if (data.loading || data.error) {
       return <div>loading...</div>;
     }

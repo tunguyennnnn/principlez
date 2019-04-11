@@ -1,9 +1,9 @@
 .story-page {
   height: 100%;
-  overflow-y: scroll;
   display: flex;
   flex-direction: row;
   position: relative;
+  padding-bottom: 50px;
 
   .chapter-list-container {
     position: relative;
@@ -32,9 +32,6 @@
 }
 
 @media only screen and (min-width: 850px) {
-  .chapter-list-container {
-    width: 300px;
-  }
   .blog-editor-container {
     flex: 1;
     padding: 1.5vw;
