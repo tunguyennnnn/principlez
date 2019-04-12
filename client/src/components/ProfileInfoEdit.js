@@ -27,7 +27,22 @@ export default class ProfileInfoEdit extends React.Component {
   blurbValue = blurb => {
     return Value.fromJSON({
       document: {
-        nodes: [...blurb],
+        nodes: [
+          {
+            object: 'block',
+            type: 'paragraph',
+            nodes: [
+              {
+                object: 'text',
+                leaves: [
+                  {
+                    text: '',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
     });
   };
