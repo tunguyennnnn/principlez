@@ -55,7 +55,7 @@ export default class ChapterList extends Component {
   render() {
     const { title, chapters, type, createChapter, readOnly } = this.props;
     return (
-      <div className="chapter-list">
+      <div className="chapter-list common-layout">
         <div className="chapter-list-add-icon">
           <Icon
             name="plus"

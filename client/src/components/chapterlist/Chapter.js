@@ -16,7 +16,7 @@ export default function Chapter({ children, link, deleteChapter, view, like }) {
 
   return (
     <div
-      className="chapter-content common-layout"
+      className="common-layout chapter-content"
       onMouseEnter={() => updateHoverState(true)}
       onMouseLeave={() => updateHoverState(false)}
     >
