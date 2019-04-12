@@ -5,9 +5,31 @@ import { Form, Button } from 'semantic-ui-react';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import Blocks from './editors/Blocks';
+import _ from 'lodash';
 
 import MessageDisplayer from './commons/MessageDisplayer';
 import { yearsDropdown } from '../utils/yearsDropdown';
+
+const initialBlurb = {
+  document: {
+    nodes: [
+      {
+        object: 'block',
+        type: 'paragraph',
+        nodes: [
+          {
+            object: 'text',
+            leaves: [
+              {
+                text: '',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+};
 
 export default class ProfileInfoEdit extends React.Component {
   constructor(props) {
@@ -24,27 +46,8 @@ export default class ProfileInfoEdit extends React.Component {
     };
   }
 
-  blurbValue = blurb => {
-    return Value.fromJSON({
-      document: {
-        nodes: [
-          {
-            object: 'block',
-            type: 'paragraph',
-            nodes: [
-              {
-                object: 'text',
-                leaves: [
-                  {
-                    text: '',
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    });
+  blurbValue = (blurb = []) => {
+    return Value.fromJSON(!_.isEmpty(blurb) ? blurb : initialBlurb);
   };
 
   onChangeInfo = (name, value) => {
@@ -64,7 +67,7 @@ export default class ProfileInfoEdit extends React.Component {
 
   updateInfo = () => {
     const { fullname, yearOfBirth, value, occupation } = this.state.inputs;
-    const blurb = value.document.toJSON().nodes;
+    const blurb = value.toJSON();
     this.props.updateInfo(fullname, yearOfBirth, blurb, occupation);
   };
 
@@ -77,7 +80,6 @@ export default class ProfileInfoEdit extends React.Component {
       occupation,
       onClick,
     } = this.state.inputs;
-    console.log('value', value);
     return (
       <div>
         {/* {errorMessage ? (
