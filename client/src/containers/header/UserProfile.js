@@ -1,88 +1,39 @@
-import React, { useState } from 'react';
-import { Menu, Image, Card } from 'semantic-ui-react';
-import { Redirect } from 'react-router-dom';
-import { isBrowser } from 'react-device-detect';
+import React from 'react';
+import { Image } from 'semantic-ui-react';
+import { Link, withRouter } from 'react-router-dom';
 
 import * as UserId from '../../utils/userId';
 import { auth } from '../../services';
 
-function Trigger({ src }) {
-  return (
-    <Menu.Item>
-      <Image src={src} avatar />
-      Me
-    </Menu.Item>
-  );
-}
+function UserProfile({ history }) {
+  const { userId, fullname } = auth.userProfile;
 
-function Profile({ fullname, email, userId }) {
+  const handleLogout = () => {
+    auth.logout();
+    history.push('/');
+  };
+
   return (
-    <div className="profile-container">
-      <div className="card-container">
-        <Card>
-          <Card.Content>
-            <Card.Header>{fullname}</Card.Header>
-            <Card.Meta>
-              <span className="date">Joined in 2015</span>
-            </Card.Meta>
-            <Card.Description>{email}</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <a href={`/of/${UserId.generateId(userId, fullname)}`}>
-              My Profile
-            </a>
-          </Card.Content>
-        </Card>
+    <span class="dropdown" style={{ float: 'right' }}>
+      <Image
+        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+        avatar
+        className="header-image"
+      />
+      <span class="dropbtn">{fullname}</span>
+      <div class="dropdown-content">
+        <Link to={`/of/${UserId.generateId(userId, fullname)}`}>
+          My Profile
+        </Link>
+        <Link to={`/of/${UserId.generateId(userId, fullname)}/stories`}>
+          My Stories
+        </Link>
+        <span onClick={handleLogout} className="span-dropdown">
+          Sign Out
+        </span>
       </div>
-    </div>
+    </span>
   );
 }
 
-function profileStateClick(profileState) {
-  const { showProfile, shouldNavigate } = profileState;
-  if (!showProfile) {
-    return { showProfile: true, shouldNavigate };
-  }
-  return { showProfile, shouldNavigate: true };
-}
-
-export default function UserProfile() {
-  const [profileState, updateProfileState] = useState({
-    shouldNavigate: false,
-    showProfile: false,
-  });
-
-  const { showProfile, shouldNavigate } = profileState;
-  const { userId, fullname, email } = auth.userProfile;
-  if (shouldNavigate) {
-    return (
-      <Redirect to={`/of/${UserId.generateId(userId, fullname)}/stories`} />
-    );
-  }
-
-  return (
-    <div
-      className="header-userprofile-container"
-      onMouseEnter={() =>
-        isBrowser &&
-        updateProfileState({
-          ...profileState,
-          showProfile: true,
-        })
-      }
-      onMouseLeave={() => {
-        isBrowser &&
-          updateProfileState({
-            ...profileState,
-            showProfile: false,
-          });
-      }}
-      onClick={() => updateProfileState(profileStateClick(profileState))}
-    >
-      <Trigger src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
-      {showProfile && (
-        <Profile email={email} fullname={fullname} userId={userId} />
-      )}
-    </div>
-  );
-}
+export default withRouter(UserProfile);

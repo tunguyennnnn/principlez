@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 import UserProfile from './UserProfile';
 import { auth } from '../../services';
@@ -7,8 +7,12 @@ import { auth } from '../../services';
 function Unauthorized() {
   return (
     <React.Fragment>
-      <Menu.Item name="Login" />
-      <Menu.Item name="Signup" />
+      <span style={{ float: 'right' }}>
+        <Link to="/login">LOGIN</Link>
+      </span>
+      <span style={{ float: 'right' }}>
+        <Link to="/signup">SIGN UP</Link>
+      </span>
     </React.Fragment>
   );
 }
@@ -17,12 +21,10 @@ function Authorized() {
   return (
     <React.Fragment>
       <UserProfile />
-      <Menu.Item name="Signout" />
     </React.Fragment>
   );
 }
 
 export default function User() {
-  const children = auth.isUserLoginned() ? <Authorized /> : <Unauthorized />;
-  return <Menu.Menu position="right">{children}</Menu.Menu>;
+  return auth.isUserLoginned() ? <Authorized /> : <Unauthorized />;
 }

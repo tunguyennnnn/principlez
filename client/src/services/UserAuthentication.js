@@ -22,6 +22,11 @@ export default class Auth {
     window.localStorage.setItem('expiresIn', this.expiresIn);
   };
 
+  logout = () => {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('expiresIn');
+  };
+
   get userProfile() {
     const { userId, fullname, email } = window.localStorage;
     return { userId, fullname, email };
