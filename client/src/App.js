@@ -16,16 +16,18 @@ export default class App extends Component {
       <div id="app">
         <Header />
         <Switch>
-          <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/of/:name" component={ProfilePage} />
-          <Route
-            exact
-            path="/of/:name/stories/:chapterId"
-            component={StoryPage}
-          />
-          <Route exact path="/of/:name/stories" component={ReadPage} />
+          <div id="app-body">
+            <Route exact path="/" component={Home} />
+            <Route exact path="/of/:name" component={ProfilePage} />
+            <Route
+              exact
+              path="/of/:name/stories/:chapterId"
+              component={StoryPage}
+            />
+            <Route exact path="/of/:name/stories" component={ReadPage} />
+          </div>
         </Switch>
       </div>
     );

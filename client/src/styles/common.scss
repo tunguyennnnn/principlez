@@ -11,14 +11,15 @@ body,
   background: white;
 }
 
-#app {
+#app-body {
   margin-left: auto;
   margin-right: auto;
 }
 
-@media only screen and (min-width: 1000px) {
-  #app {
-    width: 1000px;
+@media only screen and (min-width: 900px) {
+  #app-body {
+    width: 900px;
+    padding-top: 80px;
   }
 }
 
@@ -93,5 +94,5 @@ body,
 .common-layout {
   background-color: #f0f0f0;
   box-shadow: 3px 3px 6px -6px black;
-  color: #505050;
+  color: #60677a;
 }

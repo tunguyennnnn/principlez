@@ -1,31 +1,94 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
+import _ from 'lodash';
+import { withRouter } from 'react-router';
 
-function ChapterMenu(props) {
+import IconButton from '../commons/IconButton';
+import StoryWriteContext from '../../contexts/StoryWriteContext';
+
+function ChapterMenu({ deleteChapter }) {
+  const deleteAction = () => {
+    const c = confirm('Are you sure to delete?');
+    if (c) {
+      deleteChapter();
+    }
+  };
   return (
     <div class="chapter-action-menu">
-      <Icon name="trash" />
+      <IconButton iconName="trash" text="delete story" action={deleteAction} />
     </div>
   );
 }
 
-export default function Chapter({ children, link, deleteChapter, view, like }) {
-  const [hovered, updateHoverState] = useState(false);
-  const viewCount = view.count + view.anonymousCount;
+function ChapterTitle({ title }) {
+  if (!_.isEmpty(_.trim(title))) {
+    return title;
+  }
+  return (
+    <StoryWriteContext.Consumer>
+      {({ placeholderText }) => (
+        <div class="title-place-holder">{placeholderText}</div>
+      )}
+    </StoryWriteContext.Consumer>
+  );
+}
 
+function ChapterBodyFocus({ id, title, deleteChapter }) {
+  return (
+    <div className="top">
+      <NavLink to={id} activeStyle={{ borderBottom: '1px solid red' }}>
+        <div className="title">
+          <ChapterTitle title={title} />
+        </div>
+      </NavLink>
+      <ChapterMenu deleteChapter={deleteChapter} />
+    </div>
+  );
+}
+
+function ChapterBody({ title, id }) {
+  const [hovered, updateHoverState] = useState(false);
   return (
     <div
-      className="common-layout chapter-content"
+      className="top"
       onMouseEnter={() => updateHoverState(true)}
       onMouseLeave={() => updateHoverState(false)}
     >
-      <div className="top">
-        <NavLink to={link} activeClassName="active-chapter-content">
-          <div className="title">{children}</div>
-        </NavLink>
-      </div>
-      {hovered && <ChapterMenu />}
+      <NavLink to={id} activeStyle={{ borderBottom: '1px solid red' }}>
+        <div className="title">
+          <ChapterTitle title={title} />
+        </div>
+      </NavLink>
+    </div>
+  );
+}
+
+function Chapter(props) {
+  const {
+    id,
+    title,
+    deleteChapter,
+    view,
+    like,
+    match: {
+      params: { chapterId },
+    },
+  } = props;
+
+  const isFocusedChapter = id === chapterId;
+  const viewCount = view.count + view.anonymousCount;
+
+  const ChapterBodyComponent = isFocusedChapter
+    ? ChapterBodyFocus
+    : ChapterBody;
+  return (
+    <div className="chapter-content">
+      <ChapterBodyComponent
+        title={title}
+        id={id}
+        deleteChapter={deleteChapter}
+      />
       <div>
         {viewCount ? (
           <a>
@@ -43,3 +106,5 @@ export default function Chapter({ children, link, deleteChapter, view, like }) {
     </div>
   );
 }
+
+export default withRouter(Chapter);

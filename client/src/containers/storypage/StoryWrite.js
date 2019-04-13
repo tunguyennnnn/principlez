@@ -3,22 +3,9 @@ import gql from 'graphql-tag';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import ImageUpload from '../../components/ImageUpload';
 import BlogEditor from '../../components/BlogEditor';
-import StoryWriteContext from '../../contexts/StoryWriteContext';
-
-const PlaceHolder = {
-  ABOUT_ME: 'Tell us about you...',
-  CHAPTER: 'Tell us your story...',
-  LESSON: 'What you want us to learn...',
-};
 
 class StoryPage extends React.Component {
-  placeHolder(type) {
-    const placeHolder = PlaceHolder[type];
-    return placeHolder || PlaceHolder.CHAPTER;
-  }
-
   updateChapterContent = async (title, body) => {
     const { type } = this.props.data.chapter;
     const { chapterId: id } = this.props.match.params;
@@ -64,19 +51,13 @@ class StoryPage extends React.Component {
     }
 
     return (
-      <StoryWriteContext.Provider
-        value={{
-          placeholderText: this.placeHolder(type),
-        }}
-      >
-        <div>
-          <BlogEditor
-            title={title}
-            body={body}
-            update={this.updateChapterContent}
-          />
-        </div>
-      </StoryWriteContext.Provider>
+      <div>
+        <BlogEditor
+          title={title}
+          body={body}
+          update={this.updateChapterContent}
+        />
+      </div>
     );
   }
 }

@@ -5,7 +5,6 @@ import { Icon, Image } from 'semantic-ui-react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import _ from 'lodash';
 
-import LogoImage from '../assets/image-medium.png';
 import Chapter from './chapterlist/Chapter';
 import EmptyChapterList from './chapterlist/EmptyChapterList';
 
@@ -15,8 +14,7 @@ const EmptyChapterMapper = {
   LESSON: 'The lessons',
 };
 
-@withRouter
-export default class ChapterList extends Component {
+class ChapterList extends Component {
   onDragEnd = ({ source, destination }) => {
     const swapIndexes = [source.index, destination.index];
     const { chapterGroupId } = this.props;
@@ -31,19 +29,19 @@ export default class ChapterList extends Component {
           <Draggable key={`${id}`} draggableId={`${id}`} index={index}>
             {(provided, snapshot) => (
               <div
-                className="chapter box"
+                className="chapter"
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
               >
                 <Chapter
+                  id={id}
                   link={`${id}`}
                   view={view}
                   like={like}
                   deleteChapter={deleteChapter.bind(null, type, id)}
-                >
-                  {title}
-                </Chapter>
+                  title={title}
+                />
               </div>
             )}
           </Draggable>
@@ -55,14 +53,12 @@ export default class ChapterList extends Component {
   render() {
     const { title, chapters, type, createChapter, readOnly } = this.props;
     return (
-      <div className="chapter-list common-layout">
-        <div className="chapter-list-add-icon">
-          <Icon
-            name="plus"
-            circular
-            className="reverse-color"
-            onClick={() => createChapter(type)}
-          />
+      <div className="chapter-list">
+        <div
+          className="chapter-list-add-icon"
+          onClick={() => createChapter(type)}
+        >
+          +
         </div>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
@@ -81,3 +77,5 @@ export default class ChapterList extends Component {
     );
   }
 }
+
+export default withRouter(ChapterList);

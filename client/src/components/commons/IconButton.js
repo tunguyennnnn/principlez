@@ -2,7 +2,13 @@ import './iconbutton.scss';
 import React from 'react';
 import { Icon, Popup, Button } from 'semantic-ui-react';
 
-export default function IconButton({ iconName, text, action, horizontal }) {
+export default function IconButton({
+  iconName,
+  text,
+  action,
+  horizontal,
+  hoverMode,
+}) {
   const iconComp = <Icon name={iconName} size="large" />;
 
   if (!horizontal) {

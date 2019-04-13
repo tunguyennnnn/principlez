@@ -1,61 +1,74 @@
+.header-container {
+  position: fixed;
+  z-index: 10000;
+  width: 100%;
+  background: white;
+}
+
 .topnav {
   overflow: hidden;
-  background-color: #f8f8f8;
-}
+  background-color: #8ba987;
+  // opacity: 0.8;
+  // background-color: #7acfd6;
 
-.topnav span {
-  float: left;
-  color: #505050;
-  text-align: center;
-  text-decoration: none;
-}
+  span {
+    float: left;
+    color: #505050;
+    text-align: center;
+    text-decoration: none;
+  }
 
-.topnav span:hover {
-  color: black;
+  span:hover {
+    color: black;
+  }
+
+  .link {
+    color: white;
+  }
+
+  span a,
+  .dropbtn {
+    display: inline-block;
+    color: #505050;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a,
+  span {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover,
+  span:hover {
+    background-color: #f1f1f1;
+  }
+
+  .dropdown-content span:hover {
+    padding-right: 70px;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 }
 
 .link {
   color: #505050;
-}
-
-span a,
-.dropbtn {
-  display: inline-block;
-  color: #505050;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a,
-span {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover,
-span:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown-content span:hover {
-  padding-right: 70px;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
 }
 
 @media only screen and (max-width: 750px) {
@@ -65,8 +78,10 @@ span:hover {
 }
 
 @media only screen and (min-width: 751px) {
-  .topnav span {
-    font-size: 1.4rem;
-    padding: 14px 16px;
+  .topnav {
+    span {
+      font-size: 1.4rem;
+      padding: 14px 16px;
+    }
   }
 }
