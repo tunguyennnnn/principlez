@@ -25,6 +25,14 @@ module.exports = function (sequelize, DataTypes) {
     },
     imageId: {
       type: DataTypes.INTEGER
+    },
+    blurb: {
+      type: DataTypes.JSONB,
+      defaultValue: []
+    },
+    occupation: {
+      type: DataTypes.STRING,
+      defaultValue: ''
     }
   }, {
     indexes: [{

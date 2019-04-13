@@ -28,6 +28,12 @@ module.exports = {
       imageId: {
         type: Sequelize.INTEGER
       },
+      blurb: {
+        type: Sequelize.JSONB
+      },
+      occupation: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.literal('NOW()'),

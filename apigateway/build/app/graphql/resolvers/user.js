@@ -260,7 +260,57 @@ var _default = {
       }
 
       return login;
-    }()
+    }(),
+    updateUserInfo: {
+      authentication: true,
+      resolve: function () {
+        var _resolve = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee6(root, _ref9, _ref10) {
+          var fullname, yearOfBirth, blurb, occupation, models, user, newUser;
+          return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            while (1) {
+              switch (_context6.prev = _context6.next) {
+                case 0:
+                  fullname = _ref9.fullname, yearOfBirth = _ref9.yearOfBirth, blurb = _ref9.blurb, occupation = _ref9.occupation;
+                  models = _ref10.models, user = _ref10.user;
+                  _context6.prev = 2;
+                  _context6.next = 5;
+                  return user.update({
+                    fullname: fullname || user.fullname,
+                    yearOfBirth: yearOfBirth || user.yearOfBirth,
+                    blurb: blurb || user.blurb,
+                    occupation: occupation || user.occupation
+                  });
+
+                case 5:
+                  newUser = _context6.sent;
+                  return _context6.abrupt("return", {
+                    user: newUser
+                  });
+
+                case 9:
+                  _context6.prev = 9;
+                  _context6.t0 = _context6["catch"](2);
+                  return _context6.abrupt("return", {
+                    error: _context6.t0.toString()
+                  });
+
+                case 12:
+                case "end":
+                  return _context6.stop();
+              }
+            }
+          }, _callee6, this, [[2, 9]]);
+        }));
+
+        function resolve(_x16, _x17, _x18) {
+          return _resolve.apply(this, arguments);
+        }
+
+        return resolve;
+      }()
+    }
   }
 };
 exports.default = _default;
