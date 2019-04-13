@@ -9,12 +9,12 @@ import TopHomeMenu from './home/TopHomeMenu';
 export default function Home() {
   return (
     <div className="home-page-container">
-      <MediaQuery query="(min-width: 1000px)">
+      <MediaQuery query="(min-width: 751px)">
         <div className="side-menu-grid">
           <HomeMenu />
         </div>
       </MediaQuery>
-      <MediaQuery query="(max-width: 999px)">
+      <MediaQuery query="(max-width: 750px)">
         <TopHomeMenu />
       </MediaQuery>
       <div className="home-page-body">

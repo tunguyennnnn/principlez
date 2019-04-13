@@ -8,12 +8,14 @@
 
   .card-author {
     padding: 10px 10px 10px 20px;
-    color: #f64c3f;
+    color: #8ba987;
     cursor: pointer;
+    text-decoration: underline;
 
     a {
       color: inherit;
       text-decoration: none;
+      text-decoration: underline;
     }
   }
 
