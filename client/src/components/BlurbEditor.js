@@ -49,11 +49,13 @@ export default class BlurbEditor extends React.Component {
 
   render() {
     const { value } = this.state;
+    const { readOnly } = this.props;
     return (
       <Editor
         value={value}
         onChange={this.onChangeBlurb}
         renderNode={this.renderNode}
+        readOnly={readOnly}
       />
     );
   }

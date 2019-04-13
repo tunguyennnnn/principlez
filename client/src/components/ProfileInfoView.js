@@ -5,7 +5,7 @@ import { Icon, Button } from 'semantic-ui-react';
 
 import BlurbEditor from './BlurbEditor';
 
-export default function ProfileInfoView() {
+export default function ProfileInfoView(props) {
   const {
     fullname,
     yearOfBirth,
@@ -13,11 +13,12 @@ export default function ProfileInfoView() {
     occupation,
     location,
     onClick,
-  } = this.props;
+    readOnly,
+  } = props;
   const { city, country } = location;
   return (
-    <div>
-      <div className="profile-info-view-section push-header-to-left">
+    <div className="profile-info-view-section">
+      <div className="push-header-to-left">
         <h1>{fullname}</h1>
         <Button
           className="profile-info-view-button push-button-to-right"
@@ -32,7 +33,7 @@ export default function ProfileInfoView() {
       <hr />
       <div className="profile-info-view-section">
         <h3>Story Blurb:</h3>
-        <BlurbEditor blurb={blurb} />
+        <BlurbEditor blurb={blurb} readOnly={readOnly} />
       </div>
       <hr />
       <div className="profile-info-view-section">
