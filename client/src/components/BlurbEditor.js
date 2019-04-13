@@ -3,6 +3,7 @@ import React from 'react';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import Blocks from './editors/Blocks';
+import _ from 'lodash';
 
 const initialBlurb = {
   document: {

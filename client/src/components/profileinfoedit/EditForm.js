@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 
 import { yearsDropdown } from '../../utils/yearsDropdown';
 
@@ -26,24 +26,8 @@ export default class EditForm extends React.Component {
 
   render() {
     const { fullname, yearOfBirth, occupation } = this.state.inputs;
-    const { onClick } = this.props;
     return (
       <div>
-        <div className="profile-info-edit-form-container">
-          <h3>BASIC INFO</h3>
-          <Button className="profile-info-edit-button push-button-to-right">
-            SAVE
-          </Button>
-          <Button
-            basic
-            color="black"
-            className="profile-info-edit-button"
-            onClick={onClick}
-          >
-            CANCEL
-          </Button>
-        </div>
-        <hr />
         <Form.Field>
           <label>FULL NAME</label>
           <input
