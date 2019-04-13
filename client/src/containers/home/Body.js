@@ -2,13 +2,8 @@ import './body.scss';
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import Masonry from 'react-masonry-component';
 
 import Card from '../../components/commons/Card';
-
-const masonryOptions = {
-  transitionDuration: 300,
-};
 
 class Body extends React.Component {
   render() {
@@ -18,18 +13,14 @@ class Body extends React.Component {
     }
     return (
       <div className="home-body-container">
-        <Masonry
-          options={masonryOptions} // default {}
-        >
-          {data.allChapters.edges.map(({ cursor, node }, index) => {
-            const { id } = node;
-            return (
-              <div key={`chapter-list-${id}`} className="body-story-container">
-                <Card {...node} />
-              </div>
-            );
-          })}
-        </Masonry>
+        {data.allChapters.edges.map(({ cursor, node }, index) => {
+          const { id } = node;
+          return (
+            <div key={`chapter-list-${id}`} className="body-story-container">
+              <Card {...node} />
+            </div>
+          );
+        })}
       </div>
     );
   }
