@@ -9,6 +9,7 @@ import _ from 'lodash';
 
 import MessageDisplayer from './commons/MessageDisplayer';
 import { yearsDropdown } from '../utils/yearsDropdown';
+import BlurbEditor from './BlurbEditor';
 
 const initialBlurb = {
   document: {
@@ -80,6 +81,7 @@ export default class ProfileInfoEdit extends React.Component {
       occupation,
       onClick,
     } = this.state.inputs;
+    const { blurb } = this.props;
     return (
       <div>
         {/* {errorMessage ? (
@@ -140,11 +142,7 @@ export default class ProfileInfoEdit extends React.Component {
               <h3>STORY BLURB</h3>
               <hr />
               <span>PROVIDE SOME BRIEF DETAILS ABOUT YOUR STORY HERE.</span>
-              <Editor
-                value={value}
-                onChange={this.onChangeBlurb}
-                renderNode={this.renderNode}
-              />
+              <BlurbEditor blurb={blurb} />
             </div>
           </Form>
         </div>

@@ -9,7 +9,7 @@ import ProfileInfoView from '../../components/ProfileInfoView';
 
 class ProfileInfo extends React.Component {
   state = {
-    isEditingInfo: false,
+    isEditingInfo: true,
     // message: '',
   };
 
@@ -66,6 +66,7 @@ class ProfileInfo extends React.Component {
           location={location}
           updateInfo={this.updateUserInformation}
           onClick={this.clickToEditOrViewInfo}
+          readOnly={!isEditingInfo}
         />
       </div>
     );
