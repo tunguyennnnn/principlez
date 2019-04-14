@@ -1,7 +1,7 @@
 import './profileinfoedit/profileinfoedit.scss';
 
 import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 import MessageDisplayer from './commons/MessageDisplayer';
 import BlurbEditor from './BlurbEditor';
@@ -34,7 +34,7 @@ export default class ProfileInfoEdit extends React.Component {
     const { blurb, fullname, yearOfBirth, occupation } = this.state;
     const { onClick } = this.props;
     return (
-      <div>
+      <div className="profile-info-edit-container">
         {/* {errorMessage ? (
           <MessageDisplayer
             type="error"
@@ -42,42 +42,38 @@ export default class ProfileInfoEdit extends React.Component {
             header="Update User Info"
           />
         ) : null} */}
-        <Form>
-          <div className="profile-info-edit-form">
-            <div className="profile-info-edit-form-container">
-              <h3>BASIC INFO</h3>
-              <Button
-                className="profile-info-edit-button push-button-to-right"
-                onClick={this.updateInfo}
-              >
-                SAVE
-              </Button>
-              <Button
-                basic
-                color="black"
-                className="profile-info-edit-button"
-                onClick={onClick}
-              >
-                CANCEL
-              </Button>
-            </div>
-            <hr />
-            <EditForm
-              fullname={fullname}
-              yearOfBirth={yearOfBirth}
-              occupation={occupation}
-              onClick={onClick}
-              onUpdate={this.updateInfoFromOnChange}
-            />
-          </div>
-          <div className="profile-info-edit-blurb">
-            <h3>STORY BLURB</h3>
-            <hr />
-            <span>PROVIDE SOME BRIEF DETAILS ABOUT YOUR STORY BELOW.</span>
-            <hr />
-            <BlurbEditor blurb={blurb} onUpdate={this.updateInfoFromOnChange} />
-          </div>
-        </Form>
+        <div className="profile-info-edit-header">
+          <h3>ABOUT ME</h3>
+          <Button
+            className="profile-info-edit-button push-button-to-right"
+            onClick={this.updateInfo}
+          >
+            SAVE
+          </Button>
+          <Button
+            basic
+            color="black"
+            className="profile-info-edit-button"
+            onClick={onClick}
+          >
+            CANCEL
+          </Button>
+        </div>
+        <hr />
+        <div className="profile-info-edit-blurb">
+          <BlurbEditor blurb={blurb} onUpdate={this.updateInfoFromOnChange} />
+        </div>
+        <div className="profile-info-edit-form">
+          <h3>BASIC INFO</h3>
+          <hr />
+          <EditForm
+            fullname={fullname}
+            yearOfBirth={yearOfBirth}
+            occupation={occupation}
+            onClick={onClick}
+            onUpdate={this.updateInfoFromOnChange}
+          />
+        </div>
       </div>
     );
   }

@@ -29,7 +29,7 @@ export default class EditForm extends React.Component {
   render() {
     const { fullname, yearOfBirth, occupation } = this.state.inputs;
     return (
-      <div>
+      <Form>
         <Form.Field>
           <label>FULL NAME</label>
           <input
@@ -60,7 +60,7 @@ export default class EditForm extends React.Component {
             }
           />
         </Form.Field>
-      </div>
+      </Form>
     );
   }
 }
