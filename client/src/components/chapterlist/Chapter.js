@@ -37,11 +37,9 @@ function ChapterTitle({ title }) {
 function ChapterBodyFocus({ id, title, deleteChapter }) {
   return (
     <div className="top">
-      <NavLink to={id} activeStyle={{ borderBottom: '1px solid red' }}>
-        <div className="title">
-          <ChapterTitle title={title} />
-        </div>
-      </NavLink>
+      <div className="title">
+        <ChapterTitle title={title} />
+      </div>
       <ChapterMenu deleteChapter={deleteChapter} />
     </div>
   );
@@ -55,11 +53,9 @@ function ChapterBody({ title, id }) {
       onMouseEnter={() => updateHoverState(true)}
       onMouseLeave={() => updateHoverState(false)}
     >
-      <NavLink to={id} activeStyle={{ borderBottom: '1px solid red' }}>
-        <div className="title">
-          <ChapterTitle title={title} />
-        </div>
-      </NavLink>
+      <div className="title">
+        <ChapterTitle title={title} />
+      </div>
     </div>
   );
 }
@@ -83,7 +79,7 @@ function Chapter(props) {
     ? ChapterBodyFocus
     : ChapterBody;
   return (
-    <div className="chapter-content">
+    <NavLink to={id} className="chapter-content">
       <ChapterBodyComponent
         title={title}
         id={id}
@@ -103,7 +99,7 @@ function Chapter(props) {
           </a>
         ) : null}
       </div>
-    </div>
+    </NavLink>
   );
 }
 

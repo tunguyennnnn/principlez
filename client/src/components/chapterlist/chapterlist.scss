@@ -4,8 +4,6 @@
   border-radius: 8px;
   font-family: sans-serif;
   box-sizing: border-box;
-  position: fixed;
-  width: 250px;
   color: #60677a;
   // background-color: #eceae0;
 
@@ -27,12 +25,9 @@
     cursor: grab;
 
     .chapter-content {
-      a {
-        text-decoration: none;
-        color: inherit;
-        display: block;
-        cursor: inherit;
-      }
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
 
       .top {
         .title {

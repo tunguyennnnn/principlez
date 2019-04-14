@@ -1,3 +1,4 @@
+import './storywrite.scss';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import React from 'react';
@@ -35,8 +36,16 @@ class StoryPage extends React.Component {
     }
   };
 
+  renderSideMenuButton() {
+    const { setOpenMenu, mobile } = this.props;
+    if (!setOpenMenu || !mobile) {
+      return null;
+    }
+    return <div onClick={setOpenMenu}>show</div>;
+  }
+
   render() {
-    const { data, location } = this.props;
+    const { data, location, mobile } = this.props;
     if (data.loading) return <div>...loading</div>;
     const { title, body, type, imageTheme, isAuthor } = data.chapter;
     if (!isAuthor) {
@@ -51,7 +60,8 @@ class StoryPage extends React.Component {
     }
 
     return (
-      <div>
+      <div class={`story-write-containter ${mobile ? 'mobile' : ''}`}>
+        {this.renderSideMenuButton()}
         <BlogEditor
           title={title}
           body={body}
