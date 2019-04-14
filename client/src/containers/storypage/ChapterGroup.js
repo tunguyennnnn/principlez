@@ -66,8 +66,22 @@ class ChapterGroup extends React.Component {
     }
   };
 
+  getStyle = () => {
+    const { mobile } = this.props;
+    if (mobile) {
+      return {
+        width: 250,
+      };
+    }
+
+    return {
+      position: 'fixed',
+      width: 250,
+    };
+  };
+
   render() {
-    const { data, readOnly } = this.props;
+    const { data, readOnly, mobile } = this.props;
 
     if (data.loading) {
       return <div>...loading</div>;
@@ -86,17 +100,19 @@ class ChapterGroup extends React.Component {
         ).map(group => {
           const { type, id, chapters } = group;
           return (
-            <ChapterList
-              readOnly={readOnly}
-              reorderChapters={this.reorderChapters}
-              deleteChapter={this.deleteChapter}
-              createChapter={this.createChapter}
-              type={type}
-              chapterGroupId={id}
-              key={`group-${type}-${id}`}
-              title={TypeToTitle[type]}
-              chapters={chapters}
-            />
+            <div style={this.getStyle()}>
+              <ChapterList
+                readOnly={readOnly}
+                reorderChapters={this.reorderChapters}
+                deleteChapter={this.deleteChapter}
+                createChapter={this.createChapter}
+                type={type}
+                chapterGroupId={id}
+                key={`group-${type}-${id}`}
+                title={TypeToTitle[type]}
+                chapters={chapters}
+              />
+            </div>
           );
         })}
       </React.Fragment>
