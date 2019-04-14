@@ -5,25 +5,21 @@
   }
 }
 
-.profile-info-edit-header {
-  display: flex;
-  align-items: baseline;
-}
-
-.profile-info-edit-button {
-  background-color: #383838 !important;
-  color: white !important;
-  opacity: 0.8;
-}
-
-.push-button-to-right {
-  margin-left: auto !important;
-}
-
 .profile-info-edit-blurb {
   margin-bottom: 10%;
 }
 
 .profile-info-edit-form {
-  margin-bottom: 10%;
+  margin-bottom: 5%;
+}
+
+.profile-info-edit-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-button {
+  background-color: #383838 !important;
+  color: white !important;
+  opacity: 0.8;
 }

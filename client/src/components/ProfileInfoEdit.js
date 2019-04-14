@@ -42,23 +42,7 @@ export default class ProfileInfoEdit extends React.Component {
             header="Update User Info"
           />
         ) : null} */}
-        <div className="profile-info-edit-header">
-          <h3>ABOUT ME</h3>
-          <Button
-            className="profile-info-edit-button push-button-to-right"
-            onClick={this.updateInfo}
-          >
-            SAVE
-          </Button>
-          <Button
-            basic
-            color="black"
-            className="profile-info-edit-button"
-            onClick={onClick}
-          >
-            CANCEL
-          </Button>
-        </div>
+        <h3>ABOUT ME</h3>
         <hr />
         <div className="profile-info-edit-blurb">
           <BlurbEditor blurb={blurb} onUpdate={this.updateInfoFromOnChange} />
@@ -73,6 +57,19 @@ export default class ProfileInfoEdit extends React.Component {
             onClick={onClick}
             onUpdate={this.updateInfoFromOnChange}
           />
+        </div>
+        <div className="profile-info-edit-buttons">
+          <Button className="profile-button" onClick={this.updateInfo}>
+            SAVE
+          </Button>
+          <Button
+            basic
+            color="black"
+            className="profile-button"
+            onClick={onClick}
+          >
+            CANCEL
+          </Button>
         </div>
       </div>
     );
