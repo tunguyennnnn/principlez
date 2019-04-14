@@ -27,15 +27,10 @@ export default function ProfileInfoView(props) {
           EDIT
         </Button>
       </div>
-      <div>
-        <h4>Joined on:</h4>
-      </div>
-      <hr />
       <div className="profile-info-view-section">
-        <h3>Story Blurb:</h3>
+        <h3>About Me</h3>
         <BlurbEditor blurb={blurb} readOnly={readOnly} />
       </div>
-      <hr />
       <div className="profile-info-view-section">
         <div className="profile-info-view-user-attr">
           <Icon name="map pin" size="large" />
