@@ -8,15 +8,31 @@ import BlurbEditor from './BlurbEditor';
 import EditForm from './profileinfoedit/EditForm';
 
 export default class ProfileInfoEdit extends React.Component {
-  // updateInfo = () => {
-  //   const { fullname, yearOfBirth, value, occupation } = this.state.inputs;
-  //   const blurb = value.toJSON();
-  //   this.props.updateInfo(fullname, yearOfBirth, blurb, occupation);
-  // };
+  constructor(props) {
+    super(props);
+
+    const { fullname, yearOfBirth, occupation, blurb } = props;
+    this.state = {
+      fullname,
+      yearOfBirth,
+      occupation,
+      blurb,
+    };
+  }
+
+  updateInfo = () => {
+    const { fullname, yearOfBirth, blurb, occupation } = this.state;
+    this.props.updateInfo(fullname, yearOfBirth, blurb, occupation);
+  };
+
+  updateInfoFromOnChange = (name, value) => {
+    this.setState({ ...this.state, [name]: value });
+  };
 
   render() {
     // const { errorMessage } = this.props;
-    const { blurb, fullname, yearOfBirth, occupation, onClick } = this.props;
+    const { blurb, fullname, yearOfBirth, occupation } = this.state;
+    const { onClick } = this.props;
     return (
       <div>
         {/* {errorMessage ? (
@@ -26,11 +42,14 @@ export default class ProfileInfoEdit extends React.Component {
             header="Update User Info"
           />
         ) : null} */}
-        <Form onSubmit={this.updateInfo}>
+        <Form>
           <div className="profile-info-edit-form">
             <div className="profile-info-edit-form-container">
               <h3>BASIC INFO</h3>
-              <Button className="profile-info-edit-button push-button-to-right">
+              <Button
+                className="profile-info-edit-button push-button-to-right"
+                onClick={this.updateInfo}
+              >
                 SAVE
               </Button>
               <Button
@@ -48,6 +67,7 @@ export default class ProfileInfoEdit extends React.Component {
               yearOfBirth={yearOfBirth}
               occupation={occupation}
               onClick={onClick}
+              onUpdate={this.updateInfoFromOnChange}
             />
           </div>
           <div className="profile-info-edit-blurb">
@@ -55,7 +75,7 @@ export default class ProfileInfoEdit extends React.Component {
             <hr />
             <span>PROVIDE SOME BRIEF DETAILS ABOUT YOUR STORY BELOW.</span>
             <hr />
-            <BlurbEditor blurb={blurb} />
+            <BlurbEditor blurb={blurb} onUpdate={this.updateInfoFromOnChange} />
           </div>
         </Form>
       </div>

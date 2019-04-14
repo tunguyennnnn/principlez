@@ -18,6 +18,8 @@ export default class EditForm extends React.Component {
   }
 
   onChangeInfo = (name, value) => {
+    this.props.onUpdate(name, value);
+
     this.setState({
       ...this.state,
       inputs: { ...this.state.inputs, [name]: value },

@@ -30,7 +30,6 @@ export default class BlurbEditor extends React.Component {
   constructor(props) {
     super(props);
     const { blurb } = props;
-
     this.state = {
       value: this.blurbValue(blurb),
     };
@@ -41,6 +40,8 @@ export default class BlurbEditor extends React.Component {
   };
 
   onChangeBlurb = ({ value }) => {
+    const blurbJSON = value.toJSON();
+    this.props.onUpdate('blurb', blurbJSON);
     this.setState({ value });
   };
 
