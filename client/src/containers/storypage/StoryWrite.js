@@ -36,14 +36,6 @@ class StoryPage extends React.Component {
     }
   };
 
-  renderSideMenuButton() {
-    const { setOpenMenu, mobile } = this.props;
-    if (!setOpenMenu || !mobile) {
-      return null;
-    }
-    return <div onClick={setOpenMenu}>show</div>;
-  }
-
   render() {
     const { data, location, mobile } = this.props;
     if (data.loading) return <div>...loading</div>;
@@ -61,7 +53,6 @@ class StoryPage extends React.Component {
 
     return (
       <div class={`story-write-containter ${mobile ? 'mobile' : ''}`}>
-        {this.renderSideMenuButton()}
         <BlogEditor
           title={title}
           body={body}

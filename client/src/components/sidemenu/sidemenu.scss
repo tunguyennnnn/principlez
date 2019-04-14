@@ -1,4 +1,14 @@
-.side-menu {
-  position: absolute;
-  width: 400px;
+.side-menu-triggerer {
+  position: fixed;
+  background-color: #8ba987;
+  text-align: center;
+  padding: 1vw;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  i {
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+  }
 }
