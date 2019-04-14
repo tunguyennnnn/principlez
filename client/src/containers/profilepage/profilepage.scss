@@ -4,8 +4,6 @@
 
 .profile-image-container {
   margin-top: 5%;
-  width: 270px;
-  height: 280px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -48,5 +46,10 @@
     flex-direction: column;
     flex-basis: 100%;
     flex: 2;
+  }
+
+  .profile-image-container {
+    width: 270px;
+    height: 280px;
   }
 }

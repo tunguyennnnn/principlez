@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 
 import { yearsDropdown } from '../../utils/yearsDropdown';
 
@@ -29,20 +29,19 @@ export default class EditForm extends React.Component {
   render() {
     const { fullname, yearOfBirth, occupation } = this.state.inputs;
     return (
-      <Form>
-        <Form.Field>
-          <label>FULL NAME</label>
-          <input
-            name="fullname"
-            defaultValue={fullname}
-            onChange={event =>
-              this.onChangeInfo(event.target.name, event.target.value)
-            }
-          />
-        </Form.Field>
-        <Form.Dropdown
-          label="YEAR OF BIRTH"
+      <form>
+        <label>FULL NAME</label>
+        <input
+          name="fullname"
+          defaultValue={fullname}
+          onChange={event =>
+            this.onChangeInfo(event.target.name, event.target.value)
+          }
+        />
+        <label>YEAR OF BIRTH</label>
+        <Dropdown
           name="yearOfBirth"
+          fluid
           options={yearsDropdown()}
           defaultValue={yearOfBirth}
           selection
@@ -50,17 +49,15 @@ export default class EditForm extends React.Component {
             this.onChangeInfo('yearOfBirth', data.value)
           }
         />
-        <Form.Field>
-          <label>OCCUPATION</label>
-          <input
-            name="occupation"
-            defaultValue={occupation}
-            onChange={event =>
-              this.onChangeInfo(event.target.name, event.target.value)
-            }
-          />
-        </Form.Field>
-      </Form>
+        <label>OCCUPATION</label>
+        <input
+          name="occupation"
+          defaultValue={occupation}
+          onChange={event =>
+            this.onChangeInfo(event.target.name, event.target.value)
+          }
+        />
+      </form>
     );
   }
 }
