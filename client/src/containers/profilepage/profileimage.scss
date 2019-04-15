@@ -1,0 +1,31 @@
+@media only screen and (max-width: 750px) {
+  .profile-image-container {
+    padding-top: 5%;
+    background-color: #f8f8f8;
+
+    img {
+      width: 70px;
+      height: 70px;
+    }
+
+    div {
+      text-align: center;
+      font-size: 10px;
+    }
+  }
+}
+
+@media only screen and (min-width: 751px) {
+  .profile-image-container {
+    img {
+      width: 270px;
+      height: 280px;
+    }
+
+    div {
+      margin-top: 5%;
+      text-align: center;
+      font-size: 20px;
+    }
+  }
+}

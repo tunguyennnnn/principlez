@@ -1,4 +1,4 @@
-import './profilepage.scss';
+import './profileimage.scss';
 
 import React from 'react';
 

@@ -1,3 +1,5 @@
+import './editform.scss';
+
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
 
@@ -29,7 +31,7 @@ export default class EditForm extends React.Component {
   render() {
     const { fullname, yearOfBirth, occupation } = this.state.inputs;
     return (
-      <form>
+      <form className="edit-form-container">
         <label>FULL NAME</label>
         <input
           name="fullname"
