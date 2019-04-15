@@ -76,7 +76,9 @@ export default class StoryPage extends Component {
         <MediaQuery query="(min-width: 850px)">
           {this.renderDestop()}
         </MediaQuery>
-        <MediaQuery query="(max-width: 849px">{this.renderMobile()}</MediaQuery>
+        <MediaQuery query="(max-width: 849px)">
+          {this.renderMobile()}
+        </MediaQuery>
       </StoryWriteContext.Provider>
     );
   }

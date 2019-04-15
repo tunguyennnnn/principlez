@@ -70,7 +70,8 @@ class ChapterGroup extends React.Component {
     const { mobile } = this.props;
     if (mobile) {
       return {
-        width: 250,
+        width: 300,
+        paddingLeft: 20,
       };
     }
 

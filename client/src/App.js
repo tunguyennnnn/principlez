@@ -18,16 +18,42 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
-          <div id="app-body">
-            <Route exact path="/" component={Home} />
-            <Route exact path="/of/:name" component={ProfilePage} />
-            <Route
-              exact
-              path="/of/:name/stories/:chapterId"
-              component={StoryPage}
-            />
-            <Route exact path="/of/:name/stories" component={ReadPage} />
-          </div>
+          <Route
+            exact
+            path="/"
+            component={props => (
+              <div id="app-body">
+                <Home {...props} />
+              </div>
+            )}
+          />
+          <Route
+            exact
+            path="/of/:name"
+            component={props => (
+              <div id="app-body">
+                <ProfilePage {...props} />
+              </div>
+            )}
+          />
+          <Route
+            exact
+            path="/of/:name/stories/:chapterId"
+            component={props => (
+              <div id="app-body">
+                <StoryPage {...props} />
+              </div>
+            )}
+          />
+          <Route
+            exact
+            path="/of/:name/stories"
+            component={props => (
+              <div id="app-body">
+                <ReadPage {...props} />
+              </div>
+            )}
+          />
         </Switch>
       </div>
     );
