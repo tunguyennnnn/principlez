@@ -13,23 +13,16 @@ import Action from './storypage/Action';
 import SideMenu from '../components/SideMenu';
 
 export default class StoryPage extends Component {
-  state = {
-    sidebarOpen: false,
-  };
-
   updateChapterTitle = (id, title, type) => {
     if (this.updateTitle) {
       this.updateTitle(id, title, type);
     }
   };
 
-  onSetSidebarOpen = open => {
-    this.setState({ sidebarOpen: open });
-  };
-
   renderMobile() {
     return (
       <SideMenu
+        headerTitle="Your Stories"
         menuComp={
           <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} mobile />
         }
