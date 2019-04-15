@@ -34,7 +34,7 @@ export default class ProfileInfoEdit extends React.Component {
     const { blurb, fullname, yearOfBirth, occupation } = this.state;
     const { onClick } = this.props;
     return (
-      <div className="profile-info-edit-container">
+      <div>
         {/* {errorMessage ? (
           <MessageDisplayer
             type="error"

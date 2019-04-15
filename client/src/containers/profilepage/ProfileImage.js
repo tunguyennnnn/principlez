@@ -7,7 +7,10 @@ import FakeProfileImage from '../../assets/darth_vader.jpg';
 export default function ProfileImage() {
   return (
     <div className="profile-image-container">
-      <img src={FakeProfileImage} className="profile-image" />
+      <div>
+        <img src={FakeProfileImage} />
+      </div>
+      <div>Change Profile Photo</div>
     </div>
   );
 }
