@@ -3,12 +3,10 @@ import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import _ from 'lodash';
-import Sidebar from 'react-sidebar';
 
 import StoryWriteContext from '../contexts/StoryWriteContext';
 import ChapterGroup from './storypage/ChapterGroup';
 import StoryWrite from './storypage/StoryWrite';
-import StoryView from './storypage/StoryView';
 import Action from './storypage/Action';
 import SideMenu from '../components/SideMenu';
 

@@ -1,52 +1,38 @@
 @media only screen and (min-width: 850px) {
-  .read-page {
-    display: flex;
-    flex-direction: row;
+  .stories-container {
+    flex: 1;
+    padding: 1.5vw 2vw 1.5vw 2vw;
   }
 }
 
 @media only screen and (max-width: 850px) {
-  .read-page {
-    display: block;
+  .stories-container {
+    padding: 10px 8vw 10px 8vw;
   }
 }
 
 .read-page {
-  position: relative;
+  display: flex;
+  flex-direction: row;
   padding: 20px 0 20px 0;
 
-  .stories-container {
-    flex: auto 1;
-    position: relative;
-  }
+  .author-info-container {
+    width: 250px;
+    height: 100%;
 
-  @media only screen and (min-width: 1000px) {
-    .stories {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 80%;
-      margin-left: -45%;
+    .author-info {
+      width: 250px;
+      padding: 40px 15px;
+      position: fixed;
+      height: 100%;
     }
   }
 
-  @media only screen and (min-width: 850px) and (max-width: 1000px) {
-    .stories {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 90%;
-      margin-left: -45%;
-    }
-  }
+  .author-info-container.mobile {
+    width: 300px;
 
-  @media only screen and (max-width: 850px) {
-    .stories-container {
-      flex: none;
-    }
-
-    .stories {
-      padding: 30px;
+    .author-info.mobile {
+      width: 300px;
     }
   }
 
@@ -77,20 +63,6 @@
 
   .story-container:last-child {
     border-bottom: 0;
-  }
-}
-
-.author-info-container {
-  width: 250px;
-  height: 100%;
-
-  .author-info {
-    width: 250px;
-    padding: 40px 15px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
   }
 }
 

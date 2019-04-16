@@ -27,8 +27,8 @@ export default function SideMenu({ menuComp, contentComp, headerTitle }) {
       }}
     >
       <div style={commonStyles}>
-        <div className="side-menu-triggerer">
-          <Icon name="tasks" onClick={() => setOpenState(true)} />
+        <div className="side-menu-triggerer" onClick={() => setOpenState(true)}>
+          <Icon name="tasks" />
         </div>
         {contentComp(setOpenState)}
       </div>

@@ -2,13 +2,13 @@
   position: fixed;
   background-color: #8ba987;
   text-align: center;
-  padding: 1vw;
+  padding: 2.5vw 0.5vw 2.5vw 0.5vw;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  cursor: pointer;
 
   i {
-    cursor: pointer;
     color: white;
-    font-size: 14px;
+    font-size: 18px;
   }
 }

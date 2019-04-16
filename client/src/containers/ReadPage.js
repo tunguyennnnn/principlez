@@ -10,6 +10,7 @@ import queryString from 'query-string';
 import { extractUserId } from '../utils/userId';
 import Story from './readpage/Story';
 import AuthorInfo from './readpage/AuthorInfo';
+import SideMenu from '../components/SideMenu';
 
 class ReadPage extends React.Component {
   storiesRef = {};
@@ -66,31 +67,55 @@ class ReadPage extends React.Component {
     this.scrollToStory();
   }
 
-  render() {
+  renderMobile() {
     const { authorQuery, storiesQuery } = this.props;
-
-    if (authorQuery.loading || storiesQuery.loading) {
-      return <div>loading...</div>;
-    }
-
     const { author } = authorQuery;
     const { stories } = storiesQuery.allChapters;
     return (
-      <div className="read-page" ref={el => (this.containerEl = el)}>
-        <MediaQuery query="(min-width: 850px)">
-          <div className="author-info-container">
-            <div className="author-info">
+      <SideMenu
+        headerTitle="Author"
+        menuComp={
+          <div className="author-info-container mobile">
+            <div className="author-info mobile">
               <AuthorInfo {...author} />
             </div>
           </div>
-        </MediaQuery>
-        <MediaQuery query="(max-width: 850px)">
-          <div className="author-info-container-mobile">
-            <div className="author-info">
-              <AuthorInfo {...author} />
+        }
+        contentComp={setOpenMenu => (
+          <div className="stories-container">
+            <div className="stories">
+              {stories.map(({ story }) => (
+                <div
+                  key={`author-${author.id}-stories-${story.id}-container`}
+                  ref={el => (this.storiesRef[story.id] = el)}
+                >
+                  <Story
+                    key={`author-${author.id}-stories-${story.id}`}
+                    likeChapter={this.likeChapter}
+                    unlikeChapter={this.unlikeChapter}
+                    {...story}
+                    author={author}
+                  />
+                </div>
+              ))}
             </div>
           </div>
-        </MediaQuery>
+        )}
+      />
+    );
+  }
+
+  renderDestop() {
+    const { authorQuery, storiesQuery } = this.props;
+    const { author } = authorQuery;
+    const { stories } = storiesQuery.allChapters;
+    return (
+      <React.Fragment>
+        <div className="author-info-container side-menu-grid">
+          <div className="author-info">
+            <AuthorInfo {...author} />
+          </div>
+        </div>
         <div className="stories-container">
           <div className="stories">
             {stories.map(({ story }) => (
@@ -109,6 +134,27 @@ class ReadPage extends React.Component {
             ))}
           </div>
         </div>
+      </React.Fragment>
+    );
+  }
+
+  render() {
+    const { authorQuery, storiesQuery } = this.props;
+
+    if (authorQuery.loading || storiesQuery.loading) {
+      return <div>loading...</div>;
+    }
+
+    const { author } = authorQuery;
+    const { stories } = storiesQuery.allChapters;
+    return (
+      <div className="read-page" ref={el => (this.containerEl = el)}>
+        <MediaQuery query="(min-width: 850px)">
+          {this.renderDestop()}
+        </MediaQuery>
+        <MediaQuery query="(max-width: 850px)">
+          {this.renderMobile()}
+        </MediaQuery>
       </div>
     );
   }
