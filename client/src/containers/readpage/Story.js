@@ -22,7 +22,7 @@ export default function Story({
   const likeAction = liked ? unlikeChapter : likeChapter;
   return (
     <div className="story-container">
-      <div className="title">{title}</div>
+      <p className="title">{title}</p>
       <div className="author">
         <Link to={`/of/${generateId(author.id, author.fullname)}`}>
           <Icon name="id badge outline" />

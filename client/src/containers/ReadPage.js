@@ -6,6 +6,7 @@ import { branch, renderComponent } from 'recompose';
 import MediaQuery from 'react-responsive';
 import _ from 'lodash';
 import queryString from 'query-string';
+import { Icon } from 'semantic-ui-react';
 
 import { extractUserId } from '../utils/userId';
 import Story from './readpage/Story';
@@ -73,6 +74,13 @@ class ReadPage extends React.Component {
     const { stories } = storiesQuery.allChapters;
     return (
       <SideMenu
+        triggerTitle={
+          <React.Fragment>
+            <Icon name="address book outline" />
+            <br />
+            <label>Author</label>
+          </React.Fragment>
+        }
         headerTitle="Author"
         menuComp={
           <div className="author-info-container mobile">
@@ -140,13 +148,10 @@ class ReadPage extends React.Component {
 
   render() {
     const { authorQuery, storiesQuery } = this.props;
-
     if (authorQuery.loading || storiesQuery.loading) {
       return <div>loading...</div>;
     }
 
-    const { author } = authorQuery;
-    const { stories } = storiesQuery.allChapters;
     return (
       <div className="read-page" ref={el => (this.containerEl = el)}>
         <MediaQuery query="(min-width: 850px)">
@@ -197,6 +202,10 @@ const userQuery = gql`
       fullname
       email
       yearOfBirth
+      location {
+        country
+        city
+      }
       profileImage {
         thumb
         medium

@@ -6,9 +6,14 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   cursor: pointer;
+  color: white;
+
+  label {
+    font-weight: 700;
+    font-size: 12px;
+  }
 
   i {
-    color: white;
     font-size: 18px;
   }
 }

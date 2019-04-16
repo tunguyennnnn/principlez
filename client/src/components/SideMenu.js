@@ -9,7 +9,12 @@ const commonStyles = {
   paddingTop: 80,
 };
 
-export default function SideMenu({ menuComp, contentComp, headerTitle }) {
+export default function SideMenu({
+  menuComp,
+  contentComp,
+  headerTitle,
+  triggerTitle,
+}) {
   const [open, setOpenState] = useState(false);
   return (
     <Sidebar
@@ -28,7 +33,7 @@ export default function SideMenu({ menuComp, contentComp, headerTitle }) {
     >
       <div style={commonStyles}>
         <div className="side-menu-triggerer" onClick={() => setOpenState(true)}>
-          <Icon name="tasks" />
+          {triggerTitle ? triggerTitle : <Icon name="tasks" />}
         </div>
         {contentComp(setOpenState)}
       </div>
