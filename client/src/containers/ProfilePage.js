@@ -16,7 +16,7 @@ export default function ProfilePage() {
           <ProfileInfo />
         </div>
       </div>
-      <div className="profile-page-row">Gonna put a list of stories here</div>
+      <div className="profile-page-row" />
     </div>
   );
 }
