@@ -75,6 +75,32 @@ class ReadPage extends React.Component {
     return <ChapterList chapters={stories} readOnly />;
   }
 
+  renderBody() {
+    const { authorQuery, storiesQuery } = this.props;
+    const { author } = authorQuery;
+    const { stories } = storiesQuery.allChapters;
+    return (
+      <div className="stories-container">
+        <div className="stories">
+          {stories.map(({ story }) => (
+            <div
+              key={`author-${author.id}-stories-${story.id}-container`}
+              ref={el => (this.storiesRef[story.id] = el)}
+            >
+              <Story
+                key={`author-${author.id}-stories-${story.id}`}
+                likeChapter={this.likeChapter}
+                unlikeChapter={this.unlikeChapter}
+                {...story}
+                author={author}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   renderMobile() {
     const { authorQuery, storiesQuery } = this.props;
     const { author } = authorQuery;
@@ -93,29 +119,11 @@ class ReadPage extends React.Component {
           <div className="author-info-container mobile">
             <div className="author-info mobile">
               <AuthorInfo {...author} />
+              {this.renderChaptersMenu()}
             </div>
           </div>
         }
-        contentComp={setOpenMenu => (
-          <div className="stories-container">
-            <div className="stories">
-              {stories.map(({ story }) => (
-                <div
-                  key={`author-${author.id}-stories-${story.id}-container`}
-                  ref={el => (this.storiesRef[story.id] = el)}
-                >
-                  <Story
-                    key={`author-${author.id}-stories-${story.id}`}
-                    likeChapter={this.likeChapter}
-                    unlikeChapter={this.unlikeChapter}
-                    {...story}
-                    author={author}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        contentComp={setOpenMenu => this.renderBody()}
       />
     );
   }
@@ -132,24 +140,7 @@ class ReadPage extends React.Component {
             {this.renderChaptersMenu()}
           </div>
         </div>
-        <div className="stories-container">
-          <div className="stories">
-            {stories.map(({ story }) => (
-              <div
-                key={`author-${author.id}-stories-${story.id}-container`}
-                ref={el => (this.storiesRef[story.id] = el)}
-              >
-                <Story
-                  key={`author-${author.id}-stories-${story.id}`}
-                  likeChapter={this.likeChapter}
-                  unlikeChapter={this.unlikeChapter}
-                  {...story}
-                  author={author}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        {this.renderBody()}
       </React.Fragment>
     );
   }

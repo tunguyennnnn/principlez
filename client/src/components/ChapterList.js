@@ -6,13 +6,6 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import _ from 'lodash';
 
 import Chapter from './chapterlist/Chapter';
-import EmptyChapterList from './chapterlist/EmptyChapterList';
-
-const EmptyChapterMapper = {
-  ABOUT_ME: 'Tell us about you',
-  STORY: 'Your stories',
-  LESSON: 'The lessons',
-};
 
 class ChapterList extends Component {
   onDragEnd = ({ source, destination }) => {
