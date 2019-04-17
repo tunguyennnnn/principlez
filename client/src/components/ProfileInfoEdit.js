@@ -30,18 +30,18 @@ export default class ProfileInfoEdit extends React.Component {
   };
 
   render() {
-    // const { errorMessage } = this.props;
+    const { errorMessage } = this.props;
     const { blurb, fullname, yearOfBirth, occupation } = this.state;
     const { onClick } = this.props;
     return (
       <div className="profile-info-edit-container">
-        {/* {errorMessage ? (
+        {errorMessage && (
           <MessageDisplayer
             type="error"
             message={errorMessage}
             header="Update User Info"
           />
-        ) : null} */}
+        )}
         <h3>ABOUT ME</h3>
         <hr />
         <div className="profile-info-edit-blurb">
