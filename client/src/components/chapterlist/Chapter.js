@@ -65,6 +65,7 @@ function Chapter(props) {
     id,
     title,
     deleteChapter,
+    readOnly,
     view,
     like,
     match: {
@@ -78,8 +79,10 @@ function Chapter(props) {
   const ChapterBodyComponent = isFocusedChapter
     ? ChapterBodyFocus
     : ChapterBody;
+
+  const link = readOnly ? `stories?id=${id}` : id;
   return (
-    <NavLink to={id} className="chapter-content">
+    <NavLink to={link} className="chapter-content">
       <ChapterBodyComponent
         title={title}
         id={id}

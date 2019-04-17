@@ -12,6 +12,7 @@ import { extractUserId } from '../utils/userId';
 import Story from './readpage/Story';
 import AuthorInfo from './readpage/AuthorInfo';
 import SideMenu from '../components/SideMenu';
+import ChapterList from '../components/ChapterList';
 
 class ReadPage extends React.Component {
   storiesRef = {};
@@ -68,6 +69,12 @@ class ReadPage extends React.Component {
     this.scrollToStory();
   }
 
+  renderChaptersMenu() {
+    const { storiesQuery } = this.props;
+    const stories = storiesQuery.allChapters.stories.map(({ story }) => story);
+    return <ChapterList chapters={stories} readOnly />;
+  }
+
   renderMobile() {
     const { authorQuery, storiesQuery } = this.props;
     const { author } = authorQuery;
@@ -122,6 +129,7 @@ class ReadPage extends React.Component {
         <div className="author-info-container side-menu-grid">
           <div className="author-info">
             <AuthorInfo {...author} />
+            {this.renderChaptersMenu()}
           </div>
         </div>
         <div className="stories-container">

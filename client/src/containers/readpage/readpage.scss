@@ -66,23 +66,3 @@
     border-bottom: 0;
   }
 }
-
-.author-info-container-mobile {
-  padding-top: 30px;
-
-  .author-info {
-    padding: 15px;
-    .author {
-      display: flex;
-      flex-grow: column;
-    }
-
-    .profile-image {
-      width: 30%;
-    }
-
-    .profile {
-      flex: 1 auto;
-    }
-  }
-}

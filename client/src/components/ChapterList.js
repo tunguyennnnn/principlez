@@ -22,7 +22,7 @@ class ChapterList extends Component {
   };
 
   renderChapters(chapters) {
-    const { deleteChapter, type, readOnly } = this.props;
+    const { deleteChapter, type } = this.props;
     return (
       <React.Fragment>
         {chapters.map(({ id, title, view, like }, index) => (
@@ -30,6 +30,7 @@ class ChapterList extends Component {
             {(provided, snapshot) => (
               <div
                 className="chapter"
+                key={`write-chapter-${id}`}
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
@@ -50,8 +51,32 @@ class ChapterList extends Component {
     );
   }
 
+  renderReadOnly() {
+    const { chapters } = this.props;
+    return (
+      <div className="chapter-list">
+        {chapters.map(({ id, title, view, like }, index) => (
+          <div className="chapter" key={`view-chapter-${id}`}>
+            <Chapter
+              id={id}
+              readOnly
+              link={`${id}`}
+              view={view}
+              like={like}
+              title={title}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   render() {
-    const { title, chapters, type, createChapter, readOnly } = this.props;
+    const { chapters, createChapter, readOnly } = this.props;
+
+    if (readOnly) {
+      return this.renderReadOnly();
+    }
     return (
       <div className="chapter-list">
         <div
@@ -63,13 +88,7 @@ class ChapterList extends Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
-              <div ref={provided.innerRef}>
-                {_.isEmpty(chapters) ? (
-                  <EmptyChapterList text={EmptyChapterMapper[type]} />
-                ) : (
-                  this.renderChapters(chapters)
-                )}
-              </div>
+              <div ref={provided.innerRef}>{this.renderChapters(chapters)}</div>
             )}
           </Droppable>
         </DragDropContext>
