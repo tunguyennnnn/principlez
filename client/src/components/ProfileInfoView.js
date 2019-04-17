@@ -17,8 +17,8 @@ export default function ProfileInfoView(props) {
   } = props;
   const { city, country } = location;
   return (
-    <div className="profile-info-view-section">
-      <div className="push-header-to-left">
+    <div className="profile-info-view-container">
+      <div className="profile-info-view-header">
         <h1>{fullname}</h1>
         <Button
           className="profile-info-view-button push-button-to-right"
@@ -27,25 +27,25 @@ export default function ProfileInfoView(props) {
           EDIT
         </Button>
       </div>
-      <div className="profile-info-view-section">
-        <h3>About Me</h3>
-        <BlurbEditor blurb={blurb} readOnly={readOnly} />
-      </div>
-      <div className="profile-info-view-section">
-        <div className="profile-info-view-user-attr">
+      <div>
+        <div>
           <Icon name="map pin" size="large" />
-          <h3 className="profile-info-view-subheader">
+          <h3 className="profile-info-view-attr">
             {city}, {country}
           </h3>
         </div>
-        <div className="profile-info-view-user-attr">
+        <div>
           <Icon name="users" size="large" />
-          <h3 className="profile-info-view-subheader">{occupation}</h3>
+          <h3 className="profile-info-view-attr">{occupation}</h3>
         </div>
-        <div className="profile-info-view-user-attr">
+        <div>
           <Icon name="birthday cake" size="large" />
-          <h3 className="profile-info-view-subheader">{yearOfBirth}</h3>
+          <h3 className="profile-info-view-attr">{yearOfBirth}</h3>
         </div>
+      </div>
+      <div className="profile-info-view-blurb">
+        <h3>About Me</h3>
+        <BlurbEditor blurb={blurb} readOnly={readOnly} />
       </div>
     </div>
   );
