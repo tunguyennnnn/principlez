@@ -1,5 +1,3 @@
-import './profileinfo.scss';
-
 import React from 'react';
 import gql from 'graphql-tag';
 import { compose, graphql } from 'react-apollo';
@@ -9,7 +7,7 @@ import ProfileInfoView from '../../components/ProfileInfoView';
 
 class ProfileInfo extends React.Component {
   state = {
-    isEditingInfo: true,
+    isEditingInfo: false,
     // message: '',
   };
 
@@ -59,18 +57,16 @@ class ProfileInfo extends React.Component {
       : ProfileInfoView;
 
     return (
-      <div className="profile-info-container">
-        <ProfileInfoComponent
-          fullname={fullname}
-          yearOfBirth={yearOfBirth}
-          blurb={blurb}
-          occupation={occupation}
-          location={location}
-          updateInfo={this.updateUserInformation}
-          onClick={this.clickToEditOrViewInfo}
-          readOnly={!isEditingInfo}
-        />
-      </div>
+      <ProfileInfoComponent
+        fullname={fullname}
+        yearOfBirth={yearOfBirth}
+        blurb={blurb}
+        occupation={occupation}
+        location={location}
+        updateInfo={this.updateUserInformation}
+        onClick={this.clickToEditOrViewInfo}
+        readOnly={!isEditingInfo}
+      />
     );
   }
 }

@@ -1,3 +1,9 @@
+.profile-image-container {
+  img {
+    border-radius: 50%;
+  }
+}
+
 @media only screen and (max-width: 750px) {
   .profile-image-container {
     padding-top: 5%;
@@ -18,8 +24,8 @@
 @media only screen and (min-width: 751px) {
   .profile-image-container {
     img {
-      width: 270px;
-      height: 280px;
+      width: 230px;
+      height: 230px;
     }
 
     div {
