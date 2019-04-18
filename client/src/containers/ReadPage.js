@@ -52,7 +52,13 @@ class ReadPage extends React.Component {
     }
   };
 
-  scrollToStory = () => {
+  scrollToStory = id => {
+    if (id) {
+      const ref = this.storiesRef[id];
+      const top = ref.offsetTop - this.containerEl.offsetTop;
+      setTimeout(() => window.scroll({ top, behavior: 'smooth' }), 0);
+      return;
+    }
     const { location, data } = this.props;
     const { search } = location;
     if (search && !storiesQuery.loading) {
@@ -72,7 +78,15 @@ class ReadPage extends React.Component {
   renderChaptersMenu() {
     const { storiesQuery } = this.props;
     const stories = storiesQuery.allChapters.stories.map(({ story }) => story);
-    return <ChapterList chapters={stories} readOnly />;
+    return (
+      <ChapterList
+        chapters={stories}
+        forceParentUpdate={id => {
+          this.scrollToStory(id);
+        }}
+        readOnly
+      />
+    );
   }
 
   renderBody() {
@@ -111,7 +125,7 @@ class ReadPage extends React.Component {
           <React.Fragment>
             <Icon name="address book outline" />
             <br />
-            <label>Author</label>
+            <label>Stories</label>
           </React.Fragment>
         }
         headerTitle="Author"
