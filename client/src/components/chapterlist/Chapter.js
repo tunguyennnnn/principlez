@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import _ from 'lodash';
 import { withRouter } from 'react-router';
@@ -64,6 +64,7 @@ function Chapter(props) {
   const {
     id,
     title,
+    forceParentUpdate,
     deleteChapter,
     readOnly,
     view,
@@ -82,7 +83,15 @@ function Chapter(props) {
 
   const link = readOnly ? `stories?id=${id}` : id;
   return (
-    <NavLink to={link} className="chapter-content">
+    <div
+      className="chapter-content"
+      onClick={event => {
+        event.preventDefault();
+        event.stopPropagation();
+        // props.history.push(link);
+        forceParentUpdate && forceParentUpdate(id);
+      }}
+    >
       <ChapterBodyComponent
         title={title}
         id={id}
@@ -102,7 +111,7 @@ function Chapter(props) {
           </a>
         ) : null}
       </div>
-    </NavLink>
+    </div>
   );
 }
 
