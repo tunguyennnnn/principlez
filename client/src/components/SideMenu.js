@@ -6,7 +6,7 @@ import { Icon } from 'semantic-ui-react';
 import Header from './sidemenu/Header';
 
 const commonStyles = {
-  paddingTop: 80,
+  marginTop: 80,
 };
 
 export default function SideMenu({
@@ -25,13 +25,14 @@ export default function SideMenu({
         </div>
       }
       touch
+      transitions
       open={open}
       onSetOpen={setOpenState.bind(null, false)}
       styles={{
         sidebar: { background: 'white', zIndex: 10000, overflowY: 'hidden' },
       }}
     >
-      <div style={commonStyles}>
+      <div style={commonStyles} ref={el => (window.sidemenu = el)}>
         <div className="side-menu-triggerer" onClick={() => setOpenState(true)}>
           {triggerTitle ? triggerTitle : <Icon name="tasks" />}
         </div>

@@ -82,12 +82,13 @@ function Chapter(props) {
     : ChapterBody;
 
   const link = readOnly ? `stories?id=${id}` : id;
-
   return (
     <div
       className="chapter-content"
-      onClick={() => {
-        props.history.push(link);
+      onClick={event => {
+        event.preventDefault();
+        event.stopPropagation();
+        // props.history.push(link);
         forceParentUpdate && forceParentUpdate(id);
       }}
     >

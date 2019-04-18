@@ -52,9 +52,17 @@ class ReadPage extends React.Component {
     }
   };
 
-  scrollToStory = id => {
+  scrollToStory = (id, mobile) => {
     if (id) {
       const ref = this.storiesRef[id];
+      if (mobile) {
+        setTimeout(() => {
+          ref.scrollIntoView({
+            behavior: 'smooth',
+          });
+        }, 0);
+        return;
+      }
       const top = ref.offsetTop - this.containerEl.offsetTop;
       setTimeout(() => window.scroll({ top, behavior: 'smooth' }), 0);
       return;
@@ -75,14 +83,14 @@ class ReadPage extends React.Component {
     this.scrollToStory();
   }
 
-  renderChaptersMenu() {
+  renderChaptersMenu(mobile) {
     const { storiesQuery } = this.props;
     const stories = storiesQuery.allChapters.stories.map(({ story }) => story);
     return (
       <ChapterList
         chapters={stories}
         forceParentUpdate={id => {
-          this.scrollToStory(id);
+          this.scrollToStory(id, mobile);
         }}
         readOnly
       />
@@ -116,9 +124,9 @@ class ReadPage extends React.Component {
   }
 
   renderMobile() {
-    const { authorQuery, storiesQuery } = this.props;
+    console.log('reachhhhhhh render');
+    const { authorQuery } = this.props;
     const { author } = authorQuery;
-    const { stories } = storiesQuery.allChapters;
     return (
       <SideMenu
         triggerTitle={
@@ -133,11 +141,11 @@ class ReadPage extends React.Component {
           <div className="author-info-container mobile">
             <div className="author-info mobile">
               <AuthorInfo {...author} />
-              {this.renderChaptersMenu()}
+              {this.renderChaptersMenu(true)}
             </div>
           </div>
         }
-        contentComp={setOpenMenu => this.renderBody()}
+        contentComp={() => this.renderBody()}
       />
     );
   }
