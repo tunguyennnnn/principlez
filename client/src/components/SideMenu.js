@@ -34,7 +34,11 @@ export default function SideMenu({
       }}
     >
       <div style={commonStyles} ref={el => (window.sidemenu = el)}>
-        <div className="side-menu-triggerer" onClick={() => setOpenState(true)}>
+        <div
+          className="side-menu-triggerer"
+          style={{ zIndex: 1 }}
+          onClick={() => setOpenState(true)}
+        >
           {triggerTitle ? triggerTitle : <Icon name="tasks" />}
         </div>
         <div

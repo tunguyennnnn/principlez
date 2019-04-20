@@ -117,8 +117,6 @@ class ReadPage extends React.Component {
         triggerTitle={
           <React.Fragment>
             <Icon name="address book outline" />
-            <br />
-            <label>Stories</label>
           </React.Fragment>
         }
         headerTitle="Author"
