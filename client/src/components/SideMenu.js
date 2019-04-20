@@ -6,7 +6,8 @@ import { Icon } from 'semantic-ui-react';
 import Header from './sidemenu/Header';
 
 const commonStyles = {
-  marginTop: 80,
+  height: window.innerHeight,
+  paddingTop: 80,
 };
 
 export default function SideMenu({
@@ -36,7 +37,12 @@ export default function SideMenu({
         <div className="side-menu-triggerer" onClick={() => setOpenState(true)}>
           {triggerTitle ? triggerTitle : <Icon name="tasks" />}
         </div>
-        {contentComp(setOpenState)}
+        <div
+          id="stories-container"
+          style={{ height: '100%', overflowY: 'scroll' }}
+        >
+          {contentComp(setOpenState)}
+        </div>
       </div>
     </Sidebar>
   );

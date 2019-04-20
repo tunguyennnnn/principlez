@@ -7,6 +7,7 @@ import MediaQuery from 'react-responsive';
 import _ from 'lodash';
 import queryString from 'query-string';
 import { Icon } from 'semantic-ui-react';
+import { Element, scroller } from 'react-scroll';
 
 import { extractUserId } from '../utils/userId';
 import Story from './readpage/Story';
@@ -14,6 +15,7 @@ import AuthorInfo from './readpage/AuthorInfo';
 import SideMenu from '../components/SideMenu';
 import ChapterList from '../components/ChapterList';
 
+window.scroller = scroller;
 class ReadPage extends React.Component {
   storiesRef = {};
 
@@ -52,31 +54,23 @@ class ReadPage extends React.Component {
     }
   };
 
-  scrollToStory = (id, mobile) => {
-    if (id) {
-      const ref = this.storiesRef[id];
-      if (mobile) {
-        setTimeout(() => {
-          ref.scrollIntoView({
-            behavior: 'smooth',
-          });
-        }, 0);
-        return;
-      }
-      const top = ref.offsetTop - this.containerEl.offsetTop;
-      setTimeout(() => window.scroll({ top, behavior: 'smooth' }), 0);
-      return;
-    }
-    const { location, data } = this.props;
+  scrollToStory = () => {
+    const { location } = this.props;
     const { search } = location;
-    if (search && !storiesQuery.loading) {
-      const { id } = queryString.parse(search);
-      if (id && this.storiesRef[id]) {
-        const ref = this.storiesRef[id];
-        const top = ref.offsetTop - this.containerEl.offsetTop;
-        setTimeout(() => window.scroll({ top }), 0);
-      }
-    }
+
+    if (!search || storiesQuery.loading) return;
+
+    const { id } = queryString.parse(search);
+
+    if (!id) return;
+
+    const isMobile = !!document.getElementById('stories-container');
+    setTimeout(() => {
+      scroller.scrollTo(`story-${id}`, {
+        offset: -90,
+        containerId: isMobile ? 'stories-container' : null,
+      });
+    }, 0);
   };
 
   componentDidUpdate() {
@@ -86,15 +80,7 @@ class ReadPage extends React.Component {
   renderChaptersMenu(mobile) {
     const { storiesQuery } = this.props;
     const stories = storiesQuery.allChapters.stories.map(({ story }) => story);
-    return (
-      <ChapterList
-        chapters={stories}
-        forceParentUpdate={id => {
-          this.scrollToStory(id, mobile);
-        }}
-        readOnly
-      />
-    );
+    return <ChapterList chapters={stories} readOnly mobile={mobile} />;
   }
 
   renderBody() {
@@ -105,9 +91,9 @@ class ReadPage extends React.Component {
       <div className="stories-container">
         <div className="stories">
           {stories.map(({ story }) => (
-            <div
+            <Element
+              name={`story-${story.id}`}
               key={`author-${author.id}-stories-${story.id}-container`}
-              ref={el => (this.storiesRef[story.id] = el)}
             >
               <Story
                 key={`author-${author.id}-stories-${story.id}`}
@@ -116,7 +102,7 @@ class ReadPage extends React.Component {
                 {...story}
                 author={author}
               />
-            </div>
+            </Element>
           ))}
         </div>
       </div>
@@ -124,7 +110,6 @@ class ReadPage extends React.Component {
   }
 
   renderMobile() {
-    console.log('reachhhhhhh render');
     const { authorQuery } = this.props;
     const { author } = authorQuery;
     return (
@@ -151,9 +136,9 @@ class ReadPage extends React.Component {
   }
 
   renderDestop() {
-    const { authorQuery, storiesQuery } = this.props;
+    const { authorQuery } = this.props;
     const { author } = authorQuery;
-    const { stories } = storiesQuery.allChapters;
+
     return (
       <React.Fragment>
         <div className="author-info-container side-menu-grid">

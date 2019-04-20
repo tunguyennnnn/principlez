@@ -45,7 +45,7 @@ class ChapterList extends Component {
   }
 
   renderReadOnly() {
-    const { chapters, forceParentUpdate } = this.props;
+    const { chapters, forceParentUpdate, mobile } = this.props;
     return (
       <div className="chapter-list">
         {chapters.map(({ id, title, view, like }, index) => (
@@ -54,6 +54,7 @@ class ChapterList extends Component {
               forceParentUpdate={forceParentUpdate}
               id={id}
               readOnly
+              mobile={mobile}
               link={`${id}`}
               view={view}
               like={like}

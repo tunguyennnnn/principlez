@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link as NavLink } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import _ from 'lodash';
 import { withRouter } from 'react-router';
+import { Link as ScrollLink } from 'react-scroll';
 
 import IconButton from '../commons/IconButton';
 import StoryWriteContext from '../../contexts/StoryWriteContext';
@@ -64,11 +65,11 @@ function Chapter(props) {
   const {
     id,
     title,
-    forceParentUpdate,
     deleteChapter,
     readOnly,
     view,
     like,
+    mobile,
     match: {
       params: { chapterId },
     },
@@ -81,16 +82,15 @@ function Chapter(props) {
     ? ChapterBodyFocus
     : ChapterBody;
 
-  const link = readOnly ? `stories?id=${id}` : id;
+  const Link = readOnly ? ScrollLink : NavLink;
+
   return (
-    <div
+    <Link
       className="chapter-content"
-      onClick={event => {
-        event.preventDefault();
-        event.stopPropagation();
-        // props.history.push(link);
-        forceParentUpdate && forceParentUpdate(id);
-      }}
+      to={readOnly ? `story-${id}` : id}
+      containerId={mobile ? 'stories-container' : null}
+      smooth
+      offset={-90}
     >
       <ChapterBodyComponent
         title={title}
@@ -111,7 +111,7 @@ function Chapter(props) {
           </a>
         ) : null}
       </div>
-    </div>
+    </Link>
   );
 }
 
