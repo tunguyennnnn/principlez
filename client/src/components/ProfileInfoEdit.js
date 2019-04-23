@@ -1,135 +1,75 @@
 import './profileinfoedit/profileinfoedit.scss';
 
 import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
-import { Editor } from 'slate-react';
-import { Value } from 'slate';
-import Blocks from './editors/Blocks';
+import { Button } from 'semantic-ui-react';
 
 import MessageDisplayer from './commons/MessageDisplayer';
-import { yearsDropdown } from '../utils/yearsDropdown';
+import BlurbEditor from './BlurbEditor';
+import EditForm from './profileinfoedit/EditForm';
 
 export default class ProfileInfoEdit extends React.Component {
   constructor(props) {
     super(props);
-    const { fullname, yearOfBirth, blurb, occupation } = props;
 
+    const { fullname, yearOfBirth, occupation, blurb } = props;
     this.state = {
-      inputs: {
-        fullname: fullname || '',
-        yearOfBirth: yearOfBirth || '',
-        value: this.blurbValue(blurb),
-        occupation: occupation || '',
-      },
+      fullname,
+      yearOfBirth,
+      occupation,
+      blurb,
     };
   }
 
-  blurbValue = blurb => {
-    return Value.fromJSON({
-      document: {
-        nodes: [...blurb],
-      },
-    });
-  };
-
-  onChangeInfo = (name, value) => {
-    this.setState({
-      ...this.state,
-      inputs: { ...this.state.inputs, [name]: value },
-    });
-  };
-
-  onChangeBlurb = ({ value }) => {
-    this.setState({ inputs: { ...this.state.inputs, value: value } });
-  };
-
-  renderNode = (props, editor, next) => {
-    return Blocks[props.node.type].call(null, props);
-  };
-
   updateInfo = () => {
-    const { fullname, yearOfBirth, value, occupation } = this.state.inputs;
-    const blurb = value.document.toJSON().nodes;
+    const { fullname, yearOfBirth, blurb, occupation } = this.state;
     this.props.updateInfo(fullname, yearOfBirth, blurb, occupation);
   };
 
+  updateInfoFromOnChange = (name, value) => {
+    this.setState({ ...this.state, [name]: value });
+  };
+
   render() {
-    // const { errorMessage } = this.props;
-    const {
-      fullname,
-      yearOfBirth,
-      value,
-      occupation,
-      onClick,
-    } = this.state.inputs;
-    console.log('value', value);
+    const { errorMessage } = this.props;
+    const { blurb, fullname, yearOfBirth, occupation } = this.state;
+    const { onClick } = this.props;
     return (
-      <div>
-        {/* {errorMessage ? (
+      <div className="profile-info-edit-container">
+        {errorMessage && (
           <MessageDisplayer
             type="error"
             message={errorMessage}
             header="Update User Info"
           />
-        ) : null} */}
-        <div>
-          <Form onSubmit={this.updateInfo}>
-            <div className="profile-info-edit-header-container">
-              <h3>BASIC INFO</h3>
-              <Button className="profile-info-edit-button push-button-to-right">
-                SAVE
-              </Button>
-              <Button
-                basic
-                color="black"
-                className="profile-info-edit-button"
-                onClick={onClick}
-              >
-                CANCEL
-              </Button>
-            </div>
-            <hr />
-            <Form.Field>
-              <label>FULL NAME</label>
-              <input
-                name="fullname"
-                defaultValue={fullname}
-                onChange={event =>
-                  this.onChangeInfo(event.target.name, event.target.value)
-                }
-              />
-            </Form.Field>
-            <Form.Dropdown
-              label="YEAR OF BIRTH"
-              name="yearOfBirth"
-              options={yearsDropdown()}
-              defaultValue={yearOfBirth}
-              selection
-              onChange={(event, data) =>
-                this.onChangeInfo('yearOfBirth', data.value)
-              }
-            />
-            <Form.Field>
-              <label>OCCUPATION</label>
-              <input
-                name="occupation"
-                defaultValue={occupation}
-                onChange={event =>
-                  this.onChangeInfo(event.target.name, event.target.value)
-                }
-              />
-            </Form.Field>
-            <div className="profile-info-edit-blurb">
-              <h3>STORY BLURB</h3>
-              <hr />
-              <span>PROVIDE SOME BRIEF DETAILS ABOUT YOUR STORY HERE.</span>
-              <Editor
-                value={value}
-                onChange={this.onChangeBlurb}
-                renderNode={this.renderNode}
-              />
-            </div>
-          </Form>
+        )}
+        <h3>ABOUT ME</h3>
+        <hr />
+        <div className="profile-info-edit-blurb">
+          <BlurbEditor blurb={blurb} onUpdate={this.updateInfoFromOnChange} />
+        </div>
+        <div className="profile-info-edit-form">
+          <h3>BASIC INFO</h3>
+          <hr />
+          <EditForm
+            fullname={fullname}
+            yearOfBirth={yearOfBirth}
+            occupation={occupation}
+            onClick={onClick}
+            onUpdate={this.updateInfoFromOnChange}
+          />
+        </div>
+        <div className="profile-info-edit-buttons">
+          <Button className="profile-button" onClick={this.updateInfo}>
+            SAVE
+          </Button>
+          <Button
+            basic
+            color="black"
+            className="profile-button"
+            onClick={onClick}
+          >
+            CANCEL
+          </Button>
         </div>
       </div>
     );

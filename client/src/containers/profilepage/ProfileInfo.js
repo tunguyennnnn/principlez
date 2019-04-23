@@ -1,5 +1,3 @@
-import './profilepage.scss';
-
 import React from 'react';
 import gql from 'graphql-tag';
 import { compose, graphql } from 'react-apollo';
@@ -10,7 +8,7 @@ import ProfileInfoView from '../../components/ProfileInfoView';
 class ProfileInfo extends React.Component {
   state = {
     isEditingInfo: false,
-    // message: '',
+    message: '',
   };
 
   clickToEditOrViewInfo = () => {
@@ -40,8 +38,8 @@ class ProfileInfo extends React.Component {
         return;
       }
 
+      await this.props.data.refetch();
       this.clickToEditOrViewInfo();
-      this.props.data.refetch();
     } catch (error) {
       console.log(error);
     }
@@ -49,25 +47,27 @@ class ProfileInfo extends React.Component {
 
   render() {
     const { data } = this.props;
-    if (data.loading) return null;
-    const { fullname, yearOfBirth, blurb, occupation, location } = data.me;
 
-    const { isEditingInfo } = this.state;
+    if (data.loading) return null;
+
+    const { fullname, yearOfBirth, blurb, occupation, location } = data.me;
+    const { isEditingInfo, message: errorMessage } = this.state;
     const ProfileInfoComponent = isEditingInfo
       ? ProfileInfoEdit
       : ProfileInfoView;
+
     return (
-      <div className="profile-info-container">
-        <ProfileInfoComponent
-          fullname={fullname}
-          yearOfBirth={yearOfBirth}
-          blurb={blurb}
-          occupation={occupation}
-          location={location}
-          updateInfo={this.updateUserInformation}
-          onClick={this.clickToEditOrViewInfo}
-        />
-      </div>
+      <ProfileInfoComponent
+        fullname={fullname}
+        yearOfBirth={yearOfBirth}
+        blurb={blurb}
+        occupation={occupation}
+        location={location}
+        updateInfo={this.updateUserInformation}
+        onClick={this.clickToEditOrViewInfo}
+        readOnly={!isEditingInfo}
+        errorMessage={errorMessage}
+      />
     );
   }
 }

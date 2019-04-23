@@ -1,0 +1,37 @@
+.edit-form-container {
+  input {
+    resize: vertical;
+    margin-bottom: 2%;
+  }
+
+  .ui.fluid.dropdown {
+    margin-bottom: 2%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .edit-form-container {
+    label {
+      font-size: 10px;
+      margin-right: 5%;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 5px;
+    }
+  }
+}
+
+@media only screen and (min-width: 751px) {
+  .edit-form-container {
+    input {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 12px;
+    }
+  }
+}
