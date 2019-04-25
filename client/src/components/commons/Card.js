@@ -8,9 +8,13 @@ import * as UserId from '../../utils/userId';
 import BlogEditor from '../BlogEditor';
 
 export default function Card(props) {
-  const { id, title, body, updatedAt, type, author, view, like } = props;
+  const { id, title, body, updatedAt, isAuthor, author, view, like } = props;
   const viewCount = view.count + view.anonymousCount;
+
   const link = '/of/' + UserId.generateId(author.id, author.fullname);
+  const storyLink = link + (isAuthor ? `/stories/${id}` : `/stories?id=${id}`);
+  const linkText = isAuthor ? 'Edit...' : 'Read...';
+
   return (
     <div className="card-container box-shadow">
       <div className="card-author">
@@ -27,7 +31,7 @@ export default function Card(props) {
           <BlogEditor title={title} body={body} readOnly previewOnly />
         </div>
         <div className="read">
-          <Link to={link + `/stories?id=${id}`}>Read...</Link>
+          <Link to={storyLink}>{linkText}</Link>
         </div>
       </div>
       <div className="card-actions">

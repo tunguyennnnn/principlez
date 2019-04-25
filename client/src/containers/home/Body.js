@@ -14,9 +14,11 @@ class Body extends React.Component {
     return (
       <div className="home-body-container">
         {data.allChapters.edges.map(({ cursor, node }, index) => {
-          const { id } = node;
           return (
-            <div key={`chapter-list-${id}`} className="body-story-container">
+            <div
+              key={`chapter-list-${node.id}`}
+              className="body-story-container"
+            >
               <Card {...node} />
             </div>
           );
@@ -37,6 +39,7 @@ const allChaptersQuery = gql`
           type
           body
           updatedAt
+          isAuthor
           author {
             id
             fullname

@@ -89,7 +89,6 @@ function Chapter(props) {
       className="chapter-content"
       to={readOnly ? `story-${id}` : id}
       containerId={mobile ? 'stories-container' : null}
-      smooth
       offset={-90}
     >
       <ChapterBodyComponent
