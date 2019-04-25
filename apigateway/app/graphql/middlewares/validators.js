@@ -38,3 +38,7 @@ export const updateUserInfo = yup.object().shape({
     .trim()
     .length(4, 'Year of birth example: 1975'),
 });
+
+export const search = yup.object().shape({
+  text: yup.string().trim(),
+});

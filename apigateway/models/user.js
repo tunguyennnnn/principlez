@@ -60,5 +60,18 @@ module.exports = (sequelize, DataTypes) => {
       as: 'profileImage',
     });
   };
+
+  User.search = async name => {
+    const searchTerm = `%${name}%`;
+    return User.findAll({
+      where: {
+        $or: [
+          { fullname: { $like: searchTerm } },
+          { email: { $like: searchTerm } },
+        ],
+      },
+      limit: 10,
+    });
+  };
   return User;
 };

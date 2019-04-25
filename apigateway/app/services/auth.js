@@ -18,16 +18,17 @@ export const authCheck = async req => {
     headers.authorization &&
     headers.authorization.split(' ')[0] === 'Bearer'
   ) {
-    const decoded = jwt.verify(
-      headers.authorization.split(' ')[1],
-      superSecret,
-    );
-
-    const user = await models.User.findOne({
-      where: { id: decoded.id },
-    });
-
-    return user;
+    try {
+      const decoded = jwt.verify(
+        headers.authorization.split(' ')[1],
+        superSecret,
+      );
+      const user = await models.User.findOne({
+        where: { id: decoded.id },
+      });
+      return user;
+    } finally {
+      return null;
+    }
   }
-  return null;
 };

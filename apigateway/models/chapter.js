@@ -69,5 +69,19 @@ module.exports = (sequelize, DataTypes) => {
   Chapter.getByUserId = async userId => {
     return Chapter.findAll({ where: { userId } });
   };
+
+  Chapter.search = async text => {
+    const chapters = await Chapter.findAll({
+      where: {
+        title: { $iLike: `%${text}%` },
+      },
+      limit: 10,
+      attributes: ['id', 'title', 'body'],
+    });
+    return chapters.map(chapter => {
+      const { id, title, body } = chapter;
+      return { id, title, body: body.length === 0 ? body : [body[0]] };
+    });
+  };
   return Chapter;
 };
