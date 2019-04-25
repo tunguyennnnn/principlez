@@ -1,16 +1,16 @@
-import './profilepage.scss';
+import './profileimage.scss';
 
 import React from 'react';
-import { Image } from 'semantic-ui-react';
 
 import FakeProfileImage from '../../assets/darth_vader.jpg';
 
-export default class ProfileImage extends React.Component {
-  render() {
-    return (
-      <div className="profile-image-container">
-        <Image size="medium" src={FakeProfileImage} />
+export default function ProfileImage() {
+  return (
+    <div className="profile-image-container">
+      <div>
+        <img src={FakeProfileImage} />
       </div>
-    );
-  }
+      <div>Change Profile Photo</div>
+    </div>
+  );
 }

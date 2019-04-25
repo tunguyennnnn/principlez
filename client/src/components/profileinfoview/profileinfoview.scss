@@ -1,28 +1,36 @@
-.profile-info-view-section {
-  margin-top: 20px;
+.profile-info-view-header {
+  display: flex;
+  align-items: flex-start;
+
+  h1 {
+    padding-right: 30px;
+  }
 }
 
-.profile-info-view-user-attr {
-  margin-top: 10px;
-}
-
-.profile-info-view-subheader {
+.profile-info-view-attr {
   display: inline;
   margin-left: 10px;
 }
 
-.profile-info-view-button {
-  background-color: #383838 !important;
-  color: white !important;
-  opacity: 0.8;
-  margin-bottom: 20px !important;
+@media only screen and (max-width: 750px) {
+  .profile-info-view-container {
+    h1 {
+      font-size: 20px;
+    }
+
+    h3 {
+      font-size: 15px;
+    }
+  }
 }
 
-.push-header-to-left {
-  display: flex;
-  align-items: baseline;
-}
+@media only screen and (min-width: 751px) {
+  .profile-info-view-container {
+    padding-top: 30px;
+    padding-left: 100px;
+  }
 
-.push-button-to-right {
-  margin-left: auto !important;
+  .profile-info-view-blurb {
+    margin-top: 10px;
+  }
 }
