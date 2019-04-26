@@ -8,6 +8,7 @@ export default function IconButton({
   action,
   horizontal,
   hoverMode,
+  style,
 }) {
   const iconComp = <Icon name={iconName} size="large" />;
 
@@ -18,22 +19,16 @@ export default function IconButton({
       iconComp
     );
     return (
-      <div className="icon-button" onClick={action}>
+      <div className="icon-button" onClick={action} style={style}>
         {children}
       </div>
     );
   }
 
-  const children = (
-    <React.Fragment>
+  return (
+    <div className="icon-button" onClick={action} style={style}>
       {iconComp}
       {text}
-    </React.Fragment>
-  );
-
-  return (
-    <div className="icon-button" onClick={action}>
-      {children}
     </div>
   );
 }

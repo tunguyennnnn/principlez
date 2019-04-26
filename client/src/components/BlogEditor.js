@@ -5,6 +5,8 @@ import { debounceTime } from 'rxjs/operators';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
 import Blocks from './editors/Blocks';
+import BlockMenu from './editors/BlockMenu';
+
 import schema from './editors/schema';
 import previewBodySchema from './editors/previewBodySchema';
 import { TITLE } from './editors/types';
@@ -80,14 +82,24 @@ export default class BlogEditor extends React.Component {
     return Blocks[node.type].call(null, props);
   };
 
+  getFocusKey() {
+    const { value } = this.state;
+    const { selection } = value;
+
+    if (value.blocks.size !== 1) return null;
+
+    return selection.isFocused && value.focusBlock.key;
+  }
+
   render() {
     const { readOnly, previewOnly, noTitle } = this.props;
+    const { value } = this.state;
     return (
       <div className="blog-editor-container">
+        {!readOnly && <BlockMenu focusKey={this.getFocusKey()} />}
         <Editor
-          value={this.state.value}
+          value={value}
           renderEditor={this.renderEditor}
-          autoFocus
           readOnly={readOnly}
           spellCheck
           schema={previewOnly || noTitle ? previewBodySchema : schema}

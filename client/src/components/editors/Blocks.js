@@ -2,8 +2,9 @@ import React from 'react';
 
 import Placeholder from './Placeholder';
 
-import { TITLE, PARAGRAPH } from './types';
+import { TITLE, PARAGRAPH, QUOTE } from './types';
 import Paragraph from './Paragraph';
+import Quote from './Quote';
 import StoryWriteContext from '../../contexts/StoryWriteContext';
 
 export default {
@@ -18,4 +19,5 @@ export default {
     </StoryWriteContext.Consumer>
   ),
   [PARAGRAPH]: props => <Paragraph {...props} />,
+  [QUOTE]: props => <Quote {...props} />,
 };

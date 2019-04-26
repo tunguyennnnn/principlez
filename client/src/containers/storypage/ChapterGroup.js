@@ -101,7 +101,7 @@ class ChapterGroup extends React.Component {
         ).map(group => {
           const { type, id, chapters } = group;
           return (
-            <div style={this.getStyle()}>
+            <div style={this.getStyle()} key={`chapter-group-${id}`}>
               <ChapterList
                 reorderChapters={this.reorderChapters}
                 deleteChapter={this.deleteChapter}

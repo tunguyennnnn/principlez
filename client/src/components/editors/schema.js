@@ -1,12 +1,12 @@
 import { Block } from 'slate';
 
-import { TITLE, PARAGRAPH } from './types';
+import { TITLE, PARAGRAPH, QUOTE } from './types';
 
 export default {
   document: {
     nodes: [
       { match: { type: TITLE }, min: 1, max: 1 },
-      { match: [PARAGRAPH].map(type => ({ type })), min: 1 },
+      { match: [PARAGRAPH, QUOTE].map(type => ({ type })), min: 1 },
     ],
     last: { type: PARAGRAPH },
     normalize: (editor, { code, node, child, index }) => {
