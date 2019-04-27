@@ -3,12 +3,12 @@ import IconButton from '../commons/IconButton';
 
 function computeTop(top, nodeHeight, menuHeight) {
   if (nodeHeight >= menuHeight) {
-    return top + nodeHeight - menuHeight;
+    return top + nodeHeight - menuHeight; // display at bottom
   }
-  return top - menuHeight / 2 + nodeHeight / 2;
+  return top - menuHeight / 2 + nodeHeight / 2; // display in middle
 }
 
-export default function BlockMenu({ focusKey }) {
+export default function BlockMenu({ focusKey, insertBlock }) {
   const domNode =
     focusKey && document.querySelector(`[data-key="${focusKey}"]`);
 
@@ -30,8 +30,16 @@ export default function BlockMenu({ focusKey }) {
         top: computeTop(top, height, menuHeight),
       }}
     >
-      <IconButton iconName="paragraph" style={{ fontSize: 10 }} />
-      <IconButton iconName="pen square" style={{ fontSize: 10 }} />
+      <IconButton
+        iconName="paragraph"
+        style={{ fontSize: 10 }}
+        action={insertBlock.bind(null, 'paragrapqh', focusKey)}
+      />
+      <IconButton
+        iconName="pen square"
+        style={{ fontSize: 10 }}
+        action={insertBlock.bind(null, 'quote', focusKey)}
+      />
     </div>
   );
 }

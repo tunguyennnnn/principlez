@@ -3,7 +3,7 @@ import React from 'react';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Editor } from 'slate-react';
-import { Value } from 'slate';
+import { Value, Block } from 'slate';
 import Blocks from './editors/Blocks';
 import BlockMenu from './editors/BlockMenu';
 
@@ -82,21 +82,36 @@ export default class BlogEditor extends React.Component {
     return Blocks[node.type].call(null, props);
   };
 
-  getFocusKey() {
+  getFocusKey = () => {
     const { value } = this.state;
-    const { selection } = value;
+    // const { selection } = value;
 
     if (value.blocks.size !== 1) return null;
 
-    return selection.isFocused && value.focusBlock.key;
-  }
+    return value.focusBlock.key;
+  };
+
+  insertBlock = (type, focusKey) => {
+    if (!focusKey) return;
+    const { editor } = this;
+    const { value } = editor;
+    const { document } = value;
+    const parent = document.getParent(focusKey);
+    const index = parent.nodes.findIndex(n => n.key === focusKey);
+    return editor.insertNodeByKey(parent.key, index + 1, Block.create(type));
+  };
 
   render() {
     const { readOnly, previewOnly, noTitle } = this.props;
     const { value } = this.state;
     return (
       <div className="blog-editor-container">
-        {!readOnly && <BlockMenu focusKey={this.getFocusKey()} />}
+        {!readOnly && (
+          <BlockMenu
+            focusKey={this.getFocusKey()}
+            insertBlock={this.insertBlock}
+          />
+        )}
         <Editor
           value={value}
           renderEditor={this.renderEditor}

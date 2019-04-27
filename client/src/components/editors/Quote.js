@@ -6,10 +6,10 @@ export default class Quote extends React.Component {
   render() {
     const { attributes, children, node } = this.props;
     return (
-      <p className="editor-quote" {...attributes}>
+      <blockquote className="editor-quote" {...attributes}>
         <Placeholder node={node} placeholderText="A quote..." />
         {children}
-      </p>
+      </blockquote>
     );
   }
 }

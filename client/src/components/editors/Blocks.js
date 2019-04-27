@@ -1,3 +1,4 @@
+import './render.scss';
 import React from 'react';
 
 import Placeholder from './Placeholder';
