@@ -507,7 +507,7 @@ var _default = {
 
                 case 9:
                   return _context11.abrupt("return", chapter.update({
-                    title: title || chapter.title,
+                    title: title === undefined ? chapter.title : title,
                     body: body || chapter.body
                   }));
 

@@ -7,6 +7,7 @@ import HomeMenu from './home/HomeMenu';
 import TopHomeMenu from './home/TopHomeMenu';
 
 export default function Home() {
+  console.log('rendering home');
   return (
     <div className="home-page-container">
       <MediaQuery query="(min-width: 751px)">

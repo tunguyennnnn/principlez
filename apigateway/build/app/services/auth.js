@@ -43,31 +43,34 @@ function () {
             headers = req.headers;
 
             if (!(headers.authorization && headers.authorization.split(' ')[0] === 'Bearer')) {
-              _context.next = 7;
+              _context.next = 13;
               break;
             }
 
+            _context.prev = 2;
             decoded = _jsonwebtoken.default.verify(headers.authorization.split(' ')[1], superSecret);
-            _context.next = 5;
+            _context.next = 6;
             return _models.default.User.findOne({
               where: {
                 id: decoded.id
               }
             });
 
-          case 5:
+          case 6:
             user = _context.sent;
             return _context.abrupt("return", user);
 
-          case 7:
-            return _context.abrupt("return", null);
+          case 10:
+            _context.prev = 10;
+            _context.t0 = _context["catch"](2);
+            console.log(_context.t0);
 
-          case 8:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this);
+    }, _callee, this, [[2, 10]]);
   }));
 
   return function authCheck(_x) {

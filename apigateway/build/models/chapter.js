@@ -123,5 +123,53 @@ module.exports = function (sequelize, DataTypes) {
     };
   }();
 
+  Chapter.search =
+  /*#__PURE__*/
+  function () {
+    var _ref4 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee3(text) {
+      var chapters;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return Chapter.findAll({
+                where: {
+                  title: {
+                    $iLike: "%".concat(text, "%")
+                  }
+                },
+                limit: 10,
+                attributes: ['id', 'title', 'body']
+              });
+
+            case 2:
+              chapters = _context3.sent;
+              return _context3.abrupt("return", chapters.map(function (chapter) {
+                var id = chapter.id,
+                    title = chapter.title,
+                    body = chapter.body;
+                return {
+                  id: id,
+                  title: title,
+                  body: body.length === 0 ? body : [body[0]]
+                };
+              }));
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    return function (_x3) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
   return Chapter;
 };

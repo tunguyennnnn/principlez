@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateUserInfo = exports.login = exports.signup = void 0;
+exports.search = exports.updateUserInfo = exports.login = exports.signup = void 0;
 
 var yup = _interopRequireWildcard(require("yup"));
 
@@ -25,3 +25,7 @@ var updateUserInfo = yup.object().shape({
   yearOfBirth: yup.string().trim().length(4, 'Year of birth example: 1975')
 });
 exports.updateUserInfo = updateUserInfo;
+var search = yup.object().shape({
+  text: yup.string().trim()
+});
+exports.search = search;
