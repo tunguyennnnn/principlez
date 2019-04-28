@@ -4,7 +4,7 @@ import MediaQuery from 'react-responsive';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import _ from 'lodash';
 
-import StoryWriteContext from '../contexts/StoryWriteContext';
+import StoryEditorContext from '../contexts/StoryWriteContext';
 import ChapterGroup from './storypage/ChapterGroup';
 import StoryWrite from './storypage/StoryWrite';
 import Action from './storypage/Action';
@@ -66,9 +66,10 @@ export default class StoryPage extends Component {
 
   render() {
     return (
-      <StoryWriteContext.Provider
+      <StoryEditorContext.Provider
         value={{
-          placeholderText: 'Tell us your story...',
+          titlePlaceholder: 'Tell us your story...',
+          readOnly: false,
         }}
       >
         <MediaQuery query="(min-width: 850px)">
@@ -77,7 +78,7 @@ export default class StoryPage extends Component {
         <MediaQuery query="(max-width: 849px)">
           {this.renderMobile()}
         </MediaQuery>
-      </StoryWriteContext.Provider>
+      </StoryEditorContext.Provider>
     );
   }
 }

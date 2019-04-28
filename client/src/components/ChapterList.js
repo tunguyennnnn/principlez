@@ -67,7 +67,7 @@ class ChapterList extends Component {
   }
 
   render() {
-    const { chapters, createChapter, readOnly } = this.props;
+    const { chapters, createChapter, type = 'STORY', readOnly } = this.props;
 
     if (readOnly) {
       return this.renderReadOnly();

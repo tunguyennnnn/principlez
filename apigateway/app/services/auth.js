@@ -27,8 +27,8 @@ export const authCheck = async req => {
         where: { id: decoded.id },
       });
       return user;
-    } finally {
-      return null;
+    } catch (e) {
+      console.log(e);
     }
   }
 };

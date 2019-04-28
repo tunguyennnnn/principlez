@@ -1,0 +1,18 @@
+.editor-quote {
+  font-style: italic;
+  margin: 8px 2px 8px 2px;
+  padding: 5px 7px 5px 7px;
+  font-size: 0.9em;
+  font-weight: 550;
+  color: #8ba987;
+  border-left: 2px solid #8ba987;
+}
+
+.editor-ol,
+.editor-ul {
+  padding-left: 30px;
+
+  .editor-li {
+    margin: 8px 0;
+  }
+}

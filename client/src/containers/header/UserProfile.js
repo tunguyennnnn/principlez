@@ -14,14 +14,14 @@ function UserProfile({ history }) {
   };
 
   return (
-    <span class="dropdown" style={{ float: 'right' }}>
+    <span className="dropdown" style={{ float: 'right' }}>
       <Image
         src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
         avatar
         className="header-image"
       />
-      <span class="dropbtn">{fullname}</span>
-      <div class="dropdown-content">
+      <span className="dropbtn">{fullname}</span>
+      <div className="dropdown-content">
         <Link to={`/of/${UserId.generateId(userId, fullname)}`}>
           My Profile
         </Link>

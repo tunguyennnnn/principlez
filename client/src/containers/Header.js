@@ -7,7 +7,7 @@ import Logo from './header/Logo';
 export default function Header() {
   return (
     <div className="header-container">
-      <div class="topnav">
+      <div className="topnav">
         <Logo />
         <User />
       </div>
