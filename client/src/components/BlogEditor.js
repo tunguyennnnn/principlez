@@ -6,6 +6,7 @@ import { Editor } from 'slate-react';
 import { Value, Block } from 'slate';
 import Blocks from './editors/Blocks';
 import BlockMenu from './editors/BlockMenu';
+import plugins from './editors/plugins';
 
 import schema from './editors/schema';
 import previewBodySchema from './editors/previewBodySchema';
@@ -73,6 +74,7 @@ export default class BlogEditor extends React.Component {
 
   renderEditor = (props, editor, next) => {
     this.editor = editor;
+    window.editor = editor;
     return next();
   };
 
@@ -88,7 +90,7 @@ export default class BlogEditor extends React.Component {
 
     if (value.blocks.size !== 1) return null;
 
-    return value.focusBlock.key;
+    return value.focusBlock.type !== TITLE && value.focusBlock.key;
   };
 
   insertBlock = (type, focusKey) => {
@@ -112,15 +114,18 @@ export default class BlogEditor extends React.Component {
             insertBlock={this.insertBlock}
           />
         )}
-        <Editor
-          value={value}
-          renderEditor={this.renderEditor}
-          readOnly={readOnly}
-          spellCheck
-          schema={previewOnly || noTitle ? previewBodySchema : schema}
-          renderNode={this.renderNode}
-          onChange={this.onChange}
-        />
+        <div className="blog-editor">
+          <Editor
+            value={value}
+            plugins={plugins}
+            renderEditor={this.renderEditor}
+            readOnly={readOnly}
+            spellCheck
+            schema={previewOnly || noTitle ? previewBodySchema : schema}
+            renderNode={this.renderNode}
+            onChange={this.onChange}
+          />
+        </div>
       </div>
     );
   }

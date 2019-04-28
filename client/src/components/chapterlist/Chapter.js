@@ -16,7 +16,7 @@ function ChapterMenu({ deleteChapter }) {
     }
   };
   return (
-    <div class="chapter-action-menu">
+    <div className="chapter-action-menu">
       <IconButton iconName="trash" text="delete story" action={deleteAction} />
     </div>
   );
@@ -29,7 +29,7 @@ function ChapterTitle({ title }) {
   return (
     <StoryWriteContext.Consumer>
       {({ placeholderText }) => (
-        <div class="title-place-holder">{placeholderText}</div>
+        <div className="title-place-holder">{placeholderText}</div>
       )}
     </StoryWriteContext.Consumer>
   );

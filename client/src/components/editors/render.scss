@@ -7,3 +7,12 @@
   color: #8ba987;
   border-left: 2px solid #8ba987;
 }
+
+.editor-ol,
+.editor-ul {
+  padding-left: 30px;
+
+  .editor-li {
+    margin: 8px 0;
+  }
+}

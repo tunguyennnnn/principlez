@@ -52,7 +52,7 @@ class StoryPage extends React.Component {
     }
 
     return (
-      <div class={`story-write-containter ${mobile ? 'mobile' : ''}`}>
+      <div className={`story-write-containter ${mobile ? 'mobile' : ''}`}>
         <BlogEditor
           title={title}
           body={body}

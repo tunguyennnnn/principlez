@@ -125,7 +125,7 @@ export default {
         }
 
         return chapter.update({
-          title: title || chapter.title,
+          title: title === undefined ? chapter.title : title,
           body: body || chapter.body,
         });
       },
