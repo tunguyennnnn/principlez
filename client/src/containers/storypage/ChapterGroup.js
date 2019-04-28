@@ -107,6 +107,7 @@ class ChapterGroup extends React.Component {
                 deleteChapter={this.deleteChapter}
                 createChapter={this.createChapter}
                 key={`group-${type}-${id}`}
+                type={type}
                 chapters={chapters}
               />
             </div>

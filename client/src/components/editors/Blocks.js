@@ -13,23 +13,29 @@ import {
 } from './types';
 import Paragraph from './Paragraph';
 import Quote from './Quote';
-import StoryWriteContext from '../../contexts/StoryWriteContext';
+import StoryEditorContext from '../../contexts/StoryWriteContext';
 
 export default {
-  [TITLE]: ({ attributes, children, node, readOnly }) => (
-    <StoryWriteContext.Consumer>
-      {({ placeholderText }) => (
+  [TITLE]: ({ attributes, children, node }) => (
+    <StoryEditorContext.Consumer>
+      {({ titlePlaceholder, readOnly }) => (
         <h2 {...attributes}>
-          {!readOnly && (
-            <Placeholder node={node} placeholderText={placeholderText} />
-          )}
+          <Placeholder node={node} placeholderText={titlePlaceholder} />
           {children}
         </h2>
       )}
-    </StoryWriteContext.Consumer>
+    </StoryEditorContext.Consumer>
   ),
-  [PARAGRAPH]: props => <Paragraph {...props} />,
-  [QUOTE]: props => <Quote {...props} />,
+  [PARAGRAPH]: props => (
+    <StoryEditorContext.Consumer>
+      {({ readOnly }) => <Paragraph {...props} readOnly={readOnly} />}
+    </StoryEditorContext.Consumer>
+  ),
+  [QUOTE]: props => (
+    <StoryEditorContext.Consumer>
+      {({ readOnly }) => <Quote {...props} />}
+    </StoryEditorContext.Consumer>
+  ),
   [ORDERED_LIST]: props => (
     <ol {...props.attributes} class="editor-ol">
       {props.children}

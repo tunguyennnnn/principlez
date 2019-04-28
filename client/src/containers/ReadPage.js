@@ -14,8 +14,8 @@ import Story from './readpage/Story';
 import AuthorInfo from './readpage/AuthorInfo';
 import SideMenu from '../components/SideMenu';
 import ChapterList from '../components/ChapterList';
+import StoryEditorContext from '../contexts/StoryWriteContext';
 
-window.scroller = scroller;
 class ReadPage extends React.Component {
   storiesRef = {};
 
@@ -157,14 +157,21 @@ class ReadPage extends React.Component {
     }
 
     return (
-      <div className="read-page" ref={el => (this.containerEl = el)}>
-        <MediaQuery query="(min-width: 850px)">
-          {this.renderDestop()}
-        </MediaQuery>
-        <MediaQuery query="(max-width: 850px)">
-          {this.renderMobile()}
-        </MediaQuery>
-      </div>
+      <StoryEditorContext.Provider
+        value={{
+          titlePlaceholder: 'No title',
+          readOnly: true,
+        }}
+      >
+        <div className="read-page" ref={el => (this.containerEl = el)}>
+          <MediaQuery query="(min-width: 850px)">
+            {this.renderDestop()}
+          </MediaQuery>
+          <MediaQuery query="(max-width: 850px)">
+            {this.renderMobile()}
+          </MediaQuery>
+        </div>
+      </StoryEditorContext.Provider>
     );
   }
 }

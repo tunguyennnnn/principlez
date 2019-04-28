@@ -28,8 +28,8 @@ function ChapterTitle({ title }) {
   }
   return (
     <StoryWriteContext.Consumer>
-      {({ placeholderText }) => (
-        <div className="title-place-holder">{placeholderText}</div>
+      {({ titlePlaceholder, readOnly }) => (
+        <div className="title-place-holder">{titlePlaceholder}</div>
       )}
     </StoryWriteContext.Consumer>
   );
