@@ -28,7 +28,7 @@ function ChapterTitle({ title }) {
   }
   return (
     <StoryWriteContext.Consumer>
-      {({ titlePlaceholder, readOnly }) => (
+      {({ titlePlaceholder, read }) => (
         <div className="title-place-holder">{titlePlaceholder}</div>
       )}
     </StoryWriteContext.Consumer>
@@ -86,6 +86,7 @@ function Chapter(props) {
 
   return (
     <Link
+      smooth
       className="chapter-content"
       to={readOnly ? `story-${id}` : id}
       containerId={mobile ? 'stories-container' : null}
