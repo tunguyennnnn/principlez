@@ -106,6 +106,7 @@ export default class BlogEditor extends React.Component {
   render() {
     const { readOnly, previewOnly, noTitle } = this.props;
     const { value } = this.state;
+
     return (
       <div className="blog-editor-container">
         {!readOnly && (
