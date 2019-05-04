@@ -1,39 +1,59 @@
-import React from 'react';
-import { Image } from 'semantic-ui-react';
-import { Link, withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-import * as UserId from '../../utils/userId';
 import { auth } from '../../services';
+import DropdownMenu from './DropdownMenu';
 
-function UserProfile({ history }) {
-  const { userId, fullname } = auth.userProfile;
-
-  const handleLogout = () => {
-    auth.logout();
-    history.push('/');
-  };
-
+function UserAvatar(props) {
+  const { fullname, onClick = null } = props;
   return (
-    <span className="dropdown" style={{ float: 'right' }}>
-      <Image
+    <div className="avatar-container">
+      <img
         src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-        avatar
+        alt="Avatar"
         className="header-image"
+        onClick={onClick}
       />
-      <span className="dropbtn">{fullname}</span>
-      <div className="dropdown-content">
-        <Link to={`/of/${UserId.generateId(userId, fullname)}`}>
-          My Profile
-        </Link>
-        <Link to={`/of/${UserId.generateId(userId, fullname)}/stories`}>
-          My Stories
-        </Link>
-        <span onClick={handleLogout} className="span-dropdown">
-          Sign Out
-        </span>
-      </div>
-    </span>
+      <span>{fullname}</span>
+    </div>
   );
 }
 
-export default withRouter(UserProfile);
+export default function UserProfile() {
+  const { fullname } = auth.userProfile;
+
+  const [isDropdownVisible, setDropdownVisibility] = useState(false);
+  const myRef = document.querySelector('#root');
+
+  const clickOutsideToHideDropdown = event => {
+    if (myRef && myRef.contains(event.target)) {
+      setDropdownVisibility(false);
+    }
+  };
+
+  const clickToShowDropdown = () => {
+    if (!isDropdownVisible) {
+      setDropdownVisibility(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', clickOutsideToHideDropdown);
+    return () => {
+      document.removeEventListener('click', clickOutsideToHideDropdown);
+    };
+  });
+
+  return (
+    <span className="user-profile-container">
+      {isDropdownVisible && (
+        <div>
+          <UserAvatar fullname={fullname} />
+          <DropdownMenu />
+        </div>
+      )}
+      {!isDropdownVisible && (
+        <UserAvatar fullname={fullname} onClick={clickToShowDropdown} />
+      )}
+    </span>
+  );
+}

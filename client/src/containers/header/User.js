@@ -7,10 +7,10 @@ import { auth } from '../../services';
 function Unauthorized() {
   return (
     <React.Fragment>
-      <span style={{ float: 'right' }}>
+      <span>
         <Link to="/login">LOGIN</Link>
       </span>
-      <span style={{ float: 'right' }}>
+      <span>
         <Link to="/signup">SIGN UP</Link>
       </span>
     </React.Fragment>
@@ -18,13 +18,13 @@ function Unauthorized() {
 }
 
 function Authorized() {
-  return (
-    <React.Fragment>
-      <UserProfile />
-    </React.Fragment>
-  );
+  return <UserProfile />;
 }
 
 export default function User() {
-  return auth.isUserLoginned() ? <Authorized /> : <Unauthorized />;
+  return (
+    <div style={{ float: 'right', position: 'relative' }}>
+      {auth.isUserLoginned() ? <Authorized /> : <Unauthorized />}
+    </div>
+  );
 }

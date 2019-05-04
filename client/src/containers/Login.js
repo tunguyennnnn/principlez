@@ -1,13 +1,13 @@
 import './login/login.scss';
 
 import React from 'react';
-import { Grid, Form, Button } from 'semantic-ui-react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, Redirect } from 'react-router-dom';
 
 import { auth } from '../services';
 import MessageDisplayer from '../components/commons/MessageDisplayer';
+import LargeButton from '../components/commons/Button';
 
 class Login extends React.Component {
   state = {
@@ -58,41 +58,27 @@ class Login extends React.Component {
     const { signinSuccess, message } = this.state;
     if (signinSuccess) return <Redirect to="/" />;
     return (
-      <Grid className="login-grid">
-        <Grid.Row className="login-row">
-          <Grid.Column className="login-column">
-            {message ? (
-              <MessageDisplayer
-                type="error"
-                message={message}
-                header="Log In"
-              />
-            ) : null}
-            <h4>
-              Don't have an account? <Link to="/signup">Sign up</Link>
-            </h4>
-            <Form onSubmit={this.onSubmit}>
-              <Form.Input
-                placeholder="Email"
-                name="email"
-                icon="mail"
-                iconPosition="left"
-                onChange={this.onChange}
-              />
-              <Form.Input
-                type="password"
-                placeholder="Password"
-                name="password"
-                icon="lock open"
-                iconPosition="left"
-                onChange={this.onChange}
-              />
-              <Button className="login-button">LOGIN</Button>
-            </Form>
-            <h4 className="login-centered-text">Forgot password?</h4>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <div className="login-page-container">
+        <div className="login-sub-container">
+          {message ? (
+            <MessageDisplayer type="error" message={message} header="Log In" />
+          ) : null}
+          <h4>
+            Don't have an account? <Link to="/signup">Sign up</Link>
+          </h4>
+          <form className="login-form" onSubmit={this.onSubmit}>
+            <input name="email" placeholder="Email" onChange={this.onChange} />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={this.onChange}
+            />
+            <LargeButton title="LOG IN" onClick={this.onSubmit} />
+          </form>
+          <h4 className="login-text">Forgot password?</h4>
+        </div>
+      </div>
     );
   }
 }

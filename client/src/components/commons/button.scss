@@ -7,3 +7,29 @@
   font-size: 80%;
   font-weight: bold;
 }
+
+.large-button-css {
+  display: inline-block;
+  margin-top: 5% !important;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  font-weight: 900;
+  text-align: center;
+  background-color: #777b7e;
+  width: 40%;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 750px) {
+  .large-button-css {
+    padding: 5px;
+  }
+}
+
+@media only screen and (min-width: 751px) {
+  .large-button-css {
+    font-size: 18px;
+    padding: 10px;
+  }
+}

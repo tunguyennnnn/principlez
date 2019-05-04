@@ -1,30 +1,100 @@
-.login-grid {
+.login-page-container {
+  width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  h4 {
+    color: white;
+  }
 }
 
-.login-row {
-  padding-bottom: 0px !important;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 10%;
+.login-sub-container {
+  width: 40%;
 }
 
-.login-column {
+.login-text {
+  text-align: center;
+  color: white;
+}
+
+.login-form {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  input {
+    resize: vertical;
+    margin-bottom: 2%;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
 }
 
 .login-button {
-  width: 60%;
-  background-color: #777b7e !important;
-  color: white !important;
+  display: inline-block;
   margin-top: 5% !important;
-  border-radius: 12px !important;
-  margin-left: 20% !important;
+  border: 0;
+  border-radius: 12px;
+  color: white;
+  font-weight: 900;
+  text-align: center;
+  background-color: #777b7e;
+  width: 40%;
 }
 
-.login-centered-text {
-  text-align: center;
+@media only screen and (max-width: 750px) {
+  .login-page-container {
+    padding-top: 100px;
+    background-image: url('../../assets/login-background-mobile.jpg');
+
+    h4 {
+      font-size: 13px;
+    }
+  }
+
+  .login-sub-container {
+    width: 80%;
+  }
+
+  .login-form {
+    input {
+      padding: 8px;
+      font-size: 10px;
+    }
+  }
+
+  .login-button {
+    padding: 5px;
+  }
+
+  .login-text {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (min-width: 751px) {
+  .login-page-container {
+    padding-top: 120px;
+    background-image: url('../../assets/signup-background.png');
+  }
+
+  .login-sub-container {
+    width: 40%;
+  }
+
+  .login-form {
+    input {
+      padding: 12px;
+    }
+  }
+
+  .login-button {
+    font-size: 18px;
+    padding: 10px;
+  }
 }
