@@ -5,6 +5,7 @@ import { debounceTime } from 'rxjs/operators';
 import { Editor } from 'slate-react';
 import { Value, Block } from 'slate';
 import Blocks from './editors/Blocks';
+import Marks from './editors/Marks';
 import BlockMenu from './editors/BlockMenu';
 import plugins from './editors/plugins';
 
@@ -84,6 +85,13 @@ export default class BlogEditor extends React.Component {
     return Blocks[node.type].call(null, props);
   };
 
+  renderMark = (props, editor, next) => {
+    console.log('reachhhhh');
+    const { mark } = props;
+    if (!Marks[mark.type]) return next();
+    return Marks[mark.type].call(null, props);
+  };
+
   getFocusKey = () => {
     const { value } = this.state;
     // const { selection } = value;
@@ -124,6 +132,7 @@ export default class BlogEditor extends React.Component {
             spellCheck
             schema={previewOnly || noTitle ? previewBodySchema : schema}
             renderNode={this.renderNode}
+            renderMark={this.renderMark}
             onChange={this.onChange}
           />
         </div>

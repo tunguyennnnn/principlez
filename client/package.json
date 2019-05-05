@@ -41,6 +41,7 @@
     "slate-plain-serializer": "^0.6.34",
     "slate-react": "^0.21.16",
     "slate-react-placeholder": "^0.1.13",
+    "trie-search": "^1.2.9",
     "validator": "^10.11.0"
   },
   "devDependencies": {

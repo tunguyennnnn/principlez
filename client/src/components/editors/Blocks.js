@@ -10,10 +10,12 @@ import {
   UNORDERED_LIST,
   ORDERED_LIST,
   LIST_ITEM,
+  AUTO_COMPLETE_MARK,
 } from './types';
 import Paragraph from './Paragraph';
 import Quote from './Quote';
 import StoryEditorContext from '../../contexts/StoryWriteContext';
+import AutoComplete from './AutoComplete';
 
 export default {
   [TITLE]: ({ attributes, children, node }) => (
@@ -51,4 +53,5 @@ export default {
       {props.children}
     </li>
   ),
+  [AUTO_COMPLETE_MARK]: props => <AutoComplete {...props} />,
 };

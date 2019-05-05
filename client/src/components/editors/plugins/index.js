@@ -1,2 +1,3 @@
 import listPlugin from './list-plugins';
-export default [listPlugin];
+import autoComplete from './autocomplete';
+export default [listPlugin, autoComplete];
