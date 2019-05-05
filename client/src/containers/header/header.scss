@@ -72,6 +72,10 @@
   }
 }
 
+.search-form-container {
+  display: inline-block;
+}
+
 @media only screen and (max-width: 750px) {
   .header-image {
     margin-top: 5% !important;

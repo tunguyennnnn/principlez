@@ -1,4 +1,4 @@
-export SearchField from './SearchField';
+export Search from './Search';
 export User from './User';
 export UserProfile from './UserProfile';
 export DropdownMenu from './DropdownMenu';
