@@ -10,27 +10,15 @@ export default function Actions({ horizontal }) {
   return (
     <ul className={`action-list ${horizontal && 'horizontal'}`}>
       <li className={className}>
-        <Link to={auth.userProfileLink}>
-          <Icon name="home" />
-          {' My Profile'}
-        </Link>
-      </li>
-      <li className={className}>
-        <Link to={auth.userStoriesLink}>
-          <Icon name="pencil alternate" />
-          {' Write my stories'}
-        </Link>
-      </li>
-      <li className={className}>
         <a>
           <Icon name="sticky note outline" />
-          {' New Stories'}
+          {'Popular stories'}
         </a>
       </li>
       <li className={className}>
         <a>
           <Icon name="street view" />
-          {' Writers Around Me'}
+          {'Writers Around Me'}
         </a>
       </li>
     </ul>
