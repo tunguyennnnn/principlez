@@ -77,7 +77,7 @@ class ChapterGroup extends React.Component {
 
     return {
       position: 'fixed',
-      width: 250,
+      width: 200,
     };
   };
 

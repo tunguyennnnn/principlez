@@ -1,7 +1,7 @@
 .home-menu-container {
   border-radius: 8px;
   font-family: sans-serif;
-  width: 250px;
+  width: 200px;
   position: fixed;
   top: 120px;
 
@@ -10,21 +10,29 @@
 
     .head {
       font-weight: 700;
-      font-size: 18px;
+      font-size: 16px;
       padding: 0 20px;
       line-height: 30px;
+      text-align: center;
+      color: #60677a;
+      text-decoration: underline;
     }
 
     .body {
       padding: 0 20px 20px;
       font-size: 20px;
-      font-size: 14px;
+      font-size: 16px;
+      font-weight: 500;
       line-height: 30px;
+      text-align: center;
+      color: #60677a;
     }
   }
 
   .channel-container {
     border-radius: 0 0 8px 8px;
+    color: #60677a;
+    text-align: center;
 
     .channels {
       padding: 15px;
@@ -38,6 +46,7 @@
 
       .channel:hover {
         transform: scale(1.3);
+        color: black;
       }
     }
   }
