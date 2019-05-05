@@ -7,6 +7,9 @@
 }
 
 .header-navigation {
+  display: flex;
+  align-items: center;
+
   span {
     float: left;
     color: #505050;
@@ -20,14 +23,14 @@
     text-align: left;
   }
 
-  .dropdown-menu {
+  .dropdown-menu-container {
     top: 70px;
     position: absolute;
     list-style: none;
     background-color: white;
     border: 1px solid #f0f0f0;
     border-radius: 5px;
-    width: 100%;
+    width: 15%;
     text-align: left;
     padding: 10px;
 
@@ -50,6 +53,11 @@
   span {
     padding-left: 16px !important;
   }
+}
+
+.search-field-container {
+  margin-left: auto;
+  padding: 20px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -75,7 +83,7 @@
     }
   }
 
-  .dropdown-menu {
+  .dropdown-menu-container {
     display: none;
   }
 
