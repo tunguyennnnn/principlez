@@ -6,10 +6,12 @@ import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 import _ from 'lodash';
 
+import SearchResultsDropdown from './SearchResultsDropdown';
+
 function Search(props) {
   const [isSearching, setSearchInput] = useState(false);
   const [text, setText] = useState('');
-  const [searchResults, setsearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   const clickToShowSearchInput = () => {
     if (!isSearching) {
@@ -25,7 +27,11 @@ function Search(props) {
         variables: { text },
         fetchPolicy: 'no-cache',
       });
-      console.log('result', result);
+      const {
+        data: { search },
+      } = result;
+      console.log(search);
+      setSearchResults(search);
     } catch (error) {
       console.log(error);
     }
@@ -40,13 +46,18 @@ function Search(props) {
         onClick={clickToShowSearchInput}
       />
       {isSearching && (
-        <form className="search-form-container" onSubmit={_executeSearch}>
-          <input
-            type="text"
-            placeholder="Search Principlez"
-            onChange={e => setText(e.target.value)}
-          />
-        </form>
+        <div className="search-form-container">
+          <form onSubmit={_executeSearch}>
+            <input
+              type="text"
+              placeholder="Search Principlez"
+              onChange={e => setText(e.target.value)}
+            />
+          </form>
+          {/* {!_.isEmpty(searchResults) && (
+            <SearchResultsDropdown results={searchResults} />
+          )} */}
+        </div>
       )}
     </div>
   );
