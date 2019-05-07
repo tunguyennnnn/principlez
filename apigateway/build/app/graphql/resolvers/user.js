@@ -128,32 +128,58 @@ var _default = {
       }
 
       return user;
+    }(),
+    users: function () {
+      var _users = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(root, args, _ref5) {
+        var models, user;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                models = _ref5.models, user = _ref5.user;
+                return _context4.abrupt("return", models.User.findAll());
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function users(_x10, _x11, _x12) {
+        return _users.apply(this, arguments);
+      }
+
+      return users;
     }()
   },
   Mutation: {
     signup: function () {
       var _signup = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(root, _ref5, _ref6) {
+      regeneratorRuntime.mark(function _callee5(root, _ref6, _ref7) {
         var email, fullname, password, location, yearOfBirth, models, userLocation, bcryptPassword, user;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                email = _ref5.email, fullname = _ref5.fullname, password = _ref5.password, location = _ref5.location, yearOfBirth = _ref5.yearOfBirth;
-                models = _ref6.models;
-                _context4.prev = 2;
-                _context4.next = 5;
+                email = _ref6.email, fullname = _ref6.fullname, password = _ref6.password, location = _ref6.location, yearOfBirth = _ref6.yearOfBirth;
+                models = _ref7.models;
+                _context5.prev = 2;
+                _context5.next = 5;
                 return models.Location.findOneOrCreate(location);
 
               case 5:
-                userLocation = _context4.sent;
-                _context4.next = 8;
+                userLocation = _context5.sent;
+                _context5.next = 8;
                 return (0, _bcrypt.encrypt)(password);
 
               case 8:
-                bcryptPassword = _context4.sent;
-                _context4.next = 11;
+                bcryptPassword = _context5.sent;
+                _context5.next = 11;
                 return models.User.create({
                   email: email,
                   fullname: fullname,
@@ -163,31 +189,31 @@ var _default = {
                 });
 
               case 11:
-                user = _context4.sent;
-                _context4.next = 14;
+                user = _context5.sent;
+                _context5.next = 14;
                 return models.ChapterGroup.createDefaultGroups(user.id);
 
               case 14:
-                return _context4.abrupt("return", {
+                return _context5.abrupt("return", {
                   user: user
                 });
 
               case 17:
-                _context4.prev = 17;
-                _context4.t0 = _context4["catch"](2);
-                return _context4.abrupt("return", {
-                  error: _context4.t0.toString()
+                _context5.prev = 17;
+                _context5.t0 = _context5["catch"](2);
+                return _context5.abrupt("return", {
+                  error: _context5.t0.toString()
                 });
 
               case 20:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this, [[2, 17]]);
+        }, _callee5, this, [[2, 17]]);
       }));
 
-      function signup(_x10, _x11, _x12) {
+      function signup(_x13, _x14, _x15) {
         return _signup.apply(this, arguments);
       }
 
@@ -196,16 +222,16 @@ var _default = {
     login: function () {
       var _login = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5(root, _ref7, _ref8) {
+      regeneratorRuntime.mark(function _callee6(root, _ref8, _ref9) {
         var email, password, models, user;
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                email = _ref7.email, password = _ref7.password;
-                models = _ref8.models;
-                _context5.prev = 2;
-                _context5.next = 5;
+                email = _ref8.email, password = _ref8.password;
+                models = _ref9.models;
+                _context6.prev = 2;
+                _context6.next = 5;
                 return models.User.findOne({
                   where: {
                     email: email
@@ -213,49 +239,49 @@ var _default = {
                 });
 
               case 5:
-                user = _context5.sent;
-                _context5.t0 = !user;
+                user = _context6.sent;
+                _context6.t0 = !user;
 
-                if (_context5.t0) {
-                  _context5.next = 11;
+                if (_context6.t0) {
+                  _context6.next = 11;
                   break;
                 }
 
-                _context5.next = 10;
+                _context6.next = 10;
                 return (0, _bcrypt.compare)(password, user.password);
 
               case 10:
-                _context5.t0 = !_context5.sent;
+                _context6.t0 = !_context6.sent;
 
               case 11:
-                if (!_context5.t0) {
-                  _context5.next = 13;
+                if (!_context6.t0) {
+                  _context6.next = 13;
                   break;
                 }
 
                 throw new Error("Incorrect email or password");
 
               case 13:
-                return _context5.abrupt("return", {
+                return _context6.abrupt("return", {
                   user: user
                 });
 
               case 16:
-                _context5.prev = 16;
-                _context5.t1 = _context5["catch"](2);
-                return _context5.abrupt("return", {
-                  error: _context5.t1.toString()
+                _context6.prev = 16;
+                _context6.t1 = _context6["catch"](2);
+                return _context6.abrupt("return", {
+                  error: _context6.t1.toString()
                 });
 
               case 19:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, this, [[2, 16]]);
+        }, _callee6, this, [[2, 16]]);
       }));
 
-      function login(_x13, _x14, _x15) {
+      function login(_x16, _x17, _x18) {
         return _login.apply(this, arguments);
       }
 
@@ -266,16 +292,16 @@ var _default = {
       resolve: function () {
         var _resolve = _asyncToGenerator(
         /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee6(root, _ref9, _ref10) {
+        regeneratorRuntime.mark(function _callee7(root, _ref10, _ref11) {
           var fullname, yearOfBirth, blurb, occupation, models, user, newUser;
-          return regeneratorRuntime.wrap(function _callee6$(_context6) {
+          return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
-              switch (_context6.prev = _context6.next) {
+              switch (_context7.prev = _context7.next) {
                 case 0:
-                  fullname = _ref9.fullname, yearOfBirth = _ref9.yearOfBirth, blurb = _ref9.blurb, occupation = _ref9.occupation;
-                  models = _ref10.models, user = _ref10.user;
-                  _context6.prev = 2;
-                  _context6.next = 5;
+                  fullname = _ref10.fullname, yearOfBirth = _ref10.yearOfBirth, blurb = _ref10.blurb, occupation = _ref10.occupation;
+                  models = _ref11.models, user = _ref11.user;
+                  _context7.prev = 2;
+                  _context7.next = 5;
                   return user.update({
                     fullname: fullname || user.fullname,
                     yearOfBirth: yearOfBirth || user.yearOfBirth,
@@ -284,27 +310,27 @@ var _default = {
                   });
 
                 case 5:
-                  newUser = _context6.sent;
-                  return _context6.abrupt("return", {
+                  newUser = _context7.sent;
+                  return _context7.abrupt("return", {
                     user: newUser
                   });
 
                 case 9:
-                  _context6.prev = 9;
-                  _context6.t0 = _context6["catch"](2);
-                  return _context6.abrupt("return", {
-                    error: _context6.t0.toString()
+                  _context7.prev = 9;
+                  _context7.t0 = _context7["catch"](2);
+                  return _context7.abrupt("return", {
+                    error: _context7.t0.toString()
                   });
 
                 case 12:
                 case "end":
-                  return _context6.stop();
+                  return _context7.stop();
               }
             }
-          }, _callee6, this, [[2, 9]]);
+          }, _callee7, this, [[2, 9]]);
         }));
 
-        function resolve(_x16, _x17, _x18) {
+        function resolve(_x19, _x20, _x21) {
           return _resolve.apply(this, arguments);
         }
 
