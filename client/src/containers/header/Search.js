@@ -1,10 +1,12 @@
 import './header.scss';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon } from 'semantic-ui-react';
 import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 import _ from 'lodash';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import SearchResultsDropdown from './SearchResultsDropdown';
 
@@ -12,6 +14,7 @@ function Search(props) {
   const [isSearching, setSearchInput] = useState(false);
   const [text, setText] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const input = new Subject();
 
   const clickToShowSearchInput = () => {
     if (!isSearching) {
@@ -19,9 +22,8 @@ function Search(props) {
     }
   };
 
-  const _executeSearch = async event => {
+  const _executeSearch = async () => {
     try {
-      event.preventDefault();
       const result = await props.client.query({
         query: searchQuery,
         variables: { text },
@@ -37,6 +39,19 @@ function Search(props) {
     }
   };
 
+  const onChange = event => {
+    const { value } = event.target;
+    input.next();
+    setText(value);
+  };
+
+  useEffect(() => {
+    input.pipe(debounceTime(3000)).subscribe(_executeSearch);
+    return () => {
+      input.unsubscribe();
+    };
+  }, [text]);
+
   return (
     <div className="search-field-container">
       <Icon
@@ -47,11 +62,12 @@ function Search(props) {
       />
       {isSearching && (
         <div className="search-form-container">
-          <form onSubmit={_executeSearch}>
+          <form>
             <input
               type="text"
               placeholder="Search Principlez"
-              onChange={e => setText(e.target.value)}
+              // onChange={e => setText(e.target.value)}
+              onChange={onChange}
             />
           </form>
           {/* {!_.isEmpty(searchResults) && (
