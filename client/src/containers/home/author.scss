@@ -1,0 +1,50 @@
+.home-authors {
+  position: fixed;
+  font-family: sans-serif;
+  top: 90px;
+  color: #60677a;
+
+  .head {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: underline;
+  }
+
+  .author {
+    width: 180px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    text-decoration: none;
+    color: #60677a;
+
+    .profile-image {
+      width: 60%;
+      margin: auto;
+    }
+
+    .info {
+      margin-top: 5px;
+      border-top: 1px solid #8ba987;
+      padding-top: 5px;
+
+      .name {
+        color: #8ba987;
+        font-weight: 600;
+      }
+
+      .location {
+        font-weight: 400;
+        font-size: 13px;
+      }
+
+      .occupation {
+        font-weight: 400;
+        font-size: 13px;
+      }
+    }
+  }
+}

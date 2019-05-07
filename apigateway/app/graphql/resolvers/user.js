@@ -26,6 +26,9 @@ export default {
     user: async (root, { id }, { models, user }) => {
       return models.User.findOne({ id });
     },
+    users: async (root, args, { models, user }) => {
+      return models.User.findAll();
+    },
   },
   Mutation: {
     signup: async (

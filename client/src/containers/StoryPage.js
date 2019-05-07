@@ -44,7 +44,10 @@ export default class StoryPage extends Component {
         <div className="chapter-list-container side-menu-grid">
           <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} />
         </div>
-        <TransitionGroup className="writing-container">
+        <TransitionGroup
+          className="writing-container"
+          style={{ minHeight: window.innerHeight - 80 }}
+        >
           <CSSTransition
             key={this.props.location.key}
             classNames="move"

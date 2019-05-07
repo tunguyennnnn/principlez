@@ -5,10 +5,11 @@
 
 html,
 body,
-#root {
+#root,
+#app {
   height: 100%;
   font-family: 'proxima-nova-soft', sans-serif;
-  background: white;
+  background: #f5f5f5;
 }
 
 #app-body {
@@ -17,9 +18,15 @@ body,
   padding-top: 80px;
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 1000px) {
   #app-body {
-    width: 900px;
+    width: 1000px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  #app {
+    background: white;
   }
 }
 
