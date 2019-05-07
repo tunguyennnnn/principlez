@@ -33,8 +33,11 @@
 
 @media only screen and (min-width: 850px) {
   .writing-container {
+    border-radius: 2px;
+    background: white;
     flex: 1;
     padding: 1.5vw 2vw 1.5vw 2vw;
+    padding-bottom: 10vh;
   }
 }
 
