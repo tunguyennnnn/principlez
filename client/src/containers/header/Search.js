@@ -10,8 +10,6 @@ import { debounceTime } from 'rxjs/operators';
 
 import SearchResultsDropdown from './SearchResultsDropdown';
 
-import SearchResultsDropdown from './SearchResultsDropdown';
-
 function Search(props) {
   const [isSearching, setSearchInput] = useState(false);
   const [text, setText] = useState('');
@@ -68,7 +66,8 @@ function Search(props) {
             <input
               type="text"
               placeholder="Search Principlez"
-              onChange={e => setText(e.target.value)}
+              // onChange={e => setText(e.target.value)}
+              onChange={onChange}
             />
           </form>
           {/* {!_.isEmpty(searchResults) && (
