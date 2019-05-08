@@ -18,6 +18,7 @@ export default function Home() {
       </MediaQuery>
       <MediaQuery query="(max-width: 800px)">
         <TopHomeMenu />
+        <Authors horizontal />
       </MediaQuery>
       <div className="home-page-body">
         <Body />
