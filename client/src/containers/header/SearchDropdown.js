@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SearchResultsDropdown(props) {
+export default function SearchDropdown(props) {
   const { results } = props;
   console.log('results', results);
   return (

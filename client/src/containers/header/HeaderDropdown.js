@@ -6,7 +6,7 @@ import * as UserId from '../../utils/userId';
 import { auth } from '../../services';
 
 // TODO: dropdown isn't visible in mobile view
-function DropdownMenu(props) {
+function HeaderDropdown(props) {
   const { history } = props;
   const { userId, fullname } = auth.userProfile;
 
@@ -32,4 +32,4 @@ function DropdownMenu(props) {
   );
 }
 
-export default withRouter(DropdownMenu);
+export default withRouter(HeaderDropdown);

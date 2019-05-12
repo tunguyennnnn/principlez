@@ -8,23 +8,32 @@ import _ from 'lodash';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import SearchResultsDropdown from './SearchResultsDropdown';
+import SearchDropdown from './SearchDropdown';
 
-function Search(props) {
-  const [isSearching, setSearchInput] = useState(false);
-  const [text, setText] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const input = new Subject();
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const clickToShowSearchInput = () => {
-    if (!isSearching) {
-      setSearchInput(true);
+    this.state = {
+      isSearching: false,
+      text: '',
+      searchResults: [],
+    };
+
+    this.input = new Subject().pipe(debounceTime(1000));
+    this.input.subscribe(this._executeSearch);
+  }
+
+  clickToShowSearchInput = () => {
+    if (!this.state.isSearching) {
+      this.setState({ isSearching: true });
     }
   };
 
-  const _executeSearch = async () => {
+  _executeSearch = async () => {
     try {
-      const result = await props.client.query({
+      const { text } = this.state;
+      const result = await this.props.client.query({
         query: searchQuery,
         variables: { text },
         fetchPolicy: 'no-cache',
@@ -32,51 +41,46 @@ function Search(props) {
       const {
         data: { search },
       } = result;
-      console.log(search);
-      setSearchResults(search);
+      this.setState({ ...this.state, searchResults: search });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onChange = event => {
+  onChange = event => {
     const { value } = event.target;
-    input.next();
-    setText(value);
+    this.input.next();
+    this.setState({ text: value });
   };
 
-  useEffect(() => {
-    input.pipe(debounceTime(3000)).subscribe(_executeSearch);
-    return () => {
-      input.unsubscribe();
-    };
-  }, [text]);
-
-  return (
-    <div className="search-field-container">
-      <Icon
-        name="search"
-        size="large"
-        color="grey"
-        onClick={clickToShowSearchInput}
-      />
-      {isSearching && (
-        <div className="search-form-container">
-          <form onSubmit={_executeSearch}>
-            <input
-              type="text"
-              placeholder="Search Principlez"
-              // onChange={e => setText(e.target.value)}
-              onChange={onChange}
-            />
-          </form>
-          {/* {!_.isEmpty(searchResults) && (
-            <SearchResultsDropdown results={searchResults} />
-          )} */}
-        </div>
-      )}
-    </div>
-  );
+  render() {
+    const { isSearching, searchResults } = this.state;
+    return (
+      <div className="search-field-container">
+        <Icon
+          name="search"
+          size="large"
+          color="grey"
+          onClick={this.clickToShowSearchInput}
+        />
+        {isSearching && (
+          <div className="search-form-container">
+            <form>
+              <input
+                type="text"
+                placeholder="Search Principlez"
+                onChange={this.onChange}
+                autoFocus
+              />
+            </form>
+            {!_.isEmpty(searchResults) && (
+              <SearchDropdown results={searchResults} />
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 const searchQuery = gql`
