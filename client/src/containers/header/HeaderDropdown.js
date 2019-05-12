@@ -16,7 +16,7 @@ function HeaderDropdown(props) {
   };
 
   return (
-    <div className="dropdown-menu-container">
+    <div className="header-dropdown-container">
       <li>
         <Link to={`/of/${UserId.generateId(userId, fullname)}/stories`}>
           Stories

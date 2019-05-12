@@ -5,7 +5,7 @@ import {
   UserSearchResult,
   TagSearchResult,
   StorySearchResult,
-} from '../../components/search/';
+} from './searchresult/';
 
 const Mapper = {
   UserSearchResult: UserSearchResult,
@@ -27,11 +27,11 @@ function organizeResultsByType(results) {
   );
 }
 
-function showResultsByType(results) {
+function showResultsByType(results, searchText) {
   return _.map(results, (value, type) => {
     if (_.isEmpty(value)) return;
     const Component = Mapper[type];
-    return <Component key={type} results={value} />;
+    return <Component key={type} results={value} searchText={searchText} />;
   });
 }
 
@@ -39,9 +39,9 @@ export default function SearchDropdown(props) {
   const { results, searchText } = props;
   const newResults = organizeResultsByType(results);
   return (
-    <div className="dropdown-menu-container">
-      <h4>Search for '{searchText}'</h4>
-      {showResultsByType(newResults)}
+    <div className="search-dropdown-container">
+      <h4>Searching for '{searchText}'</h4>
+      {showResultsByType(newResults, searchText)}
     </div>
   );
 }
