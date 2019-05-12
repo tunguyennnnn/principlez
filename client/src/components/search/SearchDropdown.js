@@ -13,6 +13,8 @@ const Mapper = {
   TagSearchResult: TagSearchResult,
 };
 
+const limit = 3;
+
 function organizeResultsByType(results) {
   return _.reduce(
     results,
@@ -27,11 +29,11 @@ function organizeResultsByType(results) {
   );
 }
 
-function showResultsByType(results, searchText) {
+function divideResultsByType(results) {
   return _.map(results, (value, type) => {
     if (_.isEmpty(value)) return;
     const Component = Mapper[type];
-    return <Component key={type} results={value} searchText={searchText} />;
+    return <Component key={type} results={value} limit={limit} />;
   });
 }
 
@@ -40,8 +42,11 @@ export default function SearchDropdown(props) {
   const newResults = organizeResultsByType(results);
   return (
     <div className="search-dropdown-container">
-      <h4>Searching for '{searchText}'</h4>
-      {showResultsByType(newResults, searchText)}
+      <li>Searching for '{searchText}'</li>
+      {divideResultsByType(newResults)}
+      {_.size(results) > limit && (
+        <li style={{ textAlign: 'center' }}>See more results</li>
+      )}
     </div>
   );
 }
