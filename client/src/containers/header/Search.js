@@ -54,7 +54,7 @@ class Search extends React.Component {
   };
 
   render() {
-    const { isSearching, searchResults } = this.state;
+    const { isSearching, searchResults, text } = this.state;
     return (
       <div className="search-field-container">
         <Icon
@@ -73,8 +73,8 @@ class Search extends React.Component {
                 autoFocus
               />
             </form>
-            {!_.isEmpty(searchResults) && (
-              <SearchDropdown results={searchResults} />
+            {text.length > 0 && (
+              <SearchDropdown results={searchResults} searchText={text} />
             )}
           </div>
         )}
