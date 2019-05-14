@@ -35,21 +35,7 @@ class Authors extends React.Component {
     const { authors } = data;
 
     if (horizontal) {
-      return (
-        <div className="home-authors-mobile">
-          <div className="container">
-            <div className="authors">
-              {_.range(0, 5).map(i => (
-                <Author
-                  key={`home-author-${authors[0].id}`}
-                  {...authors[0]}
-                  horizontal={horizontal}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      );
+      return null;
     }
 
     return (
@@ -60,10 +46,10 @@ class Authors extends React.Component {
           style={{ maxHeight: window.innerHeight * 0.7 }}
         >
           <div className="authors">
-            {_.range(0, 5).map(i => (
+            {authors.map(author => (
               <Author
-                key={`home-author-${authors[0].id}`}
-                {...authors[0]}
+                key={`home-author-${author.id}`}
+                {...author}
                 horizontal={horizontal}
               />
             ))}
