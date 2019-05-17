@@ -9,34 +9,51 @@ import { generateId } from '../../utils/userId';
 
 function Author({ id, fullname, location, profileImage, blurb, occupation }) {
   return (
-    <Link className="author box-shadow" to={`/of/${generateId(id, fullname)}`}>
-      <div className="profile-image">
-        {profileImage && <Image src={profileImage.medium} />}
-      </div>
-      <div className="info">
-        <div className="name">{fullname}</div>
-        <div className="location">{`${location.country} ${location.city}`}</div>
-        <div className="occupation">{occupation}</div>
-      </div>
-    </Link>
+    <div className="author" to={`/of/${generateId(id, fullname)}`}>
+      <Link to={`/of/${generateId(id, fullname)}`}>
+        <div className="profile-image">
+          {profileImage && <Image src={profileImage.medium} />}
+        </div>
+        <div className="info">
+          <div className="name">{fullname}</div>
+          <div className="location">{`${location.country} ${
+            location.city
+          }`}</div>
+          <div className="occupation">{occupation}</div>
+        </div>
+      </Link>
+    </div>
   );
 }
 
 class Authors extends React.Component {
   render() {
-    const { data } = this.props;
+    const { data, horizontal } = this.props;
     if (data.loading || data.error) {
       return <div />;
     }
     const { authors } = data;
 
+    if (horizontal) {
+      return null;
+    }
+
     return (
       <div className="home-authors">
-        {/* <div className="head">Authors</div> */}
-        <div className="authors">
-          {authors.map(author => (
-            <Author key={`home-author-${author.id}`} {...author} />
-          ))}
+        <div className="head">Top Authors & Coaches</div>
+        <div
+          className="container"
+          style={{ maxHeight: window.innerHeight * 0.7 }}
+        >
+          <div className="authors">
+            {authors.map(author => (
+              <Author
+                key={`home-author-${author.id}`}
+                {...author}
+                horizontal={horizontal}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );

@@ -12,8 +12,6 @@ export default function Card(props) {
   const viewCount = view.count + view.anonymousCount;
 
   const link = '/of/' + UserId.generateId(author.id, author.fullname);
-  const storyLink = link + (isAuthor ? `/stories/${id}` : `/stories?id=${id}`);
-  const linkText = isAuthor ? 'Edit...' : 'Read...';
 
   return (
     <div className="card-container box-shadow">
@@ -29,9 +27,15 @@ export default function Card(props) {
         </div>
         <div className="content">
           <BlogEditor title={title} body={body} readOnly previewOnly />
-        </div>
-        <div className="read">
-          <Link to={storyLink}>{linkText}</Link>
+          <div className="read">
+            {isAuthor ? (
+              <React.Fragment>
+                <Link to={`${link}/stories/${id}`}>Edit...</Link>
+                {' | '}
+              </React.Fragment>
+            ) : null}
+            <Link to={`${link}/stories?id=${id}`}>Read...</Link>
+          </div>
         </div>
       </div>
       <div className="card-actions">
