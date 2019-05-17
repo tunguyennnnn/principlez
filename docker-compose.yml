@@ -28,7 +28,22 @@ services:
       - "4000:4000"
     depends_on:
       - postgres
+      - elasticsearch
     environment:
       DB_HOST: postgres
+      ES_HOST: elasticsearch
     command: npm run dev
     restart: on-failure
+  elasticsearch:
+    networks:
+      - webnetwork
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    ports:
+      - "9300:9300"
+      - "9200:9200"
