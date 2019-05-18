@@ -76,11 +76,11 @@ module.exports = (sequelize, DataTypes) => {
         title: { $iLike: `%${text}%` },
       },
       limit: 10,
-      attributes: ['id', 'title', 'body'],
+      attributes: ['id', 'title', 'body', 'userId'],
     });
     return chapters.map(chapter => {
-      const { id, title, body } = chapter;
-      return { id, title, body: body.length === 0 ? body : [body[0]] };
+      const { id, title, body, userId } = chapter;
+      return { id, title, userId, body: body.length === 0 ? body : [body[0]] };
     });
   };
   return Chapter;

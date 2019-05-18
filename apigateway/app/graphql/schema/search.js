@@ -9,6 +9,7 @@ export default `
     id: ID!
     title: String!
     body: JSON!
+    userId: ID!
   }
 
   type UserSearchResult implements SearchResultInterface {

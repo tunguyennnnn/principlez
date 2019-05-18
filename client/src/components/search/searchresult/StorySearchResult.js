@@ -1,8 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { generateId } from '../../../utils/userId';
 
 function displayResults(results, limit) {
   return _.map(_.take(results, limit), (result, index) => {
-    const { title, body } = result;
+    const { title, body, id } = result;
+    console.log('result', result);
     return (
       <li key={index}>
         {title}

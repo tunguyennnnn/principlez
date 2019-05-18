@@ -41,6 +41,7 @@ class Search extends React.Component {
       const {
         data: { search },
       } = result;
+      console.log('search', search);
       this.setState({ ...this.state, searchResults: search });
     } catch (error) {
       console.log(error);
@@ -49,6 +50,9 @@ class Search extends React.Component {
 
   onChange = event => {
     const { value } = event.target;
+    if (!value) {
+      this.setState({ ...this.state, searchResults: [] });
+    }
     this.input.next();
     this.setState({ text: value });
   };
@@ -161,6 +165,7 @@ const searchQuery = gql`
         id
         title
         body
+        userId
       }
       ... on UserSearchResult {
         id
