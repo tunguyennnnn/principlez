@@ -8,7 +8,7 @@ import cors from 'cors';
 import models from '../models';
 import { schemaWithMiddleware } from './graphql';
 import middlewares from './graphql/middlewares';
-import './elastics';
+import '../elastics';
 console.log(process.env.ES_HOST);
 
 const server = new ApolloServer({
