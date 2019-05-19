@@ -1,4 +1,8 @@
 import elasticsearch from 'elasticsearch';
+import { addMappings } from './setup';
+import schema from './schema';
+
+export const indexName = 'principlez';
 
 const port = 9200;
 const host = process.env.ES_HOST || 'localhost';
@@ -12,6 +16,8 @@ async function checkConnection() {
       const health = await client.cluster.health({});
       console.log(health);
       isConnected = true;
+
+      await addMappings(schema);
     } catch (err) {
       console.log('Connection Failed, Retrying...', err);
     }

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Es from '../elastics';
 import * as utils from '../utils';
 
 const GroupTypes = ['STORY', 'ABOUT_ME', 'LESSON'];
@@ -69,7 +70,11 @@ module.exports = (sequelize, DataTypes) => {
 
   ChapterGroup.deleteChapter = async (chapterGroup, chapter) => {
     await sequelize.models.Chapter.destroy({ where: { id: chapter.id } });
-
+    try {
+      Es.esSearchStory.deleteStoryById(chapter.id);
+    } catch (e) {
+      console.log('Failed to destroy on esSearch');
+    }
     return chapterGroup.update({
       chapterListOrder: chapterGroup.chapterListOrder.filter(
         id => id !== chapter.id,

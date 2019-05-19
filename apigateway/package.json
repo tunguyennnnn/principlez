@@ -25,12 +25,14 @@
     "graphql-tools": "^4.0.4",
     "graphql-type-json": "^0.2.1",
     "graphql-upload": "^8.0.4",
+    "immutable": "^4.0.0-rc.12",
     "jsonwebtoken": "^8.5.0",
     "lodash": "^4.17.11",
     "merge-graphql-schemas": "^1.5.8",
     "pg": "^7.8.0",
     "sequelize": "^4.42.0",
     "shortid": "^2.2.14",
+    "slate": "^0.44.10",
     "yup": "^0.27.0"
   },
   "devDependencies": {

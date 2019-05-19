@@ -1,4 +1,6 @@
-'use strict';
+import { Value } from 'slate';
+import Es from '../elastics';
+
 module.exports = (sequelize, DataTypes) => {
   const Chapter = sequelize.define(
     'Chapter',
@@ -26,6 +28,22 @@ module.exports = (sequelize, DataTypes) => {
       imageId: DataTypes.INTEGER,
     },
     {
+      hooks: {
+        afterUpdate: async chapter => {
+          const { id, body, title } = chapter;
+          const slateObject = Value.fromJSON({
+            document: {
+              nodes: body,
+            },
+          });
+          const text = slateObject.document.text;
+          try {
+            await Es.esSearchStory.insertStory(id, { title, body: text });
+          } catch (e) {
+            console.log(e);
+          }
+        },
+      },
       indexes: [
         {
           fields: ['title'],
@@ -71,13 +89,15 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Chapter.search = async text => {
+    const chapterIds = await Es.esSearchStory.searchStory(text);
+
     const chapters = await Chapter.findAll({
       where: {
-        title: { $iLike: `%${text}%` },
+        id: chapterIds,
       },
-      limit: 10,
       attributes: ['id', 'title', 'body'],
     });
+
     return chapters.map(chapter => {
       const { id, title, body } = chapter;
       return { id, title, body: body.length === 0 ? body : [body[0]] };
