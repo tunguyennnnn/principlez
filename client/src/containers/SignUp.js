@@ -8,7 +8,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import Select from '../components/commons/Select';
 import LargeButton from '../components/commons/Button';
-import { ipLookUp } from '../utils/userLocation';
+import { ipLookUp } from '../services/userLocation';
 import { auth } from '../services';
 import MessageDisplayer from '../components/commons/MessageDisplayer';
 import { yearsDropdown } from '../utils/yearsDropdown';
