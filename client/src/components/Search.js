@@ -1,6 +1,6 @@
 import './search/search.scss';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -41,7 +41,7 @@ class Search extends React.Component {
       const {
         data: { search },
       } = result;
-      console.log('search', search);
+
       this.setState({ ...this.state, searchResults: search });
     } catch (error) {
       console.log(error);
@@ -87,77 +87,6 @@ class Search extends React.Component {
   }
 }
 
-// function Search(props) {
-//   const [isSearching, setSearchInput] = useState(false);
-//   const [text, setText] = useState('');
-//   const [searchResults, setSearchResults] = useState([]);
-//   const input = new Subject();
-
-//   const clickToShowSearchInput = () => {
-//     if (!isSearching) {
-//       setSearchInput(true);
-//     }
-//   };
-
-//   const _executeSearch = async () => {
-//     try {
-//       const result = await props.client.query({
-//         query: searchQuery,
-//         variables: { text },
-//         fetchPolicy: 'no-cache',
-//       });
-//       const {
-//         data: { search },
-//       } = result;
-//       console.log(search);
-//       setSearchResults(search);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   const onChange = event => {
-//     const { value } = event.target;
-//     if (value !== text) {
-//       input.next();
-//     }
-//     setText(value);
-//   };
-
-//   useEffect(() => {
-//     input.pipe(debounceTime(3000)).subscribe(_executeSearch);
-//     return () => {
-//       input.unsubscribe();
-//     };
-//   });
-
-//   return (
-//     <div className="search-field-container">
-//       <Icon
-//         name="search"
-//         size="large"
-//         color="grey"
-//         onClick={clickToShowSearchInput}
-//       />
-//       {isSearching && (
-//         <div className="search-form-container">
-//           <form>
-//             <input
-//               type="text"
-//               placeholder="Search Principlez"
-//               // onChange={e => setText(e.target.value)}
-//               onChange={onChange}
-//             />
-//           </form>
-//           {/* {!_.isEmpty(searchResults) && (
-//             <SearchResultsDropdown results={searchResults} />
-//           )} */}
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
 const searchQuery = gql`
   query searchQuery($text: String!) {
     search(text: $text) {
@@ -165,7 +94,10 @@ const searchQuery = gql`
         id
         title
         body
-        userId
+        author {
+          id
+          fullname
+        }
       }
       ... on UserSearchResult {
         id

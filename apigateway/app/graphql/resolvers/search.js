@@ -19,6 +19,13 @@ function getSearchSpec(text) {
 }
 
 export default {
+  StorySearchResult: {
+    author: async ({ userId }, args, { models }) => {
+      return await models.User.findOne({
+        id: userId,
+      });
+    },
+  },
   Query: {
     search: async (root, { text }, { models }) => {
       const spec = getSearchSpec(text);

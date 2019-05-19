@@ -1,16 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { generateId } from '../../../utils/userId';
+import * as UserId from '../../../utils/userId';
 
 function displayResults(results, limit) {
-  return _.map(_.take(results, limit), (result, index) => {
-    const { title, body, id } = result;
-    console.log('result', result);
+  return _.map(_.take(results, limit), result => {
+    const {
+      title,
+      body,
+      id,
+      author: { id: userId, fullname },
+    } = result;
     return (
-      <li key={index}>
-        {title}
-        {/* <div>{body[0].nodes[0].leaves[0].text}</div> */}
+      <li key={`${id}-${title}`}>
+        <Link
+          to={`/of/${UserId.generateId(userId, fullname)}/stories?id=${id}`}
+        >
+          {title}
+        </Link>
       </li>
     );
   });

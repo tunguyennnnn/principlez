@@ -9,7 +9,7 @@ export default `
     id: ID!
     title: String!
     body: JSON!
-    userId: ID!
+    author: User!
   }
 
   type UserSearchResult implements SearchResultInterface {
