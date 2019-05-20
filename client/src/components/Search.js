@@ -18,15 +18,39 @@ class Search extends React.Component {
     this.state = {
       text: '',
       searchResults: [],
+      isDropdownVisible: false,
     };
 
     this.input = new Subject().pipe(debounceTime(1000));
     this.input.subscribe(this._executeSearch);
   }
 
+  componentDidMount() {
+    document.addEventListener('click', this.hideDropdown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.hideDropdown);
+  }
+
+  hideDropdown = () => {
+    const { isDropdownVisible } = this.state;
+    if (isDropdownVisible) {
+      this.setState({ isDropdownVisible: false });
+    }
+  };
+
+  showDropdown = () => {
+    const { isDropdownVisible } = this.state;
+    if (!isDropdownVisible) {
+      this.setState({ isDropdownVisible: true });
+    }
+  };
+
   _executeSearch = async () => {
     try {
       const { text } = this.state;
+      if (!text) return;
       const result = await this.props.client.query({
         query: searchQuery,
         variables: { text },
@@ -46,8 +70,10 @@ class Search extends React.Component {
     const { value } = event.target;
     if (!value) {
       this.setState({ ...this.state, searchResults: [] });
+      this.hideDropdown();
     }
     this.input.next();
+    this.showDropdown();
     this.setState({ text: value });
   };
 
@@ -64,7 +90,7 @@ class Search extends React.Component {
   };
 
   render() {
-    const { searchResults, text } = this.state;
+    const { searchResults, text, isDropdownVisible } = this.state;
     return (
       <div className="search-form-container">
         <Icon name="search" size="large" color="grey" />
@@ -76,7 +102,7 @@ class Search extends React.Component {
               onChange={this.onChange}
             />
           </form>
-          {text.length > 0 && (
+          {isDropdownVisible && (
             <SearchDropdown results={searchResults} searchText={text} />
           )}
         </div>
