@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 import {
   UserSearchResult,
@@ -44,9 +45,6 @@ export default function SearchDropdown(props) {
     <div className="search-dropdown-container">
       <li>Searching for '{searchText}'</li>
       {divideResultsByType(newResults)}
-      {_.size(results) > limit && (
-        <li style={{ textAlign: 'center' }}>See more results</li>
-      )}
     </div>
   );
 }

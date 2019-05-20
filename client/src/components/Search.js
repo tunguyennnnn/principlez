@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import _ from 'lodash';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { withRouter } from 'react-router-dom';
 
 import SearchDropdown from './search/SearchDropdown';
 
@@ -15,7 +16,6 @@ class Search extends React.Component {
     super(props);
 
     this.state = {
-      isSearching: false,
       text: '',
       searchResults: [],
     };
@@ -23,12 +23,6 @@ class Search extends React.Component {
     this.input = new Subject().pipe(debounceTime(1000));
     this.input.subscribe(this._executeSearch);
   }
-
-  clickToShowSearchInput = () => {
-    if (!this.state.isSearching) {
-      this.setState({ isSearching: true });
-    }
-  };
 
   _executeSearch = async () => {
     try {
@@ -57,31 +51,35 @@ class Search extends React.Component {
     this.setState({ text: value });
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    const { text, searchResults } = this.state;
+    if (!text) return;
+    const searchPath = `?q=${text}`;
+    this.props.history.push({
+      pathname: '/search',
+      search: searchPath,
+      state: { results: searchResults },
+    });
+  };
+
   render() {
-    const { isSearching, searchResults, text } = this.state;
+    const { searchResults, text } = this.state;
     return (
       <div className="search-form-container">
-        <Icon
-          name="search"
-          size="large"
-          color="grey"
-          onClick={this.clickToShowSearchInput}
-        />
-        {isSearching && (
-          <div className="search-field-container">
-            <form>
-              <input
-                type="text"
-                placeholder="Search Principlez"
-                onChange={this.onChange}
-                autoFocus
-              />
-            </form>
-            {text.length > 0 && (
-              <SearchDropdown results={searchResults} searchText={text} />
-            )}
-          </div>
-        )}
+        <Icon name="search" size="large" color="grey" />
+        <div className="search-field-container">
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              placeholder="Search Principlez"
+              onChange={this.onChange}
+            />
+          </form>
+          {text.length > 0 && (
+            <SearchDropdown results={searchResults} searchText={text} />
+          )}
+        </div>
       </div>
     );
   }
@@ -107,4 +105,4 @@ const searchQuery = gql`
   }
 `;
 
-export default withApollo(Search);
+export default withRouter(withApollo(Search));
