@@ -1,21 +1,15 @@
 .home-menu-container {
-  border-radius: 8px;
-  font-family: sans-serif;
-  width: 200px;
-  position: fixed;
-  top: 120px;
+  padding-top: 4vh;
+  height: 100%;
+  padding: 10px;
 
   .introduction {
     border-radius: 8px 8px 0 0;
-
     .head {
-      font-weight: 700;
+      font-weight: 600;
       font-size: 16px;
-      padding: 0 20px;
       line-height: 30px;
       text-align: center;
-      color: #60677a;
-      text-decoration: underline;
     }
 
     .body {
@@ -25,20 +19,21 @@
       font-weight: 500;
       line-height: 30px;
       text-align: center;
-      color: #60677a;
     }
   }
 
   .channel-container {
-    border-radius: 0 0 8px 8px;
-    color: #60677a;
-    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    border-top: 1px solid #60677a;
+    // color: #60677a;
 
     .channels {
-      padding: 15px;
-      border-radius: 0 0 8px 8px;
-
       .channel {
+        margin: 5px;
         cursor: pointer;
         font-size: 25px;
         transition: all 0.2s ease-in-out;
@@ -46,7 +41,7 @@
 
       .channel:hover {
         transform: scale(1.3);
-        color: black;
+        // color: black;
       }
     }
   }

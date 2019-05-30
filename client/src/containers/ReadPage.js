@@ -1,20 +1,18 @@
-import './readpage/readpage.scss';
+// import './readpage/readpage.scss';
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { branch, renderComponent } from 'recompose';
-import MediaQuery from 'react-responsive';
 import _ from 'lodash';
 import queryString from 'query-string';
-import { Icon } from 'semantic-ui-react';
 import { Element, scroller } from 'react-scroll';
 
 import { extractUserId } from '../utils/userId';
 import Story from './readpage/Story';
 import AuthorInfo from './readpage/AuthorInfo';
-import SideMenu from '../components/SideMenu';
 import ChapterList from '../components/ChapterList';
 import StoryEditorContext from '../contexts/StoryWriteContext';
+import Sidebar from './SideBar';
 
 class ReadPage extends React.Component {
   storiesRef = {};
@@ -109,52 +107,13 @@ class ReadPage extends React.Component {
     );
   }
 
-  renderMobile() {
-    const { authorQuery } = this.props;
-    const { author } = authorQuery;
-    return (
-      <SideMenu
-        triggerTitle={
-          <React.Fragment>
-            <Icon name="address book outline" />
-          </React.Fragment>
-        }
-        headerTitle="Author"
-        menuComp={
-          <div className="author-info-container mobile">
-            <div className="author-info mobile">
-              <AuthorInfo {...author} />
-              {this.renderChaptersMenu(true)}
-            </div>
-          </div>
-        }
-        contentComp={() => this.renderBody()}
-      />
-    );
-  }
-
-  renderDestop() {
-    const { authorQuery } = this.props;
-    const { author } = authorQuery;
-
-    return (
-      <React.Fragment>
-        <div className="author-info-container side-menu-grid">
-          <div className="author-info">
-            <AuthorInfo {...author} />
-            {this.renderChaptersMenu()}
-          </div>
-        </div>
-        {this.renderBody()}
-      </React.Fragment>
-    );
-  }
-
   render() {
     const { authorQuery, storiesQuery } = this.props;
     if (authorQuery.loading || storiesQuery.loading) {
       return <div>loading...</div>;
     }
+
+    const { author } = authorQuery;
 
     return (
       <StoryEditorContext.Provider
@@ -164,12 +123,15 @@ class ReadPage extends React.Component {
         }}
       >
         <div className="read-page" ref={el => (this.containerEl = el)}>
-          <MediaQuery query="(min-width: 850px)">
-            {this.renderDestop()}
-          </MediaQuery>
-          <MediaQuery query="(max-width: 850px)">
-            {this.renderMobile()}
-          </MediaQuery>
+          <Sidebar>
+            <div className="author-info-container">
+              <div className="author-info">
+                <AuthorInfo {...author} />
+                {this.renderChaptersMenu()}
+              </div>
+            </div>
+          </Sidebar>
+          {this.renderBody()}
         </div>
       </StoryEditorContext.Provider>
     );

@@ -1,27 +1,25 @@
 import './author.scss';
 import React from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import { generateId } from '../../utils/userId';
 
 function Author({ id, fullname, location, profileImage, blurb, occupation }) {
   return (
-    <div className="author" to={`/of/${generateId(id, fullname)}`}>
-      <Link to={`/of/${generateId(id, fullname)}`}>
-        <div className="profile-image">
-          {profileImage && <Image src={profileImage.medium} />}
-        </div>
-        <div className="info">
-          <div className="name">{fullname}</div>
-          <div className="location">{`${location.country} ${
-            location.city
-          }`}</div>
-          <div className="occupation">{occupation}</div>
-        </div>
-      </Link>
+    <div className="author">
+      <Card>
+        <CardImg top src={profileImage.medium} alt="Card image cap" />
+        <CardBody>
+          <Link to={`/of/${generateId(id, fullname)}`}>
+            <CardTitle tag="h5">{fullname}</CardTitle>
+            <CardText>{occupation}</CardText>
+          </Link>
+          <CardText>{`${location.country} / ${location.city}`}</CardText>
+        </CardBody>
+      </Card>
     </div>
   );
 }

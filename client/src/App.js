@@ -1,61 +1,50 @@
-import './styles/common.scss';
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from 'react';
+import { PageSettings } from './config/page-settings.js';
 
 import Header from './containers/Header';
-import Home from './containers/Home';
-import SignUp from './containers/SignUp';
-import StoryPage from './containers/StoryPage';
-import Login from './containers/Login';
-import ReadPage from './containers/ReadPage';
-import ProfilePage from './containers/ProfilePage';
+import Sidebar from './containers/SideBar';
+import Footer from './containers/Footer';
+import Routes from './Routes';
 
-export default class App extends Component {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.toggleMobileSidebar = e => {
+      this.setState(state => ({
+        pageSidebarToggled: !this.state.pageSidebarToggled,
+      }));
+    };
+
+    this.state = {
+      pageSidebar: true,
+      pageSidebarWide: true,
+
+      pageSidebarToggled: false,
+
+      toggleMobileSidebar: this.toggleMobileSidebar,
+    };
+  }
+
   render() {
     return (
-      <div id="app">
-        <Header />
-        <Switch>
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login" component={Login} />
-          <Route
-            exact
-            path="/"
-            component={props => (
-              <div id="app-body">
-                <Home {...props} />
-              </div>
-            )}
-          />
-          <Route
-            exact
-            path="/of/:name"
-            component={props => (
-              <div id="app-body">
-                <ProfilePage {...props} />
-              </div>
-            )}
-          />
-          <Route
-            exact
-            path="/of/:name/stories/:chapterId"
-            component={props => (
-              <div id="app-body">
-                <StoryPage {...props} />
-              </div>
-            )}
-          />
-          <Route
-            exact
-            path="/of/:name/stories"
-            component={props => (
-              <div id="app-body">
-                <ReadPage {...props} />
-              </div>
-            )}
-          />
-        </Switch>
-      </div>
+      <PageSettings.Provider value={this.state}>
+        <div
+          className={
+            'fade page-sidebar-fixed show page-container page-header-fixed page-with-top-menu' +
+            (this.state.pageSidebar ? '' : 'page-without-sidebar ') +
+            (this.state.pageSidebarWide ? 'page-with-wide-sidebar ' : '') +
+            (this.state.pageSidebarToggled ? 'page-sidebar-toggled ' : '')
+          }
+        >
+          <Header />
+          {/* <Sidebar /> */}
+          <Routes />
+          <Footer />
+        </div>
+      </PageSettings.Provider>
     );
   }
 }
+
+export default App;

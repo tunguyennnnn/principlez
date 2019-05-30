@@ -5,8 +5,6 @@
   position: relative;
   font-family: sans-serif;
   box-sizing: border-box;
-  color: #60677a;
-  // background-color: #eceae0;
 
   .chapter-list-add-icon {
     position: absolute;
@@ -15,14 +13,14 @@
     font-weight: 500;
     font-size: 20px;
     left: 0px;
-    color: #8ba987;
+    color: #4b6777;
   }
 
   .chapter {
     position: relative;
     margin-bottom: 5px;
     padding: 5px;
-    border-left: 2px solid #8ba987;
+    // border-left: 2px solid #ce9e62;
     cursor: grab;
 
     .chapter-content {
@@ -45,7 +43,7 @@
       .chapter-action-menu {
         i {
           font-size: 14px;
-          color: #8ba987;
+          color: #4b6777;
           cursor: pointer;
         }
       }

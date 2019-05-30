@@ -1,0 +1,495 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.css');
+@import url('https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css');
+@import 'assets/css/apple/style.css';
+@import 'assets/css/apple/style-responsive.css';
+@import 'assets/css/apple/theme/default.css';
+@import 'assets/css/style.css';
+
+/* Modal Setting */
+
+.modal-message {
+  max-width: 100%;
+  width: 100%;
+}
+.modal-header .modal-title {
+  font-size: 18px;
+}
+
+/* Sidebar Setting */
+
+.sidebar-mobile-dismiss {
+  display: none;
+}
+.float-sub-menu-container {
+  overflow: hidden;
+}
+.sidebar .nav li.has-sub.expand > .sub-menu,
+.float-sub-menu li.has-sub.expand > .sub-menu {
+  display: block;
+}
+.sidebar .nav li.has-sub.closed > .sub-menu {
+  display: none;
+}
+.page-sidebar-minified .sidebar .nav li.has-sub:hover > .sub-menu {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .page-sidebar-toggled .sidebar-mobile-dismiss {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1020;
+  }
+}
+
+/* React Nvd3 */
+
+body .widget-chart-full-width .nvd3-svg {
+  width: calc(100% + 25px) !important;
+}
+
+/* CodeMirrow */
+
+.CodeMirror {
+  height: auto;
+}
+
+/* React Tags */
+
+.inbox .react-tags {
+  display: block;
+  border: none !important;
+  border-bottom: 1px solid #ccd0d4 !important;
+  padding: 9px 12px 9px 45px !important;
+  border-radius: 0;
+}
+.react-tags {
+  border: 1px solid #d3d8de !important;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.react-tags .react-tags__search,
+.react-tags .react-tags__selected {
+  display: inline-block;
+}
+.react-tags .react-tags__selected-tag,
+.react-tags .react-tags__selected-tag:focus,
+.react-tags .react-tags__selected-tag:active {
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+  padding: 2px 24px 3px 7px;
+  background: #348fe2;
+  position: relative;
+  margin-right: 6px;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.react-tags .react-tags__selected-tag:before {
+  content: 'x';
+  position: absolute;
+  right: 8px;
+  line-height: 22px;
+  text-align: center;
+  top: 0;
+  margin: 0;
+  font-weight: bold;
+}
+.react-tags .react-tags__search-input input,
+.react-tags .react-tags__search-input input:focus,
+.react-tags .react-tags__search-input input:active {
+  width: auto !important;
+  border: none;
+  background: none;
+  height: 22px;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.react-tags .react-tags__search {
+  position: relative;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+.react-tags .react-tags__search .react-tags__suggestions {
+  position: absolute;
+  left: 0;
+  top: 100%;
+}
+.react-tags .react-tags__search .react-tags__suggestions ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 0;
+  background: #fff;
+  box-shadow: 0 2px 12px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+.react-tags .react-tags__search .react-tags__suggestions ul > li {
+  padding: 5px 10px;
+}
+.react-tags .react-tags__search .react-tags__suggestions ul > li.is-active {
+  background: #348fe2;
+  color: #fff;
+}
+
+/* React Calendar */
+
+.react-calendar {
+  width: auto;
+  border: none;
+  font-family: inherit;
+}
+.react-calendar .react-calendar__month-view {
+  padding: 0 0 10px;
+}
+.react-calendar .react-calendar__year-view,
+.react-calendar .react-calendar__century-view {
+  padding: 0 15px 10px;
+}
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 15px 15px;
+}
+.react-calendar button {
+  border-radius: 6px;
+}
+.react-calendar button:focus {
+  outline: none;
+}
+.react-calendar .react-calendar__navigation {
+  margin: 0;
+}
+.react-calendar .react-calendar__navigation button,
+.react-calendar .react-calendar__navigation button:hover,
+.react-calendar .react-calendar__navigation button:focus,
+.react-calendar .react-calendar__navigation button:active {
+  background: none !important;
+}
+.react-calendar .react-calendar__navigation__arrow {
+  font-size: 24px;
+  line-height: 20px;
+}
+.react-calendar .react-calendar__navigation__label {
+  font-size: 18px;
+  line-height: 20px;
+}
+.react-calendar .react-calendar__tile--hasActive,
+.react-calendar .react-calendar__tile--active {
+  background: #348fe2 !important;
+  color: #fff !important;
+}
+
+/* React Datetimepicker */
+
+.rdtPicker {
+  width: 320px;
+  border: none;
+  box-shadow: 0 5px 30px 0px rgba(0, 0, 0, 0.25);
+}
+.rdtPicker td,
+.rdtPicker th,
+.rdtCounter .rdtBtn {
+  border-radius: 4px;
+}
+.rdtPicker td.rdtActive,
+.rdtPicker td.rdtActive:hover {
+  text-shadow: none;
+  background: #348fe2;
+}
+.rdtPicker td.rdtToday:before {
+  border-bottom-color: #348fe2;
+}
+.rdtPrev span,
+.rdtNext span {
+  position: relative;
+  top: -2px;
+}
+.rdtPicker .dow,
+.rdtPicker th.rdtSwitch,
+.rdtCounter .rdtBtn {
+  color: #2d353c;
+}
+.rdtPicker th.rdtNext,
+.rdtPicker th.rdtPrev {
+}
+.rdtPicker th,
+.rdtPicker tfoot {
+  border: none;
+}
+
+/* React Datepicker */
+
+.react-datepicker-popper {
+  z-index: 1020;
+}
+.react-datepicker-popper .react-datepicker {
+  border: none;
+  box-shadow: 0 5px 30px 0px rgba(0, 0, 0, 0.25);
+}
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+  background: #348fe2;
+  border-radius: 4px;
+}
+.react-datepicker__header {
+  background: #f2f3f4;
+  border-bottom-color: #d3d8de;
+}
+.react-datepicker {
+  font-family: inherit;
+  border-color: #d3d8de;
+}
+.react-datepicker-popper .react-datepicker__triangle {
+  display: none;
+}
+
+/* React Colorpicker */
+
+.dropdown-menu .sketch-picker,
+.dropdown-menu .swatches-picker,
+.dropdown-menu .alpha-picker,
+.dropdown-menu .block-picker,
+.dropdown-menu .chrome-picker,
+.dropdown-menu .compact-picker,
+.dropdown-menu .github-picker,
+.dropdown-menu .hue-picker,
+.dropdown-menu .material-picker,
+.dropdown-menu .photoshop-picker,
+.dropdown-menu .slider-picker,
+.dropdown-menu .twitter-picker {
+  border: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+.dropdown-menu .photoshop-picker,
+.dropdown-menu .chrome-picker {
+  margin-top: -8px !important;
+}
+
+/* React Select */
+
+.css-10nd86i .css-vj8t7z {
+  min-height: 34px;
+  border-color: #d3d8de;
+}
+.css-10nd86i .css-1ep9fjw,
+.css-10nd86i .css-1uq0kb5 {
+  padding: 6px;
+}
+.css-10nd86i .css-d8oujb {
+  margin-top: 0;
+  margin-bottom: 0;
+  background: none;
+}
+.css-10nd86i .css-2o5izw {
+  min-height: 34px;
+  border: 1px solid #5db0ff;
+  outline: 0;
+  box-shadow: 0 0 0 0.125rem rgba(52, 142, 227, 0.3);
+}
+
+/* React Slider */
+
+.rc-slider {
+  height: 34px;
+  padding: 15px 0;
+}
+.rc-slider-mark {
+  top: 24px;
+}
+.rc-slider-handle,
+.rc-slider-handle:hover,
+.rc-slider-handle:active,
+.rc-slider-dot-active {
+  background: #fff;
+  border-color: #348fe2;
+}
+.rc-slider-handle:focus {
+  border-color: #348fe2;
+  outline: 0;
+  box-shadow: 0 0 0 0.125rem rgba(52, 142, 227, 0.3);
+}
+.rc-slider-track {
+  background: #348fe2;
+}
+
+/* React Table */
+
+.ReactTable {
+  border: none;
+}
+.ReactTable .rt-thead.-header,
+.ReactTable .-pagination {
+  box-shadow: none;
+}
+.ReactTable .rt-th {
+  color: #242a30;
+  font-weight: 600;
+}
+.ReactTable .rt-thead + .rt-tbody {
+  border-top: 1px solid #b6c2c9 !important;
+}
+.ReactTable .rt-td,
+.ReactTable .rt-thead.-filters .rt-th {
+  border-color: #e2e7eb;
+  padding: 10px 15px;
+}
+.ReactTable .-header .rt-th,
+.ReactTable .-headerGroups .rt-th {
+  border-color: #e2e7eb;
+  padding: 5px 15px;
+}
+.ReactTable .rt-thead .rt-th,
+.ReactTable .rt-thead .rt-td,
+.ReactTable .rt-tbody .rt-td,
+.ReactTable .rt-tbody .rt-tr-group {
+  border-color: #e2e7eb;
+}
+.ReactTable .-pagination {
+  border-top: 1px solid #b6c2c9 !important;
+  padding: 10px 15px;
+  background: #f2f3f4;
+}
+.ReactTable .-pagination .-btn {
+  display: block;
+  color: #242a30;
+  padding: 6px 12px;
+  line-height: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-weight: 600;
+}
+.ReactTable .-pagination input,
+.ReactTable .-pagination select {
+  border: 1px solid #d3d8de;
+  box-shadow: none;
+  font-size: 12px;
+  line-height: 1.42857143;
+  height: 34px;
+  padding: 6px 12px;
+}
+.ReactTable .-pagination input:focus,
+.ReactTable .-pagination select:focus {
+  border-color: #5db0ff;
+  outline: 0;
+  box-shadow: 0 0 0 0.125rem rgba(52, 142, 227, 0.3);
+}
+.ReactTable .-pagination .-center {
+  flex: 2.5 1;
+}
+.ReactTable .-pagination .-pageInfo,
+.ReactTable .-pagination .-pageSizeOptions {
+  margin: 0 10px;
+}
+@media (max-width: 767px) {
+  .ReactTable .-pagination .-pageInfo,
+  .ReactTable .-pagination .-pageSizeOptions {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .ReactTable .-pagination .-center {
+    flex: 1.5 1;
+  }
+}
+.ReactTable .-pagination .-btn:not([disabled]):hover {
+  color: #242a30;
+  background: #f2f3f4;
+  border-color: #dadfe2;
+}
+.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
+  background: #f2f3f4;
+}
+.ReactTable .-headerGroups .rt-th {
+  font-weight: bold;
+}
+.ReactTable .rt-thead.-filters {
+  border-bottom: none;
+  border-top: 1px solid #e2e7eb;
+}
+.ReactTable .rt-thead .rt-th.-sort-asc,
+.ReactTable .rt-thead .rt-td.-sort-asc,
+.ReactTable .rt-thead .rt-th.-sort-desc,
+.ReactTable .rt-thead .rt-td.-sort-desc {
+  box-shadow: none;
+}
+.ReactTable .rt-thead .rt-th .rt-resizable-header-content {
+  position: relative;
+}
+.ReactTable .rt-thead .rt-th .rt-resizable-header-content:before {
+  content: '\f0dc';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -10px;
+  line-height: 20px;
+  font-size: 14px;
+  opacity: 0.25;
+  font-family: Font awesome\5 Free, Font awesome\5 Pro, FontAwesome !important;
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+}
+.ReactTable .rt-thead .rt-th.-sort-asc .rt-resizable-header-content:before {
+  content: '\f0de';
+  display: block;
+  opacity: 1;
+}
+.ReactTable .rt-thead .rt-th.-sort-desc .rt-resizable-header-content:before {
+  content: '\f0dd';
+  display: block;
+  opacity: 1;
+}
+.ReactTable .rt-thead.-headerGroups {
+  border-color: #e2e7eb;
+  background: #f2f3f4;
+}
+.ReactTable.-striped .rt-tr.-odd {
+  background: #f2f3f4;
+}
+
+/* Boxed Layout */
+
+.boxed-layout #root {
+  height: 100%;
+}
+
+.meta-data {
+  display: flex;
+  padding: 10px 0;
+  flex-direction: row;
+  font-size: 15px;
+
+  .meta-items {
+    width: 50%;
+
+    .item {
+      i {
+        cursor: pointer;
+      }
+
+      i.set {
+        color: green;
+      }
+
+      margin-left: 10px;
+      display: inline;
+    }
+  }
+
+  .time-container {
+    flex: 1 auto;
+    text-align: right;
+    font-weight: 900;
+  }
+}

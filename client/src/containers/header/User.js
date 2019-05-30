@@ -1,30 +1,53 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
 
-import UserProfile from './UserProfile';
-import { auth } from '../../services';
+class DropdownProfile extends React.Component {
+  constructor(props) {
+    super(props);
 
-function Unauthorized() {
-  return (
-    <React.Fragment>
-      <span>
-        <Link to="/login">LOGIN</Link>
-      </span>
-      <span>
-        <Link to="/signup">SIGN UP</Link>
-      </span>
-    </React.Fragment>
-  );
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: false,
+    };
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen,
+    }));
+  }
+
+  render() {
+    return (
+      <Dropdown
+        isOpen={this.state.dropdownOpen}
+        toggle={this.toggle}
+        className="dropdown navbar-user"
+        tag="li"
+      >
+        <DropdownToggle className="dropdown-toggle" tag="a">
+          <img src="../assets/img/user/user-13.jpg" alt="" />
+          <span className="d-none d-md-inline">Adam Schwartz</span>{' '}
+          <b className="caret" />
+        </DropdownToggle>
+        <DropdownMenu className="dropdown-menu dropdown-menu-right" tag="ul">
+          <DropdownItem>Edit Profile</DropdownItem>
+          <DropdownItem>
+            <span className="badge badge-danger pull-right">2</span> Inbox
+          </DropdownItem>
+          <DropdownItem>Calendar</DropdownItem>
+          <DropdownItem>Setting</DropdownItem>
+          <div className="dropdown-divider" />
+          <DropdownItem>Log Out</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    );
+  }
 }
 
-function Authorized() {
-  return <UserProfile />;
-}
-
-export default function User() {
-  return (
-    <div style={{ float: 'right', position: 'relative' }}>
-      {auth.isUserLoginned() ? <Authorized /> : <Unauthorized />}
-    </div>
-  );
-}
+export default DropdownProfile;

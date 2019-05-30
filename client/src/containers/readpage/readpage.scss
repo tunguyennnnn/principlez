@@ -1,20 +1,6 @@
-@media only screen and (min-width: 850px) {
-  .stories-container {
-    flex: 1;
-    padding: 1.5vw 2vw 1.5vw 2vw;
-  }
-}
-
-@media only screen and (max-width: 850px) {
-  .stories-container {
-    padding: 10px 8vw 10px 8vw;
-  }
-}
-
 .read-page {
   display: flex;
   flex-direction: row;
-  padding: 20px 0 20px 0;
 
   .author-info-container {
     width: 250px;

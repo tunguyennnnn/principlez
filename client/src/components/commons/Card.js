@@ -1,50 +1,47 @@
-import './card.scss';
 import React from 'react';
-import { Icon } from 'semantic-ui-react';
+import { Card, CardBody, CardTitle, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import StoryMetaData from './StoryMetaData';
 import * as UserId from '../../utils/userId';
 import BlogEditor from '../BlogEditor';
 
-export default function Card(props) {
+export default function CardComponent(props) {
   const { id, title, body, updatedAt, isAuthor, author, view, like } = props;
   const viewCount = view.count + view.anonymousCount;
 
   const link = '/of/' + UserId.generateId(author.id, author.fullname);
 
   return (
-    <div className="card-container box-shadow">
-      <div className="card-author">
-        <Link to={link} className="scaler-hover">
-          <Icon name="id badge outline" />
-          {author.fullname}
+    <Card>
+      <CardBody>
+        <CardTitle tag="h4" className="m-t-0 m-b-10">
+          {title}
+        </CardTitle>
+
+        <BlogEditor title={title} body={body} readOnly previewOnly />
+
+        {isAuthor ? (
+          <Link to={`${link}/stories/${id}`}>
+            <Button color="default" size="sm">
+              Edit...
+            </Button>
+          </Link>
+        ) : null}
+        <Link to={`${link}/stories?id=${id}`}>
+          <Button color="default" size="sm">
+            Read...
+          </Button>
         </Link>
-      </div>
-      <div className="card-content-container">
-        <div className="title">
-          <strong>{title}</strong>
+
+        <div className="card-actions">
+          <StoryMetaData
+            viewCount={viewCount}
+            likeCount={like.count}
+            updatedAt={updatedAt}
+          />
         </div>
-        <div className="content">
-          <BlogEditor title={title} body={body} readOnly previewOnly />
-          <div className="read">
-            {isAuthor ? (
-              <React.Fragment>
-                <Link to={`${link}/stories/${id}`}>Edit...</Link>
-                {' | '}
-              </React.Fragment>
-            ) : null}
-            <Link to={`${link}/stories?id=${id}`}>Read...</Link>
-          </div>
-        </div>
-      </div>
-      <div className="card-actions">
-        <StoryMetaData
-          viewCount={viewCount}
-          likeCount={like.count}
-          updatedAt={updatedAt}
-        />
-      </div>
-    </div>
+      </CardBody>
+    </Card>
   );
 }

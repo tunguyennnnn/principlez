@@ -1,14 +1,11 @@
-import './storypage/storypage.scss';
 import React, { Component } from 'react';
-import MediaQuery from 'react-responsive';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import _ from 'lodash';
+import { Card, CardBody } from 'reactstrap';
 
 import StoryEditorContext from '../contexts/StoryWriteContext';
 import ChapterGroup from './storypage/ChapterGroup';
 import StoryWrite from './storypage/StoryWrite';
-import Action from './storypage/Action';
-import SideMenu from '../components/SideMenu';
+import Sidebar from './SideBar';
 
 export default class StoryPage extends Component {
   updateChapterTitle = (id, title, type) => {
@@ -16,56 +13,6 @@ export default class StoryPage extends Component {
       this.updateTitle(id, title, type);
     }
   };
-
-  renderMobile() {
-    return (
-      <SideMenu
-        headerTitle="Your Stories"
-        menuComp={
-          <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} mobile />
-        }
-        contentComp={setOpenMenu => (
-          <StoryWrite
-            mobile
-            setOpenMenu={setOpenMenu}
-            location={this.props.location}
-            match={this.props.match}
-            title="Chapter..."
-            updateChapterTitle={this.updateChapterTitle}
-          />
-        )}
-      />
-    );
-  }
-
-  renderDestop() {
-    return (
-      <div className="story-page">
-        <div className="chapter-list-container side-menu-grid">
-          <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} />
-        </div>
-        <TransitionGroup
-          className="writing-container"
-          style={{ minHeight: window.innerHeight - 80 }}
-        >
-          <CSSTransition
-            key={this.props.location.key}
-            classNames="move"
-            timeout={1000}
-            appear
-          >
-            <StoryWrite
-              location={this.props.location}
-              match={this.props.match}
-              title="Chapter..."
-              updateChapterTitle={this.updateChapterTitle}
-            />
-          </CSSTransition>
-        </TransitionGroup>
-        <Action match={this.props.match} />
-      </div>
-    );
-  }
 
   render() {
     return (
@@ -75,12 +22,21 @@ export default class StoryPage extends Component {
           readOnly: false,
         }}
       >
-        <MediaQuery query="(min-width: 850px)">
-          {this.renderDestop()}
-        </MediaQuery>
-        <MediaQuery query="(max-width: 849px)">
-          {this.renderMobile()}
-        </MediaQuery>
+        <div className="story-page">
+          <Sidebar>
+            <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} />
+          </Sidebar>
+          <Card style={{ minHeight: window.innerHeight }}>
+            <CardBody>
+              <StoryWrite
+                location={this.props.location}
+                match={this.props.match}
+                title="Chapter..."
+                updateChapterTitle={this.updateChapterTitle}
+              />
+            </CardBody>
+          </Card>
+        </div>
       </StoryEditorContext.Provider>
     );
   }

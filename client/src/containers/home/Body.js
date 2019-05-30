@@ -12,13 +12,10 @@ class Body extends React.Component {
       return <div>loading...</div>;
     }
     return (
-      <div className="home-body-container">
-        {data.allChapters.edges.map(({ cursor, node }, index) => {
+      <div className="row">
+        {data.allChapters.edges.map(({ cursor, node }) => {
           return (
-            <div
-              key={`chapter-list-${node.id}`}
-              className="body-story-container"
-            >
+            <div className="col-lg-6 col-md-12" key={`chapter-list-${node.id}`}>
               <Card {...node} />
             </div>
           );

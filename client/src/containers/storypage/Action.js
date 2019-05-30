@@ -1,5 +1,4 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -35,16 +34,12 @@ class Action extends React.Component {
 
     return (
       <div className="story-page-action-container">
-        <MediaQuery query="(max-width: 850px">
-          <BottomMenu>
-            <ViewerBottomActions liked={liked} likeAction={this.likeAction} />
-          </BottomMenu>
-        </MediaQuery>
-        <MediaQuery query="(min-width: 850px">
-          <ButtonMenu>
-            <ViewerButtonActions liked={liked} likeAction={this.likeAction} />
-          </ButtonMenu>
-        </MediaQuery>
+        <BottomMenu>
+          <ViewerBottomActions liked={liked} likeAction={this.likeAction} />
+        </BottomMenu>
+        <ButtonMenu>
+          <ViewerButtonActions liked={liked} likeAction={this.likeAction} />
+        </ButtonMenu>
       </div>
     );
   }
