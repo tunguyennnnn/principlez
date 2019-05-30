@@ -25,21 +25,21 @@ class Header extends React.Component {
               <Link to="/" className="navbar-brand">
                 <span className="navbar-logo" /> <b>Principlez</b>
               </Link>
-              <ul className="navbar-nav navbar-right">
-                <SearchForm />
-                <User />
-              </ul>
-
-              <button
-                type="button"
-                className="navbar-toggle"
-                onClick={toggleMobileSidebar}
-              >
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-              </button>
             </div>
+            <ul className="navbar-nav navbar-right">
+              <SearchForm />
+              <User />
+            </ul>
+
+            <button
+              type="button"
+              className="navbar-toggle"
+              onClick={toggleMobileSidebar}
+            >
+              <span className="icon-bar" />
+              <span className="icon-bar" />
+              <span className="icon-bar" />
+            </button>
           </div>
         )}
       </PageSettings.Consumer>

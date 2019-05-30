@@ -5,8 +5,12 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import * as UserId from '../../utils/userId';
 
-class DropdownProfile extends React.Component {
+import { auth } from '../../services';
+
+class Authorized extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,6 +27,7 @@ class DropdownProfile extends React.Component {
   }
 
   render() {
+    const { userId, fullname } = auth.userProfile;
     return (
       <Dropdown
         isOpen={this.state.dropdownOpen}
@@ -31,16 +36,27 @@ class DropdownProfile extends React.Component {
         tag="li"
       >
         <DropdownToggle className="dropdown-toggle" tag="a">
-          <img src="../assets/img/user/user-13.jpg" alt="" />
-          <span className="d-none d-md-inline">Adam Schwartz</span>{' '}
+          <img
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+            alt=""
+          />
+          <span className="d-none d-md-inline">{fullname}</span>{' '}
           <b className="caret" />
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu dropdown-menu-right" tag="ul">
-          <DropdownItem>Edit Profile</DropdownItem>
+          <DropdownItem>
+            <Link to={`/of/${UserId.generateId(userId, fullname)}/stories`}>
+              Stories
+            </Link>
+          </DropdownItem>
           <DropdownItem>
             <span className="badge badge-danger pull-right">2</span> Inbox
           </DropdownItem>
-          <DropdownItem>Calendar</DropdownItem>
+          <DropdownItem>
+            <Link to={`/of/${UserId.generateId(userId, fullname)}`}>
+              Profile
+            </Link>
+          </DropdownItem>
           <DropdownItem>Setting</DropdownItem>
           <div className="dropdown-divider" />
           <DropdownItem>Log Out</DropdownItem>
@@ -50,4 +66,19 @@ class DropdownProfile extends React.Component {
   }
 }
 
-export default DropdownProfile;
+function Unauthorized() {
+  return (
+    <li>
+      <span>
+        <Link to="/login">LOGIN</Link>
+      </span>
+      <span>
+        <Link to="/signup">SIGN UP</Link>
+      </span>
+    </li>
+  );
+}
+
+export default function User() {
+  return auth.isUserLoginned() ? <Authorized /> : <Unauthorized />;
+}

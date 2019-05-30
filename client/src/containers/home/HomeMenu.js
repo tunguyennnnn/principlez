@@ -56,7 +56,7 @@ function Authors() {
 export default function HomeMenu() {
   return (
     <div className="home-menu-container">
-      <Authors />
+      {/* <Authors /> */}
       <Channels />
     </div>
   );
