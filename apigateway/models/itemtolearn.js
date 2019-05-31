@@ -9,7 +9,13 @@ module.exports = (sequelize, DataTypes) => {
       learningAreaId: DataTypes.INTEGER,
       userId: DataTypes.INTEGER,
     },
-    {},
+    {
+      indexes: [
+        {
+          fields: ['name'],
+        },
+      ],
+    },
   );
   ItemToLearn.associate = models => {
     ItemToLearn.belongsTo(models.LearningArea, {

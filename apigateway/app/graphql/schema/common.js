@@ -10,6 +10,7 @@ export default `
   }
 
   type PageInfo {
+    total: Int!
     hasNextPage: Boolean
     hasPreviousPage: Boolean
   }
