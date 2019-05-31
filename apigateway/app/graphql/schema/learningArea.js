@@ -5,7 +5,7 @@ export default `
     name: String!
     description: String
     settings: JSON!
-    user: User!
+    owner: User!
     items: ItemToLearnListConnection!
   }
 
