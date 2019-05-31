@@ -1,11 +1,12 @@
 export default `
 
   type LearningArea {
+    id: ID!
     name: String!
     description: String
     settings: JSON!
     user: User!
-    items: ItemToLearnList
+    items: ItemToLearnListConnection!
   }
 
   type Query {

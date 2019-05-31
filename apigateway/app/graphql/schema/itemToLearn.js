@@ -1,18 +1,24 @@
 export default `
   type ItemToLearn {
+    id: ID!
     name: String!
     description: String
     source: String!
-    user: User!
+    owner: User!
   }
 
-  type ItemToLearnList {
+  type ItemToLearnEdge {
     cursor: String!
-    nodes: [ItemToLearn!]!
+    node: ItemToLearn!
+  }
+
+  type ItemToLearnListConnection {
+    pageInfo: PageInfo!
+    edges: [ItemToLearnEdge!]!
   }
 
   type Query {
-    newItems(userId: ID): ItemToLearnList
+    newLearningItems(userId: ID, cursor: String, limit: Int = 10): ItemToLearnListConnection!
   }
 
   type Mutation {

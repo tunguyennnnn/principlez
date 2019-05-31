@@ -42,3 +42,11 @@ export const updateUserInfo = yup.object().shape({
 export const search = yup.object().shape({
   text: yup.string().trim(),
 });
+
+export const createItemToLearn = yup.object().shape({
+  name: yup
+    .string()
+    .trim()
+    .min(3, 'name is too short'),
+  source: yup.string().trim(),
+});
