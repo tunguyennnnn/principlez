@@ -2,6 +2,8 @@ import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
+import NewItems from './personaldev/NewItems';
+
 import {
   UncontrolledDropdown,
   DropdownToggle,
@@ -11,6 +13,7 @@ import {
 
 import TodoList from '../components/TodoList';
 import Sidebar from './SideBar';
+import SideBarContent from './personaldev/SideBar';
 
 const randomColor = [
   'bg-yellow',
@@ -78,49 +81,13 @@ const PersonalDevAreas = [
   },
 ];
 
-export default class PersonalDevPage extends React.Component {
+class PersonalDevPage extends React.Component {
   render() {
+    console.log(this.props.learningAreas);
     return (
       <React.Fragment>
         <Sidebar>
-          <div style={{ padding: 10 }}>
-            <div
-              class="widget-todolist widget-todolist-rounded"
-              style={{ marginBottom: 10 }}
-            >
-              <div class="widget-todolist-header">
-                <div class="widget-todolist-header-left">
-                  <h4 class="widget-todolist-header-title">Areas</h4>
-                </div>
-              </div>
-              <div class="widget-todolist-body">
-                {PersonalDevAreas.map(({ id, name, icon }) => {
-                  return (
-                    <div
-                      class={`widget-todolist-item`}
-                      key={`development-are-${id}`}
-                    >
-                      <div class="widget-todolist-content">
-                        <h4 class="widget-todolist-title">{name}</h4>
-                      </div>
-                    </div>
-                  );
-                })}
-                <div class="widget-todolist-item">
-                  <div class="widget-todolist-input">
-                    <i class="fa fa-plus text-muted" />
-                  </div>
-                  <div class="widget-todolist-content">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Write your task here..."
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <SideBarContent data={this.props.learningAreas} />
         </Sidebar>
         <div className="row row-space-30">
           <div className="col-sm-12 col-lg-8">
@@ -128,42 +95,13 @@ export default class PersonalDevPage extends React.Component {
               const { name: header, id, items } = area;
               return (
                 <div key={`personal-dev-area-${id}`}>
-                  <TodoList header={header} items={items} />
+                  <TodoList key={'areas'} header={header} items={items} />
                 </div>
               );
             })}
           </div>
           <div className="col-sm-12 col-lg-4">
-            <TodoList
-              cart
-              header={'New Items'}
-              items={[
-                {
-                  id: 1,
-                  done: true,
-                  title: 'Principles',
-                  description: 'by Ray Dalio',
-                },
-                {
-                  id: 2,
-                  done: false,
-                  title: 'The hero with 1000 faces',
-                  description: 'by Joseph Campbell',
-                },
-                {
-                  id: 3,
-                  done: true,
-                  title: 'Principles',
-                  description: 'by Ray Dalio',
-                },
-                {
-                  id: 4,
-                  done: false,
-                  title: 'The hero with 1000 faces',
-                  description: 'by Joseph Campbell',
-                },
-              ]}
-            />
+            <NewItems data={this.props.newItems} />
           </div>
         </div>
       </React.Fragment>
@@ -171,4 +109,52 @@ export default class PersonalDevPage extends React.Component {
   }
 }
 
-// export default compose()(PersonalDevPage);
+const newItemsQuery = gql`
+  query newLearningItems($cursor: String, $limit: Int) {
+    newItems: newLearningItems(cursor: $cursor, limit: $limit) {
+      pageInfo {
+        total
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        cursor
+        node {
+          id
+          title: name
+          description
+          source
+        }
+      }
+    }
+  }
+`;
+
+const learningAreas = gql`
+  query learningAreas {
+    learningAreas {
+      id
+      title: name
+      description
+    }
+  }
+`;
+
+export default compose(
+  graphql(newItemsQuery, {
+    name: 'newItems',
+    options: props => {
+      return {
+        variables: {},
+      };
+    },
+  }),
+  graphql(learningAreas, {
+    name: 'learningAreas',
+    options: props => {
+      return {
+        variables: {},
+      };
+    },
+  }),
+)(PersonalDevPage);
