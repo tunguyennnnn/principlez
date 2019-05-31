@@ -18,7 +18,7 @@ export default class TodoList extends React.Component {
   }
 
   render() {
-    const { header, items, expand, cart } = this.props;
+    const { header, items, key, cart } = this.props;
 
     return (
       <div
@@ -33,10 +33,11 @@ export default class TodoList extends React.Component {
 
         <div class="widget-todolist-body">
           {items.map(({ id, title, description, done }) => {
+            console.log(description);
             return (
               <div
                 class="widget-todolist-item"
-                key={`${header.split(/\s+/).join('')}-item-${id}`}
+                key={`${key}-${header.split(/\s+/).join('')}-item-${id}`}
               >
                 {this.renderIconCheck(done)}
                 <div class="widget-todolist-content">
