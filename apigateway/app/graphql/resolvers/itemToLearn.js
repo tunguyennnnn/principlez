@@ -7,14 +7,14 @@ export default {
   Query: {
     newLearningItems: async (
       root,
-      { userId, limit, cursor },
+      { userId, learningAreaId = null, limit, cursor },
       { models, user },
     ) => {
       userId = userId || user.id;
       const options = {
         where: {
           userId,
-          learningAreaId: null,
+          learningAreaId,
         },
         order: [['id', 'ASC']],
         limit,
@@ -26,7 +26,7 @@ export default {
 
       const items = await models.ItemToLearn.findAll(options);
       const count = await models.ItemToLearn.count({
-        where: { userId, learningAreaId: null },
+        where: { userId, learningAreaId },
       });
 
       return {
