@@ -60,7 +60,7 @@ export const createLearningAreaMutation = gql`
   mutation createLearningArea($name: String!, $description: String) {
     createLearningArea(name: $name, description: $description) {
       id
-      name
+      title: name
       description
     }
   }
