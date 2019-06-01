@@ -18,10 +18,10 @@ export default `
   }
 
   type Query {
-    newLearningItems(userId: ID, cursor: String, limit: Int = 10): ItemToLearnListConnection!
+    newLearningItems(userId: ID, learningAreaId: ID, cursor: String, limit: Int = 10): ItemToLearnListConnection!
   }
 
   type Mutation {
-    createItemToLearn(name: String!, description: String, source: String!, learningAreaId: ID): ItemToLearn!
+    createItemToLearn(name: String!, description: String, source: String, learningAreaId: ID): ItemToLearn!
   }
 `;
