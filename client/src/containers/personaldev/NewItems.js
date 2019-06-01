@@ -18,7 +18,7 @@ export default class NewItems extends React.Component {
     return (
       <TodoList
         cart
-        key={'new-item'}
+        keyPrefix={'new-item'}
         header={'New things to learn'}
         items={items}
       />

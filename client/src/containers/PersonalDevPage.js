@@ -1,89 +1,25 @@
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
-import { Link } from 'react-router-dom';
-import NewItems from './personaldev/NewItems';
-
 import {
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from 'reactstrap';
+  newItemsQuery,
+  learningAreas,
+  createItemToLearnMutation,
+  createLearningAreaMutation,
+} from './personaldev/graphql';
 
-import TodoList from '../components/TodoList';
+import DevAreas from './personaldev/DevAreas';
+import NewItems from './personaldev/NewItems';
 import Sidebar from './SideBar';
 import SideBarContent from './personaldev/SideBar';
 
-const randomColor = [
-  'bg-yellow',
-  // 'bg-gradient-purple',
-  'bg-pink',
-  'bg-gradient-aqua',
-];
-const PersonalDevAreas = [
-  {
-    id: 1,
-    name: 'Books',
-    icon: 'book',
-    items: [
-      {
-        id: 1,
-        done: true,
-        title: 'Principles',
-        description: 'by Ray Dalio',
-      },
-      {
-        id: 2,
-        done: false,
-        title: 'The hero with 1000 faces',
-        description: 'by Joseph Campbell',
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Videos',
-    icon: 'video',
-    items: [
-      {
-        id: 1,
-        done: true,
-        title: 'Principles',
-        description: 'by Ray Dalio',
-      },
-      {
-        id: 2,
-        done: false,
-        title: 'The hero with 1000 faces',
-        description: 'by Joseph Campbell',
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Articles',
-    icon: 'align-right',
-    items: [
-      {
-        id: 1,
-        done: true,
-        title: 'Principles',
-        description: 'by Ray Dalio',
-      },
-      {
-        id: 2,
-        done: false,
-        title: 'The hero with 1000 faces',
-        description: 'by Joseph Campbell',
-      },
-    ],
-  },
-];
-
 class PersonalDevPage extends React.Component {
+  createLearningArea = async ({ name, description }) => {};
+
+  createNewItems = async ({ title, description, source, learningAreaId }) => {
+    console.log(title, description, source, learningAreaId);
+  };
+
   render() {
-    console.log(this.props.learningAreas);
     return (
       <React.Fragment>
         <Sidebar>
@@ -91,14 +27,7 @@ class PersonalDevPage extends React.Component {
         </Sidebar>
         <div className="row row-space-30">
           <div className="col-sm-12 col-lg-8">
-            {PersonalDevAreas.map(area => {
-              const { name: header, id, items } = area;
-              return (
-                <div key={`personal-dev-area-${id}`}>
-                  <TodoList key={'areas'} header={header} items={items} />
-                </div>
-              );
-            })}
+            <DevAreas data={this.props.learningAreas} />
           </div>
           <div className="col-sm-12 col-lg-4">
             <NewItems data={this.props.newItems} />
@@ -108,37 +37,6 @@ class PersonalDevPage extends React.Component {
     );
   }
 }
-
-const newItemsQuery = gql`
-  query newLearningItems($cursor: String, $limit: Int) {
-    newItems: newLearningItems(cursor: $cursor, limit: $limit) {
-      pageInfo {
-        total
-        hasNextPage
-        hasPreviousPage
-      }
-      edges {
-        cursor
-        node {
-          id
-          title: name
-          description
-          source
-        }
-      }
-    }
-  }
-`;
-
-const learningAreas = gql`
-  query learningAreas {
-    learningAreas {
-      id
-      title: name
-      description
-    }
-  }
-`;
 
 export default compose(
   graphql(newItemsQuery, {
@@ -156,5 +54,11 @@ export default compose(
         variables: {},
       };
     },
+  }),
+  graphql(createItemToLearnMutation, {
+    name: 'createItemToLearn',
+  }),
+  graphql(createLearningAreaMutation, {
+    name: 'createLearningArea',
   }),
 )(PersonalDevPage);
