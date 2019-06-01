@@ -1,4 +1,5 @@
 import React from 'react';
+import Form from './todolist/Form';
 
 export default class TodoList extends React.Component {
   renderIconCheck(done) {
@@ -46,18 +47,7 @@ export default class TodoList extends React.Component {
               </div>
             );
           })}
-          <div class="widget-todolist-item">
-            <div class="widget-todolist-input">
-              <i class="fa fa-plus text-muted" />
-            </div>
-            <div class="widget-todolist-content">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Write your task here..."
-              />
-            </div>
-          </div>
+          <Form />
         </div>
       </div>
     );

@@ -8,7 +8,7 @@ import ListLoading from '../../components/hoc/ListLoadingHoc';
 @ListLoading
 class DevArea extends React.Component {
   render() {
-    const { data, title } = this.props;
+    const { data, name: title } = this.props;
 
     const { newItems } = data;
 

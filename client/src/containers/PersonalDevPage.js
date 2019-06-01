@@ -7,13 +7,27 @@ import {
   createLearningAreaMutation,
 } from './personaldev/graphql';
 
+import FormContext from '../contexts/FormContext';
 import DevAreas from './personaldev/DevAreas';
 import NewItems from './personaldev/NewItems';
 import Sidebar from './SideBar';
 import SideBarContent from './personaldev/SideBar';
 
 class PersonalDevPage extends React.Component {
-  createLearningArea = async ({ name, description }) => {};
+  createLearningArea = async ({ name, description }) => {
+    try {
+      await this.props.createLearningArea({
+        variables: { name, description },
+        update: (store, { data: { createLearningArea } }) => {
+          const data = store.readQuery({ query: learningAreas });
+          data.learningAreas.push(createLearningArea);
+          store.writeQuery({ query: learningAreas, data });
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   createNewItems = async ({ title, description, source, learningAreaId }) => {
     console.log(title, description, source, learningAreaId);
@@ -23,14 +37,20 @@ class PersonalDevPage extends React.Component {
     return (
       <React.Fragment>
         <Sidebar>
-          <SideBarContent data={this.props.learningAreas} />
+          <FormContext.Provider value={{ submit: this.createLearningArea }}>
+            <SideBarContent data={this.props.learningAreas} />
+          </FormContext.Provider>
         </Sidebar>
         <div className="row row-space-30">
           <div className="col-sm-12 col-lg-8">
-            <DevAreas data={this.props.learningAreas} />
+            <FormContext.Provider value={{ submit: this.createNewItems }}>
+              <DevAreas data={this.props.learningAreas} />
+            </FormContext.Provider>
           </div>
           <div className="col-sm-12 col-lg-4">
-            <NewItems data={this.props.newItems} />
+            <FormContext.Provider value={{ submit: this.createNewItems }}>
+              <NewItems data={this.props.newItems} />
+            </FormContext.Provider>
           </div>
         </div>
       </React.Fragment>
