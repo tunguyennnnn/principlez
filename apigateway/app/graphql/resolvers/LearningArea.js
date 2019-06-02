@@ -27,5 +27,30 @@ export default {
         });
       },
     },
+    deleteLearningArea: {
+      authentication: true,
+      resolve: async (root, { id }, { models, user }) => {
+        const learningArea = await models.LearningArea.findOne({
+          where: {
+            id,
+            userId: user.id,
+          },
+        });
+        if (!learningArea) {
+          return {
+            error: 'Anauthorized',
+          };
+        }
+
+        const learningItemCount = await learningArea.countItems();
+
+        if (learningItemCount === 0) {
+          await models.LearningArea.destroy({ where: { id } });
+          return {};
+        }
+
+        return { error: 'Cannot be deleted' };
+      },
+    },
   },
 };
