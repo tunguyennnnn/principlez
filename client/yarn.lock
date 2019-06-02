@@ -6136,6 +6136,13 @@ react-modal@^3.8.1:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
+react-notifications-component@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-notifications-component/-/react-notifications-component-1.1.1.tgz#8d1a557b2f7a5d8fb25b74d1855510ac0d26e1f1"
+  integrity sha512-YGd00pMFg5uqX9f6Zhdjweuxa5YZDwmxgkGRwXXVP3P/YJvPvziITGLBbLExlJPCATq3+S7DZBYtIpZW8BA7Ww==
+  dependencies:
+    react "^16.4.2"
+
 react-onclickoutside@^6.5.0:
   version "6.8.0"
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.8.0.tgz#9f91b5b3ed59f4d9e43fd71620dc200773a4d569"
@@ -6216,7 +6223,7 @@ react-transition-group@^2.3.1, react-transition-group@^2.5.3:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.8.1:
+react@^16.4.2, react@^16.8.1:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==

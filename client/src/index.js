@@ -4,6 +4,7 @@ import 'simple-line-icons/css/simple-line-icons.css';
 import 'flag-icon-css/css/flag-icon.min.css';
 import 'bootstrap-social/bootstrap-social.css';
 import 'react-placeholder/lib/reactPlaceholder.css';
+import 'react-notifications-component/dist/theme.css';
 import './index.scss';
 
 import React from 'react';

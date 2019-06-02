@@ -1,14 +1,17 @@
 import React from 'react';
+import ReactNotification from 'react-notifications-component';
+
 import { PageSettings } from './config/page-settings.js';
 
 import Header from './containers/Header';
-import Sidebar from './containers/SideBar';
 import Footer from './containers/Footer';
 import Routes from './Routes';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.notificationDOMRef = React.createRef();
 
     this.toggleMobileSidebar = e => {
       this.setState(state => ({
@@ -28,7 +31,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <PageSettings.Provider value={this.state}>
+      <PageSettings.Provider
+        value={{ ...this.state, notificationDOMRef: this.notificationDOMRef }}
+      >
         <div
           className={
             'fade page-sidebar-fixed show page-container page-header-fixed page-with-top-menu' +
@@ -42,6 +47,7 @@ class App extends React.Component {
           <Routes />
           <Footer />
         </div>
+        <ReactNotification ref={this.notificationDOMRef} />
       </PageSettings.Provider>
     );
   }
