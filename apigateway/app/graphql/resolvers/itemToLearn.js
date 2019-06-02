@@ -68,5 +68,12 @@ export default {
         });
       },
     },
+    deleteItemToLearn: {
+      authentication: true,
+      resolve: async (root, { id }, { models, user }) => {
+        await models.ItemToLearn.destroy({ where: { id, userId: user.id } });
+        return {};
+      },
+    },
   },
 };
