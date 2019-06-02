@@ -15,4 +15,7 @@ export default `
     hasPreviousPage: Boolean
   }
 
+  type DeleteResult {
+    error: String
+  }
 `;

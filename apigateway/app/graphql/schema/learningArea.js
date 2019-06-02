@@ -15,5 +15,6 @@ export default `
 
   type Mutation {
     createLearningArea (name: String!, description: String): LearningArea!
+    deleteLearningArea (id: ID): DeleteResult!
   }
 `;
