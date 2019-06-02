@@ -73,3 +73,11 @@ export const deleteLearningAreaMutation = gql`
     }
   }
 `;
+
+export const deleteItemToLearnMutation = gql`
+  mutation deleteItemToLearn($id: ID!) {
+    deleteItemToLearn(id: $id) {
+      error
+    }
+  }
+`;
