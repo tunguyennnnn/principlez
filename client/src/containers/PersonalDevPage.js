@@ -8,6 +8,7 @@ import {
   createItemToLearnMutation,
   createLearningAreaMutation,
   deleteLearningAreaMutation,
+  deleteItemToLearnMutation,
 } from './personaldev/graphql';
 
 import Notification from '../components/commons/Notification';
@@ -35,9 +36,9 @@ class PersonalDevPage extends React.Component {
     try {
       await this.props.deleteLearningArea({
         variables: { id },
-        update: (store, { data: { createLearningArea } }) => {
-          if (createLearningArea && createLearningArea.error) {
-            const { error } = createLearningArea;
+        update: (store, { data: { deleteLearningArea } }) => {
+          if (deleteLearningArea && deleteLearningArea.error) {
+            const { error } = deleteLearningArea;
             return this.addNotification('warning', error);
           }
 
@@ -47,6 +48,29 @@ class PersonalDevPage extends React.Component {
           );
 
           store.writeQuery({ query: learningAreas, data });
+        },
+      });
+    } catch (e) {
+      this.addNotification('warning', 'Something wrong');
+    }
+  };
+
+  deleteItemToLearn = async id => {
+    try {
+      await this.props.deleteItemToLearn({
+        variables: { id },
+        update: (store, { data: { deleteItemToLearn } }) => {
+          if (deleteItemToLearn && deleteItemToLearn.error) {
+            const { error } = deleteItemToLearn;
+            return this.addNotification('warning', error);
+          }
+
+          const data = _.cloneDeep(store.readQuery({ query: newItemsQuery }));
+          data.newItems.edges = data.newItems.edges.filter(
+            ({ cursor, node }) => node.id !== id,
+          );
+
+          store.writeQuery({ query: newItemsQuery, data });
         },
       });
     } catch (e) {
@@ -114,14 +138,21 @@ class PersonalDevPage extends React.Component {
             <DevAreas data={this.props.learningAreas} />
           </div>
           <div className="col-sm-12 col-lg-4">
-            <FormContext.Provider
+            <MenuContext.Provider
               value={{
-                submit: this.createNewItems,
-                fields: ['name', 'description', 'source'],
+                items: [{ name: 'Delete', action: this.deleteItemToLearn }],
+                keyPrefix: `pd-area-action`,
               }}
             >
-              <NewItems data={this.props.newItems} />
-            </FormContext.Provider>
+              <FormContext.Provider
+                value={{
+                  submit: this.createNewItems,
+                  fields: ['name', 'description', 'source'],
+                }}
+              >
+                <NewItems data={this.props.newItems} />
+              </FormContext.Provider>
+            </MenuContext.Provider>
           </div>
         </div>
       </React.Fragment>
@@ -154,5 +185,8 @@ export default compose(
   }),
   graphql(deleteLearningAreaMutation, {
     name: 'deleteLearningArea',
+  }),
+  graphql(deleteItemToLearnMutation, {
+    name: 'deleteItemToLearn',
   }),
 )(PersonalDevPage);
