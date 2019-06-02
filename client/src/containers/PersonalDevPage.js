@@ -10,6 +10,7 @@ import {
   deleteLearningAreaMutation,
 } from './personaldev/graphql';
 
+import Notification from '../components/commons/Notification';
 import MenuContext from '../contexts/MenuContext';
 import FormContext from '../contexts/FormContext';
 import DevAreas from './personaldev/DevAreas';
@@ -18,19 +19,39 @@ import Sidebar from './SideBar';
 import SideBarContent from './personaldev/SideBar';
 
 class PersonalDevPage extends React.Component {
+  addNotification = (type, title, message) => {
+    this.props.notificationDOMRef.current.addNotification({
+      insert: 'top',
+      container: 'top-left',
+      animationIn: ['animated', 'fadeIn'],
+      animationOut: ['animated', 'fadeOut'],
+      dismiss: { duration: 2000 },
+      dismissable: { click: true },
+      content: <Notification type={type} title={title} message={message} />,
+    });
+  };
+
   deleteLearningArea = async id => {
     try {
       await this.props.deleteLearningArea({
         variables: { id },
         update: (store, { data: { createLearningArea } }) => {
+          const { error } = createLearningArea;
+          if (error) {
+            return this.addNotification('warning', error);
+          }
+
           const data = _.cloneDeep(store.readQuery({ query: learningAreas }));
           data.learningAreas = data.learningAreas.filter(
             area => area.id !== id,
           );
+
           store.writeQuery({ query: learningAreas, data });
         },
       });
-    } catch (e) {}
+    } catch (e) {
+      this.addNotification('warning', 'Something wrong');
+    }
   };
 
   createLearningArea = async ({ name, description }) => {

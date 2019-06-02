@@ -14,7 +14,7 @@ export default class AppRoutes extends React.Component {
   render() {
     return (
       <PageSettings.Consumer>
-        {({ pageContentFullWidth, pageContentClass }) => (
+        {({ pageContentFullWidth, pageContentClass, notificationDOMRef }) => (
           <div
             className={
               'content ' +
@@ -35,7 +35,16 @@ export default class AppRoutes extends React.Component {
                   </div>
                 )}
               />
-              <Route exact path="/of/me" component={PersonalDevPage} />
+              <Route
+                exact
+                path="/of/me"
+                component={props => (
+                  <PersonalDevPage
+                    {...props}
+                    notificationDOMRef={notificationDOMRef}
+                  />
+                )}
+              />
               <Route
                 exact
                 path="/of/:name"
