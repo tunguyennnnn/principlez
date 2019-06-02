@@ -1,5 +1,10 @@
 import React from 'react';
+
 import Form from './todolist/Form';
+import MenuOption from './todolist/MenuOption';
+
+import FormContext from '../contexts/FormContext';
+import MenuContext from '../contexts/MenuContext';
 
 export default class TodoList extends React.Component {
   renderIconCheck(done) {
@@ -19,7 +24,7 @@ export default class TodoList extends React.Component {
   }
 
   render() {
-    const { header, items, keyPrefix, cart } = this.props;
+    const { id, header, items, keyPrefix, cart } = this.props;
 
     return (
       <div
@@ -44,10 +49,17 @@ export default class TodoList extends React.Component {
                   <h4 class="widget-todolist-title">{title}</h4>
                   <p class="widget-todolist-desc">{description}</p>
                 </div>
+                <MenuContext.Consumer>
+                  {({ items, keyPrefix }) => (
+                    <MenuOption keyPrefix={keyPrefix} id={id} items={items} />
+                  )}
+                </MenuContext.Consumer>
               </div>
             );
           })}
-          <Form />
+          <FormContext.Consumer>
+            {({ submit }) => <Form submit={submit} />}
+          </FormContext.Consumer>
         </div>
       </div>
     );
