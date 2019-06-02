@@ -36,8 +36,8 @@ class PersonalDevPage extends React.Component {
       await this.props.deleteLearningArea({
         variables: { id },
         update: (store, { data: { createLearningArea } }) => {
-          const { error } = createLearningArea;
-          if (error) {
+          if (createLearningArea && createLearningArea.error) {
+            const { error } = createLearningArea;
             return this.addNotification('warning', error);
           }
 
@@ -65,12 +65,28 @@ class PersonalDevPage extends React.Component {
         },
       });
     } catch (e) {
-      console.log(e);
+      this.addNotification('warning', 'Something wrong');
     }
   };
 
-  createNewItems = async ({ title, description, source, learningAreaId }) => {
-    console.log(title, description, source, learningAreaId);
+  createNewItems = async ({ name, description, source }) => {
+    try {
+      await this.props.createItemToLearn({
+        variables: { name, description, source },
+        update: (store, { data: { createItemToLearn } }) => {
+          const data = _.cloneDeep(store.readQuery({ query: newItemsQuery }));
+          data.newItems.edges.push({
+            __typename: 'ItemToLearnEdge',
+            cursor: createItemToLearn.id,
+            node: createItemToLearn,
+          });
+          store.writeQuery({ query: newItemsQuery, data });
+        },
+      });
+    } catch (e) {
+      console.log(e);
+      this.addNotification('warning', 'Something wrong');
+    }
   };
 
   render() {
@@ -83,19 +99,27 @@ class PersonalDevPage extends React.Component {
               keyPrefix: `pd-area-action`,
             }}
           >
-            <FormContext.Provider value={{ submit: this.createLearningArea }}>
+            <FormContext.Provider
+              value={{
+                submit: this.createLearningArea,
+                fields: ['name', 'description'],
+              }}
+            >
               <SideBarContent data={this.props.learningAreas} />
             </FormContext.Provider>
           </MenuContext.Provider>
         </Sidebar>
         <div className="row row-space-30">
           <div className="col-sm-12 col-lg-8">
-            <FormContext.Provider value={{ submit: this.createNewItems }}>
-              <DevAreas data={this.props.learningAreas} />
-            </FormContext.Provider>
+            <DevAreas data={this.props.learningAreas} />
           </div>
           <div className="col-sm-12 col-lg-4">
-            <FormContext.Provider value={{ submit: this.createNewItems }}>
+            <FormContext.Provider
+              value={{
+                submit: this.createNewItems,
+                fields: ['name', 'description', 'source'],
+              }}
+            >
               <NewItems data={this.props.newItems} />
             </FormContext.Provider>
           </div>

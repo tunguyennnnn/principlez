@@ -49,7 +49,7 @@ export const createItemToLearnMutation = gql`
       learningAreaId: $learningAreaId
     ) {
       id
-      title
+      title: name
       description
       source
     }

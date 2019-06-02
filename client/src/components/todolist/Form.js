@@ -1,13 +1,27 @@
 import React from 'react';
 
+function constructInputState(fields) {
+  const input = {};
+
+  for (const field of fields) {
+    if (typeof field === 'string') {
+      input[field] = '';
+    }
+  }
+  return input;
+}
+
 export default class Form extends React.Component {
-  state = {
-    focus: false,
-    inputs: {
-      name: '',
-      description: '',
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    const { fields } = props;
+
+    this.state = {
+      focus: false,
+      inputs: constructInputState(fields),
+    };
+  }
 
   updateInputs = inputs => {
     this.setState({ inputs });
@@ -15,13 +29,38 @@ export default class Form extends React.Component {
 
   onSubmit = event => {
     event.preventDefault();
-    const {
-      focus,
-      inputs: { name, description },
-    } = this.state;
+    const { parentId } = this.props;
+    const { focus, inputs } = this.state;
 
-    if (!name) return;
-    this.props.submit({ name, description });
+    this.props.submit({ ...inputs, parentId });
+  };
+
+  renderFields = () => {
+    const { focus, inputs } = this.state;
+
+    const { fields } = this.props;
+
+    const comps = fields.map(field => (
+      <input
+        onFocus={() => this.setState({ focus: true })}
+        value={inputs[field]}
+        type="text"
+        className="form-control bg-white"
+        placeholder={`${field}...`}
+        onChange={event => {
+          this.updateInputs({
+            ...inputs,
+            [field]: event.target.value,
+          });
+        }}
+      />
+    ));
+
+    return (
+      <React.Fragment>
+        {comps.map((comp, index) => (index === 0 ? comp : focus && comp))}
+      </React.Fragment>
+    );
   };
 
   render() {
@@ -59,22 +98,7 @@ export default class Form extends React.Component {
               </button>
             )}
           </div>
-          <div class="widget-todolist-content">
-            <input
-              onFocus={() => this.setState({ focus: true })}
-              value={name}
-              type="text"
-              className="form-control bg-white"
-              placeholder="name..."
-              onChange={event => {
-                this.updateInputs({
-                  description,
-                  name: event.target.value,
-                });
-              }}
-            />
-            {focus && descriptionComp}
-          </div>
+          <div class="widget-todolist-content">{this.renderFields()}</div>
         </form>
       </div>
     );

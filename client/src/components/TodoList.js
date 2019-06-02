@@ -24,7 +24,7 @@ export default class TodoList extends React.Component {
   }
 
   render() {
-    const { id, header, items, keyPrefix, cart } = this.props;
+    const { id: parentId, header, items, keyPrefix, cart } = this.props;
 
     return (
       <div
@@ -51,14 +51,21 @@ export default class TodoList extends React.Component {
                 </div>
                 <MenuContext.Consumer>
                   {({ items, keyPrefix }) => (
-                    <MenuOption keyPrefix={keyPrefix} id={id} items={items} />
+                    <MenuOption
+                      keyPrefix={keyPrefix}
+                      parentId={parentId}
+                      id={id}
+                      items={items}
+                    />
                   )}
                 </MenuContext.Consumer>
               </div>
             );
           })}
           <FormContext.Consumer>
-            {({ submit }) => <Form submit={submit} />}
+            {({ submit, fields }) => (
+              <Form submit={submit} fields={fields} parentId={parentId} />
+            )}
           </FormContext.Consumer>
         </div>
       </div>
