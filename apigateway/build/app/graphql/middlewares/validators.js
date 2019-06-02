@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.search = exports.updateUserInfo = exports.login = exports.signup = void 0;
+exports.createItemToLearn = exports.search = exports.updateUserInfo = exports.login = exports.signup = void 0;
 
 var yup = _interopRequireWildcard(require("yup"));
 
@@ -29,3 +29,8 @@ var search = yup.object().shape({
   text: yup.string().trim()
 });
 exports.search = search;
+var createItemToLearn = yup.object().shape({
+  name: yup.string().trim().min(3, 'name is too short'),
+  source: yup.string().trim()
+});
+exports.createItemToLearn = createItemToLearn;
