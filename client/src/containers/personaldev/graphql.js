@@ -65,3 +65,11 @@ export const createLearningAreaMutation = gql`
     }
   }
 `;
+
+export const deleteLearningAreaMutation = gql`
+  mutation deleteLearningArea($id: ID!) {
+    deleteLearningArea(id: $id) {
+      error
+    }
+  }
+`;
