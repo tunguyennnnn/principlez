@@ -109,6 +109,8 @@ Website: http://www.seantheme.com/color-admin-v4.2/admin/
 	}
 	.header .navbar-right {
 		float: right!important;
+		display: flex;
+		flex-direction: row;
 	}
 	.header .container-fluid .navbar-right,
 	.header .container .navbar-right {

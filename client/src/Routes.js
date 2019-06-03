@@ -8,6 +8,7 @@ import Login from './containers/Login';
 import ReadPage from './containers/ReadPage';
 import ProfilePage from './containers/ProfilePage';
 import PersonalDevPage from './containers/PersonalDevPage';
+import SearchPage from './components/search/SearchPage';
 import { PageSettings } from './config/page-settings.js';
 
 export default class AppRoutes extends React.Component {
@@ -69,6 +70,15 @@ export default class AppRoutes extends React.Component {
                 component={props => (
                   <div id="app-body">
                     <ReadPage {...props} />
+                  </div>
+                )}
+              />
+              <Route
+                exact
+                path="/search"
+                component={props => (
+                  <div id="app-body">
+                    <SearchPage {...props} />
                   </div>
                 )}
               />

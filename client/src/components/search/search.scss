@@ -7,16 +7,20 @@
     border-radius: 10px;
     padding: 8px;
     border: 1px solid grey;
-    color: white;
+    // color: white;
     width: 300px;
   }
 
-  input::placeholder {
-    color: white;
-  }
+  // input::placeholder {
+  //   color: white;
+  // }
 
   .search-field-container {
     display: inline-block;
+
+    input:focus {
+      outline: none !important;
+    }
   }
 }
 
