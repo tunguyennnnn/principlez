@@ -31,8 +31,14 @@ export default class Form extends React.Component {
     event.preventDefault();
     const { parentId } = this.props;
     const { focus, inputs } = this.state;
-
     this.props.submit({ ...inputs, parentId });
+
+    //reset states
+    const { fields } = this.props;
+    this.setState({
+      ...this.state,
+      inputs: constructInputState(fields),
+    });
   };
 
   renderFields = () => {
