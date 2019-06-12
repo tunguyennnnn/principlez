@@ -3,8 +3,22 @@ export default {
     owner: async (item, args, { models }) => {
       return await models.User.findOne({ where: { id: item.userId } });
     },
+    isAuthor: (item, args, { user }) => {
+      return item.userId === user.id;
+    },
+    learnNote: async (item, args, { models }) => {
+      const [learnNote] = await models.LearnNote.findOrCreate({
+        where: {
+          itemToLearnId: item.id,
+        },
+      });
+      return learnNote;
+    },
   },
   Query: {
+    itemToLearn: async (root, { id }, { models, user }) => {
+      return models.ItemToLearn.findOne({ where: { id } });
+    },
     newLearningItems: async (
       root,
       { userId, learningAreaId = null, limit, cursor },

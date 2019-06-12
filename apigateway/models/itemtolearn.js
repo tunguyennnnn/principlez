@@ -27,6 +27,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'user',
     });
+
+    ItemToLearn.hasOne(models.LearnNote, {
+      foreignKey: 'itemToLearnId',
+      as: 'learnNote',
+    });
   };
   return ItemToLearn;
 };

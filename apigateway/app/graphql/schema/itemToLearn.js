@@ -4,7 +4,9 @@ export default `
     name: String!
     description: String
     source: String!
+    isAuthor: Boolean!
     owner: User!
+    learnNote: LearnNote!
   }
 
   type ItemToLearnEdge {
@@ -19,6 +21,7 @@ export default `
 
   type Query {
     newLearningItems(userId: ID, learningAreaId: ID, cursor: String, limit: Int = 10): ItemToLearnListConnection!
+    itemToLearn(id: ID!): ItemToLearn!
   }
 
   type Mutation {
