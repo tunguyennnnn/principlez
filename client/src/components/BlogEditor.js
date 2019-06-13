@@ -58,10 +58,14 @@ export default class BlogEditor extends React.Component {
   };
 
   update = () => {
+    const { noTitle } = this.props;
     const { nodes } = this.state.value.document;
-    const title = nodes.first().text;
-    const body = _.slice(this.state.value.document.toJSON().nodes, 1);
-    this.props.update(title, body);
+    if (!noTitle) {
+      const title = nodes.first().text;
+      const body = _.slice(this.state.value.document.toJSON().nodes, 1);
+      return this.props.update(title, body);
+    }
+    return this.props.update(this.state.value.document.toJSON().nodes);
   };
 
   onChange = ({ value }) => {

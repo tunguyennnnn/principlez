@@ -48,6 +48,7 @@ export default class Form extends React.Component {
 
     const comps = fields.map(field => (
       <input
+        key={field}
         onFocus={() => this.setState({ focus: true })}
         value={inputs[field]}
         type="text"

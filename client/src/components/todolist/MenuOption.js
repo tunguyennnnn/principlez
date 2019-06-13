@@ -11,7 +11,7 @@ export default function(props) {
   if (!items || !keyPrefix) return null;
 
   return (
-    <div className="widget-list-action">
+    <div class="widget-list-action text-nowrap text-grey-darker text-right">
       <UncontrolledDropdown>
         <DropdownToggle tag="a" className="text-muted pull-right p-0 bg-none">
           <i className="fa fa-ellipsis-h f-s-14" />

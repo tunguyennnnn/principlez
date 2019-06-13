@@ -8,6 +8,7 @@ import Login from './containers/Login';
 import ReadPage from './containers/ReadPage';
 import ProfilePage from './containers/ProfilePage';
 import PersonalDevPage from './containers/PersonalDevPage';
+import NotePage from './containers/NotePage';
 import { PageSettings } from './config/page-settings.js';
 
 export default class AppRoutes extends React.Component {
@@ -32,6 +33,15 @@ export default class AppRoutes extends React.Component {
                 component={props => (
                   <div id="app-body">
                     <Home {...props} />
+                  </div>
+                )}
+              />
+              <Route
+                exact
+                path="/of/me/notes/:noteId"
+                component={props => (
+                  <div id="app-body">
+                    <NotePage {...props} />
                   </div>
                 )}
               />

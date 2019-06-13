@@ -1,10 +1,34 @@
 import React from 'react';
+import { Card, CardText, CardBody, CardTitle, Button } from 'reactstrap';
+
+import { Link } from 'react-router-dom';
 
 import Form from './todolist/Form';
 import MenuOption from './todolist/MenuOption';
 
 import FormContext from '../contexts/FormContext';
 import MenuContext from '../contexts/MenuContext';
+
+function TodoItem({ parentId, id, title, description, source }) {
+  return (
+    <Card>
+      <CardBody>
+        <CardTitle tag="h4" className="m-t-0 m-b-10">
+          {title}
+        </CardTitle>
+        {description && <CardText>{description}</CardText>}
+        {source && <CardText>{source}</CardText>}
+        {parentId && (
+          <Link to={`/notes/${id}`}>
+            <Button color="default" size="sm">
+              Add note
+            </Button>
+          </Link>
+        )}
+      </CardBody>
+    </Card>
+  );
+}
 
 export default class TodoList extends React.Component {
   renderIconCheck(done) {
@@ -38,17 +62,14 @@ export default class TodoList extends React.Component {
         </div>
 
         <div class="widget-todolist-body">
-          {items.map(({ id, title, description, done }) => {
+          {items.map(props => {
+            const { id } = props;
             return (
               <div
-                class="widget-todolist-item"
+                class="widget-list-item"
                 key={`${keyPrefix}-${header.split(/\s+/).join('')}-item-${id}`}
               >
-                {this.renderIconCheck(done)}
-                <div class="widget-todolist-content">
-                  <h4 class="widget-todolist-title">{title}</h4>
-                  <p class="widget-todolist-desc">{description}</p>
-                </div>
+                <TodoItem {...props} parentId={parentId} cart={cart} />
                 <MenuContext.Consumer>
                   {({ items, keyPrefix }) => (
                     <MenuOption
