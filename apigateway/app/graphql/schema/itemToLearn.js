@@ -27,5 +27,6 @@ export default `
   type Mutation {
     createItemToLearn(name: String!, description: String, source: String, learningAreaId: ID): ItemToLearn!
     deleteItemToLearn(id: ID!): DeleteResult!
+    updateLearnNote(id: ID!, body: JSON): LearnNote!
   }
 `;

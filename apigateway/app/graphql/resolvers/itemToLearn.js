@@ -89,5 +89,20 @@ export default {
         return {};
       },
     },
+    updateLearnNote: {
+      authentication: true,
+      resolve: async (root, { id, body }, { models, user }) => {
+        const itemToLearn = await models.ItemToLearn.findOne({
+          where: { id, userId: user.id },
+        });
+        if (!itemToLearn) {
+          throw new Error('Not found');
+        }
+
+        const learnNote = await itemToLearn.getLearnNote();
+
+        return await learnNote.update({ body });
+      },
+    },
   },
 };
