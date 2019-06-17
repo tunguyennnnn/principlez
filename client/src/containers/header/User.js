@@ -59,7 +59,14 @@ class Authorized extends React.Component {
           </DropdownItem>
           <DropdownItem>Setting</DropdownItem>
           <div className="dropdown-divider" />
-          <DropdownItem>Log Out</DropdownItem>
+          <DropdownItem
+            onClick={() => {
+              auth.logout();
+              document.location.href = '/';
+            }}
+          >
+            Log Out
+          </DropdownItem>
         </DropdownMenu>
       </Dropdown>
     );
@@ -69,12 +76,16 @@ class Authorized extends React.Component {
 function Unauthorized() {
   return (
     <li>
-      <span>
-        <Link to="/login">LOGIN</Link>
-      </span>
-      <span>
-        <Link to="/signup">SIGN UP</Link>
-      </span>
+      <a>
+        <ol className="breadcrumb pull-right">
+          <li className="breadcrumb-item">
+            <Link to="/login">LOGIN</Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link to="/signup">SIGN UP</Link>
+          </li>
+        </ol>
+      </a>
     </li>
   );
 }
