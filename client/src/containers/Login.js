@@ -3,11 +3,11 @@ import './login/login.scss';
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { auth } from '../services';
-import MessageDisplayer from '../components/commons/MessageDisplayer';
 import LargeButton from '../components/commons/Button';
+import Notification from '../components/commons/Notification';
 
 class Login extends React.Component {
   state = {
@@ -15,14 +15,24 @@ class Login extends React.Component {
       email: '',
       password: '',
     },
-    signinSuccess: null,
-    message: '',
   };
 
   onChange = event => {
     const { name, value } = event.target;
     const { inputs } = this.state;
     this.setState({ ...this.state, inputs: { ...inputs, [name]: value } });
+  };
+
+  showErrorMessage = (type, title, message) => {
+    this.props.notificationDOMRef.current.addNotification({
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animated', 'fadeIn'],
+      animationOut: ['animated', 'fadeOut'],
+      dismiss: { duration: 2000 },
+      dismissable: { click: true },
+      content: <Notification type={type} title={title} message={message} />,
+    });
   };
 
   onSubmit = async () => {
@@ -39,7 +49,7 @@ class Login extends React.Component {
       const { error, user } = response.data.login;
 
       if (error) {
-        this.setState({ signinSuccess: false, message: error });
+        this.showErrorMessage('error', 'Login error', error);
         return;
       }
 
@@ -47,22 +57,16 @@ class Login extends React.Component {
       const { token, expiresIn } = authToken;
       auth.login({ id, fullname, email, token, expiresIn });
 
-      this.setState({ signinSuccess: true });
+      document.location.href = '/';
     } catch (error) {
-      this.setState({ signinSuccess: false, message: 'Something is wrong' });
-      console.log(error);
+      this.showErrorMessage('error', 'Login error', error);
     }
   };
 
   render() {
-    const { signinSuccess, message } = this.state;
-    if (signinSuccess) return <Redirect to="/" />;
     return (
       <div className="login-page-container">
         <div className="login-sub-container">
-          {message ? (
-            <MessageDisplayer type="error" message={message} header="Log In" />
-          ) : null}
           <h4>
             Don't have an account? <Link to="/signup">Sign up</Link>
           </h4>

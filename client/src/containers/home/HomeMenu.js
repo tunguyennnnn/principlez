@@ -18,11 +18,19 @@ function Channels() {
 function PrinciplezIntro() {
   return (
     <div className="introduction">
-      <p className="head">
-        Pz
-        <br />
-        Stories and principles of successful people
-      </p>
+      <div class="widget widget-stats bg-gradient-teal m-b-10">
+        <div class="stats-icon stats-icon-lg">
+          <i class="fa fa-globe fa-fw" />
+        </div>
+        <div class="stats-content">
+          <div class="stats-title">TODAY'S VISITS</div>
+          <div class="stats-number">7,842,900</div>
+          <div class="stats-progress progress">
+            <div class="progress-bar" />
+          </div>
+          <div class="stats-desc">Better than last week (70.1%)</div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -56,7 +64,7 @@ function Authors() {
 export default function HomeMenu() {
   return (
     <div className="home-menu-container">
-      {/* <Authors /> */}
+      <PrinciplezIntro />
       <Channels />
     </div>
   );
