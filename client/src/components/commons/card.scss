@@ -1,26 +1,30 @@
-.card {
-  .card--content {
-    max-height: 200px;
-    overflow: hidden;
-    position: relative;
-  }
+.card--container {
+  border-bottom: 1px solid #b8b8b8;
 
-  .read {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: right;
-    margin: 0;
-    padding-top: 30px;
-    color: #8ba987;
-    font-weight: 700;
+  .card {
+    .card--content {
+      max-height: 150px;
+      overflow: hidden;
+      position: relative;
+    }
 
-    background-image: linear-gradient(to bottom, transparent, #fff);
+    .read {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: right;
+      margin: 0;
+      padding-top: 30px;
+      color: #8ba987;
+      font-weight: 700;
 
-    a {
-      color: inherit;
-      cursor: pointer;
+      background-image: linear-gradient(to bottom, transparent, #fff);
+
+      a {
+        color: inherit;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -1,3 +1,4 @@
+import './header/header.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -21,25 +22,27 @@ class Header extends React.Component {
       <PageSettings.Consumer>
         {({ toggleMobileSidebar }) => (
           <div id="header" className="header navbar-default">
-            <div className="navbar-header">
-              <Link to="/" className="navbar-brand">
-                <span className="navbar-logo" /> <b>Principlez</b>
-              </Link>
-            </div>
-            <ul className="navbar-nav navbar-right">
-              <SearchForm />
-              <User />
-            </ul>
+            <div className="header-container">
+              <div className="navbar-header">
+                <Link to="/" className="navbar-brand">
+                  <span className="navbar-logo" /> <b>Principlez</b>
+                </Link>
+              </div>
+              <ul className="navbar-nav navbar-right">
+                <SearchForm />
+                <User />
+              </ul>
 
-            <button
-              type="button"
-              className="navbar-toggle"
-              onClick={toggleMobileSidebar}
-            >
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-            </button>
+              <button
+                type="button"
+                className="navbar-toggle"
+                onClick={toggleMobileSidebar}
+              >
+                <span className="icon-bar" />
+                <span className="icon-bar" />
+                <span className="icon-bar" />
+              </button>
+            </div>
           </div>
         )}
       </PageSettings.Consumer>

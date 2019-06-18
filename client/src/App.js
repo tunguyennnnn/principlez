@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactNotification from 'react-notifications-component';
 import { withRouter } from 'react-router';
+import _ from 'lodash';
 
 import { PageSettings } from './config/page-settings.js';
 
 import Header from './containers/Header';
 import Footer from './containers/Footer';
 import Routes from './Routes';
+
+const NoSideBarRoutes = ['/login', '/signup', '/'];
 
 @withRouter
 class App extends React.Component {
@@ -33,7 +36,8 @@ class App extends React.Component {
 
   render() {
     const { pathname } = this.props.location;
-    const hasSidebar = pathname !== '/login' && pathname !== '/signup';
+    const noSidebar = _.includes(NoSideBarRoutes, pathname);
+
     return (
       <PageSettings.Provider
         value={{ ...this.state, notificationDOMRef: this.notificationDOMRef }}
@@ -41,18 +45,13 @@ class App extends React.Component {
         <div
           className={
             'fade page-sidebar-fixed show page-container page-header-fixed ' +
-            (hasSidebar && this.state.pageSidebar
-              ? ''
-              : 'page-without-sidebar ') +
-            (hasSidebar && this.state.pageSidebarWide
-              ? 'page-with-wide-sidebar '
-              : '') +
+            (!noSidebar ? 'page-with-wide-sidebar' : 'page-without-sidebar ') +
             (this.state.pageSidebarToggled ? 'page-sidebar-toggled ' : '')
           }
         >
           <Header />
           <Routes />
-          {hasSidebar && <Footer />}
+          {!noSidebar && <Footer />}
         </div>
         <ReactNotification ref={this.notificationDOMRef} />
       </PageSettings.Provider>

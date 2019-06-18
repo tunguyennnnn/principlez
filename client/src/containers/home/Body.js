@@ -15,7 +15,7 @@ class Body extends React.Component {
       <div className="row">
         {data.allChapters.edges.map(({ cursor, node }) => {
           return (
-            <div className="col-lg-6 col-md-12" key={`chapter-list-${node.id}`}>
+            <div className="col-xs-12" key={`chapter-list-${node.id}`}>
               <Card {...node} />
             </div>
           );
