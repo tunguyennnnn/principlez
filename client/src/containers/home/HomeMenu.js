@@ -35,36 +35,7 @@ function PrinciplezIntro() {
   );
 }
 
-export function Authors() {
-  return (
-    <div className="home-authors-container">
-      <div className="panel panel-inverse">
-        <div className="panel-heading">Authors</div>
-        <ul className="registered-users-list clearfix">
-          <li>
-            <Link to="/dashboard/v2">
-              <img
-                src="https://image.shutterstock.com/image-photo/glitter-vintage-lights-background-gold-260nw-226746934.jpg"
-                alt=""
-              />
-            </Link>
-            <h4 className="username text-ellipsis">
-              Savory Posh
-              <small>Algerian</small>
-            </h4>
-          </li>
-        </ul>
-        <div className="panel-footer ">
-          <Link to="/users" className="text-inverse">
-            View All
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function HomeMenu() {
+export default function HomeMenu() {
   return (
     <div className="home-menu-container">
       <PrinciplezIntro />

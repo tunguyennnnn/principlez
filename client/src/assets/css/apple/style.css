@@ -871,7 +871,7 @@ table.dataTable thead .sorting_desc_disabled:after,
 	top: 0;
 	bottom: 0;
 	padding-top: 50px;
-	background: #33363b ;
+	background: #fff ;
 	z-index: 1010;
 	color: #fff;
 	-webkit-transform: translateZ(0);

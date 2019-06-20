@@ -1,6 +1,4 @@
-import './author.scss';
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
@@ -9,18 +7,15 @@ import { generateId } from '../../utils/userId';
 
 function Author({ id, fullname, location, profileImage, blurb, occupation }) {
   return (
-    <div className="author">
-      <Card>
-        <CardImg top src={profileImage.medium} alt="Card image cap" />
-        <CardBody>
-          <Link to={`/of/${generateId(id, fullname)}`}>
-            <CardTitle tag="h5">{fullname}</CardTitle>
-            <CardText>{occupation}</CardText>
-          </Link>
-          <CardText>{`${location.country} / ${location.city}`}</CardText>
-        </CardBody>
-      </Card>
-    </div>
+    <li>
+      <Link to={`/of/${generateId(id, fullname)}`}>
+        <img src={profileImage.medium} alt="" />
+      </Link>
+      <h4 className="username text-ellipsis">
+        {fullname}
+        <small>{occupation}</small>
+      </h4>
+    </li>
   );
 }
 
@@ -37,13 +32,9 @@ class Authors extends React.Component {
     }
 
     return (
-      <div className="home-authors">
-        <div className="head">Top Authors & Coaches</div>
-        <div
-          className="container"
-          style={{ maxHeight: window.innerHeight * 0.7 }}
-        >
-          <div className="authors">
+      <div className="home-authors-container">
+        <div className="panel panel-inverse">
+          <ul className="registered-users-list clearfix">
             {authors.map(author => (
               <Author
                 key={`home-author-${author.id}`}
@@ -51,6 +42,11 @@ class Authors extends React.Component {
                 horizontal={horizontal}
               />
             ))}
+          </ul>
+          <div className="panel-footer ">
+            <Link to="/users" className="text-inverse">
+              View All
+            </Link>
           </div>
         </div>
       </div>

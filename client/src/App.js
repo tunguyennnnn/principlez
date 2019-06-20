@@ -9,7 +9,7 @@ import Header from './containers/Header';
 import Footer from './containers/Footer';
 import Routes from './Routes';
 
-const NoSideBarRoutes = ['/login', '/signup', '/'];
+const NoSideBarRoutes = ['/login', '/signup'];
 
 @withRouter
 class App extends React.Component {
@@ -45,11 +45,17 @@ class App extends React.Component {
         <div
           className={
             'fade page-sidebar-fixed show page-container page-header-fixed ' +
-            (!noSidebar ? 'page-with-wide-sidebar' : 'page-without-sidebar ') +
+            (!noSidebar && this.state.pageSidebar
+              ? ''
+              : 'page-without-sidebar ') +
+            (!noSidebar && this.state.pageSidebarWide
+              ? 'page-with-wide-sidebar '
+              : '') +
             (this.state.pageSidebarToggled ? 'page-sidebar-toggled ' : '')
           }
         >
           <Header />
+          {/* <Sidebar /> */}
           <Routes />
           {!noSidebar && <Footer />}
         </div>

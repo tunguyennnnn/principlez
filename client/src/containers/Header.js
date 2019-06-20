@@ -25,7 +25,7 @@ class Header extends React.Component {
             <div className="header-container">
               <div className="navbar-header">
                 <Link to="/" className="navbar-brand">
-                  <span className="navbar-logo" /> <b>Principlez</b>
+                  <b>Principlez</b>
                 </Link>
               </div>
               <ul className="navbar-nav navbar-right">
