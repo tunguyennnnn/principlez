@@ -1,16 +1,4 @@
 import React from 'react';
-import { Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-
-function Channels() {
-  return (
-    <div className="channels">
-      <Icon name="youtube" className="channel" />
-      <Icon name="facebook" className="channel" />
-      <Icon name="meetup" className="channel" />
-    </div>
-  );
-}
 
 function PrinciplezIntro() {
   return (

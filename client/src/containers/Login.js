@@ -4,18 +4,30 @@ import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
+import { PageSettings } from '../config/page-settings';
 
 import { auth } from '../services';
 import LargeButton from '../components/commons/Button';
 import Notification from '../components/commons/Notification';
 
 class Login extends React.Component {
+  static contextType = PageSettings;
   state = {
     inputs: {
       email: '',
       password: '',
     },
   };
+
+  componentDidMount() {
+    this.context.handleSetPageSidebar(false);
+    this.context.handleSetPageHeader(false);
+  }
+
+  componentWillUnmount() {
+    this.context.handleSetPageSidebar(true);
+    this.context.handleSetPageHeader(true);
+  }
 
   onChange = event => {
     const { name, value } = event.target;

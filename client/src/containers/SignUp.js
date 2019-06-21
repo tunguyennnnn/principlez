@@ -1,11 +1,11 @@
 import './signup/signup.scss';
-
 import * as _ from 'lodash';
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Link, Redirect } from 'react-router-dom';
 
+import { PageSettings } from '../config/page-settings';
 import Select from '../components/commons/Select';
 import LargeButton from '../components/commons/Button';
 import { ipLookUp } from '../utils/userLocation';
@@ -14,6 +14,7 @@ import MessageDisplayer from '../components/commons/MessageDisplayer';
 import { yearsDropdown } from '../utils/yearsDropdown';
 
 class SignUp extends React.Component {
+  static contextType = PageSettings;
   state = {
     inputs: {
       fullname: '',
@@ -29,7 +30,14 @@ class SignUp extends React.Component {
   };
 
   componentDidMount() {
+    this.context.handleSetPageSidebar(false);
+    this.context.handleSetPageHeader(false);
     this.getUserLocation();
+  }
+
+  componentWillUnmount() {
+    this.context.handleSetPageSidebar(true);
+    this.context.handleSetPageHeader(true);
   }
 
   getUserLocation = async () => {

@@ -1,7 +1,9 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { compose, graphql } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
+import ProfileHeader from './ProfileHeader';
 import ProfileInfoEdit from '../../components/ProfileInfoEdit';
 import ProfileInfoView from '../../components/ProfileInfoView';
 
@@ -50,24 +52,28 @@ class ProfileInfo extends React.Component {
 
     if (data.loading) return null;
 
-    const { fullname, yearOfBirth, blurb, occupation, location } = data.me;
+    const {
+      fullname,
+      yearOfBirth,
+      blurb,
+      occupation,
+      location,
+      profileImage,
+    } = data.me;
     const { isEditingInfo, message: errorMessage } = this.state;
     const ProfileInfoComponent = isEditingInfo
       ? ProfileInfoEdit
       : ProfileInfoView;
 
     return (
-      <ProfileInfoComponent
-        fullname={fullname}
-        yearOfBirth={yearOfBirth}
-        blurb={blurb}
-        occupation={occupation}
-        location={location}
-        updateInfo={this.updateUserInformation}
-        onClick={this.clickToEditOrViewInfo}
-        readOnly={!isEditingInfo}
-        errorMessage={errorMessage}
-      />
+      <div className="profile">
+        <ProfileHeader
+          fullname={fullname}
+          occupation={occupation}
+          profileImage={profileImage}
+          location={location}
+        />
+      </div>
     );
   }
 }
@@ -82,6 +88,9 @@ const queryUserInfo = gql`
       location {
         city
         country
+      }
+      profileImage {
+        medium
       }
     }
   }

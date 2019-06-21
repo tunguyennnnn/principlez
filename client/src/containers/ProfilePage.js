@@ -1,22 +1,26 @@
 import './profilepage/profilepage.scss';
-
 import React from 'react';
+import { PageSettings } from '../config/page-settings';
 
 import ProfileInfo from './profilepage/ProfileInfo';
 import ProfileImage from './profilepage/ProfileImage';
 
-export default function ProfilePage() {
-  return (
-    <div className="profile-page-container">
-      <div className="profile-page-row">
-        <div className="profile-page-column">
-          <ProfileImage />
-        </div>
-        <div className="profile-page-double-column">
-          <ProfileInfo />
-        </div>
+export default class ProfilePage extends React.Component {
+  static contextType = PageSettings;
+
+  componentDidMount() {
+    this.context.handleSetPageSidebar(false);
+  }
+
+  componentWillUnmount() {
+    this.context.handleSetPageSidebar(true);
+  }
+
+  render() {
+    return (
+      <div>
+        <ProfileInfo />
       </div>
-      <div className="profile-page-row" />
-    </div>
-  );
+    );
+  }
 }

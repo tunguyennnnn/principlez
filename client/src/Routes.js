@@ -17,84 +17,40 @@ export default class AppRoutes extends React.Component {
     return (
       <PageSettings.Consumer>
         {({ notificationDOMRef }) => (
-          <Switch>
-            <Route
-              exact
-              path="/signup"
-              component={props => (
-                <div className="content content-full-width">
-                  <SignUp {...props} notificationDOMRef={notificationDOMRef} />
-                </div>
-              )}
-            />
-            <Route
-              exact
-              path="/login"
-              component={props => (
-                <div className="content content-full-width">
-                  <Login {...props} notificationDOMRef={notificationDOMRef} />
-                </div>
-              )}
-            />
-            <Route
-              exact
-              path="/"
-              component={props => (
-                <div className="content">
-                  <Home {...props} />
-                </div>
-              )}
-            />
-            <Route
-              exact
-              path="/of/me/notes/:noteId"
-              component={props => (
-                <div className="content">
-                  <NotePage {...props} />
-                </div>
-              )}
-            />
-            <Route
-              exact
-              path="/of/me"
-              component={props => (
-                <div className="content">
+          <div className="content content-full-width">
+            <Switch>
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Home} />
+              <Route
+                exact
+                path="/of/me/notes/:noteId"
+                component={props => <NotePage {...props} />}
+              />
+              <Route
+                exact
+                path="/of/me"
+                component={props => (
                   <PersonalDevPage
                     {...props}
                     notificationDOMRef={notificationDOMRef}
                   />
-                </div>
-              )}
-            />
-            <Route
-              exact
-              path="/of/:name"
-              component={props => (
-                <div className="content">
-                  <ProfilePage {...props} />
-                </div>
-              )}
-            />
-            <Route
-              exact
-              path="/of/:name/stories/:chapterId"
-              component={props => (
-                <div className="content">
-                  <StoryPage {...props} />
-                </div>
-              )}
-            />
-            <Route
-              exact
-              path="/of/:name/stories"
-              component={props => (
-                <div className="content">
-                  <ReadPage {...props} />
-                </div>
-              )}
-            />
-            <Route component={NotFoundPage} />
-          </Switch>
+                )}
+              />
+              <Route exact path="/of/:name" component={ProfilePage} />
+              <Route
+                exact
+                path="/of/:name/stories/:chapterId"
+                component={props => <StoryPage {...props} />}
+              />
+              <Route
+                exact
+                path="/of/:name/stories"
+                component={props => <ReadPage {...props} />}
+              />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </div>
         )}
       </PageSettings.Consumer>
     );
