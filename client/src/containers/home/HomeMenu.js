@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 
 function Channels() {
   return (
-    <div className="channel-container">
-      <div className="channels">
-        <Icon name="youtube" className="channel" />
-        <Icon name="facebook" className="channel" />
-        <Icon name="meetup" className="channel" />
-      </div>
+    <div className="channels">
+      <Icon name="youtube" className="channel" />
+      <Icon name="facebook" className="channel" />
+      <Icon name="meetup" className="channel" />
     </div>
   );
 }
@@ -39,7 +37,6 @@ export default function HomeMenu() {
   return (
     <div className="home-menu-container">
       <PrinciplezIntro />
-      <Channels />
     </div>
   );
 }

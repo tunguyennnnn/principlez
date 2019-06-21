@@ -1,4 +1,4 @@
-// import './readpage/readpage.scss';
+import './readpage/readpage.scss';
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -122,7 +122,7 @@ class ReadPage extends React.Component {
           readOnly: true,
         }}
       >
-        <div className="read-page" ref={el => (this.containerEl = el)}>
+        <div className="read--page" ref={el => (this.containerEl = el)}>
           <Sidebar>
             <div className="author-info-container">
               <div className="author-info">
@@ -131,7 +131,7 @@ class ReadPage extends React.Component {
               </div>
             </div>
           </Sidebar>
-          {this.renderBody()}
+          <div className="col-lg-9 col-md-12">{this.renderBody()}</div>
         </div>
       </StoryEditorContext.Provider>
     );

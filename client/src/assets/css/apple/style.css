@@ -873,7 +873,6 @@ table.dataTable thead .sorting_desc_disabled:after,
 	padding-top: 50px;
 	background: #fff ;
 	z-index: 1010;
-	color: #fff;
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 }

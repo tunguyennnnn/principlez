@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import NotFoundPage from './containers/PageNotFound';
 import Home from './containers/Home';
 import SignUp from './containers/SignUp';
 import StoryPage from './containers/StoryPage';
@@ -92,6 +93,7 @@ export default class AppRoutes extends React.Component {
                 </div>
               )}
             />
+            <Route component={NotFoundPage} />
           </Switch>
         )}
       </PageSettings.Consumer>

@@ -1,54 +1,25 @@
-.read-page {
-  display: flex;
-  flex-direction: row;
-
+.read--page {
   .author-info-container {
-    width: 250px;
-    height: 100%;
-
-    .author-info {
-      width: 250px;
-      padding: 10px;
-      position: fixed;
-      height: 100%;
-    }
-  }
-
-  .author-info-container.mobile {
-    width: 300px;
-
-    .author-info.mobile {
-      width: 300px;
-    }
-  }
-
-  .story-container {
-    padding-bottom: 10px;
-    border-bottom: 2px solid grey;
-    margin-bottom: 3vh;
-
-    .title {
-      font-weight: 700;
-      font-size: 28px;
-      padding-left: 10px;
-      margin-bottom: 0 !important;
-    }
+    padding-top: 15vh;
 
     .author {
-      padding: 20px;
-      color: #f64c3f;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
+      display: flex;
+      flex-direction: row;
 
-      a {
-        color: inherit;
-        text-decoration: none;
+      .profile--image {
+        width: 30%;
+        padding: 5px;
+        border-radius: 2px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .profile {
+        flex: 1;
+        padding: 5px;
       }
     }
-  }
-
-  .story-container:last-child {
-    border-bottom: 0;
   }
 }

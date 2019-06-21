@@ -24,12 +24,26 @@ class App extends React.Component {
       }));
     };
 
+    this.handleSetPageSidebar = value => {
+      this.setState(state => ({
+        pageSidebar: value,
+      }));
+    };
+
+    this.handleSetPageHeader = value => {
+      this.setState(state => ({
+        pageHeader: value,
+      }));
+    };
+
     this.state = {
       pageSidebar: true,
       pageSidebarWide: true,
 
       pageSidebarToggled: false,
 
+      handleSetPageHeader: this.handleSetPageHeader,
+      handleSetPageSidebar: this.handleSetPageSidebar,
       toggleMobileSidebar: this.toggleMobileSidebar,
     };
   }
@@ -44,7 +58,8 @@ class App extends React.Component {
       >
         <div
           className={
-            'fade page-sidebar-fixed show page-container page-header-fixed ' +
+            'fade page-sidebar-fixed show page-container ' +
+            (this.state.pageHeader ? 'page-header-fixed ' : '') +
             (!noSidebar && this.state.pageSidebar
               ? ''
               : 'page-without-sidebar ') +
@@ -54,10 +69,10 @@ class App extends React.Component {
             (this.state.pageSidebarToggled ? 'page-sidebar-toggled ' : '')
           }
         >
-          <Header />
+          {this.state.pageHeader && <Header />}
           {/* <Sidebar /> */}
           <Routes />
-          {!noSidebar && <Footer />}
+          {/* {!noSidebar && <Footer />} */}
         </div>
         <ReactNotification ref={this.notificationDOMRef} />
       </PageSettings.Provider>
