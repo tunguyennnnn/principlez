@@ -22,20 +22,22 @@ export default class StoryPage extends Component {
           readOnly: false,
         }}
       >
-        <div className="story-page">
+        <div className="row">
           <Sidebar>
             <ChapterGroup updateTitleRef={fn => (this.updateTitle = fn)} />
           </Sidebar>
-          <Card style={{ minHeight: window.innerHeight }}>
-            <CardBody>
-              <StoryWrite
-                location={this.props.location}
-                match={this.props.match}
-                title="Chapter..."
-                updateChapterTitle={this.updateChapterTitle}
-              />
-            </CardBody>
-          </Card>
+          <div className="col-lg-8">
+            <Card style={{ minHeight: window.innerHeight }}>
+              <CardBody>
+                <StoryWrite
+                  location={this.props.location}
+                  match={this.props.match}
+                  title="Chapter..."
+                  updateChapterTitle={this.updateChapterTitle}
+                />
+              </CardBody>
+            </Card>
+          </div>
         </div>
       </StoryEditorContext.Provider>
     );

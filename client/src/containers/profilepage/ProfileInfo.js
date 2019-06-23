@@ -73,6 +73,17 @@ class ProfileInfo extends React.Component {
           profileImage={profileImage}
           location={location}
         />
+        <ProfileInfoComponent
+          fullname={fullname}
+          yearOfBirth={yearOfBirth}
+          blurb={blurb}
+          occupation={occupation}
+          location={location}
+          updateInfo={this.updateUserInformation}
+          onClick={this.clickToEditOrViewInfo}
+          readOnly={!isEditingInfo}
+          errorMessage={errorMessage}
+        />
       </div>
     );
   }
