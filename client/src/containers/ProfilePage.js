@@ -3,6 +3,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { compose, graphql } from 'react-apollo';
 import _ from 'lodash';
+import queryString from 'query-string';
 
 import { PageSettings } from '../config/page-settings';
 import About from './profilepage/About';
@@ -17,15 +18,19 @@ const MAP_TAB_TO_COMPONENT = {
 class ProfilePage extends React.Component {
   static contextType = PageSettings;
 
-  state = {
-    activeTab: 'About',
-  };
+  constructor(props) {
+    super(props);
 
-  showTab = tab => {
-    if (MAP_TAB_TO_COMPONENT[tab] && tab !== this.state.activeTab) {
-      this.setState({ activeTab: tab });
-    }
-  };
+    const queries = queryString.parse(this.props.location.search);
+    const activeTab =
+      queries.tab &&
+      _.keys(MAP_TAB_TO_COMPONENT).find(
+        tab => tab === queries.tab || tab.toLowerCase() === queries.tab,
+      );
+    this.state = {
+      activeTab: activeTab || 'Activities',
+    };
+  }
 
   componentDidMount() {
     this.context.handleSetPageSidebar(false);
@@ -34,6 +39,15 @@ class ProfilePage extends React.Component {
   componentWillUnmount() {
     this.context.handleSetPageSidebar(true);
   }
+
+  showTab = tab => {
+    if (MAP_TAB_TO_COMPONENT[tab] && tab !== this.state.activeTab) {
+      this.setState({ activeTab: tab });
+      this.props.history.push({
+        search: `?tab=${tab}`,
+      });
+    }
+  };
 
   render() {
     const { data } = this.props;
