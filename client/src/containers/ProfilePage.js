@@ -6,13 +6,17 @@ import _ from 'lodash';
 import queryString from 'query-string';
 
 import { PageSettings } from '../config/page-settings';
+import { extractUserId } from '../utils/userId';
+import { auth } from '../services';
 import About from './profilepage/About';
 import Activities from './profilepage/Activities';
 import ProfileHeader from './profilepage/ProfileHeader';
+import PersonalDev from './PersonalDevPage';
 
 const MAP_TAB_TO_COMPONENT = {
   About: About,
   Activities: Activities,
+  'Self-growth': PersonalDev,
 };
 
 class ProfilePage extends React.Component {
@@ -54,14 +58,7 @@ class ProfilePage extends React.Component {
     if (data.loading) return null;
 
     const ActiveComp = MAP_TAB_TO_COMPONENT[this.state.activeTab];
-    const {
-      fullname,
-      yearOfBirth,
-      blurb,
-      occupation,
-      location,
-      profileImage,
-    } = data.me;
+    const { fullname, occupation, location, profileImage } = data.user;
     return (
       <div>
         <ProfileHeader
@@ -73,15 +70,15 @@ class ProfilePage extends React.Component {
           showTab={this.showTab}
           activeTab={this.state.activeTab}
         />
-        <ActiveComp profile={data.me} />
+        <ActiveComp profile={data.user} />
       </div>
     );
   }
 }
 
 const queryUserInfo = gql`
-  query me {
-    me {
+  query user($id: ID!) {
+    user(id: $id) {
       fullname
       yearOfBirth
       blurb
@@ -122,6 +119,26 @@ const mutationUserInfo = gql`
 `;
 
 export default compose(
-  graphql(queryUserInfo),
+  graphql(queryUserInfo, {
+    options: props => {
+      const { path } = props.match;
+      if (path === '/of/me') {
+        const { userId } = auth.userProfile;
+        return {
+          variables: {
+            id: userId,
+          },
+        };
+      }
+
+      const { name } = props.match.params;
+      const userId = extractUserId(name);
+      return {
+        variables: {
+          id: userId,
+        },
+      };
+    },
+  }),
   graphql(mutationUserInfo, { name: 'updateUserInfo' }),
 )(ProfilePage);

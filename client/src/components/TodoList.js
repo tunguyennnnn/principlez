@@ -38,10 +38,10 @@ export default class TodoList extends React.Component {
     }
 
     return (
-      <div class="widget-todolist-input">
-        <div class="checkbox checkbox-css">
+      <div className="widget-todolist-input">
+        <div className="checkbox checkbox-css">
           <input type="checkbox" id="widget_todolist_1" checked={done} />
-          <label for="widget_todolist_1" class="p-l-15" />
+          <label for="widget_todolist_1" className="p-l-15" />
         </div>
       </div>
     );
@@ -52,21 +52,21 @@ export default class TodoList extends React.Component {
 
     return (
       <div
-        class="widget-todolist widget-todolist-rounded"
+        className="widget-todolist widget-todolist-rounded"
         style={{ marginBottom: 10 }}
       >
-        <div class="widget-todolist-header">
-          <div class="widget-todolist-header-left">
-            <h4 class="widget-todolist-header-title">{header}</h4>
+        <div className="widget-todolist-header">
+          <div className="widget-todolist-header-left">
+            <h4 className="widget-todolist-header-title">{header}</h4>
           </div>
         </div>
 
-        <div class="widget-todolist-body">
+        <div className="widget-todolist-body">
           {items.map(props => {
             const { id } = props;
             return (
               <div
-                class="widget-list-item"
+                className="widget-list-item"
                 key={`${keyPrefix}-${header.split(/\s+/).join('')}-item-${id}`}
               >
                 <TodoItem {...props} parentId={parentId} cart={cart} />

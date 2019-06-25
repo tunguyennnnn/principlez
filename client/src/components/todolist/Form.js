@@ -79,7 +79,7 @@ export default class Form extends React.Component {
     const descriptionComp = (
       <input
         type="text"
-        class="form-control"
+        className="form-control"
         placeholder="detail..."
         value={description}
         onChange={event => {
@@ -89,11 +89,11 @@ export default class Form extends React.Component {
     );
 
     return (
-      <div class="widget-todolist-item">
+      <div className="widget-todolist-item">
         <form onSubmit={this.onSubmit}>
-          <div class="widget-todolist-input">
+          <div className="widget-todolist-input">
             <button type="submit" className="btn">
-              <i class="fa fa-plus text-muted" />
+              <i className="fa fa-plus text-muted" />
             </button>
             {focus && (
               <button
@@ -101,11 +101,11 @@ export default class Form extends React.Component {
                 className="btn"
                 onClick={() => this.setState({ focus: false })}
               >
-                <i class="fas fa-times text-muted" />
+                <i className="fas fa-times text-muted" />
               </button>
             )}
           </div>
-          <div class="widget-todolist-content">{this.renderFields()}</div>
+          <div className="widget-todolist-content">{this.renderFields()}</div>
         </form>
       </div>
     );

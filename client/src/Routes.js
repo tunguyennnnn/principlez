@@ -22,21 +22,8 @@ export default class AppRoutes extends React.Component {
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/" component={Home} />
-              <Route
-                exact
-                path="/of/me/notes/:noteId"
-                component={props => <NotePage {...props} />}
-              />
-              <Route
-                exact
-                path="/of/me"
-                component={props => (
-                  <PersonalDevPage
-                    {...props}
-                    notificationDOMRef={notificationDOMRef}
-                  />
-                )}
-              />
+              <Route exact path="/notes/:noteId" component={NotePage} />
+              <Route exact path="/of/me" component={ProfilePage} />
               <Route exact path="/of/:name" component={ProfilePage} />
               <Route
                 exact

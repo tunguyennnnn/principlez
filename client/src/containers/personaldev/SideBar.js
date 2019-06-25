@@ -24,7 +24,7 @@ export default class SideBar extends React.Component {
     const { data } = this.props;
 
     return (
-      <div style={{ padding: 10 }}>
+      <div>
         <LearningAreas data={data} />
       </div>
     );

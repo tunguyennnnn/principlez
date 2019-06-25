@@ -37,17 +37,17 @@ export default {
     </StoryEditorContext.Consumer>
   ),
   [ORDERED_LIST]: props => (
-    <ol {...props.attributes} class="editor-ol">
+    <ol {...props.attributes} className="editor-ol">
       {props.children}
     </ol>
   ),
   [UNORDERED_LIST]: props => (
-    <ul {...props.attributes} class="editor-ul">
+    <ul {...props.attributes} className="editor-ul">
       {props.children}
     </ul>
   ),
   [LIST_ITEM]: props => (
-    <li {...props.attributes} class="editor-li">
+    <li {...props.attributes} className="editor-li">
       {props.children}
     </li>
   ),

@@ -1,6 +1,8 @@
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import _ from 'lodash';
+import MediaQuery from 'react-responsive';
+import { PageSettings } from '../config/page-settings';
 
 import {
   newItemsQuery,
@@ -20,8 +22,10 @@ import Sidebar from './SideBar';
 import SideBarContent from './personaldev/SideBar';
 
 class PersonalDevPage extends React.Component {
+  static contextType = PageSettings;
+
   addNotification = (type, title, message) => {
-    this.props.notificationDOMRef.current.addNotification({
+    this.context.notificationDOMRef.current.addNotification({
       insert: 'top',
       container: 'top-left',
       animationIn: ['animated', 'fadeIn'],
@@ -108,36 +112,40 @@ class PersonalDevPage extends React.Component {
         },
       });
     } catch (e) {
-      console.log(e);
       this.addNotification('warning', 'Something wrong');
     }
   };
 
   render() {
+    const sideBar = (
+      <MenuContext.Provider
+        value={{
+          items: [{ name: 'Delete', action: this.deleteLearningArea }],
+          keyPrefix: `pd-area-action`,
+        }}
+      >
+        <FormContext.Provider
+          value={{
+            submit: this.createLearningArea,
+            fields: ['name', 'description'],
+          }}
+        >
+          <SideBarContent data={this.props.learningAreas} />
+        </FormContext.Provider>
+      </MenuContext.Provider>
+    );
+
     return (
       <React.Fragment>
-        <Sidebar>
-          <MenuContext.Provider
-            value={{
-              items: [{ name: 'Delete', action: this.deleteLearningArea }],
-              keyPrefix: `pd-area-action`,
-            }}
-          >
-            <FormContext.Provider
-              value={{
-                submit: this.createLearningArea,
-                fields: ['name', 'description'],
-              }}
-            >
-              <SideBarContent data={this.props.learningAreas} />
-            </FormContext.Provider>
-          </MenuContext.Provider>
-        </Sidebar>
+        <MediaQuery maxDeviceWidth={767}>
+          <Sidebar>{sideBar}</Sidebar>
+        </MediaQuery>
         <div className="row row-space-30">
-          <div className="col-sm-12 col-lg-8">
+          <div className="col-sm-12 col-lg-3">{sideBar}</div>
+          <div className="col-sm-12 col-lg-6">
             <DevAreas data={this.props.learningAreas} />
           </div>
-          <div className="col-sm-12 col-lg-4">
+          <div className="col-sm-12 col-lg-3">
             <MenuContext.Provider
               value={{
                 items: [{ name: 'Delete', action: this.deleteItemToLearn }],
